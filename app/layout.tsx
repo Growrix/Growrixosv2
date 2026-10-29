@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { HeadBootstrap } from "@/components/layout/HeadBootstrap";
+import { SkipLink } from "@/components/ui/SkipLink";
+
+import { fontDisplay, fontSans } from "./fonts";
 import "./globals.css";
 
 // Interim metadata for the homepage slice (preview only, D-027).
@@ -19,10 +23,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" data-theme="light" className="no-js">
+    // suppressHydrationWarning: C-18 rewrites class, data-theme, data-motion
+    // and data-home-top on <html> before hydration (applies to <html> only).
+    <html
+      lang="en"
+      data-theme="light"
+      className={`no-js ${fontDisplay.variable} ${fontSans.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        {/* C-18 head bootstrap mounts here (inline script: removes `no-js`,
-            applies the stored theme, sets `data-motion` before first paint). */}
+        {/* C-18 head bootstrap (inline script: removes `no-js`, applies the
+            stored theme, sets `data-motion` before first paint). */}
+        <HeadBootstrap />
         {/* C-08 JSON-LD @graph mounts here (siteSettings + person). */}
       </head>
       <body>
@@ -30,7 +42,7 @@ export default function RootLayout({
             Interim text = the plan's documented value for `ui.skipLink`
             (06-content-schemas.md, CLIENT 02 §9.11). Replaced by the Sanity
             field when C-07 is built; styling (visible on focus) is ui-dev's. */}
-        <a href="#main">Skip to content</a>
+        <SkipLink label="Skip to content" />
 
         {/* 2. C-10 Header (banner) mounts here. */}
 
