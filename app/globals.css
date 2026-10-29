@@ -314,7 +314,7 @@
    Header states (wireframe §4.1.2, C-10/C-11). The background lives on a
    pseudo-element, never on the <header> itself: `backdrop-filter` (and
    `transform`) on the header would make it the containing block of the
-   fixed mobile-menu panel. No transitions here (motion is slice 7, M-02/M-03).
+   fixed mobile-menu panel. Transitions live in the motion block below (M-02/M-03).
    Visual polish of every state is ui-dev's (slice 4b). */
 @layer components {
   /* `solid` / `scrolled` carry a 1px `--color-border` hairline on the bottom
@@ -332,8 +332,7 @@
      `html[data-home-top]` on `/`, so `top` shows from first paint. */
   .site-header[data-header-state="top"]::before,
   html[data-home-top] .site-header[data-header-state="solid"]::before {
-    background-color: transparent;
-    border-block-end-color: transparent;
+    opacity: 0;
   }
 
   /* `scrolled`: surface at 85 % with a 12 px blur; solid surface when
@@ -363,6 +362,7 @@
   /* Mobile menu open: the bar is opaque so it reads as one surface with the
      panel below it, whatever the scroll state. */
   .site-header:has(#mobile-menu:not([hidden]))::before {
+    opacity: 1;
     background-color: var(--color-surface);
     border-block-end-color: var(--color-border);
     backdrop-filter: none;
@@ -373,6 +373,7 @@
     transform: none;
   }
   .no-js .site-header::before {
+    opacity: 1;
     background-color: var(--color-surface);
     border-block-end-color: var(--color-border);
     backdrop-filter: none;
@@ -400,5 +401,220 @@
     outline: 2px solid var(--color-focus);
     outline-offset: 4px;
     box-shadow: 0 0 0 4px var(--color-surface);
+  }
+}
+
+/* ---- Motion (slice 7, pages/home.motion.md) -------------------------------
+   CSS transitions only; CSS is the single owner of every animated property.
+   The rules outside the guard below are the reduced-motion column (instant,
+   or the opacity-only / colour-only fallbacks). Movement is added only when
+   `prefers-reduced-motion` is `no-preference` AND C-18 did not set
+   `html[data-motion="none"]`. No theme transition (M-06). The focus ring
+   (`outline`, two-tone `box-shadow`) is never transitioned. */
+@layer components {
+  /* M-01 / M-11 colour feedback (KEEP-ESSENTIAL in every tier). */
+  .motion-press,
+  #chat-launcher {
+    transition-property: background-color, color, border-color;
+    transition-duration: var(--dur-s);
+    transition-timing-function: var(--ease-signal);
+  }
+
+  /* M-08 reduced column: opacity-only fade of panel and backdrop. Browsers
+     without `@starting-style` / `allow-discrete` open and close instantly. */
+  .motion-dialog,
+  .motion-dialog::backdrop {
+    transition:
+      opacity var(--dur-s) var(--ease-signal),
+      display var(--dur-s) allow-discrete,
+      overlay var(--dur-s) allow-discrete;
+  }
+  .motion-dialog:not([open]),
+  .motion-dialog:not([open])::backdrop {
+    opacity: 0;
+  }
+  @starting-style {
+    .motion-dialog[open],
+    .motion-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* M-01: press scale on buttons and chips. */
+    html:not([data-motion="none"]) .motion-press {
+      transition-property: background-color, color, border-color, scale;
+    }
+    html:not([data-motion="none"]) .motion-press:active {
+      scale: 0.98;
+    }
+
+    /* M-11: launcher press scale. */
+    html:not([data-motion="none"]) #chat-launcher {
+      transition-property: background-color, scale;
+    }
+    html:not([data-motion="none"]) #chat-launcher:active {
+      scale: 0.97;
+    }
+
+    /* M-02: header background layer fade (top <-> scrolled). Enabled only
+       after the first state set at hydration (`data-header-ready`). */
+    html:not([data-motion="none"]) .site-header[data-header-ready]::before {
+      transition: opacity var(--dur-m) var(--ease-signal);
+    }
+
+    /* M-03: hide / reveal. `transform` is only ever non-`none` in `hidden`
+       or while sliding back from it. Focus inside reveals instantly. */
+    html:not([data-motion="none"]) .site-header[data-header-ready] {
+      transition: transform var(--dur-l) var(--ease-signal);
+    }
+    html:not([data-motion="none"])
+      .site-header[data-header-ready][data-header-state="hidden"] {
+      transition-duration: var(--dur-exit-l);
+      will-change: transform;
+    }
+    html:not([data-motion="none"])
+      .site-header[data-header-ready]:focus-within {
+      transition-duration: 0s;
+    }
+
+    /* M-04 nav dropdown / M-05 mobile menu panel: enter from `hidden` via
+       `@starting-style`, exit kept on screen by `display` allow-discrete. */
+    html:not([data-motion="none"]) .motion-dropdown,
+    html:not([data-motion="none"]) #mobile-menu {
+      transition:
+        opacity var(--dur-m) var(--ease-signal),
+        translate var(--dur-m) var(--ease-signal),
+        display var(--dur-m) allow-discrete;
+    }
+    html:not([data-motion="none"]) .motion-dropdown[hidden],
+    html:not([data-motion="none"]) #mobile-menu[hidden] {
+      opacity: 0;
+      transition-duration: var(--dur-exit-m);
+    }
+    html:not([data-motion="none"]) .motion-dropdown[hidden] {
+      translate: 0 -4px;
+    }
+    html:not([data-motion="none"]) #mobile-menu[hidden] {
+      translate: 0 -8px;
+    }
+    @starting-style {
+      html:not([data-motion="none"]) .motion-dropdown:not([hidden]) {
+        opacity: 0;
+        translate: 0 -4px;
+      }
+      html:not([data-motion="none"]) #mobile-menu:not([hidden]) {
+        opacity: 0;
+        translate: 0 -8px;
+      }
+    }
+
+    /* M-07: mobile CTA bar. `visibility` flips to hidden only once the exit
+       ends (discrete interpolation keeps it visible during the slide). */
+    html:not([data-motion="none"]) #mobile-cta-bar {
+      transition:
+        translate var(--dur-l) var(--ease-signal),
+        visibility var(--dur-l);
+    }
+    html:not([data-motion="none"]) #mobile-cta-bar[data-state="hidden"] {
+      transition-duration: var(--dur-exit-l);
+    }
+
+    /* M-08: panel slides up (24px sheet < 640px, 16px from 640px); backdrop
+       fades over --dur-m; exit --dur-exit-l. */
+    html:not([data-motion="none"]) .motion-dialog {
+      transition:
+        opacity var(--dur-l) var(--ease-signal),
+        translate var(--dur-l) var(--ease-signal),
+        display var(--dur-l) allow-discrete,
+        overlay var(--dur-l) allow-discrete;
+    }
+    html:not([data-motion="none"]) .motion-dialog::backdrop {
+      transition:
+        opacity var(--dur-m) var(--ease-signal),
+        display var(--dur-m) allow-discrete,
+        overlay var(--dur-m) allow-discrete;
+    }
+    html:not([data-motion="none"]) .motion-dialog:not([open]),
+    html:not([data-motion="none"]) .motion-dialog:not([open])::backdrop {
+      transition-duration: var(--dur-exit-l);
+    }
+    html:not([data-motion="none"]) .motion-dialog:not([open]) {
+      translate: 0 24px;
+    }
+    @starting-style {
+      html:not([data-motion="none"]) .motion-dialog[open] {
+        translate: 0 24px;
+      }
+    }
+    @media (width >= 40rem) {
+      html:not([data-motion="none"]) .motion-dialog:not([open]) {
+        translate: 0 16px;
+      }
+      @starting-style {
+        html:not([data-motion="none"]) .motion-dialog[open] {
+          translate: 0 16px;
+        }
+      }
+    }
+
+    /* M-09 (signature, `full` tier only): the unfilled start state exists
+       only under `html.js[data-motion="full"]`; C-53 sets `data-inview`.
+       5 steps: 200 + 4 x 60 = 440 ms. */
+    html.js[data-motion="full"] [data-timeline] [data-timeline-part="fill"],
+    html.js[data-motion="full"]
+      [data-timeline]
+      [data-timeline-part="connector"] {
+      transition-duration: var(--dur-l);
+      transition-timing-function: var(--ease-signal);
+      transition-delay: calc(var(--i, 0) * var(--stagger));
+    }
+    html.js[data-motion="full"] [data-timeline] [data-timeline-part="fill"] {
+      opacity: 0;
+      transition-property: opacity;
+    }
+    html.js[data-motion="full"]
+      [data-timeline]
+      [data-timeline-part="connector"] {
+      scale: 1 0;
+      transition-property: scale;
+    }
+    @media (width >= 64rem) {
+      html.js[data-motion="full"]
+        [data-timeline]
+        [data-timeline-part="connector"] {
+        scale: 0 1;
+      }
+    }
+    html.js[data-motion="full"]
+      [data-inview="true"]
+      [data-timeline-part="fill"] {
+      opacity: 1;
+    }
+    html.js[data-motion="full"]
+      [data-inview="true"]
+      [data-timeline-part="connector"] {
+      scale: 1;
+    }
+
+    /* M-10: FAQ chevron (rotation set by `group-open:rotate-180`). */
+    html:not([data-motion="none"]) .motion-chevron {
+      transition: rotate var(--dur-m) var(--ease-signal);
+    }
+
+    /* M-12: arrow nudge on hover (hover-capable pointers only), mirrored
+       under RTL. */
+    html:not([data-motion="none"]) .motion-arrow {
+      transition: translate var(--dur-m) var(--ease-signal);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      html:not([data-motion="none"]) a:hover > .motion-arrow {
+        translate: 4px 0;
+      }
+      html:not([data-motion="none"]):where([dir="rtl"]) a:hover > .motion-arrow,
+      html:not([data-motion="none"]) [dir="rtl"] a:hover > .motion-arrow {
+        translate: -4px 0;
+      }
+    }
   }
 }

@@ -49,7 +49,7 @@ export function FaqList({ heading, items }: FaqListProps) {
                   <span className="min-w-0">{faq.question}</span>
                   <Icon
                     name="chevron-down"
-                    className="text-text-muted group-open:rotate-180"
+                    className="motion-chevron text-text-muted group-open:rotate-180"
                   />
                 </summary>
                 <PortableBody

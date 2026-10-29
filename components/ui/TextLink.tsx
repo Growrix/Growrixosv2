@@ -50,7 +50,7 @@ export function TextLink({
       {children}
       {srText ? <VisuallyHidden>{srText}</VisuallyHidden> : null}
       {externalText ? <VisuallyHidden>{externalText}</VisuallyHidden> : null}
-      {arrow ? <Icon name="arrow-right" /> : null}
+      {arrow ? <Icon name="arrow-right" className="motion-arrow" /> : null}
     </a>
   );
 }

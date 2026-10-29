@@ -90,7 +90,7 @@ export function NavDropdown({
       <ul
         id={panelId}
         hidden={!open}
-        className="absolute start-0 top-full flex min-w-65 flex-col gap-2 rounded-md border border-border-strong bg-surface p-2"
+        className="motion-dropdown absolute start-0 top-full flex min-w-65 flex-col gap-2 rounded-md border border-border-strong bg-surface p-2"
       >
         {item.children.map((child) => (
           <li key={child.key}>

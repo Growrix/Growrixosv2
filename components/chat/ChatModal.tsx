@@ -165,7 +165,7 @@ export function ChatModal({
       onClose={() => {
         if (!dialogRef.current?.open) onClose();
       }}
-      className="m-0 h-dvh max-h-none w-full max-w-none bg-surface p-0 text-text backdrop:bg-overlay sm:m-auto sm:h-[min(88dvh,860px)] sm:w-[min(1120px,100%-2rem)] sm:rounded-lg sm:border sm:border-border-strong sm:shadow-3 sm:backdrop:backdrop-blur-xs"
+      className="motion-dialog m-0 h-dvh max-h-none w-full max-w-none bg-surface p-0 text-text backdrop:bg-overlay sm:m-auto sm:h-[min(88dvh,860px)] sm:w-[min(1120px,100%-2rem)] sm:rounded-lg sm:border sm:border-border-strong sm:shadow-3 sm:backdrop:backdrop-blur-xs"
     >
       <div className="flex h-full flex-col">
         <div className="flex items-start gap-3 border-b border-border px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 sm:px-5">

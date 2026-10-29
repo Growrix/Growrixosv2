@@ -16,7 +16,7 @@ export function StarterPrompts({ prompts, onPick }: StarterPromptsProps) {
           <button
             type="button"
             onClick={() => onPick(prompt)}
-            className="min-h-11 rounded-pill border border-border-control bg-surface px-4 text-small text-text hover:bg-inset active:bg-inset"
+            className="motion-press min-h-11 rounded-pill border border-border-control bg-surface px-4 text-small text-text hover:bg-inset active:bg-inset"
           >
             {prompt}
           </button>

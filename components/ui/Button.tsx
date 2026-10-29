@@ -39,7 +39,7 @@ export type ButtonProps = {
   (AsLink | AsButton);
 
 const BASE =
-  "inline-flex items-center justify-center gap-2 font-sans text-center select-none " +
+  "motion-press inline-flex items-center justify-center gap-2 font-sans text-center select-none " +
   "disabled:pointer-events-none disabled:opacity-60 " +
   "aria-disabled:pointer-events-none aria-disabled:opacity-60";
 

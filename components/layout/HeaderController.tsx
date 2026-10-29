@@ -127,13 +127,21 @@ export function HeaderController({
       if (header.dataset.headerState === "hidden") set("scrolled");
     };
 
-    // First set at hydration (no transition: M-02).
+    // First set at hydration (no transition: M-02). `data-header-ready`
+    // enables the M-02/M-03 transitions two frames later, after that first
+    // state has been styled.
     update();
+    let readyFrame = requestAnimationFrame(() => {
+      readyFrame = requestAnimationFrame(() => {
+        header.dataset.headerReady = "";
+      });
+    });
     window.addEventListener("scroll", onScroll, { passive: true });
     header.addEventListener("focusin", onFocusIn);
     header.addEventListener("focusout", onFocusOut);
     return () => {
       if (frame) cancelAnimationFrame(frame);
+      cancelAnimationFrame(readyFrame);
       window.removeEventListener("scroll", onScroll);
       header.removeEventListener("focusin", onFocusIn);
       header.removeEventListener("focusout", onFocusOut);
