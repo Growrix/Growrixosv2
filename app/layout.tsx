@@ -5,6 +5,7 @@ import { HeadBootstrap } from "@/components/layout/HeadBootstrap";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SpeedInsightsIdle } from "@/components/layout/SpeedInsightsIdle";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { getLayoutData } from "@/lib/cms/fetchers";
 import { SERVER_THEME_COLOR } from "@/lib/utils/theme";
@@ -111,6 +112,9 @@ export default async function RootLayout({
         {/* 6. C-30 ChatRoot (launcher + lazily loaded dialog) mounts here in
             slice 6, rendered only when `chatAvailable`:
             {chatAvailable ? <ChatRoot ... /> : null} */}
+
+        {/* 7. Speed Insights (91-stack.md §3): loaded after idle, lazy chunk. */}
+        <SpeedInsightsIdle />
       </body>
     </html>
   );
