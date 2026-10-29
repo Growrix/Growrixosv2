@@ -49,6 +49,8 @@ const eslintConfig = [
       "playwright-report/**",
       "test-results/**",
       "blob-report/**",
+      // Sanity Studio workspace: own package.json and tsconfig (npm run typecheck in sanity/).
+      "sanity/**",
     ],
   },
 ];
