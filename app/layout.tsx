@@ -1,13 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
+import { ChatRoot } from "@/components/chat/ChatRoot";
+import { ChatTrigger } from "@/components/chat/ChatTrigger";
 import { HeadBootstrap } from "@/components/layout/HeadBootstrap";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SpeedInsightsIdle } from "@/components/layout/SpeedInsightsIdle";
+import { Icon } from "@/components/ui/Icon";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { getLayoutData } from "@/lib/cms/fetchers";
+import {
+  isChatAvailable,
+  resolveEscalationActions,
+} from "@/lib/utils/chat-config";
 import { SERVER_THEME_COLOR } from "@/lib/utils/theme";
 
 import { fontDisplay, fontSans } from "./fonts";
@@ -48,9 +55,24 @@ export default async function RootLayout({
   const ui = settings?.ui ?? {};
   const skipLabel = data ? (ui.skipLink ?? "") : INTERIM_SKIP_LABEL;
 
-  // Chat (C-30, slice 6): available only when every required `concierge`
-  // field is set (06 §1.2, B-06). False until slice 6 builds the triggers.
-  const chatAvailable = false;
+  // Chat (C-30): available only when every required `concierge` field and
+  // the `ui.chatOpen` / `ui.chatClose` names are set (06 §1.2, B-06).
+  // Unavailable → no trigger renders and the modal chunk is never requested.
+  const chatAvailable = isChatAvailable(settings);
+  const chatOpenLabel = ui.chatOpen ?? "";
+  const chatTitle = settings?.concierge.title ?? "";
+  const chatSlots = chatAvailable
+    ? {
+        trigger: (
+          <ChatTrigger
+            variant="header-icon"
+            label={chatOpenLabel}
+            icon={<Icon name="chat-bubble-left-right" size={24} />}
+          />
+        ),
+        menuEntry: <ChatTrigger variant="menu-item" label={chatTitle} />,
+      }
+    : undefined;
 
   return (
     // suppressHydrationWarning: C-18 rewrites class, data-theme, data-motion
@@ -80,6 +102,7 @@ export default async function RootLayout({
             ui={ui}
             chatLabel={settings.concierge.title}
             chatAvailable={chatAvailable}
+            chat={chatSlots}
           />
         ) : null}
 
@@ -109,9 +132,16 @@ export default async function RootLayout({
           />
         ) : null}
 
-        {/* 6. C-30 ChatRoot (launcher + lazily loaded dialog) mounts here in
-            slice 6, rendered only when `chatAvailable`:
-            {chatAvailable ? <ChatRoot ... /> : null} */}
+        {/* 6. C-30 ChatRoot: launcher (>= 768 px) + lazily loaded dialog. */}
+        {settings && chatAvailable ? (
+          <ChatRoot
+            concierge={settings.concierge}
+            openLabel={chatOpenLabel}
+            closeLabel={ui.chatClose ?? ""}
+            actions={resolveEscalationActions(settings)}
+            launcherIcon={<Icon name="chat-bubble-left-right" size={24} />}
+          />
+        ) : null}
 
         {/* 7. Speed Insights (91-stack.md §3): loaded after idle, lazy chunk. */}
         <SpeedInsightsIdle />

@@ -82,10 +82,13 @@ export function MobileMenu({
       if (xl.matches) onOpenChange(false);
     };
     // Activating any link in the panel closes the menu (keyboard activation
-    // of a link fires the same click event).
+    // of a link fires the same click event). So does the chat entry
+    // (`data-menu-close`), without moving focus to the menu button
+    // (wireframe §4.4: focus goes to the dialog instead).
     const panel = panelRef.current;
     const onPanelClick = (event: MouseEvent) => {
-      if ((event.target as Element).closest("a[href]")) onOpenChange(false);
+      if ((event.target as Element).closest("a[href], [data-menu-close]"))
+        onOpenChange(false);
     };
     document.addEventListener("keydown", onKeyDown);
     xl.addEventListener("change", onBreakpoint);

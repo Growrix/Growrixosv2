@@ -159,6 +159,12 @@
   --text-wordmark: 1.25rem; /* 20px */
   --text-wordmark--font-weight: 600;
 
+  /* Chat dialog title (pages/home.wireframe.md §4.4, C-31): display 600,
+     22px (< 640px) / 24px (>= 640px). */
+  --text-chat-title: 1.375rem; /* 22px */
+  --text-chat-title--line-height: 1.2;
+  --text-chat-title--font-weight: 600;
+
   /* ---- Layout (02 §4) ---------------------------------------------------- */
   --container-content: 1200px;
   --container-prose: 68ch;
@@ -258,6 +264,7 @@
     --gutter: 32px;
     --text-display: 3rem; /* 48px */
     --text-h2: 2.25rem; /* 36px */
+    --text-chat-title: 1.5rem; /* 24px */
   }
 
   @variant md {

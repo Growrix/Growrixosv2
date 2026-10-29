@@ -7,6 +7,7 @@ import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
 import InformationCircleIcon from "@heroicons/react/24/outline/InformationCircleIcon";
 import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
+import PaperAirplaneIcon from "@heroicons/react/24/outline/PaperAirplaneIcon";
 import SparklesIcon from "@heroicons/react/24/outline/SparklesIcon";
 import SunIcon from "@heroicons/react/24/outline/SunIcon";
 import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
@@ -20,7 +21,7 @@ type HeroIcon = ComponentType<SVGProps<SVGSVGElement>>;
 // chevron (FAQ summary, nav dropdown), sparkles (chat assistant label),
 // information (chat `no_answer` cue), sun / moon (C-13 theme toggle),
 // bars-3 / x-mark (C-14 menu open / close), chat bubble (C-30 header
-// trigger and launcher).
+// trigger and launcher), paper airplane (C-33 send, the reference's icon).
 const ICONS = {
   "arrow-right": ArrowRightIcon,
   "bars-3": Bars3Icon,
@@ -29,6 +30,7 @@ const ICONS = {
   "chevron-down": ChevronDownIcon,
   "information-circle": InformationCircleIcon,
   moon: MoonIcon,
+  "paper-airplane": PaperAirplaneIcon,
   sparkles: SparklesIcon,
   sun: SunIcon,
   "x-mark": XMarkIcon,
@@ -38,7 +40,10 @@ export type IconName = keyof typeof ICONS;
 export type IconSize = 20 | 24;
 
 /** Directional icons are mirrored under RTL (05 §0 logical CSS). */
-const DIRECTIONAL: ReadonlySet<IconName> = new Set<IconName>(["arrow-right"]);
+const DIRECTIONAL: ReadonlySet<IconName> = new Set<IconName>([
+  "arrow-right",
+  "paper-airplane",
+]);
 
 const SIZE_CLASS: Record<IconSize, string> = {
   20: "size-5",
