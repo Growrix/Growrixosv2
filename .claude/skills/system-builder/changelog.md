@@ -70,6 +70,10 @@ Vendor-specific MCPs (Neon, Supabase, Clerk, Stripe, etc.) are **per-product** �
 
 ## Changes (newest first)
 
+### 2026-10-29 — Language rule
+
+- `docs(skills)` **system-builder** — Adds a Language section: Bangla for user-facing talk, English for everything written into the system. Scoped to this skill only. _[this commit]_
+
 ### 2026-10-28 — System export
 
 - `feat(skills)` **system-export** — Copies the reusable `.claude/` system to any destination root. Dry run first; overwrites and deletions only on approval; excludes project-only files (`CLAUDE.md`, `.mcp.json`, `launch.json`, worktrees). _[this commit]_
