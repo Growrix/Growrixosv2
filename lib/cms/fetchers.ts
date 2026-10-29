@@ -21,6 +21,7 @@ import {
 import { formatPrice } from "@/lib/utils/format-price";
 
 import { getSanityClient } from "./client";
+import { devHomeResult, devLayoutResult } from "./dev-seed";
 import { HOME_PAGE_QUERY, LAYOUT_QUERY } from "./queries";
 import {
   UI_KEYS,
@@ -684,13 +685,13 @@ function resolveContent<T extends RawLayoutResult>(raw: T): T {
  */
 export const getHomePage = cache(async (): Promise<HomePageData | null> => {
   const client = getSanityClient();
-  if (!client) return null;
-
-  const raw = await client.fetch<RawHomeResult>(
-    HOME_PAGE_QUERY,
-    {},
-    { cache: "force-cache", next: { tags: HOME_TAGS } },
-  );
+  const raw = client
+    ? await client.fetch<RawHomeResult>(
+        HOME_PAGE_QUERY,
+        {},
+        { cache: "force-cache", next: { tags: HOME_TAGS } },
+      )
+    : ((await devHomeResult()) as RawHomeResult | null);
   if (!raw?.home) return null;
 
   const resolved = resolveContent(raw);
@@ -705,13 +706,13 @@ export const getHomePage = cache(async (): Promise<HomePageData | null> => {
 /** Root layout data. Returns `null` when the CMS is not configured locally (B-01). */
 export const getLayoutData = cache(async (): Promise<LayoutData | null> => {
   const client = getSanityClient();
-  if (!client) return null;
-
-  const raw = await client.fetch<RawLayoutResult>(
-    LAYOUT_QUERY,
-    {},
-    { cache: "force-cache", next: { tags: LAYOUT_TAGS } },
-  );
+  const raw = client
+    ? await client.fetch<RawLayoutResult>(
+        LAYOUT_QUERY,
+        {},
+        { cache: "force-cache", next: { tags: LAYOUT_TAGS } },
+      )
+    : ((await devLayoutResult()) as RawLayoutResult | null);
   if (!raw) return null;
 
   const resolved = resolveContent(raw);
