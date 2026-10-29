@@ -1,37 +1,18 @@
-import Image from "next/image";
-
-export type WordmarkLogo = {
-  src: string;
-  width: number;
-  height: number;
-};
-
 export type WordmarkProps = {
   brandName: string;
-  /** `logo.svg` once supplied (TBD-from-client); `alt` = `brandName`. */
-  logo?: WordmarkLogo;
 };
 
 /**
  * C-17: live text `brandName` in display 600 (`--text-wordmark`: 20px, 18px
- * below 360px, 22px from 768px), or the SVG logo at a fixed 28px height.
- * Rendered inside the home link by the header and footer.
+ * below 360px, 22px from 768px). Rendered inside the home link by the header
+ * and footer.
+ *
+ * The SVG logo variant (02 §2.7, non-blocking client deliverable) is added
+ * when `logo.svg` arrives. It was removed for now because importing
+ * `next/image` here put ~5 kB of client JS on every page for an unused branch.
  */
-export function Wordmark({ brandName, logo }: WordmarkProps) {
+export function Wordmark({ brandName }: WordmarkProps) {
   if (!brandName.trim()) return null;
-
-  if (logo) {
-    return (
-      <Image
-        src={logo.src}
-        width={logo.width}
-        height={logo.height}
-        alt={brandName}
-        unoptimized
-        className="h-7 w-auto"
-      />
-    );
-  }
 
   return (
     <span className="font-display text-wordmark whitespace-nowrap text-text">

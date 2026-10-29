@@ -26,6 +26,11 @@
   }
 }
 
+/* Script state on <html> (C-18 swaps `no-js` -> `js` before paint):
+   `js:` styles apply only with JS, `no-js:` only without it. */
+@custom-variant js (&:where(.js, .js *));
+@custom-variant no-js (&:where(.no-js, .no-js *));
+
 @theme {
   /* ---- Colour (02 §1.2) ------------------------------------------------ */
   --color-*: initial;
@@ -281,5 +286,71 @@
   :focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
+  }
+}
+
+/* ---- Shared chrome: layout and state mechanics (slice 4a) ----------------
+   Header states (wireframe §4.1.2, C-10/C-11). The background lives on a
+   pseudo-element, never on the <header> itself: `backdrop-filter` (and
+   `transform`) on the header would make it the containing block of the
+   fixed mobile-menu panel. No transitions here (motion is slice 7, M-02/M-03).
+   Visual polish of every state is ui-dev's (slice 4b). */
+@layer components {
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--color-surface);
+  }
+
+  /* `top`: transparent over the hero. Before hydration C-18 sets
+     `html[data-home-top]` on `/`, so `top` shows from first paint. */
+  .site-header[data-header-state="top"]::before,
+  html[data-home-top] .site-header[data-header-state="solid"]::before {
+    background-color: transparent;
+  }
+
+  /* `scrolled`: surface at 85 % with a 12 px blur; solid surface when
+     backdrop-filter is unsupported or reduced transparency is requested. */
+  .site-header[data-header-state="scrolled"]::before {
+    background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(12px);
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .site-header[data-header-state="scrolled"]::before {
+      background-color: var(--color-surface);
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header[data-header-state="scrolled"]::before {
+      background-color: var(--color-surface);
+      backdrop-filter: none;
+    }
+  }
+
+  /* `hidden`: moved fully above the viewport; stays in the tab order (C-11
+     reveals it on keyboard focus). */
+  .site-header[data-header-state="hidden"] {
+    transform: translateY(-100%);
+  }
+
+  /* `.no-js` forces the `solid` appearance whatever the attribute says. */
+  .no-js .site-header {
+    transform: none;
+  }
+  .no-js .site-header::before {
+    background-color: var(--color-surface);
+    backdrop-filter: none;
+  }
+}
+
+/* Below 768 px a focused element is never hidden behind the CTA bar
+   (wireframe §4.3, WCAG 2.4.11). */
+@layer base {
+  @media (width < 48rem) {
+    html {
+      scroll-padding-bottom: var(--bar-h);
+    }
   }
 }

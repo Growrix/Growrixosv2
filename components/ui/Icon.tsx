@@ -1,12 +1,15 @@
 import type { ComponentType, SVGProps } from "react";
 
 import ArrowRightIcon from "@heroicons/react/24/outline/ArrowRightIcon";
+import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
+import ChatBubbleLeftRightIcon from "@heroicons/react/24/outline/ChatBubbleLeftRightIcon";
 import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
 import InformationCircleIcon from "@heroicons/react/24/outline/InformationCircleIcon";
 import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
 import SparklesIcon from "@heroicons/react/24/outline/SparklesIcon";
 import SunIcon from "@heroicons/react/24/outline/SunIcon";
+import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
 
 import { cn } from "@/lib/utils/cn";
 
@@ -15,15 +18,20 @@ type HeroIcon = ComponentType<SVGProps<SVGSVGElement>>;
 // C-05: Heroicons outline 24, per-icon imports. Only icons the plan names:
 // arrow (C-02 arrow links), check (trust row, S3 bullets, security list),
 // chevron (FAQ summary, nav dropdown), sparkles (chat assistant label),
-// information (chat `no_answer` cue), sun / moon (C-13 theme toggle).
+// information (chat `no_answer` cue), sun / moon (C-13 theme toggle),
+// bars-3 / x-mark (C-14 menu open / close), chat bubble (C-30 header
+// trigger and launcher).
 const ICONS = {
   "arrow-right": ArrowRightIcon,
+  "bars-3": Bars3Icon,
+  "chat-bubble-left-right": ChatBubbleLeftRightIcon,
   check: CheckIcon,
   "chevron-down": ChevronDownIcon,
   "information-circle": InformationCircleIcon,
   moon: MoonIcon,
   sparkles: SparklesIcon,
   sun: SunIcon,
+  "x-mark": XMarkIcon,
 } as const satisfies Record<string, HeroIcon>;
 
 export type IconName = keyof typeof ICONS;
