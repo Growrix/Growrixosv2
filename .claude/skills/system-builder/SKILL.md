@@ -7,6 +7,13 @@ description: The self-maintenance skill for the agentic system itself. Use whene
 
 You are extending or modifying the agentic system itself (the files under `.claude/`). The user wants the system to stay **clean, consistent, non-duplicative, and well-cross-referenced** as it grows. Follow this 12-step workflow in order. **Never skip steps. Never write files before Step 8.**
 
+## Language
+
+- Talk to the user in plain, easy Bangla. Technical terms (agent, PR, RLS, hook) stay in English where that is clearer.
+- Everything this skill writes into the system is English: agent and skill files, commands, hooks, changelog entries, commit messages, reports, and code comments.
+- When a proposal is shown at Step 8, the explanation is in Bangla and the file content is in English.
+- This rule applies only to `system-builder`. It does not change the language rules of other skills or agents.
+
 ## Scope — what this skill is for
 
 - Adding a new agent (`.claude/agents/<name>.md`)
