@@ -21,7 +21,7 @@ App at the repo root (no `src/`): `app/`, `components/{ui,layout,sections,trust,
 
 ## Locked constraints (change only with the user's explicit approval)
 
-- Performance budgets in `docs/frontend-plans/homepage/90-performance.md` (first-load JS <= 130 KB gzip, chat chunk separate <= 20 KB gzip, CSS <= 30 KB gzip, <= 2 font families / <= 3 woff2, LCP image <= 100 KB, HTML <= 120 KB).
+- Performance budgets in `docs/frontend-plans/homepage/90-performance.md` (first-load JS <= 130 KB **brotli** per D-032 — the plan file still says gzip until a `/plan-ui` revision; chat chunk separate <= 20 KB, CSS <= 30 KB gzip, <= 2 font families / <= 3 woff2, LCP image <= 100 KB, HTML <= 120 KB).
 - The homepage must be static (shown as `○` in the `next build` route table): no `cookies()`, `headers()`, `searchParams` in it.
 - No motion library (`motion`/`framer-motion`, `gsap`, `lenis`), no `clsx`/`tailwind-merge`, no `@headlessui/react`, no focus-trap packages, no `zustand` (`91-stack.md` §2).
 - Client islands are only those listed in `91-stack.md` §3 (approved under D-013). Everything else is a Server Component.

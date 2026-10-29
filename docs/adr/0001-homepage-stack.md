@@ -11,6 +11,7 @@
 4. **Extra client islands approved** (D-013 option a): HeaderController, ThemeToggle, MobileCtaBar, InViewOnce, ChatRoot (+ lazy ChatModal).
 5. **Preview-only slice** (D-027): deferred to named later slices — `web-vitals` attribution and Sentry (launch), CSP mode A Report-Only first (launch), chat rate limiting (chat-backend slice, before any Claude call), 404 nav targets (launch must build or remove them).
 6. **Analytics event names** `chat_open`, `chat_message_sent`, locations `menu`, `chat` approved (D-014); `track()` is a no-op in this slice.
+7. **D-032 — JS budget measured in brotli** (user decision 2026-10-29). The empty Next 16.4.3 + React 19.3.1 app already loads 134.54 kB gzip on `/` (react-dom 73.4 kB, Next router 52.2 kB; webpack 133.6 kB), above the plan's 130 KB gzip budget. The user kept the 130 KB limit and chose to measure in brotli, which Vercel serves (114.8 kB brotli for the empty app). `.size-limit.mjs` uses brotli. `90-performance.md` §2 still says gzip; it is updated later through `/plan-ui`. Also: `lint` runs with `--max-warnings=0` (BG-1).
 
 ## Consequences
 

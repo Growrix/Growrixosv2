@@ -1,11 +1,13 @@
 // BG-2 (93-qa-checklist.md §2) / 90-performance.md §2: first-load JS for `/`
-// <= 130 KB gzip. Run after `next build`.
+// <= 130 KB, measured in brotli (D-032, user decision 2026-10-29: Vercel
+// serves brotli; the framework runtime alone is ~135 kB gzip / ~115 kB brotli).
+// Run after `next build`.
 //
 // Method: Turbopack emits content-hashed chunk names with no per-route folder,
 // so a static glob cannot select the homepage's chunks. The prerendered
 // homepage HTML (.next/server/app/index.html) lists exactly the <script src>
 // tags a browser downloads on first load of `/`. This config reads that file
-// and measures those chunks with @size-limit/file (gzip level 9).
+// and measures those chunks with @size-limit/file (brotli quality 11).
 // `noModule` scripts (the legacy polyfill bundle) are excluded: modern browsers
 // never download them. Chunks loaded later via import() (e.g. the chat modal)
 // are not in the HTML, so they are not counted here.
@@ -41,7 +43,7 @@ const checks = [
   {
     name: "Homepage (/) first-load JS",
     path: firstLoadJs,
-    gzip: true,
+    brotli: true,
     limit: "130 KB",
   },
 ];
