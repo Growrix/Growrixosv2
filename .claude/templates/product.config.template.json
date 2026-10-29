@@ -1,0 +1,24 @@
+{
+  "_comment": "Product manifest — one per SaaS product. The project-director creates this at /new-product with every slot empty, then fills it from your answers at the Phase 1 gate. No vendor is favored by the system; every value here comes from you. 'defer' means ask again when the first task actually needs this capability. 'none' means the product doesn't use this capability at all.",
+  "name": "",
+  "created": "",
+  "stack": {
+    "framework":  { "name": "", "version": "" },
+    "ui":         { "lib": "", "styling": "" },
+    "animation":  { "lib": "" },
+    "database":   { "provider": "", "connection": "" },
+    "orm":        { "name": "" },
+    "auth":       { "provider": "" },
+    "email":      { "provider": "", "from": "" },
+    "storage":    { "provider": "", "public_bucket": "", "private_bucket": "" },
+    "payments":   { "provider": "", "model": "", "test_mode": true },
+    "monitoring": { "provider": "", "sample_rate": 1.0 },
+    "analytics":  { "provider": "" },
+    "hosting":    { "provider": "" },
+    "ci":         { "provider": "" },
+    "feature_flags": { "provider": "" },
+    "i18n":       { "provider": "", "default_locale": "en", "locales": ["en"], "future_locales": [] },
+    "infra":      { "provider": "" }
+  },
+  "notes": ""
+}

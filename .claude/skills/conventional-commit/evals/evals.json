@@ -1,0 +1,85 @@
+{
+  "skill_name": "conventional-commit",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Hey can you commit my staged changes? I just added a password strength checker to the auth module.",
+      "expected_output": "A conventional commit message of type 'feat' with scope 'auth', a concise imperative description, optionally a body if the diff warrants it, and the commit actually applied to the repo.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "type-is-feat",
+          "description": "Commit message first line starts with 'feat'"
+        },
+        {
+          "name": "scope-is-auth",
+          "description": "Commit message includes '(auth)' scope"
+        },
+        {
+          "name": "description-is-imperative",
+          "description": "Description uses an imperative verb (add, implement, introduce, etc.), not past or present-continuous tense"
+        },
+        {
+          "name": "first-line-under-72-chars",
+          "description": "The first line of the commit message is 72 characters or fewer"
+        },
+        {
+          "name": "commit-was-applied",
+          "description": "git log --oneline -1 shows a new commit (not the initial 'chore: initial scaffold' commit)"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Write a commit message for what I just changed and commit it.",
+      "expected_output": "A conventional commit message of type 'fix' with scope 'api', describing the 500→404 status code correction, with or without a brief body, and the commit applied.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "type-is-fix",
+          "description": "Commit message first line starts with 'fix'"
+        },
+        {
+          "name": "scope-is-api",
+          "description": "Commit message includes '(api)' scope"
+        },
+        {
+          "name": "description-mentions-404-or-status",
+          "description": "Description references 404, status code, or 'not found'"
+        },
+        {
+          "name": "first-line-under-72-chars",
+          "description": "The first line of the commit message is 72 characters or fewer"
+        },
+        {
+          "name": "commit-was-applied",
+          "description": "git log --oneline -1 shows a new commit (not the initial scaffold commit)"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I updated the README with better setup instructions. Can you make a commit for that?",
+      "expected_output": "A conventional commit message of type 'docs', with or without a scope, describing the README update in imperative mood, and the commit applied.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "type-is-docs",
+          "description": "Commit message first line starts with 'docs'"
+        },
+        {
+          "name": "description-is-imperative",
+          "description": "Description uses an imperative verb (update, expand, improve, etc.)"
+        },
+        {
+          "name": "first-line-under-72-chars",
+          "description": "The first line of the commit message is 72 characters or fewer"
+        },
+        {
+          "name": "commit-was-applied",
+          "description": "git log --oneline -1 shows a new commit (not the initial scaffold commit)"
+        }
+      ]
+    }
+  ]
+}

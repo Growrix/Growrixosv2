@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+sanity/node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# sanity
+sanity/dist/
+sanity/.sanity/
+
+# env (real values never committed)
+.env*
+!.env.example
+
+# testing
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# misc
+*.tsbuildinfo
+.DS_Store
+.vercel
+*.log
