@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+package-lock.json
+playwright-report/
+test-results/
+blob-report/
+docs/
+.claude/
+sanity/node_modules/
+sanity/dist/
+sanity/.sanity/
+.mcp.json
