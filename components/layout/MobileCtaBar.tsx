@@ -37,6 +37,7 @@ export function MobileCtaBar({ fitCall, teardown }: MobileCtaBarProps) {
             fullWidth
             trackId={fitCall?.trackId ?? undefined}
             trackLocation="sticky"
+            className="focus-two-tone"
           >
             {fit.label}
           </Button>
@@ -51,6 +52,7 @@ export function MobileCtaBar({ fitCall, teardown }: MobileCtaBarProps) {
             fullWidth
             trackId={teardown?.trackId ?? undefined}
             trackLocation="sticky"
+            className="focus-two-tone"
           >
             {tear.label}
           </Button>

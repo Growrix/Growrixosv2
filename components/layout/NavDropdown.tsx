@@ -71,7 +71,7 @@ export function NavDropdown({
       {/* .no-js: plain link to the parent page. */}
       <a
         href={item.href}
-        className="inline-flex min-h-11 items-center px-3 text-button js:hidden"
+        className="inline-flex min-h-11 items-center rounded-md px-3 text-button whitespace-nowrap text-text hover:bg-inset active:bg-inset js:hidden"
       >
         {item.label}
       </a>
@@ -81,7 +81,7 @@ export function NavDropdown({
         aria-expanded={open}
         aria-controls={panelId}
         onClick={onToggle}
-        className="inline-flex min-h-11 items-center gap-1 px-3 text-button no-js:hidden"
+        className="inline-flex min-h-11 items-center gap-1 rounded-md px-3 text-button whitespace-nowrap text-text hover:bg-inset active:bg-inset aria-expanded:bg-inset no-js:hidden aria-expanded:[&>svg]:rotate-180"
       >
         {item.label}
         {srSuffix ? <VisuallyHidden>{srSuffix}</VisuallyHidden> : null}
@@ -90,14 +90,14 @@ export function NavDropdown({
       <ul
         id={panelId}
         hidden={!open}
-        className="absolute start-0 top-full min-w-65 rounded-md border border-border-strong bg-surface py-2"
+        className="absolute start-0 top-full flex min-w-65 flex-col gap-2 rounded-md border border-border-strong bg-surface p-2"
       >
         {item.children.map((child) => (
           <li key={child.key}>
             <a
               href={child.href}
               onClick={onClose}
-              className="flex min-h-11 items-center px-4 text-button"
+              className="flex min-h-11 items-center rounded-md px-3 text-button text-text hover:bg-inset active:bg-inset"
             >
               {child.label}
             </a>

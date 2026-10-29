@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-
+import { VerifyRow } from "@/components/trust/VerifyRow";
 import { TextLink } from "@/components/ui/TextLink";
+import { resolveVerifyLinks } from "@/lib/cms/platforms";
 import type { CtaUpwork, Nullable, SiteSettings } from "@/lib/cms/types";
 import { cn } from "@/lib/utils/cn";
 
@@ -28,14 +28,13 @@ export type SiteFooterProps = {
   brandName: string | null;
   /** `ui.footerNavLabel`; the `aria-label` is omitted while empty (B-07). */
   footerNavLabel?: string;
-  /** `ui.externalSuffix` for the external Upwork link (empty → omitted, B-07). */
+  /** `ui.externalSuffix` for the external links (empty → omitted, B-07). */
   externalSuffix?: string;
-  /**
-   * C-22 `VerifyRow` (ui-dev, slice 4b) for `footer.verifyLabel` +
-   * `verifyLinks`. Not rendered by this shell until C-22 exists.
-   */
-  verifyRow?: ReactNode;
 };
+
+/** Footer nav and legal links: muted text, underline + ink on hover. */
+const FOOTER_LINK =
+  "inline-flex min-h-11 items-center text-text-muted hover:text-text hover:underline hover:underline-offset-3 active:text-text";
 
 /**
  * C-16 (server). `<footer>` (contentinfo): descriptor → `<nav id="footer-nav">`
@@ -50,7 +49,6 @@ export function SiteFooter({
   brandName,
   footerNavLabel,
   externalSuffix,
-  verifyRow,
 }: SiteFooterProps) {
   const columns = footer.columns
     .map((col) => ({
@@ -78,18 +76,20 @@ export function SiteFooter({
     Boolean(copyright) ||
     legalLinks.length > 0 ||
     Boolean(upworkUrl && upworkLabel);
-  if (!footer.descriptor && columns.length === 0 && !verifyRow && !hasLegal)
+  // C-22: `footer.verifyLabel` then every platform with a URL (wireframe §4.2).
+  const hasVerify = resolveVerifyLinks(verifyLinks).length > 0;
+  if (!footer.descriptor && columns.length === 0 && !hasVerify && !hasLegal)
     return null;
 
   return (
     <footer
       id={CHROME_IDS.footer}
-      className="border-t border-border pt-12 pb-[calc(var(--bar-h)+16px)] md:pb-12"
+      className="border-t border-border bg-bg pt-12 pb-[calc(var(--bar-h)+16px)] text-small text-text md:pb-12"
     >
       <div className="mx-auto box-content flex max-w-content flex-col gap-8 px-(--gutter)">
         <div className="grid gap-8 lg:grid-cols-12">
           {footer.descriptor ? (
-            <p className="text-small text-text-muted lg:col-span-4">
+            <p className="max-w-prose text-text-muted lg:col-span-4">
               {footer.descriptor}
             </p>
           ) : null}
@@ -105,15 +105,12 @@ export function SiteFooter({
               {columns.map((col) => (
                 <div key={col.key}>
                   {col.heading ? (
-                    <h2 className="text-small font-bold">{col.heading}</h2>
+                    <h2 className="mb-1 font-bold text-text">{col.heading}</h2>
                   ) : null}
-                  <ul>
+                  <ul className="flex flex-col gap-2">
                     {col.links.map((link) => (
                       <li key={link._key}>
-                        <a
-                          href={link.href}
-                          className="inline-flex min-h-11 items-center text-small"
-                        >
+                        <a href={link.href} className={FOOTER_LINK}>
                           {link.label}
                         </a>
                       </li>
@@ -125,19 +122,22 @@ export function SiteFooter({
           ) : null}
         </div>
 
-        {verifyRow ?? null}
+        <VerifyRow
+          label={footer.verifyLabel}
+          links={verifyLinks}
+          externalSuffix={externalSuffix}
+          singleLineFromLg
+          className="md:pe-24"
+        />
 
         {hasLegal ? (
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-small text-text-muted md:pe-24">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-6 text-text-muted md:pe-24 lg:flex-nowrap">
             {copyright ? <p>{copyright}</p> : null}
             {legalLinks.length > 0 ? (
-              <ul className="flex flex-wrap gap-x-6">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
                 {legalLinks.map((link) => (
                   <li key={link._key}>
-                    <a
-                      href={link.href}
-                      className="inline-flex min-h-11 items-center"
-                    >
+                    <a href={link.href} className={FOOTER_LINK}>
                       {link.label}
                     </a>
                   </li>

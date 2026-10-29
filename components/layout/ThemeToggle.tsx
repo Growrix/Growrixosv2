@@ -62,7 +62,6 @@ function applyTheme(theme: Theme) {
  * C-13 (client). `<button aria-pressed>`: pressed = dark active. Writes
  * `localStorage`, `data-theme` and `meta[name=theme-color]`; the switch is
  * instant (M-06: no transition). `.no-js` → `visibility: hidden`.
- * Visual states are completed by ui-dev (slice 4b).
  */
 export function ThemeToggle({
   label,
@@ -81,7 +80,10 @@ export function ThemeToggle({
       data-variant={variant}
       onClick={() => applyTheme(isDark ? "light" : "dark")}
       className={cn(
-        "inline-flex size-11 items-center justify-center rounded-md no-js:invisible",
+        "inline-flex size-11 items-center justify-center rounded-md text-text hover:bg-inset active:bg-inset no-js:invisible",
+        // Menu row (M): a 1 px control boundary so it reads as a control
+        // beside its visible label; the bar variant is a ghost icon button.
+        variant === "menu-row" && "border border-border-control bg-surface",
         className,
       )}
     >

@@ -31,6 +31,14 @@
 @custom-variant js (&:where(.js, .js *));
 @custom-variant no-js (&:where(.no-js, .no-js *));
 
+/* Header compact rule below 360px (wireframe §4.1.1): wordmark 18px, pill
+   text 14px with 12px padding, 6px gaps. */
+@custom-variant compact {
+  @media (width < 22.5rem) {
+    @slot;
+  }
+}
+
 @theme {
   /* ---- Colour (02 §1.2) ------------------------------------------------ */
   --color-*: initial;
@@ -129,6 +137,12 @@
   --text-button-lg--line-height: 1;
   --text-button-lg--letter-spacing: -0.01em;
   --text-button-lg--font-weight: 700;
+
+  /* Header pill below 360px (wireframe §4.1.1 compact rule): 14px. */
+  --text-button-compact: 0.875rem; /* 14px */
+  --text-button-compact--line-height: 1;
+  --text-button-compact--letter-spacing: -0.01em;
+  --text-button-compact--font-weight: 700;
 
   --text-chat: 0.9375rem; /* 15px */
   --text-chat--line-height: 1.5rem; /* 24px */
@@ -296,12 +310,15 @@
    fixed mobile-menu panel. No transitions here (motion is slice 7, M-02/M-03).
    Visual polish of every state is ui-dev's (slice 4b). */
 @layer components {
+  /* `solid` / `scrolled` carry a 1px `--color-border` hairline on the bottom
+     edge (Formal hairlines, 01 §4); `top` has none. */
   .site-header::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: -1;
     background-color: var(--color-surface);
+    border-block-end: 1px solid var(--color-border);
   }
 
   /* `top`: transparent over the hero. Before hydration C-18 sets
@@ -309,6 +326,7 @@
   .site-header[data-header-state="top"]::before,
   html[data-home-top] .site-header[data-header-state="solid"]::before {
     background-color: transparent;
+    border-block-end-color: transparent;
   }
 
   /* `scrolled`: surface at 85 % with a 12 px blur; solid surface when
@@ -335,12 +353,21 @@
     transform: translateY(-100%);
   }
 
+  /* Mobile menu open: the bar is opaque so it reads as one surface with the
+     panel below it, whatever the scroll state. */
+  .site-header:has(#mobile-menu:not([hidden]))::before {
+    background-color: var(--color-surface);
+    border-block-end-color: var(--color-border);
+    backdrop-filter: none;
+  }
+
   /* `.no-js` forces the `solid` appearance whatever the attribute says. */
   .no-js .site-header {
     transform: none;
   }
   .no-js .site-header::before {
     background-color: var(--color-surface);
+    border-block-end-color: var(--color-border);
     backdrop-filter: none;
   }
 }
@@ -352,5 +379,19 @@
     html {
       scroll-padding-bottom: var(--bar-h);
     }
+  }
+}
+
+/* Two-tone focus ring for floating controls (02 §2, 05 §0: C-15 buttons,
+   C-30 launcher): the standard 2px `--color-focus` outline plus a 4px
+   `--color-surface` halo (box-shadow). The outline offset equals the halo
+   width, so the halo fills the whole gap between the control and the outline
+   and the outline always has a known surface on its inner edge. A utility
+   (not a component class) so it wins over `shadow-1` on primary buttons. */
+@utility focus-two-tone {
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+    box-shadow: 0 0 0 4px var(--color-surface);
   }
 }

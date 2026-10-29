@@ -110,7 +110,7 @@ export function MobileMenu({
       <a
         href={`#${CHROME_IDS.footerNav}`}
         aria-label={openLabel}
-        className="inline-flex size-11 items-center justify-center rounded-md xl:hidden js:hidden"
+        className="inline-flex size-11 items-center justify-center rounded-md text-text hover:bg-inset active:bg-inset xl:hidden js:hidden"
       >
         {openIcon}
       </a>
@@ -121,7 +121,7 @@ export function MobileMenu({
         aria-controls={CHROME_IDS.mobileMenu}
         aria-label={open ? closeLabel : openLabel}
         onClick={() => onOpenChange(!open)}
-        className="inline-flex size-11 items-center justify-center rounded-md xl:hidden no-js:hidden"
+        className="inline-flex size-11 items-center justify-center rounded-md text-text hover:bg-inset active:bg-inset aria-expanded:bg-inset xl:hidden no-js:hidden"
       >
         {open ? closeIcon : openIcon}
       </button>
@@ -130,27 +130,27 @@ export function MobileMenu({
         id={CHROME_IDS.mobileMenu}
         ref={panelRef}
         hidden={!open}
-        className="fixed inset-x-0 top-(--chrome-h) bottom-0 overflow-y-auto overscroll-contain bg-surface xl:hidden"
+        className="fixed inset-x-0 top-(--chrome-h) bottom-0 overflow-y-auto overscroll-contain bg-surface text-text xl:hidden"
       >
         <div className="mx-auto box-content flex max-w-content flex-col gap-4 px-(--gutter) py-6">
           {navigation.length > 0 ? (
             <nav aria-label={navLabel || undefined}>
-              <ul className="flex flex-col">
+              <ul className="flex flex-col gap-2">
                 {navigation.map((item) => (
                   <li key={item.key}>
                     <a
                       href={item.href}
-                      className="flex min-h-11 items-center text-button"
+                      className="-mx-3 flex min-h-11 items-center rounded-md px-3 text-button hover:bg-inset active:bg-inset"
                     >
                       {item.label}
                     </a>
                     {item.children.length > 0 ? (
-                      <ul className="flex flex-col ps-4">
+                      <ul className="ms-1 mt-2 flex flex-col gap-2 border-s border-border ps-3">
                         {item.children.map((child) => (
                           <li key={child.key}>
                             <a
                               href={child.href}
-                              className="flex min-h-11 items-center text-button"
+                              className="flex min-h-11 items-center rounded-md px-3 text-button font-normal text-text-muted hover:bg-inset hover:text-text active:bg-inset"
                             >
                               {child.label}
                             </a>

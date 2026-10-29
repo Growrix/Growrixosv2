@@ -157,7 +157,7 @@ export function HeaderController({
           aria-label={ui.navLabel || undefined}
           className="hidden xl:ms-8 xl:flex"
         >
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-2">
             {navigation.map((item) =>
               item.children.length > 0 ? (
                 <NavDropdown
@@ -177,7 +177,7 @@ export function HeaderController({
                 <li key={item.key}>
                   <a
                     href={item.href}
-                    className="inline-flex min-h-11 items-center px-3 text-button"
+                    className="inline-flex min-h-11 items-center rounded-md px-3 text-button whitespace-nowrap text-text hover:bg-inset active:bg-inset"
                   >
                     {item.label}
                   </a>
@@ -188,7 +188,7 @@ export function HeaderController({
         </nav>
       ) : null}
 
-      <div className="ms-auto flex items-center gap-2">
+      <div className="ms-auto flex items-center gap-2 compact:gap-1.5">
         {children}
         {ui.menuOpen && ui.menuClose ? (
           <MobileMenu

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import type { CmsNavItem, SiteSettings, UiStrings } from "@/lib/cms/types";
+import { cn } from "@/lib/utils/cn";
 
 import { HeaderController } from "./HeaderController";
 import { toHeaderNav } from "./nav-types";
@@ -68,6 +69,7 @@ export function SiteHeader({
 
   // Header CTA: one link per breakpoint band (wireframe §4.1); the hidden
   // ones are `display: none`, so only one is in the accessibility tree.
+  // The M pill follows the < 360 px compact rule (wireframe §4.1.1).
   const headerCtas: { label: string | null; band: string; pill: boolean }[] = [
     { label: fitCall?.labelMobile ?? null, band: "flex md:hidden", pill: true },
     {
@@ -114,7 +116,7 @@ export function SiteHeader({
   const themeRow = themeLabel ? (
     <div className="flex min-h-11 items-center justify-between gap-4 md:hidden">
       {ui.themeRowLabel ? (
-        <span className="text-button">{ui.themeRowLabel}</span>
+        <span className="text-button text-text">{ui.themeRowLabel}</span>
       ) : null}
       <ThemeToggle
         label={themeLabel}
@@ -139,8 +141,11 @@ export function SiteHeader({
       data-header-state="solid"
       className="site-header fixed inset-x-0 top-0 z-(--z-header) h-(--chrome-h)"
     >
-      <div className="mx-auto box-content flex h-full max-w-content items-center gap-2 px-(--gutter)">
-        <Link href="/" className="inline-flex min-h-11 shrink-0 items-center">
+      <div className="mx-auto box-content flex h-full max-w-content items-center gap-2 px-(--gutter) compact:gap-1.5">
+        <Link
+          href="/"
+          className="inline-flex min-h-11 shrink-0 items-center rounded-sm"
+        >
           <Wordmark brandName={brandName} />
         </Link>
         <HeaderController
@@ -177,6 +182,10 @@ export function SiteHeader({
                       shape={pill ? "pill" : "rounded"}
                       trackId={fitCall?.trackId ?? undefined}
                       trackLocation="header"
+                      className={cn(
+                        "whitespace-nowrap",
+                        pill && "compact:px-3 compact:text-button-compact",
+                      )}
                     >
                       {label}
                     </Button>
