@@ -14,6 +14,20 @@ You are extending or modifying the agentic system itself (the files under `.clau
 - When a proposal is shown at Step 8, the explanation is in Bangla and the file content is in English.
 - This rule applies only to `system-builder`. It does not change the language rules of other skills or agents.
 
+## Validation rule (hard)
+
+This rule applies to every answer and every change this skill makes.
+
+- Before you state any fact about Claude Code (hooks, subagents, skills, commands, settings, model names, limits, pricing), check these sources in order:
+  1. The user's book-mcp reference (`mcp__book-mcp__search_book`, then `get_outline`, then `get_chapter`).
+  2. Claude Code official docs (https://code.claude.com/docs/en/overview and the pages it links to).
+  3. A live web search for the exact fact.
+- Cite the source for each fact you state.
+- If a source is unavailable or silent, say so plainly: "not verified: <what>; <source> unavailable", or "not found". Never fill the gap with a guess.
+- Keep verified facts apart from inference. Label any inference "assumption" and do not act on it.
+- If an earlier answer turns out wrong or unverified, say so and correct it before going on.
+- Do not write a file that depends on an unverified fact. Stop at Step 8 and report the gap.
+
 ## Scope — what this skill is for
 
 - Adding a new agent (`.claude/agents/<name>.md`)
@@ -233,6 +247,7 @@ If multiple files touched for one logical change (new agent + CLAUDE.md + README
 12. **Never touch `~/.claude/`** (user-global settings) unless the user explicitly asks.
 13. **Always append a changelog entry** in Step 10 as part of the same commit as the change. No change is complete without its log line.
 14. **If the changelog disagrees with the live tree**, the live tree wins. Rebaseline the changelog rather than editing files to match a stale log.
+15. **Never state an unverified fact** about the Claude Code system. Follow the "Validation rule" section: cite the source, or label the gap.
 
 ---
 

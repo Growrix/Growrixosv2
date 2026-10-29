@@ -73,6 +73,7 @@ Vendor-specific MCPs (Neon, Supabase, Clerk, Stripe, etc.) are **per-product** �
 ### 2026-10-29 — Language rule
 
 - `docs(skills)` **system-builder** — Adds a Language section: Bangla for user-facing talk, English for everything written into the system. Scoped to this skill only. _[this commit]_
+- `docs(skills)` **system-builder validation rule** — Adds a hard rule: facts about Claude Code must be checked against book-mcp, official docs, or web search; unverified claims are labelled. _[this commit]_
 
 ### 2026-10-28 — System export
 
