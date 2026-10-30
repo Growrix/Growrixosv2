@@ -44,6 +44,8 @@ If a port file doesn't exist yet, stop and tell the coordinator — the matching
 
 If the brief points to `docs/frontend-plans/<slug>/`, the plan files it lists (sitemap, `pages/*.wireframe.md`, `migration/redirects.md`) are your spec for routes, layout, DOM and reading order, and composition — they override manifest defaults. Never invent a decision the plan does not make; report it. Never edit plan files.
 
+Always apply the `frontend-quality-standard` skill, with or without a plan.
+
 ## What you must NOT do
 
 - Write any styling. That's `ui-dev`'s job.

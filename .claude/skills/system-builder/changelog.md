@@ -70,6 +70,16 @@ Vendor-specific MCPs (Neon, Supabase, Clerk, Stripe, etc.) are **per-product** �
 
 ## Changes (newest first)
 
+### 2026-10-30 — Frontend flow: creative → prototype → production
+
+- `feat(agents)` **prototype-builder** — Single-file HTML prototype (Tailwind Play CDN, GSAP + ScrollTrigger, real copy, labelled placeholders, both themes) under `docs/frontend-plans/<slug>/prototype/`, with a browser-pane screenshot loop and a `CHANGES.md` per refinement round. The homepage build looked like a wireframe because no visual approval existed before the production spec. _[this commit]_
+- `feat(commands)` **/prototype** — Runs the prototype-builder procedure in the main session, not as a subagent: browser-pane access from a subagent is unverified (sub-agents doc page could not be read in full; book-mcp silent). _[this commit]_
+- `refactor(skills)` **frontend-quality-standard** — `site-planning-playbook/references/quality-standard.md` moved (not copied) into its own skill so builders apply it by default with or without a plan. References updated in the playbook (loading table, §1.10, Critic prompt) and `redesign-module.md`. _[this commit]_
+- `feat(skills)` **site-planning-playbook** — New §3a: Stage A (creative: brief, art direction, tokens, page creative plan, motion spec) → `/prototype` → Stage B (`finalize`: production questions, stack, schemas, wireframes, budgets, Critic, INDEX). Intake always asks motion intensity and boldness with the scale shown, plus visual references. Content defaults to local data files; CMS is a later slice. INDEX handover names the prototype as visual reference. Deviations 14–15. _[this commit]_
+- `feat(agents)` **site-planner** — Stage selection in pre-flight; separate Stage A and Stage B reports. `/plan-ui` relays the Stage A report with the `/prototype` next step. _[this commit]_
+- `feat(agents-ext)` **senior-dev**, **ui-dev**, **frontend-dev** — Load `frontend-quality-standard` by default for frontend work; senior-dev builds from local content files, screenshots each UI slice against the prototype, and shows labelled placeholders in `next dev` only; routing row offers `/prototype`. _[this commit]_
+- `chore(docs)` **cross-refs** — Root `CLAUDE.md` is now the product's rules file (no Agentic-system counts), no README inventory exists, and the SaaS Factory Blueprint artifact URL is not on record, so none were updated. Live tree after this change: 49 agents, 15 skills, 9 commands, 6 hooks. _[this commit]_
+
 ### 2026-10-29 — Language rule
 
 - `docs(skills)` **system-builder** — Adds a Language section: Bangla for user-facing talk, English for everything written into the system. Scoped to this skill only. _[this commit]_

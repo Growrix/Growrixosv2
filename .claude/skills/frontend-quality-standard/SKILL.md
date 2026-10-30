@@ -1,3 +1,10 @@
+---
+name: frontend-quality-standard
+description: The production quality floor for every frontend change — performance budgets, Core Web Vitals, rendering, motion performance, images and fonts, accessibility (WCAG 2.2 AA), SEO and metadata, security and third-party hygiene, QA pipeline, senior-developer rules. Loaded by senior-dev, frontend-dev and ui-dev for any frontend work, with or without a plan; site-planner cites it in plans. A plan or project CLAUDE.md may tighten a rule, never loosen it silently.
+---
+
+**How to use.** Builders (`senior-dev`, `frontend-dev`, `ui-dev`) apply this file by default to any frontend work, whether or not a `site-planner` plan exists. When a plan exists, its `90-performance.md` / `93-qa-checklist.md` and the project's `CLAUDE.md` can only tighten these numbers. The planner and its Critic cite rules by section number (for example "§2.3"); section numbers are stable.
+
 # Part D: Performance, Accessibility, SEO & QA Standard
 
 **Purpose.** This is the quality floor for every plan. The Critic cites rules by section number (for example "§2.3"). Each rule carries a number or a yes/no check. A client brief may tighten a rule; it may loosen one only if the plan records the rule, the new value and the reason. Motion design lives in another section; this one sets only its performance and accessibility limits.
