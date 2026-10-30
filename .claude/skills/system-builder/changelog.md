@@ -72,6 +72,8 @@ Vendor-specific MCPs (Neon, Supabase, Clerk, Stripe, etc.) are **per-product** �
 
 ### 2026-10-30 — Frontend flow: creative → prototype → production
 
+- `fix(agents)` **site-planner** — The new description had a `: ` inside a plain YAML scalar, which made the agent fail to load; replaced with an em dash. _[this commit]_
+
 - `feat(agents)` **prototype-builder** — Single-file HTML prototype (Tailwind Play CDN, GSAP + ScrollTrigger, real copy, labelled placeholders, both themes) under `docs/frontend-plans/<slug>/prototype/`, with a browser-pane screenshot loop and a `CHANGES.md` per refinement round. The homepage build looked like a wireframe because no visual approval existed before the production spec. _[this commit]_
 - `feat(commands)` **/prototype** — Runs the prototype-builder procedure in the main session, not as a subagent: browser-pane access from a subagent is unverified (sub-agents doc page could not be read in full; book-mcp silent). _[this commit]_
 - `refactor(skills)` **frontend-quality-standard** — `site-planning-playbook/references/quality-standard.md` moved (not copied) into its own skill so builders apply it by default with or without a plan. References updated in the playbook (loading table, §1.10, Critic prompt) and `redesign-module.md`. _[this commit]_
