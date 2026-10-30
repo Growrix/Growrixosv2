@@ -28,6 +28,7 @@ You never run phases and never call `project-director`, any `phase*-coordinator`
 2. `git status --short`. If there are uncommitted changes unrelated to this task, stop and ask — never mix them into your commits.
 3. Read, in order: root `CLAUDE.md`; the rules file of the area you will touch (e.g. `web/CLAUDE.md`, `studio/CLAUDE.md`); `HANDOVER.md` / README To-Do if present (is this task, or something it touches, a known item?); relevant `docs/adr/*`. The real stack and conventions come from these files and the code — not from memory, and not from `docs/product.config.json` (brownfield projects usually have none).
 4. If the area's rules say to read bundled framework docs first, do it before writing code. Otherwise use the docs MCP or the official docs for the exact API you are about to use.
+5. For any frontend task (pages, components, styles, motion), load the `frontend-quality-standard` skill and apply it as the default floor, with or without a plan. A plan's `90`/`93` or the project's `CLAUDE.md` can only tighten it.
 
 ## Triage — size the task
 
@@ -50,6 +51,7 @@ Delegate to the sub-agent that owns the lane. Check the real file layout with Gl
 | find code / understand an area                                                       | `Explore` (read-only)                                                                                                                                |
 | design for an L task                                                                 | `Plan`; `system-architect` (ADR), `api-designer`, `db-schema-designer`, `ux-designer`, `threat-modeler`                                              |
 | UI/UX design planning for a new page, section, site, or redesign (no final plan yet) | not delegated — offer `/plan-ui` to the user first (ask once; for Tier S, default to proceeding without a plan)                                |
+| see a design visually before building                                                | not delegated — offer `/prototype`                                                                                                                   |
 | pages, routes, layouts, client/server boundaries                                     | `frontend-dev`                                                                                                                                       |
 | components, styling, dark mode, responsive, animation                                | `ui-dev`                                                                                                                                             |
 | server actions, route handlers, validation                                           | `api-dev`                                                                                                                                            |
@@ -91,6 +93,9 @@ When the task points to a plan from `site-planner` (`docs/frontend-plans/<slug>/
 4. **Brief each lane with its plan files.** Use the Build order's builder column: `ui-dev` gets tokens, components, and motion files; `frontend-dev` gets sitemap, wireframes, and redirects; content schemas are yours; copy slots stay with the client or `content-writer`; SEO goes to `seo-optimizer`. Add to the context packet: "This brief follows `docs/frontend-plans/<slug>/`. The listed plan files are your spec and override any manifest defaults; report missing decisions, do not invent them."
 5. **Dependency decisions** in `91-stack.md` need the user's approval before any install, one at a time.
 6. **Verify against the plan.** Pass `90-performance.md` and `93-qa-checklist.md` (for a section plan, the "Budgets and QA" block of `sections/<slug>.md`; for redesigns, also `qa/before-after.md`) to `performance-auditor` / `accessibility-checker`. The project's own gate still decides done.
+7. **Content source.** Content comes from local typed data files unless `INDEX.md` lists a CMS slice the user approved.
+8. **Match the prototype.** If `INDEX.md` names a visual reference, after each UI slice screenshot the page at 375 and 1440 px and compare it with `prototype/index.html`; a visible mismatch is a finding.
+9. **Empty slots.** Empty content slots render a labelled placeholder in `next dev` only, never in a production build.
 
 ## Edit policy (hybrid)
 

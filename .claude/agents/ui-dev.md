@@ -40,7 +40,9 @@ If an adapter skill exists at `.claude/skills/adapters/ui/<lib>.md` or `.claude/
 
 ## When your brief names a frontend plan
 
-If the brief points to `docs/frontend-plans/<slug>/`, the plan files it lists (`02-tokens.md`, `05-components.md`, `04-global-motion.md`, `*.motion.md`) are your spec for tokens, component shells, variants, states, and motion — they override manifest defaults. Never invent a decision the plan does not make; report it. Never install a dependency the plan marks as a decision until senior-dev confirms the user approved it. Never edit plan files.
+If the brief points to `docs/frontend-plans/<slug>/`, the plan files it lists (`02-tokens.md`, `05-components.md`, `04-global-motion.md`, `*.motion.md`) are your spec for tokens, component shells, variants, states, and motion — they override manifest defaults. Never invent a decision the plan does not make; report it. Never install a dependency the plan marks as a decision until senior-dev confirms the user approved it. Never edit plan files. When the brief names `prototype/index.html`, match its visual result (layout, type, colour, motion); its code is reference only, never copied.
+
+Always apply the `frontend-quality-standard` skill, with or without a plan.
 
 ## What you must NOT do
 

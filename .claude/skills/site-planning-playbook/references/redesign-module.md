@@ -52,7 +52,7 @@ Run these steps in order. Record each result in `00-audit/`.
 **3.3 Performance baseline**
 - Use Chrome DevTools MCP to run a Lighthouse audit and a performance trace on the homepage and on one representative page per template.
 - Add field data where available: CrUX, PageSpeed Insights, or a Search Console export. If the client cannot provide field data, mark the field section as "not available" and never estimate it.
-- Output: `00-audit/performance-baseline.md`, with LCP, INP, and CLS per page. Use the thresholds in `quality-standard.md`: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1 at p75.
+- Output: `00-audit/performance-baseline.md`, with LCP, INP, and CLS per page. Use the thresholds in `.claude/skills/frontend-quality-standard/SKILL.md`: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1 at p75.
 
 **3.4 SEO baseline**
 - For every page, record the title, meta description, H1, canonical URL, `robots` directives, and structured-data types.
