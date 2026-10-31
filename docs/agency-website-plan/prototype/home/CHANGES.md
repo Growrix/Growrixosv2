@@ -1,5 +1,24 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 19 — pinned scrolling on mobile (2026-10-31)
+
+**Asked:** the mobile layout is fine, but the service, website and automation cards should slide and show every card with pinned scrolling, as on desktop.
+
+**Changed:** below 1024 px each list now pins, and vertical scroll moves its cards sideways until the last one shows. Each card takes 34 svh of scroll.
+- Services pin per pillar. The pillar panel scrolls away first, then its cards pin.
+- Demo websites and automations pin with their heading in view.
+- Swiping by hand still works, and the page moves to the matching place.
+- The rail dots jump to their card.
+- With reduced motion there is no pin, and plain swiping stays.
+
+**Trade-off:** the 375 px page grows from about 10,500 px to 14,550 px, because the pins need scroll distance. The cards no longer stack, so the extra scroll now moves cards instead of passing over them.
+
+**Departure from desktop:** mobile follows scroll in both directions and has no 1.8 s timer. A timer would leave idle scroll at the end of each pin.
+
+**Checked (script, not a real phone):** at 375 × 812, 375 × 667 and 820 × 1180, scrolling reached every card in all five lists, with no overflow or console errors. Desktop is unchanged at 37 stops. Hand swiping was not simulated.
+
+**Review answer:** awaiting.
+
 ## Round 18 — mobile swipes, icons, square buttons, typing title (2026-10-31)
 
 **Asked:** sideways swipes on mobile; one icon for the theme switch; an icon for the menu; an Upwork hire link in the footer; a copyright line at the very bottom; squarer buttons (shape only, from the reference); an animation on the hero title.

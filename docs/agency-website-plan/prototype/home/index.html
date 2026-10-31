@@ -472,6 +472,19 @@
     .svc-group { margin-bottom: 0; }
     .svc-group + .swipe-nav { margin-bottom: 40px; }
   }
+  .swipe-pin, .swipe-stage { display: contents; }
+  @media (max-width: 1023px) {
+    .swipe-pin, .swipe-stage { display: block; }
+    .swipe-pinned .swipe-stage { position: sticky; }
+    .swipe-pinned .svc-group, .swipe-pinned .showcase-track, .swipe-pinned .flow-list { scroll-snap-type: none; }
+    .swipe-pinned .showcase-stage { position: sticky; height: calc(100svh - 64px); padding-top: 0; padding-bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+    .swipe-pinned .showcase .section-head { margin-bottom: 20px; }
+    .swipe-pinned .swipe-pin { margin-bottom: 24px; }
+    .swipe-pinned .svc-group + .swipe-nav { margin-bottom: 0; }
+  }
+  @media (max-width: 1023px) and (max-height: 700px) {
+    .swipe-pinned .showcase .section-head p { display: none; }
+  }
   @media (min-width: 768px) and (max-width: 1023px) {
     .svc-slide, .showcase-card, .flow-row, .flow-row:last-child { flex-basis: 46%; }
   }
@@ -1143,16 +1156,25 @@
       extra.appendChild(badge); extra.appendChild(desc); extra.appendChild(nodes);
       row.appendChild(extra);
     });
+    // Below 1024 px each list pins, and vertical scroll moves its cards sideways. Swiping still works.
+    var STEP_SVH = 34, HEADER = 64;
+    var pinQuery = window.matchMedia('(max-width: 1023px) and (prefers-reduced-motion: no-preference)');
+    var pins = [];
+
     $$('.svc-group, .showcase-track, .flow-list').forEach(function (scroller) {
       var items = Array.prototype.slice.call(scroller.children), nav = document.createElement('div');
       var dots = document.createElement('div'), count = document.createElement('span');
       nav.className = 'swipe-nav'; dots.className = 'swipe-dots'; count.className = 'swipe-count';
+      var section = scroller.closest('.showcase'), pin = { scroller: scroller, steps: items.length - 1, touching: false };
+      var maxLeft = function () { return scroller.scrollWidth - scroller.clientWidth; };
+      var leftOf = function (item) { return Math.min(maxLeft(), item.offsetLeft - scroller.firstElementChild.offsetLeft); };
       var buttons = items.map(function (item, i) {
         var b = document.createElement('button');
         b.type = 'button';
         b.setAttribute('aria-label', 'Go to item ' + (i + 1) + ' of ' + items.length);
         b.addEventListener('click', function () {
-          scroller.scrollTo({ left: item.offsetLeft - scroller.firstElementChild.offsetLeft, behavior: 'smooth' });
+          if (pinQuery.matches) window.scrollTo({ top: pageY(pin, leftOf(item) / maxLeft()), behavior: 'smooth' });
+          else scroller.scrollTo({ left: leftOf(item), behavior: 'smooth' });
         });
         dots.appendChild(b);
         return b;
@@ -1160,19 +1182,89 @@
       function sync() {
         var at = 0, best = Infinity;
         items.forEach(function (item, i) {
-          var d = Math.abs(item.offsetLeft - scroller.firstElementChild.offsetLeft - scroller.scrollLeft);
-          if (d < best) { best = d; at = i; }
+          var d = Math.abs(leftOf(item) - scroller.scrollLeft);
+          if (d <= best) { best = d; at = i; }
         });
-        if (scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 2) at = items.length - 1;
         buttons.forEach(function (b, i) { b.classList.toggle('on', i <= at); });
         count.textContent = (at + 1) + ' / ' + items.length;
       }
       scroller.setAttribute('tabindex', '0');
       scroller.addEventListener('scroll', sync, { passive: true });
       nav.appendChild(dots); nav.appendChild(count);
-      scroller.parentNode.insertBefore(nav, scroller.nextSibling);
+      if (section) {
+        scroller.parentNode.insertBefore(nav, scroller.nextSibling);
+        pin.section = section;
+        pin.outer = section.querySelector('.showcase-track-outer');
+        pin.stage = section.querySelector('.showcase-stage');
+      } else {
+        var outer = document.createElement('div'), stage = document.createElement('div');
+        outer.className = 'swipe-pin'; stage.className = 'swipe-stage';
+        scroller.parentNode.insertBefore(outer, scroller);
+        stage.appendChild(scroller); stage.appendChild(nav); outer.appendChild(stage);
+        pin.outer = outer; pin.stage = stage;
+      }
+      pin.maxLeft = maxLeft;
+
+      // A sideways swipe moves the page to the matching place, so the two stay in step.
+      var settle = function () {
+        if (!pin.touching) return;
+        pin.touching = false;
+        if (pinQuery.matches) window.scrollTo({ top: pageY(pin, scroller.scrollLeft / maxLeft()), behavior: 'instant' });
+      };
+      var settleTimer;
+      scroller.addEventListener('touchstart', function () { pin.touching = true; clearTimeout(settleTimer); }, { passive: true });
+      scroller.addEventListener('touchend', function () { settleTimer = setTimeout(settle, 450); }, { passive: true });
+      scroller.addEventListener('scrollend', settle);
+      pins.push(pin);
       sync();
     });
+
+    function pageY(pin, progress) {
+      var range = pin.outer.offsetHeight - pin.stage.offsetHeight;
+      return window.scrollY + pin.outer.getBoundingClientRect().top - pin.top + range * Math.max(0, Math.min(1, progress));
+    }
+
+    function fit() {
+      var on = pinQuery.matches, vh = window.innerHeight;
+      document.documentElement.classList.toggle('swipe-pinned', on);
+      pins.forEach(function (pin) {
+        pin.outer.style.minHeight = '';
+        pin.stage.style.top = '';
+        if (!on) return;
+        var h = pin.stage.offsetHeight;
+        pin.top = pin.section ? HEADER : Math.max(HEADER + 8, HEADER + (vh - HEADER - h) / 2);
+        pin.stage.style.top = pin.top + 'px';
+        pin.outer.style.minHeight = 'calc(' + h + 'px + ' + pin.steps * STEP_SVH + 'svh)';
+      });
+      move();
+    }
+
+    function move() {
+      if (!pinQuery.matches) return;
+      pins.forEach(function (pin) {
+        if (pin.touching) return;
+        var range = pin.outer.offsetHeight - pin.stage.offsetHeight;
+        var done = Math.max(0, Math.min(1, (pin.top - pin.outer.getBoundingClientRect().top) / range));
+        pin.scroller.scrollLeft = done * pin.maxLeft();
+      });
+    }
+
+    var queued = false;
+    window.addEventListener('scroll', function () {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(function () { queued = false; move(); });
+    }, { passive: true });
+    if (pinQuery.addEventListener) pinQuery.addEventListener('change', fit);
+    var fitTimer, lastWidth = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (window.innerWidth === lastWidth) return;  // Mobile address bars fire resize while scrolling.
+      lastWidth = window.innerWidth;
+      clearTimeout(fitTimer);
+      fitTimer = setTimeout(fit, 150);
+    });
+    fit();
+    window.RUN.refit = fit;
   })();
 
   // The Run: signal line, band moments and type motion. Moment ids (RUN-nn) come from pages/home.motion.md.
@@ -1755,8 +1847,8 @@
     var started = false;
     function start() { if (!started) { started = true; setup(); } }
     Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 400); })]).then(start);
-    fontsReady.then(function () { setTimeout(function () { if (started) relayout(); }, 50); });
-    window.addEventListener('load', function () { if (started) relayout(); });
+    fontsReady.then(function () { setTimeout(function () { RUN.refit(); if (started) relayout(); }, 50); });
+    window.addEventListener('load', function () { RUN.refit(); if (started) relayout(); });
   })();
 </script>
 </body>
