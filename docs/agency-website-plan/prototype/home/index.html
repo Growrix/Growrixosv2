@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Websites, Apps, AI Automation & Growth | Growrix OS</title>
 <meta name="description" content="Websites, mobile apps, SaaS, AI automation and search visibility from one studio. Fixed scope and price, 30-day fix guarantee.">
-<!-- Fonts are self-hosted in the build (handover P-6). The prototype uses the system fallback. -->
 <style>
+  /* Sections 1 and 2 only (revision 3). Font is the system fallback; the build self-hosts DM Sans. */
   :root {
     --color-bg: #FAF8F5;
     --color-surface: #FFFFFF;
@@ -14,16 +14,14 @@
     --color-line: #E7E2DA;
     --color-ink: #1C1917;
     --color-ink-muted: #57534E;
-    --color-ink-subtle: #78716C;
     --color-accent: #C2410C;
     --color-accent-hover: #9A3412;
     --color-accent-soft: #FFEDD5;
     --color-on-accent: #FFFFFF;
-    --radius-md: 10px;
     --radius-pill: 999px;
     --max-content: 1200px;
-    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
-    --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-display: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--color-bg); color: var(--color-ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
@@ -32,11 +30,11 @@
   .wrap { max-width: var(--max-content); margin: 0 auto; padding: 0 16px; }
   h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.1; margin: 0; }
   h1 { font-size: clamp(36px, 5vw, 56px); }
-  h2 { font-size: clamp(28px, 3.4vw, 40px); }
-  h3 { font-size: 20px; font-family: var(--font-body); font-weight: 600; }
+  h2 { font-size: clamp(26px, 3vw, 36px); }
+  h3 { font-size: 20px; font-weight: 600; }
   .eyebrow { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-muted); margin: 0 0 12px; }
   .muted { color: var(--color-ink-muted); }
-  .source { font-size: 13px; color: var(--color-ink-subtle); }
+  .note { font-size: 13px; color: var(--color-ink-muted); }
   .skip { position: absolute; left: 16px; top: -100px; background: var(--color-ink); color: var(--color-bg); padding: 8px 12px; border-radius: 6px; z-index: 50; }
   .skip:focus { top: 12px; }
 
@@ -48,17 +46,17 @@
 
   .draft { position: fixed; right: 12px; bottom: 12px; z-index: 60; font-size: 12px; background: var(--color-ink); color: var(--color-bg); padding: 6px 10px; border-radius: 6px; }
 
-  /* Header and mega menu (approved structure; labels updated) */
+  /* Header and mega menu (approved structure; labels AI Automation and Growth) */
   .site-header { position: sticky; top: 0; z-index: 20; background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
   .bar { display: flex; align-items: center; gap: 24px; min-height: 64px; }
-  .brand { font-family: var(--font-display); font-weight: 600; font-size: 18px; text-decoration: none; margin-right: auto; }
+  .brand { font-weight: 600; font-size: 18px; text-decoration: none; margin-right: auto; }
   .site-nav { display: block; }
   .nav-list { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; align-items: center; }
   .nav-list > li { position: relative; }
   .nav-list a, .nav-list button { font: inherit; color: var(--color-ink); background: none; border: 0; padding: 8px 0; text-decoration: none; cursor: pointer; }
   .nav-list a:hover, .nav-list button:hover { text-decoration: underline; }
   .menu-toggle { display: none; font: inherit; background: none; border: 1px solid var(--color-line); color: var(--color-ink); padding: 8px 14px; border-radius: var(--radius-pill); cursor: pointer; }
-  .mega { position: absolute; top: calc(100% + 8px); left: -16px; width: min(760px, 92vw); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; box-shadow: 0 8px 24px rgb(28 25 23 / 0.08); }
+  .mega { position: absolute; top: calc(100% + 8px); left: -16px; width: min(760px, 92vw); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 10px; padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; box-shadow: 0 8px 24px rgb(28 25 23 / 0.08); }
   .mega[hidden] { display: none; }
   .mega-head { display: block; font-weight: 600; text-decoration: none; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); }
   .mega ul { list-style: none; margin: 0; padding: 0; }
@@ -67,61 +65,23 @@
   .sub-label { display: block; margin-top: 14px; font-size: 13px; color: var(--color-ink-muted); }
   .mega ul ul { padding-left: 12px; border-left: 1px solid var(--color-line); margin-top: 4px; }
 
-  /* Hero: stacked by default */
-  .hero-pin { position: relative; }
-  .hero-stage { padding: 56px 0 48px; }
-  .hero-grid { display: grid; gap: 40px; }
-  .hero-intro .subhead { font-size: 19px; margin: 20px 0 28px; max-width: 46ch; }
+  /* Section 1: hero, one column, no pin, no motion */
+  .hero { padding: 96px 0 72px; border-bottom: 1px solid var(--color-line); }
+  .hero .subhead { font-size: 19px; margin: 20px 0 32px; max-width: 46ch; }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .slides { position: relative; display: grid; gap: 24px; }
-  .slide { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 28px; }
-  .slide .num { font-family: var(--font-display); font-size: 56px; line-height: 1; color: var(--color-ink-muted); margin: 0 0 8px; }
-  .slide ul { list-style: none; padding: 0; margin: 16px 0 20px; }
-  .slide li { padding: 8px 0; border-top: 1px solid var(--color-line); }
-  .slide li a { text-decoration: none; }
-  .slide li a:hover { text-decoration: underline; }
-  .rail { display: none; }
+  .hero h1 { max-width: 20ch; }
 
-  .studio { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-line); }
-
-  /* Pinned desktop: supported browsers, wide enough, motion allowed */
-  @media (min-width: 768px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .hero-pin { height: 300svh; view-timeline: --hero block; }
-      .hero-stage { position: sticky; top: 64px; height: calc(100svh - 64px); padding: 0; display: flex; align-items: center; }
-      .hero-grid { grid-template-columns: 1fr 1fr; align-items: center; width: 100%; }
-      .slides { min-height: 360px; display: block; }
-      .slide { position: absolute; inset: 0; opacity: 0; animation-timeline: --hero; animation-range: cover 0% cover 100%; animation-fill-mode: both; }
-      .slide:nth-child(1) { animation-name: s1; }
-      .slide:nth-child(2) { animation-name: s2; }
-      .slide:nth-child(3) { animation-name: s3; }
-      .rail { display: flex; gap: 12px; margin-top: 24px; font-size: 14px; color: var(--color-ink-muted); }
-      .rail span { flex: 1; border-top: 3px solid var(--color-line); padding-top: 8px; }
-      .rail span:nth-child(1) { border-color: var(--color-accent); }
-    }
-  }
-  @keyframes s1 { 0% { opacity: 1; transform: none; } 28% { opacity: 1; transform: none; } 36% { opacity: 0; transform: translateY(-24px); } 100% { opacity: 0; transform: translateY(-24px); } }
-  @keyframes s2 { 0% { opacity: 0; transform: translateY(24px); } 31% { opacity: 0; transform: translateY(24px); } 36% { opacity: 1; transform: none; } 61% { opacity: 1; transform: none; } 69% { opacity: 0; transform: translateY(-24px); } 100% { opacity: 0; transform: translateY(-24px); } }
-  @keyframes s3 { 0% { opacity: 0; transform: translateY(24px); } 64% { opacity: 0; transform: translateY(24px); } 69% { opacity: 1; transform: none; } 100% { opacity: 1; transform: none; } }
-
-  /* Sections */
-  section.block { padding: 72px 0; border-top: 1px solid var(--color-line); }
-  .cards { display: grid; gap: 20px; }
-  .card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 24px; }
-  .card.is-slot { background: transparent; border-style: dashed; }
-  .badge { display: inline-block; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: var(--radius-pill); background: var(--color-surface-muted); color: var(--color-ink-muted); margin-bottom: 12px; }
-  .steps { counter-reset: step; display: grid; gap: 20px; list-style: none; padding: 0; margin: 0; }
-  .steps li { counter-increment: step; display: grid; gap: 4px; }
-  .steps li::before { content: counter(step, decimal-leading-zero); font-family: var(--font-display); color: var(--color-ink-muted); font-size: 14px; }
-  .niche-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; padding: 24px; background: var(--color-surface-muted); border-radius: var(--radius-md); }
-  details { border-top: 1px solid var(--color-line); padding: 16px 0; }
-  details:last-child { border-bottom: 1px solid var(--color-line); }
-  summary { cursor: pointer; font-weight: 500; list-style: none; }
-  summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; float: right; color: var(--color-accent); }
-  details[open] summary::after { content: "−"; }
-  details p { margin: 12px 0 0; color: var(--color-ink-muted); }
-  .final .ladder { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  /* Section 2: services, three ledger rows */
+  .services { padding: 72px 0; }
+  .block { display: grid; gap: 20px; padding: 32px 0; border-top: 1px solid var(--color-line); }
+  .block:last-child { border-bottom: 1px solid var(--color-line); }
+  .block ul { list-style: none; margin: 0; padding: 0; }
+  .block li { padding: 10px 0; border-top: 1px solid var(--color-line); }
+  .block li:first-child { border-top: 0; }
+  .block li a { text-decoration: none; }
+  .block li a:hover { text-decoration: underline; }
+  .block .cta { display: inline-block; margin-top: 8px; font-weight: 500; }
+  .block .eyebrow { margin-bottom: 8px; }
 
   footer.site-footer { border-top: 1px solid var(--color-line); padding: 40px 0 96px; font-size: 15px; color: var(--color-ink-muted); }
   .foot-grid { display: grid; gap: 24px; }
@@ -138,20 +98,25 @@
     .nav-list > li > a, .nav-list > li > button { display: flex; width: 100%; justify-content: space-between; padding: 14px 0; font-size: 17px; }
     .mega { position: static; width: auto; margin: 0 0 12px; box-shadow: none; border: 0; background: transparent; padding: 0; grid-template-columns: 1fr; gap: 16px; }
     .site-header { position: relative; }
-    .hero-stage { padding-top: 40px; }
+    .hero { padding: 56px 0 48px; }
+    .block li a { display: block; padding: 6px 0; }
   }
-  @media (min-width: 768px) {
-    .hero-grid { grid-template-columns: 1fr 1fr; }
-    .cards { grid-template-columns: repeat(3, 1fr); }
-    .foot-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
-    .steps { grid-template-columns: repeat(4, 1fr); }
+  @media (min-width: 1024px) {
+    .block { grid-template-columns: 5fr 1fr 6fr; align-items: start; }
+    .block .intro { grid-column: 1; }
+    .block .body { grid-column: 3; }
+    .foot-grid { grid-template-columns: 2fr 1fr 1fr; }
   }
-  @media (min-width: 1024px) { .hero-grid { gap: 64px; } }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 767px) {
+    .foot-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
-<a class="skip" href="#hero-content">Skip to content</a>
+<a class="skip" href="#hero">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap bar">
@@ -179,7 +144,7 @@
                 <li><a href="#ai-automation">Care plans</a></li>
                 <li>
                   <span class="sub-label">Industries</span>
-                  <ul><li><a href="#niche">Law firms</a></li></ul>
+                  <ul><li><a href="#ai-automation">Law firms</a></li></ul>
                 </li>
               </ul>
             </div>
@@ -204,149 +169,68 @@
 </header>
 
 <main>
-  <!-- S1 Hero: fixed H1 and subhead; three slides Develop → AI Automation → Growth -->
-  <div class="hero-pin">
-    <div class="hero-stage">
-      <div class="wrap hero-grid" id="hero-content">
-        <div class="hero-intro">
-          <p class="eyebrow">Digital studio for websites, apps and AI automation</p>
-          <h1>We build it, automate it, and help people find it.</h1>
-          <p class="subhead">Websites, mobile apps, SaaS, AI automation and search visibility, from one studio that agrees scope and price in writing before work starts.</p>
-          <div class="hero-ctas">
-            <a class="btn" href="#book">Book a free 20-min call</a>
-            <a class="btn btn-ghost" href="#services">See all services</a>
-          </div>
-        </div>
-
-        <div class="slides" aria-label="Services">
-          <article class="slide" id="develop">
-            <p class="eyebrow">01 / 03 · Develop</p>
-            <p class="num" aria-hidden="true">01</p>
-            <h2>Websites, apps and SaaS built to run after launch.</h2>
-            <p class="muted">Marketing sites, web applications, mobile apps and SaaS products. We build on a stack we can maintain, with content your team can edit.</p>
-            <ul>
-              <li><a href="#develop">Web development</a></li>
-              <li><a href="#develop">Mobile apps</a></li>
-              <li><a href="#develop">SaaS products</a></li>
-            </ul>
-            <a class="link" href="#develop">See development services →</a>
-          </article>
-
-          <article class="slide" id="ai-automation">
-            <p class="eyebrow">02 / 03 · AI Automation</p>
-            <p class="num" aria-hidden="true">02</p>
-            <h2>Your repetitive work, running in the background.</h2>
-            <p class="muted">AI automation built on n8n and Claude: instant replies to new inquiries, document follow-ups, and handoffs between the tools you already use. Every step is logged, and every failure alerts a person.</p>
-            <ul>
-              <li><a href="#ai-automation">AI intake &amp; speed-to-lead</a></li>
-              <li><a href="#ai-automation">Document intake &amp; chase</a></li>
-              <li><a href="#ai-automation">Audit &amp; sprint</a></li>
-            </ul>
-            <a class="link" href="#ai-automation">See AI Automation services →</a>
-          </article>
-
-          <article class="slide" id="growth">
-            <p class="eyebrow">03 / 03 · Growth</p>
-            <p class="num" aria-hidden="true">03</p>
-            <h2>Be found by people, and by the AI tools they ask.</h2>
-            <p class="muted">Technical SEO, answer engine (AEO) and generative engine (GEO) work, so search engines and AI assistants can find, understand and cite your business. We report what we change and what we measure. We don't guarantee rankings or citations.</p>
-            <ul>
-              <li><a href="#growth">SEO</a></li>
-              <li><a href="#growth">AEO &amp; GEO</a></li>
-            </ul>
-            <a class="link" href="#growth">See Growth services →</a>
-          </article>
-
-          <div class="rail" aria-hidden="true"><span>Develop</span><span>AI Automation</span><span>Growth</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- S2 Studio strip. Team and location lines are hidden until confirmed (D-1, D-2). -->
-  <section class="block" aria-labelledby="studio-h">
+  <!-- Section 1: hero, one column -->
+  <section class="hero" id="hero" aria-label="Introduction">
     <div class="wrap">
-      <h2 id="studio-h">Who we are</h2>
-      <p class="muted" style="max-width:62ch;margin-top:16px">Growrix OS is a studio for websites, apps, AI automation and search visibility. Every project gets a written scope and a fixed price before work starts, is built in accounts you own, and comes with handover notes.</p>
-      <p style="margin-top:20px"><a class="link" href="#about">About the studio →</a></p>
-    </div>
-  </section>
-
-  <!-- S3 Work. Live rule: hidden until two items are filled. Shown here with the slots visible for review. -->
-  <section class="block" id="work" aria-labelledby="work-h">
-    <div class="wrap">
-      <h2 id="work-h">Work, labelled by how it was made.</h2>
-      <p class="muted" style="margin-top:12px">Every item carries one label: Client project, Internal build, Demo build or Illustrative example.</p>
-      <div class="cards" style="margin-top:32px">
-        <article class="card">
-          <span class="badge">Internal build</span>
-          <h3>LedgerLine</h3>
-          <p class="muted">Our document-intake automation, now in its third version. Not a client project. The build log covers what it does and what changed between versions.</p>
-          <a class="link" href="#work">Read the build log →</a>
-        </article>
-        <article class="card is-slot">
-          <span class="badge">Demo build</span>
-          <h3>Review only: demo title</h3>
-          <p class="muted">Fills when a demo exists. Recorded end to end with test data.</p>
-        </article>
-        <article class="card is-slot">
-          <span class="badge">Illustrative example</span>
-          <h3>Review only: example title</h3>
-          <p class="muted">Fills when supplied. A walkthrough of how a system would look, not a client result.</p>
-        </article>
-      </div>
-      <p style="margin-top:20px"><a class="link" href="#work">See all work →</a> <span class="source">(shown on the live site only once /work is live)</span></p>
-    </div>
-  </section>
-
-  <!-- S4 How we work -->
-  <section class="block" aria-labelledby="how-h">
-    <div class="wrap">
-      <h2 id="how-h">Four steps, one studio, a fixed price.</h2>
-      <ol class="steps" style="margin-top:32px">
-        <li><h3>Talk</h3><p class="muted">A 20-minute call to see whether we are the right fit.</p></li>
-        <li><h3>Scope</h3><p class="muted">A written scope and fixed price, agreed before work starts.</p></li>
-        <li><h3>Build</h3><p class="muted">We build in the open and show progress as we go.</p></li>
-        <li><h3>Hand over</h3><p class="muted">You own the work. Handover notes, then a 30-day fix guarantee.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- S5 Industries row. Live rule: shown only when the law page is live. Shown here for review. -->
-  <section class="block" id="niche" aria-label="Industries">
-    <div class="wrap">
-      <div class="niche-row">
-        <p style="margin:0">We also build intake and search systems for law firms.</p>
-        <a class="link" href="#niche">Law firms →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- S6 Writing: hidden until three posts are published (not shown). -->
-
-  <!-- S7 FAQ -->
-  <section class="block" id="faq" aria-labelledby="faq-h">
-    <div class="wrap">
-      <h2 id="faq-h">Questions before you book.</h2>
-      <div style="margin-top:32px">
-        <details><summary>Do we own the code and the workflows?</summary><p>Yes. The work runs in your accounts with your credentials, and you receive the source, documentation and a handover walkthrough.</p></details>
-        <details><summary>How does pricing work?</summary><p>Fixed price, agreed in writing before work starts. Price ranges and payment terms are on the pricing page.</p></details>
-        <details><summary>What happens if something breaks after launch?</summary><p>For 30 days after go-live we fix anything we built, within the agreed scope, at no extra cost.</p></details>
-        <details><summary>Do you guarantee rankings or AI citations?</summary><p>No. We don't guarantee rankings, leads or AI citations. We report what we change and what we measure.</p></details>
-        <details><summary>Do you work with other agencies?</summary><p>Yes, through a partner arrangement. Details are on the partners page, linked in the footer.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- S8 Final CTA -->
-  <section class="block final" id="book" aria-labelledby="final-h">
-    <div class="wrap">
-      <h2 id="final-h">Tell us what you're building.</h2>
-      <p class="muted" style="max-width:52ch;margin-top:12px">Twenty minutes, one honest answer. If we're not the right fit, we'll say so.</p>
-      <div class="ladder">
+      <p class="eyebrow">Digital studio for websites, apps and AI automation</p>
+      <h1>We build it, automate it, and help people find it.</h1>
+      <p class="subhead">Websites, mobile apps, SaaS, AI automation and search visibility, from one studio that agrees scope and price in writing before work starts.</p>
+      <div class="hero-ctas">
         <a class="btn" href="#book">Book a free 20-min call</a>
-        <a class="btn btn-ghost" href="mailto:hello@growrixos.com">Email us</a>
+        <a class="btn btn-ghost" href="#services">See all services</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Section 2: services, three ledger rows in pillar order -->
+  <section class="services" id="services" aria-label="Services">
+    <div class="wrap">
+      <article class="block" id="develop">
+        <div class="intro">
+          <p class="eyebrow">01 / 03 · Develop</p>
+          <h2>Websites, apps and SaaS built to run after launch.</h2>
+        </div>
+        <div class="body">
+          <p class="muted">Marketing sites, web applications, mobile apps and SaaS products. We build on a stack we can maintain, with content your team can edit.</p>
+          <ul>
+            <li><a href="#develop">Web development</a></li>
+            <li><a href="#develop">Mobile apps</a></li>
+            <li><a href="#develop">SaaS products</a></li>
+          </ul>
+          <a class="link cta" href="#develop">See development services →</a>
+        </div>
+      </article>
+
+      <article class="block" id="ai-automation">
+        <div class="intro">
+          <p class="eyebrow">02 / 03 · AI Automation</p>
+          <h2>Your repetitive work, running in the background.</h2>
+        </div>
+        <div class="body">
+          <p class="muted">AI automation built on n8n and Claude: instant replies to new inquiries, document follow-ups, and handoffs between the tools you already use. Every step is logged, and every failure alerts a person.</p>
+          <ul>
+            <li><a href="#ai-automation">AI intake &amp; speed-to-lead</a></li>
+            <li><a href="#ai-automation">Document intake &amp; chase</a></li>
+            <li><a href="#ai-automation">Audit &amp; sprint</a></li>
+          </ul>
+          <a class="link cta" href="#ai-automation">See AI Automation services →</a>
+        </div>
+      </article>
+
+      <article class="block" id="growth">
+        <div class="intro">
+          <p class="eyebrow">03 / 03 · Growth</p>
+          <h2>Be found by people, and by the AI tools they ask.</h2>
+        </div>
+        <div class="body">
+          <p class="muted">Technical SEO, answer engine (AEO) and generative engine (GEO) work, so search engines and AI assistants can find, understand and cite your business. We report what we change and what we measure. We don't guarantee rankings or citations.</p>
+          <ul>
+            <li><a href="#growth">SEO</a></li>
+            <li><a href="#growth">AEO &amp; GEO</a></li>
+          </ul>
+          <a class="link cta" href="#growth">See Growth services →</a>
+        </div>
+      </article>
     </div>
   </section>
 </main>
@@ -363,16 +247,12 @@
     </div>
     <div>
       <strong style="color:var(--color-ink)">Company</strong>
-      <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#security">Security</a><a href="#partners">Partners</a>
-    </div>
-    <div>
-      <strong style="color:var(--color-ink)">Profiles</strong>
-      <a href="#upwork">Upwork</a>
+      <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#partners">Partners</a>
     </div>
   </div>
 </footer>
 
-<div class="draft" aria-hidden="true">PROTOTYPE · approved copy v2</div>
+<div class="draft" aria-hidden="true">PROTOTYPE · sections 1 and 2</div>
 
 <script>
   (function () {

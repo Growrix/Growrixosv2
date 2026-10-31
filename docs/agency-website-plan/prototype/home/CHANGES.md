@@ -1,5 +1,22 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 3 — sections 1 and 2 only
+
+**Asked:** simplify the hero to one column with the left-column content only, and make the services section the second section. Build only sections 1 and 2.
+
+**Built:**
+- Section 1, hero: eyebrow, H1, subhead, "Book a free 20-min call" and "See all services", exactly as the user wrote them. No right column, no slides, no pin, no motion.
+- Section 2, services: three ledger rows in order, Develop, AI Automation and Growth. Copy from the approved slide copy in `02-homepage-copy.md`, unchanged. Each row has an H2, a body, links and a CTA.
+- Header and footer kept as chrome. The other sections (Who we are, Work, How we work, Industries, Writing, FAQ, Final CTA) are removed from this prototype. They stay in the git history at commit `c6ea0c9`, the rollback point.
+
+**Shown for review, not final:**
+- Service links and the CTAs point to pages that are not live. Under the rule in `pages/home.md`, they should be hidden until the target is live (D-24). They are shown here so the layout can be judged.
+- Services has no heading (D-25 default).
+
+**Checked in the browser:** 1440 px and 375 px. No horizontal scroll at 375 px. The hero has no pin and no motion.
+
+**Font:** system fallback. The build loads DM Sans.
+
 ## Round 2 — 31 Oct 2026
 
 **Source:** `pages/home.md` §8 (prototype handover, Stage A approved), `02-homepage-copy.md` v2, decisions D-12 to D-22 at their defaults.
