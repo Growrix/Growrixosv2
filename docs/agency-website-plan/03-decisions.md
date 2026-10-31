@@ -167,3 +167,30 @@ Conflicts added:
 - X-16. The pillar hub routes (`/services/develop`, `/services/ai-automation`, `/services/growth`) are in the sitemap but not built.
 
 `02-tokens.md` (v2) was re-checked against revision 3. No token change is needed, so it keeps its version.
+
+## Services redesign round (31 Oct 2026): needs the user's decisions
+
+Scope: the services section (SV) only. The file is `sections/services.md` v1 (review). Nothing else is planned in this round. No animation.
+
+| ID | Item | Status |
+| --- | --- | --- |
+| SV-D1 | Direction: Direction 1, three equal columns divided by hairlines (recommended). Alternatives: Direction 2 (ledger rows, the revision 3 baseline) and Direction 3 (weighted grid). | **PENDING** |
+| SV-D2 | **Supersedes D-12 for SV:** the brand palette (teal primary, warm neutrals, decorative mark colour, dark theme keyed to `data-theme`) replaces the research orange in the services section. The user states the orange is not the brand. | **PENDING.** Flagged. Consequence: the rest of the page still uses the research orange until D-27 is decided |
+| SV-D3 | Desktop block H2 at 28 px (new size token `--text-block`, desktop only). | **PENDING** (recommended) |
+| SV-D4 | Left-aligned text inside the services columns, under a centred hero. | **PENDING** (recommended) |
+| SV-D5 | Eyebrow rule in the neutral border-strong colour, not the decorative mark colour (the locked cap is one mark element in view). | **PENDING** (recommended) |
+| SV-D6 | D-24 (CTAs hidden until the pillar hub is live): **kept as approved.** | Kept. The reason is in `sections/services.md` §8 |
+| SV-D7 | D-25 (no visible section heading): **kept as approved.** | Kept. The reason is in `sections/services.md` §8 |
+| D-27 | New, for the user: palette site-wide. Apply the brand teal to the whole homepage, or keep research orange elsewhere. Recommended: site-wide brand teal, so the page has one accent. | **PENDING** |
+| D-28 | New, for the hero's revision: the centred hero needs an H1 about 26 px on one line from 768 px (or shorter copy, which needs approval), and a subhead measure about 75 characters for two lines from 768 px. | **PENDING** (input to the hero revision, not planned here) |
+
+Superseded by this round, pending the user's approval:
+
+- `pages/home.md` §3 SV layout (revision 3 ledger rows): superseded by `sections/services.md` §2 once SV-D1 is decided. `pages/home.md` is not edited in this round.
+- D-12 for SV only: see SV-D2.
+- The SV motion (SM-01 fade in revision 3): deferred to the animation round.
+
+Conflicts added:
+
+- X-17. The locked brand token file (`docs/frontend-plans/homepage/02-tokens.md`) caps the decorative mark colour at one mark element in view (`01` §4). Three eyebrow rules in the mark colour would break the cap. SV-D5 avoids this.
+- X-18. The locked tokens have no block-heading size between H2 and H3. `--text-block` (SV-D3) is a new token. It needs adding to the token file in the next locked-spec revision.

@@ -8,7 +8,7 @@
 <meta name="description" content="Websites, mobile apps, SaaS, AI automation and search visibility from one studio. Fixed scope and price, 30-day fix guarantee.">
 <style>
   /* Sections 1 and 2 only. Brand tokens from docs/frontend-plans/homepage/02-tokens.md (teal primary, warm neutrals,
-     decorative mark). Light is the default; dark is keyed to [data-theme="dark"] on <html>, as in app/globals.css.
+     decorative mark). Light is the default; dark is keyed to [data-theme="dark"] on <html>.
      Font is the system fallback; the build loads the brand face (see X-3). */
   :root, [data-theme="light"] {
     --c-bg: #f5f1e8;
@@ -55,11 +55,11 @@
   .skip { position: absolute; left: 16px; top: -100px; background: var(--c-text); color: var(--c-bg); padding: 8px 12px; border-radius: 6px; z-index: 50; }
   .skip:focus { top: 12px; }
 
-  /* Buttons: primary is the only filled control; ghost is outline. */
+  /* Buttons */
   .btn { display: inline-block; text-decoration: none; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; padding: 14px 22px; border-radius: 999px; border: 1px solid var(--c-primary); background: var(--c-primary); color: var(--c-on-primary); box-shadow: 0 1px 2px rgb(20 22 26 / 0.06); }
   .btn:hover { background: var(--c-primary-hover); border-color: var(--c-primary-hover); }
   .btn-ghost { background: transparent; color: var(--c-text); border-color: var(--c-border-control); box-shadow: none; }
-  .btn-ghost:hover { background: var(--c-inset); border-color: var(--c-border-control); color: var(--c-text); }
+  .btn-ghost:hover { background: var(--c-inset); color: var(--c-text); }
   .link { color: var(--c-primary); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
   .draft { position: fixed; right: 12px; bottom: 12px; z-index: 60; font-size: 12px; background: var(--c-text); color: var(--c-bg); padding: 6px 10px; border-radius: 6px; }
@@ -85,31 +85,58 @@
   .sub-label { display: block; margin-top: 14px; font-size: 13px; color: var(--c-text-muted); }
   .mega ul ul { padding-left: 12px; border-left: 1px solid var(--c-border); margin-top: 4px; }
 
-  /* Section 1: hero, one column, centred on both axes, no pin, no motion */
+  /* Section 1: hero, one column, centred on both axes, no motion */
   .hero { min-height: calc(100svh - 64px); display: flex; align-items: center; padding: 72px 0; border-bottom: 1px solid var(--c-border); }
   .hero .wrap { max-width: 1200px; text-align: center; }
   .hero .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 2px; background: var(--c-mark); vertical-align: middle; margin-right: 10px; }
   .hero h1 { max-width: none; margin: 0 auto; font-size: clamp(28px, 6.4vw, 46px); }
+  .hero .subhead { font-size: 19px; line-height: 1.6; color: var(--c-text-muted); margin: 20px auto 36px; max-width: 46ch; }
+  .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
   @media (min-width: 768px) {
     .hero h1 { white-space: nowrap; font-size: clamp(28px, 3.1vw, 46px); }
-  }
-  .hero .subhead { font-size: 19px; line-height: 1.6; color: var(--c-text-muted); margin: 20px auto 36px; max-width: 46ch; }
-  @media (min-width: 768px) {
     .hero .subhead { max-width: 780px; }
   }
-  .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 
-  /* Section 2: services, three ledger rows */
-  .services { padding: 72px 0; }
-  .block { display: grid; gap: 20px; padding: 32px 0; border-top: 1px solid var(--c-border); }
-  .block:last-child { border-bottom: 1px solid var(--c-border); }
-  .block ul { list-style: none; margin: 0; padding: 0; }
-  .block li { padding: 10px 0; border-top: 1px solid var(--c-border); }
-  .block li:first-child { border-top: 0; }
-  .block li a { text-decoration: none; color: var(--c-text); }
-  .block li a:hover { color: var(--c-primary); text-decoration: underline; }
-  .block .cta { display: inline-block; margin-top: 8px; }
-  .block .eyebrow { margin-bottom: 10px; }
+  /* Section 2: services. Desktop with motion: a pinned left stage and scrolling right slides.
+     Everything else: one column, the pillar panel above its slides. */
+  .services { padding: 64px 0 96px; border-top: 1px solid var(--c-border); }
+  .svc-track { display: block; }
+  .svc-panel { margin-bottom: 40px; padding: 32px; background: var(--c-inset); border-radius: 16px; position: relative; overflow: hidden; }
+  .svc-panel .muted { margin: 16px 0 0; }
+  .svc-bar { display: none; }
+  .svc-num { display: none; }
+  .svc-group { margin-bottom: 48px; }
+  .svc-slide { padding: 40px 0; border-top: 1px solid var(--c-border); }
+  .svc-group .svc-slide:last-child { border-bottom: 1px solid var(--c-border); }
+  .svc-idx { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: var(--c-text-muted); margin-bottom: 14px; }
+  .svc-slide h3 { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.1; }
+  .svc-slide p { margin: 14px 0 0; color: var(--c-text-muted); max-width: 52ch; }
+  .svc-slide ul { list-style: none; margin: 18px 0 0; padding: 0; max-width: 52ch; }
+  .svc-slide li { padding: 8px 0; border-top: 1px solid var(--c-border); }
+  .svc-slide li:first-child { border-top: 0; }
+  .svc-slide li a { color: var(--c-text); text-decoration: none; }
+  .svc-slide li a:hover { color: var(--c-primary); text-decoration: underline; }
+  .svc-slide .link { display: inline-block; margin-top: 16px; }
+
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .svc-track { display: grid; grid-template-columns: 5fr 7fr; column-gap: 64px; align-items: start; }
+    .svc-panel {
+      grid-column: 1; grid-row: 1 / -1; position: sticky; top: 96px; align-self: start;
+      height: calc(100svh - 128px); margin: 0; padding: 56px; display: flex; flex-direction: column; justify-content: center;
+      opacity: 0; transform: translateY(12px); transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .svc-panel.is-active { opacity: 1; transform: none; }
+    .svc-group { grid-column: 2; margin: 0; }
+    .svc-group .svc-slide:first-child { border-top: 0; padding-top: 0; }
+    .svc-slide { min-height: 74svh; display: flex; flex-direction: column; justify-content: center; padding: 48px 0; }
+    .svc-bar { display: block; position: absolute; left: 56px; right: 56px; bottom: 48px; height: 2px; background: var(--c-border); overflow: hidden; }
+    .svc-bar::after { content: ""; position: absolute; inset: 0; background: var(--c-primary); transform: scaleX(0); transform-origin: left; transition: transform 1.2s linear; }
+    .svc-panel.is-active .svc-bar::after { transform: scaleX(1); }
+    .svc-num {
+      display: block; position: absolute; right: 48px; top: 28px; font-size: 120px; font-weight: 700; line-height: 1;
+      color: transparent; -webkit-text-stroke: 1px var(--c-primary); opacity: 0.5; letter-spacing: -0.04em;
+    }
+  }
 
   footer.site-footer { border-top: 1px solid var(--c-border); padding: 40px 0 96px; font-size: 15px; color: var(--c-text-muted); }
   .foot-grid { display: grid; gap: 24px; }
@@ -129,16 +156,14 @@
     .mega { position: static; width: auto; margin: 0 0 12px; box-shadow: none; border: 0; background: transparent; padding: 0; grid-template-columns: 1fr; gap: 16px; }
     .site-header { position: relative; }
     .hero { min-height: 0; padding: 64px 0 56px; }
-    .block li a { display: block; padding: 6px 0; }
+    .svc-panel { padding: 24px; }
+    .svc-slide li a { display: block; padding: 6px 0; }
     .foot-grid { grid-template-columns: 1fr; }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     .foot-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (min-width: 1024px) {
-    .block { grid-template-columns: 5fr 1fr 6fr; align-items: start; }
-    .block .intro { grid-column: 1; }
-    .block .body { grid-column: 3; }
     .foot-grid { grid-template-columns: 2fr 1fr 1fr; }
   }
 </style>
@@ -158,18 +183,18 @@
             <div>
               <a class="mega-head" href="#develop">Develop</a>
               <ul>
-                <li><a href="#develop">Web development</a></li>
-                <li><a href="#develop">Mobile apps</a></li>
-                <li><a href="#develop">SaaS products</a></li>
+                <li><a href="#web-development">Web development</a></li>
+                <li><a href="#mobile-apps">Mobile apps</a></li>
+                <li><a href="#saas-products">SaaS products</a></li>
               </ul>
             </div>
             <div>
               <a class="mega-head" href="#ai-automation">AI Automation</a>
               <ul>
-                <li><a href="#ai-automation">AI intake &amp; speed-to-lead</a></li>
-                <li><a href="#ai-automation">Document intake &amp; chase</a></li>
-                <li><a href="#ai-automation">Audit &amp; sprint</a></li>
-                <li><a href="#ai-automation">Care plans</a></li>
+                <li><a href="#ai-intake">AI intake &amp; speed-to-lead</a></li>
+                <li><a href="#document-intake">Document intake &amp; chase</a></li>
+                <li><a href="#audit">Audit &amp; sprint</a></li>
+                <li><a href="#care-plans">Care plans</a></li>
                 <li>
                   <span class="sub-label">Industries</span>
                   <ul><li><a href="#ai-automation">Law firms</a></li></ul>
@@ -179,8 +204,8 @@
             <div>
               <a class="mega-head" href="#growth">Growth</a>
               <ul>
-                <li><a href="#growth">SEO</a></li>
-                <li><a href="#growth">AEO &amp; GEO</a></li>
+                <li><a href="#seo">SEO</a></li>
+                <li><a href="#aeo-geo">AEO &amp; GEO</a></li>
               </ul>
             </div>
           </div>
@@ -211,55 +236,96 @@
     </div>
   </section>
 
-  <!-- Section 2: services, three ledger rows in pillar order -->
+  <!-- Section 2: services. Panels and slides are in one track, in pillar order. -->
   <section class="services" id="services" aria-label="Services">
-    <div class="wrap">
-      <article class="block" id="develop">
-        <div class="intro">
-          <p class="eyebrow">01 / 03 · Develop</p>
-          <h2>Websites, apps and SaaS built to run after launch.</h2>
-        </div>
-        <div class="body">
-          <p class="muted">Marketing sites, web applications, mobile apps and SaaS products. We build on a stack we can maintain, with content your team can edit.</p>
-          <ul>
-            <li><a href="#develop">Web development</a></li>
-            <li><a href="#develop">Mobile apps</a></li>
-            <li><a href="#develop">SaaS products</a></li>
-          </ul>
-          <a class="link cta" href="#develop">See development services →</a>
-        </div>
-      </article>
+    <div class="wrap svc-track">
 
-      <article class="block" id="ai-automation">
-        <div class="intro">
-          <p class="eyebrow">02 / 03 · AI Automation</p>
-          <h2>Your repetitive work, running in the background.</h2>
-        </div>
-        <div class="body">
-          <p class="muted">AI automation built on n8n and Claude: instant replies to new inquiries, document follow-ups, and handoffs between the tools you already use. Every step is logged, and every failure alerts a person.</p>
-          <ul>
-            <li><a href="#ai-automation">AI intake &amp; speed-to-lead</a></li>
-            <li><a href="#ai-automation">Document intake &amp; chase</a></li>
-            <li><a href="#ai-automation">Audit &amp; sprint</a></li>
-          </ul>
-          <a class="link cta" href="#ai-automation">See AI Automation services →</a>
-        </div>
-      </article>
+      <div class="svc-panel is-active" data-pillar="develop" id="develop">
+        <p class="eyebrow">01 / 03 · Develop</p>
+        <h2>Websites, apps and SaaS built to run after launch.</h2>
+        <p class="muted">Marketing sites, web applications, mobile apps and SaaS products. We build on a stack we can maintain, with content your team can edit.</p>
+        <span class="svc-bar" aria-hidden="true"></span>
+        <span class="svc-num" aria-hidden="true">01</span>
+      </div>
+      <div class="svc-group" data-pillar="develop">
+        <article class="svc-slide" id="web-development">
+          <span class="svc-idx">01.1 · Develop</span>
+          <h3>Web development</h3>
+          <p>DRAFT: Marketing sites and web applications, built so your team can change the content without a developer.</p>
+          <ul><li><a href="#web-development">Marketing sites</a></li><li><a href="#web-development">Web applications</a></li></ul>
+          <a class="link" href="#web-development">Web development details →</a>
+        </article>
+        <article class="svc-slide" id="mobile-apps">
+          <span class="svc-idx">01.2 · Develop</span>
+          <h3>Mobile apps</h3>
+          <p>DRAFT: iOS and Android apps for a clear, specific job. We say early whether an app is the right answer.</p>
+          <ul><li><a href="#mobile-apps">iOS and Android</a></li><li><a href="#mobile-apps">Scoped before the first line of code</a></li></ul>
+          <a class="link" href="#mobile-apps">Mobile apps details →</a>
+        </article>
+        <article class="svc-slide" id="saas-products">
+          <span class="svc-idx">01.3 · Develop</span>
+          <h3>SaaS products</h3>
+          <p>DRAFT: The product, sign-in, billing and admin tools, built as one codebase you own.</p>
+          <ul><li><a href="#saas-products">Product and admin</a></li><li><a href="#saas-products">Sign-in and billing</a></li></ul>
+          <a class="link" href="#saas-products">SaaS products details →</a>
+        </article>
+      </div>
 
-      <article class="block" id="growth">
-        <div class="intro">
-          <p class="eyebrow">03 / 03 · Growth</p>
-          <h2>Be found by people, and by the AI tools they ask.</h2>
-        </div>
-        <div class="body">
-          <p class="muted">Technical SEO, answer engine (AEO) and generative engine (GEO) work, so search engines and AI assistants can find, understand and cite your business. We report what we change and what we measure. We don't guarantee rankings or citations.</p>
-          <ul>
-            <li><a href="#growth">SEO</a></li>
-            <li><a href="#growth">AEO &amp; GEO</a></li>
-          </ul>
-          <a class="link cta" href="#growth">See Growth services →</a>
-        </div>
-      </article>
+      <div class="svc-panel" data-pillar="ai-automation" id="ai-automation">
+        <p class="eyebrow">02 / 03 · AI Automation</p>
+        <h2>Your repetitive work, running in the background.</h2>
+        <p class="muted">AI automation built on n8n and Claude: instant replies to new inquiries, document follow-ups, and handoffs between the tools you already use. Every step is logged, and every failure alerts a person.</p>
+        <span class="svc-bar" aria-hidden="true"></span>
+        <span class="svc-num" aria-hidden="true">02</span>
+      </div>
+      <div class="svc-group" data-pillar="ai-automation">
+        <article class="svc-slide" id="ai-intake">
+          <span class="svc-idx">02.1 · AI Automation</span>
+          <h3>AI intake &amp; speed-to-lead</h3>
+          <p>DRAFT: Instant replies to new inquiries, qualified against your rules and logged in the tools your team already uses.</p>
+          <ul><li><a href="#ai-intake">Instant reply</a></li><li><a href="#ai-intake">Qualification and booking</a></li></ul>
+          <a class="link" href="#ai-intake">AI intake details →</a>
+        </article>
+        <article class="svc-slide" id="document-intake">
+          <span class="svc-idx">02.2 · AI Automation</span>
+          <h3>Document intake &amp; chase</h3>
+          <p>DRAFT: Requests and polite reminders for client documents, until everything arrives.</p>
+          <ul><li><a href="#document-intake">Request lists</a></li><li><a href="#document-intake">Reminders and filing</a></li></ul>
+          <a class="link" href="#document-intake">Document intake details →</a>
+        </article>
+        <article class="svc-slide" id="audit">
+          <span class="svc-idx">02.3 · AI Automation</span>
+          <h3>Audit &amp; sprint</h3>
+          <p>DRAFT: A short, fixed-scope review of one workflow, with a written plan before any build.</p>
+          <ul><li><a href="#audit">Workflow audit</a></li><li><a href="#audit">Fixed-scope sprint</a></li></ul>
+          <a class="link" href="#audit">Audit and sprint details →</a>
+        </article>
+      </div>
+
+      <div class="svc-panel" data-pillar="growth" id="growth">
+        <p class="eyebrow">03 / 03 · Growth</p>
+        <h2>Be found by people, and by the AI tools they ask.</h2>
+        <p class="muted">Technical SEO, answer engine (AEO) and generative engine (GEO) work, so search engines and AI assistants can find, understand and cite your business. We report what we change and what we measure. We don't guarantee rankings or citations.</p>
+        <span class="svc-bar" aria-hidden="true"></span>
+        <span class="svc-num" aria-hidden="true">03</span>
+      </div>
+      <div class="svc-group" data-pillar="growth">
+        <article class="svc-slide" id="seo">
+          <span class="svc-idx">03.1 · Growth</span>
+          <h3>SEO</h3>
+          <p>DRAFT: Technical SEO and content planning, reported against what actually changes.</p>
+          <ul><li><a href="#seo">Technical SEO</a></li><li><a href="#seo">Content planning</a></li></ul>
+          <a class="link" href="#seo">SEO details →</a>
+        </article>
+        <article class="svc-slide" id="aeo-geo">
+          <span class="svc-idx">03.2 · Growth</span>
+          <h3>AEO &amp; GEO</h3>
+          <p>DRAFT: Pages and structured data that answer engines can read and cite, measured honestly.</p>
+          <ul><li><a href="#aeo-geo">Answer-first pages</a></li><li><a href="#aeo-geo">Structured data</a></li></ul>
+          <a class="link" href="#aeo-geo">AEO and GEO details →</a>
+        </article>
+      </div>
+
     </div>
   </section>
 </main>
@@ -281,7 +347,7 @@
   </div>
 </footer>
 
-<div class="draft" aria-hidden="true">PROTOTYPE · sections 1 and 2</div>
+<div class="draft" aria-hidden="true">PROTOTYPE · sections 1 and 2 · pinned services</div>
 
 <script>
   (function () {
@@ -323,6 +389,24 @@
         menuToggle.setAttribute('aria-expanded', 'false');
       }
     });
+
+    // Pinned services: the panel for the pillar that is in the middle of the screen is active.
+    // Only used where the layout is pinned; the CSS and the stacked layout do not depend on it.
+    var panels = {};
+    document.querySelectorAll('.svc-panel').forEach(function (p) { panels[p.getAttribute('data-pillar')] = p; });
+    function activate(pillar) {
+      Object.keys(panels).forEach(function (key) {
+        panels[key].classList.toggle('is-active', key === pillar);
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) activate(entry.target.getAttribute('data-pillar'));
+        });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      document.querySelectorAll('.svc-group').forEach(function (g) { io.observe(g); });
+    }
   })();
 </script>
 </body>

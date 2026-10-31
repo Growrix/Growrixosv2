@@ -1,5 +1,27 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 7 — services: pinned two-column stage
+
+**Asked:** the services section pinned while scrolling, in two columns, with each service type as its own slide. Think about the overall design.
+
+**Design:**
+- Desktop (≥1024 px, motion allowed): a left stage stays pinned. It shows the pillar, its approved H2 and body, a progress bar and a large outlined numeral (01, 02, 03). On the right, each service is a full-height slide, grouped by pillar in the approved order.
+- As the right column scrolls, the stage changes to the pillar that is in the middle of the screen, with a short fade. The progress bar fills while the pillar is active.
+- Mobile, tablet, reduced motion: one column. Each pillar's panel sits above its slides. Nothing is pinned.
+
+**Copy:**
+- Pillar headings and bodies are the approved copy (`02-homepage-copy.md`, S1 slides 1 to 3).
+- Service slide titles are the approved link labels.
+- Service slide descriptions are **DRAFT**, marked in the prototype. They are not approved copy and need your review.
+
+**Mechanism:** a short inline script (IntersectionObserver) sets the active pillar. The page has no other script. The build needs a client-island decision under `91-stack.md` §3 and D-013, because it is a new island. A CSS-only version is possible with scroll-linked timelines, but the first attempt timed the fades wrongly, so it is not used here.
+
+**Checked in the browser:** 1440×900. The stage stays pinned, and the active pillar changes at the expected points (develop, then AI Automation, then Growth). Mobile at 375 px: one column, no horizontal scroll.
+
+**Supersedes:** the services direction in the last design round (three equal columns, SV-D1) is replaced by this pinned layout. The brand colours and both themes are kept.
+
+**Not changed:** the hero (sections 1 and 2 only). Animations beyond this services stage are not planned yet.
+
 ## Round 6 — hero subhead on two lines
 
 **Asked:** the subhead should not run to three lines.
