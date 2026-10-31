@@ -1,5 +1,11 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 6 — hero subhead on two lines
+
+**Asked:** the subhead should not run to three lines.
+
+**Changed:** from 768 px up, the subhead column is 780 px wide (was 46 characters). It sets on two lines at 1440 px and 1024 px. Phones are unchanged.
+
 ## Round 5 — hero H1 on one line
 
 **Asked:** widen the title so it sits on one line.

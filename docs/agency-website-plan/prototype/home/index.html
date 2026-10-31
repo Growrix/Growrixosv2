@@ -94,6 +94,9 @@
     .hero h1 { white-space: nowrap; font-size: clamp(28px, 3.1vw, 46px); }
   }
   .hero .subhead { font-size: 19px; line-height: 1.6; color: var(--c-text-muted); margin: 20px auto 36px; max-width: 46ch; }
+  @media (min-width: 768px) {
+    .hero .subhead { max-width: 780px; }
+  }
   .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 
   /* Section 2: services, three ledger rows */
