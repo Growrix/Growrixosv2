@@ -1,5 +1,19 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 10 — remaining sections built
+
+**Built, in the planner's order:** Work (4), How we work (5), Industries row (6), Writing (7), FAQ (8), Final CTA (9). The page now has all nine sections.
+
+**Copy:** approved copy from `02-homepage-copy.md` for every section. Work card 1 is the approved LedgerLine text. FAQ shows five questions, with the first left out until D-1 is confirmed.
+
+**Review aids (not part of the build):** dashed slot cards for the second and third work items and the three writing posts. Notes under the Work, Industries and Writing sections say when each section hides on the live site.
+
+**Design:** proof sits in cards, steps are on numbered hairlines, the industries line is an inset band, the FAQ uses native disclosure, and the final call to action is centred to match the hero. Brand teal and both themes throughout.
+
+**Checked in the browser:** 1440 px and 375 px. No horizontal scroll at 375 px. Steps are four columns on desktop and one column on mobile. The FAQ has five items.
+
+**Not done:** the planner has not reviewed the visual design of these sections. Its approval for the earlier decisions is still pending. The planner's review and the animation plan come after your visual check.
+
 ## Round 9 — section 3, Who we are
 
 **Built:** the "Who we are" section after services, following the planner's section order (services at 2, "Who we are" at 3, D-23 default). Heading and approved body from `02-homepage-copy.md` (S2). Team and location lines are not shown (D-1, D-2 TBD).

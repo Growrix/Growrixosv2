@@ -150,6 +150,55 @@
     .studio-grid { grid-template-columns: 5fr 7fr; column-gap: 64px; align-items: start; }
   }
 
+  /* Shared section rhythm and heads */
+  .block-section { padding: 96px 0; border-top: 1px solid var(--c-border); }
+  .section-head { max-width: 680px; margin-bottom: 48px; }
+  .section-head p { margin: 14px 0 0; color: var(--c-text-muted); }
+  .review-note { display: block; font-size: 13px; color: var(--c-text-muted); margin-top: 16px; }
+
+  /* Section 4: work. Proof cards only; every item carries its honest label. */
+  .work-grid { display: grid; gap: 20px; }
+  .work-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; }
+  .work-card p { color: var(--c-text-muted); margin: 12px 0 20px; }
+  .work-card .link { margin-top: auto; align-self: flex-start; }
+  .work-card.is-slot { background: transparent; border-style: dashed; border-color: var(--c-border-control); }
+  .badge { display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--c-inset); color: var(--c-text-muted); margin-bottom: 16px; }
+  .badge.is-internal { background: transparent; color: var(--c-primary); border: 1px solid var(--c-primary); }
+  .work-more { margin-top: 28px; }
+  @media (min-width: 768px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Section 5: how we work. Four numbered steps on hairlines. */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .steps li { padding: 28px 24px 28px 0; border-top: 1px solid var(--c-border); }
+  .step-n { display: block; font-size: 13px; font-weight: 700; color: var(--c-text-muted); margin-bottom: 18px; letter-spacing: 0.04em; }
+  .steps h3 { font-size: 22px; margin-bottom: 8px; }
+  .steps p { margin: 0; color: var(--c-text-muted); }
+  @media (min-width: 768px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+
+  /* Section 6: industries row. One line, one link. */
+  .niche-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 28px 32px; background: var(--c-inset); border-radius: 16px; }
+  .niche-row p { margin: 0; font-size: 19px; font-weight: 600; }
+
+  /* Section 7: writing. Three latest posts; slots shown for review. */
+  .post-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; }
+  .post-card p { margin: 12px 0 0; color: var(--c-text-muted); }
+  .post-card.is-slot { background: transparent; border-style: dashed; border-color: var(--c-border-control); }
+  @media (min-width: 768px) { .work-grid.posts { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Section 8: FAQ. Native disclosure, answers in the HTML. */
+  .faq details { border-top: 1px solid var(--c-border); padding: 22px 0; }
+  .faq details:last-of-type { border-bottom: 1px solid var(--c-border); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--c-primary); font-size: 24px; line-height: 1; font-weight: 400; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p { margin: 14px 0 0; color: var(--c-text-muted); max-width: 64ch; }
+
+  /* Section 9: final call to action. Centred, like the hero. */
+  .final { padding: 112px 0; border-top: 1px solid var(--c-border); text-align: center; }
+  .final h2 { font-size: clamp(30px, 4vw, 44px); max-width: 22ch; margin: 0 auto; }
+  .final p { color: var(--c-text-muted); max-width: 52ch; margin: 16px auto 36px; }
+
   footer.site-footer { border-top: 1px solid var(--c-border); padding: 40px 0 96px; font-size: 15px; color: var(--c-text-muted); }
   .foot-grid { display: grid; gap: 24px; }
   .foot-grid strong { color: var(--c-text); }
@@ -359,6 +408,117 @@
           <li>Handover notes at the end</li>
         </ul>
         <a class="link" href="#about">About the studio →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: work. Live rule: shown only with two complete items. Slots are review aids, not part of the build. -->
+  <section class="block-section" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="work-h">Work, labelled by how it was made.</h2>
+        <p>Every item carries one label: Client project, Internal build, Demo build or Illustrative example.</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card">
+          <span class="badge is-internal">Internal build</span>
+          <h3>LedgerLine</h3>
+          <p>Our document-intake automation, now in its third version. Not a client project. The build log covers what it does and what changed between versions.</p>
+          <a class="link" href="#work">Read the build log →</a>
+        </article>
+        <article class="work-card is-slot">
+          <span class="badge">Demo build</span>
+          <h3>Review slot: demo title</h3>
+          <p>Fills when a demo exists. Recorded end to end with test data.</p>
+        </article>
+        <article class="work-card is-slot">
+          <span class="badge">Illustrative example</span>
+          <h3>Review slot: example title</h3>
+          <p>Fills when supplied. A walkthrough of how a system would look, not a client result.</p>
+        </article>
+      </div>
+      <p class="work-more"><a class="link" href="#work">See all work →</a> <span class="review-note" style="display:inline">Shown for review. The live site hides this section below two complete items.</span></p>
+    </div>
+  </section>
+
+  <!-- Section 5: how we work. Exactly four steps. -->
+  <section class="block-section" id="how-we-work" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="how-h">Four steps, one studio, a fixed price.</h2>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">01</span><h3>Talk</h3><p>A 20-minute call to see whether we are the right fit.</p></li>
+        <li><span class="step-n">02</span><h3>Scope</h3><p>A written scope and fixed price, agreed before work starts.</p></li>
+        <li><span class="step-n">03</span><h3>Build</h3><p>We build in the open and show progress as we go.</p></li>
+        <li><span class="step-n">04</span><h3>Hand over</h3><p>You own the work. Handover notes, then a 30-day fix guarantee.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Section 6: industries row. Live rule: shown only when the law page is live. -->
+  <section class="block-section" id="niche" aria-label="Industries">
+    <div class="wrap">
+      <div class="niche-row">
+        <p>We also build intake and search systems for law firms.</p>
+        <a class="link" href="#niche">Law firms →</a>
+      </div>
+      <span class="review-note">Shown for review. Hidden on the live site until the law page is live.</span>
+    </div>
+  </section>
+
+  <!-- Section 7: writing. Live rule: shown only with three published posts. -->
+  <section class="block-section" id="writing" aria-labelledby="writing-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="writing-h">Writing</h2>
+      </div>
+      <div class="work-grid posts">
+        <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
+        <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
+        <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
+      </div>
+      <span class="review-note">Shown for review. Hidden on the live site until three posts are published.</span>
+    </div>
+  </section>
+
+  <!-- Section 8: FAQ. Five questions while the first is hidden (D-1, D-18). -->
+  <section class="block-section faq" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="faq-h">Questions before you book.</h2>
+      </div>
+      <details>
+        <summary>Do we own the code and the workflows?</summary>
+        <p>Yes. The work runs in your accounts with your credentials, and you receive the source, documentation and a handover walkthrough.</p>
+      </details>
+      <details>
+        <summary>How does pricing work?</summary>
+        <p>Fixed price, agreed in writing before work starts. Price ranges and payment terms are on the pricing page.</p>
+      </details>
+      <details>
+        <summary>What happens if something breaks after launch?</summary>
+        <p>For 30 days after go-live we fix anything we built, within the agreed scope, at no extra cost.</p>
+      </details>
+      <details>
+        <summary>Do you guarantee rankings or AI citations?</summary>
+        <p>No. We don't guarantee rankings, leads or AI citations. We report what we change and what we measure.</p>
+      </details>
+      <details>
+        <summary>Do you work with other agencies?</summary>
+        <p>Yes, through a partner arrangement. Details are on the partners page, linked in the footer.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Section 9: final CTA -->
+  <section class="final" id="book" aria-labelledby="final-h">
+    <div class="wrap">
+      <h2 id="final-h">Tell us what you're building.</h2>
+      <p>Twenty minutes, one honest answer. If we're not the right fit, we'll say so.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#book">Book a free 20-min call</a>
+        <a class="btn btn-ghost" href="mailto:hello@growrixos.com">Email us</a>
       </div>
     </div>
   </section>
