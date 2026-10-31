@@ -1,5 +1,24 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 14 — concept A "The ledger" (creative layer)
+
+**Built, concept A only:**
+- Hero: a fine ledger grid behind the content, faded at the edges. The subhead and buttons arrive on load. The H1 is visible from the first paint.
+- Each section's rule draws in on scroll (a teal hairline). Each section heading rises as it enters the view.
+- Automations sits on the night band (`#0c1a1b`) in both themes.
+- Micro-interactions: buttons press to 98%, links draw an underline on hover, and showcase cards and blog features lift on hover (fine pointers only).
+- Reduced motion turns all the new motion off.
+
+**Kept, against the planner's recommendation:** the pinned services stage and the timed showcases. You asked for both earlier, and the planner's plan removes them (C-D5, C-D8). Say if you want them removed.
+
+**Deviations from the plan:**
+- The lite tier is not gated in CSS. The browser does not support the `update` media feature, and `saveData` needs a script. Both are left for the build.
+- The section sequence is scroll-linked CSS only, so it runs where the browser supports scroll-linked animation. Otherwise the content shows without the motion.
+
+**Checked in the browser:** at 1440 px, the Who-we-are, How-we-work and FAQ headings rise as they enter, and their rules draw. The automations section is on the night band. At 375 px there is no horizontal scroll.
+
+**Not done:** the lite tier, the decisions in the planner's report (DEC-37 and DEC-38, and the rest), and the wireframe-level changes.
+
 ## Round 13 — industries row removed, blog redesigned
 
 **Removed:** the industries row ("We also build intake and search systems for law firms."). The section is no longer in the prototype.

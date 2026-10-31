@@ -267,6 +267,65 @@
   .final h2 { font-size: clamp(30px, 4vw, 44px); max-width: 22ch; margin: 0 auto; }
   .final p { color: var(--c-text-muted); max-width: 52ch; margin: 16px auto 36px; }
 
+  /* ── Creative layer, concept A "The ledger" (docs/agency-website-plan/pages/home.motion.md) ──
+     Motion is structure, arrival and sequence only. Transform and opacity only. Three tiers:
+     full (motion allowed, normal update), lite (slow updates), none (reduced motion). */
+
+  /* Hero: a fine ledger grid behind the content, faded at the edges. */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+    background-image: linear-gradient(var(--c-border) 1px, transparent 1px), linear-gradient(90deg, var(--c-border) 1px, transparent 1px);
+    background-size: 64px 64px; background-position: center;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+
+  /* Button, link and card micro-interactions. */
+  .btn { transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+  .btn:active { transform: scale(0.98); }
+  .link { background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 1px; text-decoration: none; transition: background-size 0.3s ease; padding-bottom: 2px; }
+  .link:hover { background-size: 100% 1px; }
+  @media (hover: hover) and (pointer: fine) {
+    .showcase-card, .post-feature { transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.6s ease; }
+    .showcase-card:hover, .post-feature:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgb(20 22 26 / 0.10); }
+  }
+
+  /* Entrance on load: the hero subhead and buttons arrive; the H1 is visible from the first paint. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero .subhead, .hero-ctas { animation: arrive 0.9s ease both; }
+    .hero-ctas { animation-delay: 0.15s; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  }
+
+  /* Section sequence (scroll-linked, CSS only): each section's rule draws, then its heading rises. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      main > section:not(.hero) { position: relative; }
+      main > section:not(.hero)::before {
+        content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 2px; background: var(--c-primary);
+        transform-origin: left; transform: scaleX(0);
+        animation: draw-rule linear both; animation-timeline: view(); animation-range: entry 5% entry 45%;
+      }
+      .block-section h2, .studio h2, .final h2 {
+        animation: rise linear both; animation-timeline: view(); animation-range: entry 10% entry 50%;
+      }
+      @keyframes draw-rule { to { transform: scaleX(1); } }
+      @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    }
+  }
+
+  /* Automations sits on the night band in both themes (brand tokens, 02-tokens.md §6). */
+  #automations {
+    --c-bg: #0c1a1b; --c-surface: #0f2224; --c-inset: #132b2d; --c-border: #1f3335; --c-border-control: #706b62;
+    --c-text: #f1ece1; --c-text-muted: #9aa3b0; --c-primary: #2dd4bf; --c-primary-hover: #5eead4;
+    --c-on-primary: #0a0a0a; --c-focus: #2dd4bf;
+    background: var(--c-bg); color: var(--c-text);
+  }
+  #automations .section-head h2, #automations .flow-row-title, #automations .flow-panel h3 { color: var(--c-text); }
+  #automations .flow-row-n { color: var(--c-text-muted); }
+
   footer.site-footer { border-top: 1px solid var(--c-border); padding: 40px 0 96px; font-size: 15px; color: var(--c-text-muted); }
   .foot-grid { display: grid; gap: 24px; }
   .foot-grid strong { color: var(--c-text); }
