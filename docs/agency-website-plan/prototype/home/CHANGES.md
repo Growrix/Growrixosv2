@@ -1,5 +1,17 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 13 — industries row removed, blog redesigned
+
+**Removed:** the industries row ("We also build intake and search systems for law firms."). The section is no longer in the prototype.
+
+**Blog (writing), redesigned:** an editorial layout. The heading and a short intro sit on the left, with an "All writing" link. On the right are a large featured post (image slot and text) above a reading list of dated rows, each ending in an arrow. It uses the same brand tokens and both themes.
+
+**Copy:** the intro line "Notes on building, automating and being found, from the work itself." and the "All writing" link are new **DRAFT** copy. The heading "Writing" is the approved S6 heading. All post titles are slots.
+
+**Live rule:** still shown only with three published posts, with the review note kept.
+
+**Checked in the browser:** 1440 px (two columns, featured post and list, no overflow) and 375 px (single column, no horizontal scroll).
+
 ## Round 12 — showcases: right-side carousel and a different automations layout
 
 **Asked:** cards come in from the right, each has a button to the demo page, the section auto-advances without scrolling and stays on the section, and the second section has a different layout.

@@ -230,6 +230,29 @@
   .post-card.is-slot { background: transparent; border-style: dashed; border-color: var(--c-border-control); }
   @media (min-width: 768px) { .post-grid { grid-template-columns: repeat(3, 1fr); } }
 
+  /* Blog (writing): intro left, featured post and a reading list right. */
+  .writing-grid { display: grid; gap: 40px; }
+  .writing-intro p { margin: 14px 0 0; color: var(--c-text-muted); max-width: 40ch; }
+  .writing-intro .link { display: inline-block; margin-top: 20px; }
+  .post-feature { display: grid; background: var(--c-surface); border: 1px dashed var(--c-border-control); border-radius: 16px; overflow: hidden; }
+  .post-feature-media { aspect-ratio: 16 / 9; background: var(--c-inset); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--c-text-muted); }
+  .post-feature-body { padding: 28px 32px 30px; display: flex; flex-direction: column; }
+  .post-feature-body h3 { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15; margin: 0 0 10px; }
+  .post-feature-body p { margin: 0; color: var(--c-text-muted); }
+  .post-feature-body .badge { align-self: flex-start; margin-bottom: 14px; }
+  .post-meta { margin-top: auto; padding-top: 20px; font-size: 13px; color: var(--c-text-muted); }
+  .post-list { list-style: none; margin: 24px 0 0; padding: 0; }
+  .post-row { display: grid; grid-template-columns: 88px 1fr auto; align-items: center; gap: 16px; padding: 22px 0; border-top: 1px solid var(--c-border); }
+  .post-row:last-child { border-bottom: 1px solid var(--c-border); }
+  .post-date { font-size: 13px; font-weight: 700; color: var(--c-text-muted); letter-spacing: 0.04em; }
+  .post-title { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; color: var(--c-text-muted); }
+  .post-arrow { color: var(--c-primary); font-size: 20px; }
+  @media (min-width: 768px) { .post-feature { grid-template-columns: 1.1fr 1fr; } }
+  @media (min-width: 1024px) {
+    .writing-grid { grid-template-columns: 4fr 8fr; column-gap: 64px; align-items: start; }
+  }
+  @media (max-width: 767px) { .post-row { grid-template-columns: 64px 1fr auto; } }
+
   /* Section 8: FAQ. Native disclosure, answers in the HTML. */
   .faq details { border-top: 1px solid var(--c-border); padding: 22px 0; }
   .faq details:last-of-type { border-bottom: 1px solid var(--c-border); }
@@ -555,17 +578,6 @@
     </div>
   </section>
 
-  <!-- Section 6: industries row. Live rule: shown only when the law page is live. -->
-  <section class="block-section" id="niche" aria-label="Industries">
-    <div class="wrap">
-      <div class="niche-row">
-        <p>We also build intake and search systems for law firms.</p>
-        <a class="link" href="#niche">Law firms →</a>
-      </div>
-      <span class="review-note">Shown for review. Hidden on the live site until the law page is live.</span>
-    </div>
-  </section>
-
   <!-- Section 7: how we work. Exactly four steps. -->
   <section class="block-section" id="how-we-work" aria-labelledby="how-h">
     <div class="wrap">
@@ -581,19 +593,32 @@
     </div>
   </section>
 
-  <!-- Section 8: writing. Live rule: shown only with three published posts. -->
-  <section class="block-section" id="writing" aria-labelledby="writing-h">
-    <div class="wrap">
-      <div class="section-head">
+  <!-- Section 7: blog. Editorial layout: intro on the left, a featured post and a reading list on the right.
+       Live rule: shown only with three published posts. Slots are review aids. -->
+  <section class="block-section writing" id="writing" aria-labelledby="writing-h">
+    <div class="wrap writing-grid">
+      <div class="writing-intro">
         <h2 id="writing-h">Writing</h2>
+        <p>Notes on building, automating and being found, from the work itself.</p>
+        <a class="link" href="#writing">All writing →</a>
       </div>
-      <div class="post-grid">
-        <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
-        <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
-        <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
+      <div class="writing-main">
+        <article class="post-feature is-slot">
+          <div class="post-feature-media" aria-hidden="true">Cover image slot</div>
+          <div class="post-feature-body">
+            <span class="badge">Featured</span>
+            <h3>Featured post title to supply</h3>
+            <p>Summary to supply.</p>
+            <span class="post-meta">Date · Reading time</span>
+          </div>
+        </article>
+        <ol class="post-list">
+          <li class="post-row is-slot"><span class="post-date">Date</span><span class="post-title">Post title to supply</span><span class="post-arrow" aria-hidden="true">→</span></li>
+          <li class="post-row is-slot"><span class="post-date">Date</span><span class="post-title">Post title to supply</span><span class="post-arrow" aria-hidden="true">→</span></li>
+        </ol>
       </div>
-      <span class="review-note">Shown for review. Hidden on the live site until three posts are published.</span>
     </div>
+    <div class="wrap"><span class="review-note">Shown for review. Hidden on the live site until three posts are published.</span></div>
   </section>
 
   <!-- Section 9: FAQ. Five questions while the first is hidden (D-1, D-18). -->
