@@ -199,6 +199,35 @@
   .final h2 { font-size: clamp(30px, 4vw, 44px); max-width: 22ch; margin: 0 auto; }
   .final p { color: var(--c-text-muted); max-width: 52ch; margin: 16px auto 36px; }
 
+  /* Showcases (websites, automations). Three cards show; the rest reveal while the section is pinned (desktop, motion on).
+     Otherwise every card shows in a plain grid. */
+  .showcase { border-top: 1px solid var(--c-border); }
+  .showcase-track { position: relative; }
+  .showcase-stage { padding-top: 96px; padding-bottom: 96px; }
+  .showcase-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+  .showcase-card {
+    background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden;
+    display: flex; flex-direction: column; transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .showcase-media {
+    aspect-ratio: 2 / 1; background: var(--c-inset); border-bottom: 1px solid var(--c-border);
+    display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--c-text-muted);
+  }
+  .showcase-body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .showcase-body .badge { align-self: flex-start; margin-bottom: 12px; }
+  .showcase-body h3 { font-size: 19px; margin: 0 0 6px; }
+  .showcase-body p { margin: 0; color: var(--c-text-muted); font-size: 15px; }
+  .showcase-body .link { margin-top: auto; padding-top: 14px; align-self: flex-start; }
+  .showcase-spacer { display: none; }
+  @media (min-width: 768px) { .showcase-grid { grid-template-columns: repeat(3, 1fr); } }
+  .showcase.is-pinned .showcase-stage {
+    position: sticky; top: 64px; height: calc(100svh - 64px); padding-top: 0; padding-bottom: 0;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .showcase.is-pinned .showcase-spacer { display: block; height: 60svh; }
+  .showcase.is-pinned .showcase-card.is-pending { opacity: 0; transform: translateY(24px); }
+  .showcase .section-head { margin-bottom: 32px; }
+
   footer.site-footer { border-top: 1px solid var(--c-border); padding: 40px 0 96px; font-size: 15px; color: var(--c-text-muted); }
   .foot-grid { display: grid; gap: 24px; }
   .foot-grid strong { color: var(--c-text); }
@@ -412,32 +441,85 @@
     </div>
   </section>
 
-  <!-- Section 4: work. Live rule: shown only with two complete items. Slots are review aids, not part of the build. -->
-  <section class="block-section" id="work" aria-labelledby="work-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="work-h">Work, labelled by how it was made.</h2>
-        <p>Every item carries one label: Client project, Internal build, Demo build or Illustrative example.</p>
+  <!-- Section 4a: demo websites. Pinned reveal on desktop; the first three cards show, the rest reveal while pinned. -->
+  <section class="showcase" id="websites" data-showcase aria-labelledby="websites-h">
+    <div class="showcase-track">
+      <div class="showcase-stage wrap">
+        <div class="section-head">
+          <h2 id="websites-h">Demo websites</h2>
+          <p>Built as demos with test data. Each card carries its label.</p>
+        </div>
+        <div class="showcase-grid">
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 1</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 2</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 3</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 4</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 5</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 6</h3><p>Summary to supply.</p></div>
+          </article>
+        </div>
       </div>
-      <div class="work-grid">
-        <article class="work-card">
-          <span class="badge is-internal">Internal build</span>
-          <h3>LedgerLine</h3>
-          <p>Our document-intake automation, now in its third version. Not a client project. The build log covers what it does and what changed between versions.</p>
-          <a class="link" href="#work">Read the build log →</a>
-        </article>
-        <article class="work-card is-slot">
-          <span class="badge">Demo build</span>
-          <h3>Review slot: demo title</h3>
-          <p>Fills when a demo exists. Recorded end to end with test data.</p>
-        </article>
-        <article class="work-card is-slot">
-          <span class="badge">Illustrative example</span>
-          <h3>Review slot: example title</h3>
-          <p>Fills when supplied. A walkthrough of how a system would look, not a client result.</p>
-        </article>
+      <div class="showcase-spacer" aria-hidden="true"></div>
+      <div class="showcase-spacer" aria-hidden="true"></div>
+      <div class="showcase-spacer" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Section 4b: demo automations. LedgerLine is the one internal build. -->
+  <section class="showcase" id="automations" data-showcase aria-labelledby="automations-h">
+    <div class="showcase-track">
+      <div class="showcase-stage wrap">
+        <div class="section-head">
+          <h2 id="automations-h">Demo automations</h2>
+          <p>Built as demos with test data, plus our own internal build. Each card carries its label.</p>
+        </div>
+        <div class="showcase-grid">
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge is-internal">Internal build</span><h3>LedgerLine</h3><p>Our document-intake automation, now in its third version. Not a client project.</p><a class="link" href="#automations">Read the build log →</a></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 2</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 3</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 4</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 5</h3><p>Summary to supply.</p></div>
+          </article>
+          <article class="showcase-card">
+            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 6</h3><p>Summary to supply.</p></div>
+          </article>
+        </div>
       </div>
-      <p class="work-more"><a class="link" href="#work">See all work →</a> <span class="review-note" style="display:inline">Shown for review. The live site hides this section below two complete items.</span></p>
+      <div class="showcase-spacer" aria-hidden="true"></div>
+      <div class="showcase-spacer" aria-hidden="true"></div>
+      <div class="showcase-spacer" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -601,6 +683,55 @@
       }, { rootMargin: '-45% 0px -45% 0px' });
       document.querySelectorAll('.svc-group').forEach(function (g) { io.observe(g); });
     }
+  })();
+</script>
+<script>
+  // Showcases: on desktop with motion, the first three cards show and each further card reveals
+  // as the section scrolls through its spacers. The section stays pinned until the last card is shown.
+  (function () {
+    var pinQuery = window.matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)');
+    var showcases = [];
+    document.querySelectorAll('[data-showcase]').forEach(function (sec) {
+      var cards = sec.querySelectorAll('.showcase-card');
+      var track = sec.querySelector('.showcase-track');
+      var stage = sec.querySelector('.showcase-stage');
+      showcases.push({ sec: sec, cards: cards, track: track, stage: stage, hidden: Math.max(0, cards.length - 3) });
+    });
+
+    function layout() {
+      var pinned = pinQuery.matches;
+      showcases.forEach(function (s) {
+        s.sec.classList.toggle('is-pinned', pinned);
+        Array.prototype.forEach.call(s.cards, function (card, i) {
+          card.classList.toggle('is-pending', pinned && i >= 3);
+        });
+      });
+      update();
+    }
+
+    function update() {
+      showcases.forEach(function (s) {
+        if (!s.sec.classList.contains('is-pinned')) return;
+        var range = s.track.offsetHeight - s.stage.offsetHeight;
+        var top = s.track.getBoundingClientRect().top - 64;
+        var p = Math.min(1, Math.max(0, -top / range));
+        var revealed = Math.min(s.hidden, Math.floor(p * s.hidden + 0.0001));
+        Array.prototype.forEach.call(s.cards, function (card, i) {
+          if (i >= 3) card.classList.toggle('is-pending', i - 3 >= revealed);
+        });
+      });
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () { update(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', layout);
+    if (pinQuery.addEventListener) pinQuery.addEventListener('change', layout);
+    layout();
   })();
 </script>
 </body>

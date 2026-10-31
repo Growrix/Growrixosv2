@@ -1,5 +1,23 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 11 — Work replaced by two showcase sections
+
+**Asked:** the portfolio is thin, so show demos instead. Two separate sections, one for websites and one for automations. Three cards show, and more reveal while the section stays pinned until they are all shown. Re-plan and redesign.
+
+**Built:**
+- **Demo websites** and **Demo automations** replace the Work section. Each has six cards.
+- Desktop with motion: the section pins while the first three cards show. Each further card reveals as you scroll through a spacer. The section unpins after the last card.
+- Mobile, tablet and reduced motion: no pin. All cards show in a grid.
+- LedgerLine is the one internal build, in the automations section, with its approved text and link. Every other card is a demo slot.
+
+**Copy:** the headings "Demo websites" and "Demo automations", their subheads and the card titles are new. They are **DRAFT** and need approval. The "Work, labelled by how it was made" copy is withdrawn.
+
+**Accessibility:** hidden cards fade in, so they stay in the page for screen readers and are not hidden. The reveal is driven by a small script on desktop, as in the services stage. That needs the same client-island decision.
+
+**Checked in the browser:** at 1440×900 the section stays pinned to the end, and cards reveal in order. The pinned stage fits the viewport. At 375 px there is no pin, all cards show, and there is no horizontal scroll.
+
+**Not yet:** the planner's re-plan for these two sections is in progress. The prototype was built in parallel, so the planner's decisions may change the layout.
+
 ## Round 10 — remaining sections built
 
 **Built, in the planner's order:** Work (4), How we work (5), Industries row (6), Writing (7), FAQ (8), Final CTA (9). The page now has all nine sections.
