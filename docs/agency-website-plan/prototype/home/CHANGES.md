@@ -1,5 +1,13 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 5 — hero H1 on one line
+
+**Asked:** widen the title so it sits on one line.
+
+**Changed:** the hero column is 1200 px wide (was 800 px). From 768 px up, the H1 does not wrap and its size scales from 28 px to 46 px. Checked at 1440 px (44.6 px, one line) and 1024 px (31.7 px, one line).
+
+**Not changed:** below 768 px the H1 still wraps. The sentence cannot fit one line on a phone at a readable size. Say if you want a smaller phone size instead.
+
 ## Round 4 — layout centred, brand colours and themes
 
 **Asked:** centre the hero on both axes; use the brand colours and themes the project already maintains.
