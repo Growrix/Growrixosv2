@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Growrix OS — homepage prototype v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens — research 02 §2.6 (light theme only in this prototype) */
+  :root {
+    --color-bg: #FAF8F5;
+    --color-surface: #FFFFFF;
+    --color-surface-muted: #F3F0EB;
+    --color-line: #E7E2DA;
+    --color-ink: #1C1917;
+    --color-ink-muted: #57534E;
+    --color-ink-subtle: #78716C;
+    --color-accent: #C2410C;
+    --color-accent-hover: #9A3412;
+    --color-accent-soft: #FFEDD5;
+    --color-on-accent: #FFFFFF;
+    --radius-md: 10px;
+    --radius-pill: 999px;
+    --max-content: 1200px;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: auto; }
+  body {
+    margin: 0; background: var(--color-bg); color: var(--color-ink);
+    font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: var(--max-content); margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.1; margin: 0; }
+  h1 { font-size: clamp(36px, 5vw, 56px); }
+  h2 { font-size: clamp(28px, 3.4vw, 40px); }
+  h3 { font-size: 20px; font-family: var(--font-body); font-weight: 600; }
+  .eyebrow { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-muted); margin: 0 0 12px; }
+  .muted { color: var(--color-ink-muted); }
+  .source { font-size: 13px; color: var(--color-ink-subtle); }
+  .skip {
+    position: absolute; left: 16px; top: -100px; background: var(--color-ink); color: var(--color-bg);
+    padding: 8px 12px; border-radius: 6px; z-index: 50;
+  }
+  .skip:focus { top: 12px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 500; padding: 12px 20px;
+    border-radius: var(--radius-pill); border: 1px solid var(--color-accent);
+    background: var(--color-accent); color: var(--color-on-accent);
+  }
+  .btn:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+  .btn-ghost { background: transparent; color: var(--color-accent); }
+  .btn-ghost:hover { background: var(--color-accent-soft); }
+  .link { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Draft badge (prototype only) */
+  .draft {
+    position: fixed; right: 12px; bottom: 12px; z-index: 60; font-size: 12px;
+    background: var(--color-ink); color: var(--color-bg); padding: 6px 10px; border-radius: 6px;
+  }
+
+  /* Header and mega menu */
+  .site-header { position: sticky; top: 0; z-index: 20; background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+  .bar { display: flex; align-items: center; gap: 24px; min-height: 64px; }
+  .brand { font-family: var(--font-display); font-weight: 600; font-size: 18px; text-decoration: none; margin-right: auto; }
+  .site-nav { display: block; }
+  .nav-list { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; align-items: center; }
+  .nav-list > li { position: relative; }
+  .nav-list a, .nav-list button {
+    font: inherit; color: var(--color-ink); background: none; border: 0; padding: 8px 0; text-decoration: none; cursor: pointer;
+  }
+  .nav-list a:hover, .nav-list button:hover { text-decoration: underline; }
+  .menu-toggle {
+    display: none; font: inherit; background: none; border: 1px solid var(--color-line); color: var(--color-ink);
+    padding: 8px 14px; border-radius: var(--radius-pill); cursor: pointer;
+  }
+  .mega {
+    position: absolute; top: calc(100% + 8px); left: -16px; width: min(760px, 92vw);
+    background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md);
+    padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    box-shadow: 0 8px 24px rgb(28 25 23 / 0.08);
+  }
+  .mega[hidden] { display: none; }
+  .mega-head { display: block; font-weight: 600; text-decoration: none; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); }
+  .mega ul { list-style: none; margin: 0; padding: 0; }
+  .mega li a { display: block; padding: 6px 0; text-decoration: none; color: var(--color-ink); }
+  .mega li a:hover { text-decoration: underline; }
+  .sub-label { display: block; margin-top: 14px; font-size: 13px; color: var(--color-ink-muted); }
+  .mega ul ul { padding-left: 12px; border-left: 1px solid var(--color-line); margin-top: 4px; }
+
+  /* Hero: stacked by default (mobile, no-support, reduced motion) */
+  .hero-pin { position: relative; }
+  .hero-stage { padding: 56px 0 48px; }
+  .hero-grid { display: grid; gap: 40px; }
+  .hero-intro .subhead { font-size: 19px; margin: 20px 0 28px; max-width: 46ch; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .slides { position: relative; display: grid; gap: 24px; }
+  .slide {
+    background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 28px;
+  }
+  .slide .num { font-family: var(--font-display); font-size: 56px; line-height: 1; color: var(--color-accent-soft); margin: 0 0 8px; -webkit-text-stroke: 1px var(--color-accent); }
+  .slide ul { list-style: none; padding: 0; margin: 16px 0 20px; }
+  .slide li { padding: 8px 0; border-top: 1px solid var(--color-line); }
+  .slide li a { text-decoration: none; }
+  .slide li a:hover { text-decoration: underline; }
+  .rail { display: none; }
+
+  .founder {
+    display: flex; gap: 16px; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-line);
+  }
+  .founder svg { width: 72px; height: 72px; flex: none; border-radius: 50%; }
+
+  /* Pinned desktop: only when supported, wide enough, and motion allowed */
+  @media (min-width: 768px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .hero-pin { height: 300svh; view-timeline: --hero block; }
+      .hero-stage {
+        position: sticky; top: 64px; height: calc(100svh - 64px); padding: 0; display: flex; align-items: center;
+      }
+      .hero-grid { grid-template-columns: 1fr 1fr; align-items: center; width: 100%; }
+      .slides { min-height: 360px; display: block; }
+      .slide {
+        position: absolute; inset: 0; opacity: 0; animation-timeline: --hero; animation-range: cover 0% cover 100%;
+        animation-fill-mode: both;
+      }
+      .slide:nth-child(1) { animation-name: s1; }
+      .slide:nth-child(2) { animation-name: s2; }
+      .slide:nth-child(3) { animation-name: s3; }
+      .rail { display: flex; gap: 12px; margin-top: 24px; font-size: 14px; color: var(--color-ink-muted); }
+      .rail span { flex: 1; border-top: 3px solid var(--color-line); padding-top: 8px; }
+      .rail span:nth-child(1) { border-color: var(--color-accent); }
+    }
+  }
+  @keyframes s1 {
+    0%   { opacity: 1; transform: none; }
+    28%  { opacity: 1; transform: none; }
+    36%  { opacity: 0; transform: translateY(-24px); }
+    100% { opacity: 0; transform: translateY(-24px); }
+  }
+  @keyframes s2 {
+    0%   { opacity: 0; transform: translateY(24px); }
+    31%  { opacity: 0; transform: translateY(24px); }
+    36%  { opacity: 1; transform: none; }
+    61%  { opacity: 1; transform: none; }
+    69%  { opacity: 0; transform: translateY(-24px); }
+    100% { opacity: 0; transform: translateY(-24px); }
+  }
+  @keyframes s3 {
+    0%   { opacity: 0; transform: translateY(24px); }
+    64%  { opacity: 0; transform: translateY(24px); }
+    69%  { opacity: 1; transform: none; }
+    100% { opacity: 1; transform: none; }
+  }
+
+  /* Sections */
+  section.block { padding: 72px 0; border-top: 1px solid var(--color-line); }
+  .two { display: grid; gap: 32px; }
+  .ledger { display: grid; gap: 0; border-top: 1px solid var(--color-line); }
+  .ledger > div { display: grid; gap: 8px; padding: 20px 0; border-bottom: 1px solid var(--color-line); }
+  .cards { display: grid; gap: 20px; }
+  .card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 24px; }
+  .badge {
+    display: inline-block; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: var(--radius-pill);
+    background: var(--color-surface-muted); color: var(--color-ink-muted); margin-bottom: 12px;
+  }
+  .steps { counter-reset: step; display: grid; gap: 20px; list-style: none; padding: 0; margin: 0; }
+  .steps li { counter-increment: step; display: grid; gap: 4px; }
+  .steps li::before { content: counter(step, decimal-leading-zero); font-family: var(--font-display); color: var(--color-accent); font-size: 14px; }
+  .niche-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; padding: 24px; background: var(--color-surface-muted); border-radius: var(--radius-md); }
+  details { border-top: 1px solid var(--color-line); padding: 16px 0; }
+  details:last-child { border-bottom: 1px solid var(--color-line); }
+  summary { cursor: pointer; font-weight: 500; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; float: right; color: var(--color-accent); }
+  details[open] summary::after { content: "−"; }
+  details p { margin: 12px 0 0; color: var(--color-ink-muted); }
+  .final { text-align: left; }
+  .final .ladder { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+  footer.site-footer { border-top: 1px solid var(--color-line); padding: 40px 0 96px; font-size: 15px; color: var(--color-ink-muted); }
+  .foot-grid { display: grid; gap: 24px; }
+  .foot-grid a { text-decoration: none; display: block; padding: 3px 0; }
+  .foot-grid a:hover { text-decoration: underline; }
+
+  /* Mobile and small screens: stacked, full menu collapses */
+  @media (max-width: 767px) {
+    .menu-toggle { display: inline-block; }
+    .bar .btn-header { display: none; }
+    .site-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--color-bg); border-bottom: 1px solid var(--color-line); padding: 8px 16px 24px; }
+    .site-nav.is-open { display: block; }
+    .nav-list { flex-direction: column; align-items: stretch; gap: 0; }
+    .nav-list > li { border-top: 1px solid var(--color-line); }
+    .nav-list > li > a, .nav-list > li > button { display: flex; width: 100%; justify-content: space-between; padding: 14px 0; font-size: 17px; }
+    .mega { position: static; width: auto; margin: 0 0 12px; box-shadow: none; border: 0; background: transparent; padding: 0; grid-template-columns: 1fr; gap: 16px; }
+    .site-header { position: relative; }
+    .hero-stage { padding-top: 40px; }
+  }
+  @media (min-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr 1fr; }
+    .cards { grid-template-columns: repeat(3, 1fr); }
+    .two { grid-template-columns: 1fr 1fr; }
+    .foot-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    .ledger > div { grid-template-columns: 220px 1fr; }
+    .steps { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (min-width: 1024px) { .hero-grid { gap: 64px; } }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#hero-content">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" id="top">Growrix OS</a>
+    <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li>
+          <button type="button" id="services-toggle" aria-expanded="false" aria-controls="mega-services">Services</button>
+          <div class="mega" id="mega-services" hidden>
+            <div>
+              <a class="mega-head" href="#develop">Develop</a>
+              <ul>
+                <li><a href="#develop">Web development</a></li>
+                <li><a href="#develop">Mobile apps</a></li>
+                <li><a href="#develop">SaaS products</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-head" href="#automate">Automate</a>
+              <ul>
+                <li><a href="#automate">AI intake &amp; speed-to-lead</a></li>
+                <li><a href="#automate">Document intake &amp; chase</a></li>
+                <li><a href="#automate">Audit &amp; sprint</a></li>
+                <li><a href="#automate">Care plans</a></li>
+                <li>
+                  <span class="sub-label">Industries</span>
+                  <ul><li><a href="#niche">Law firms</a></li></ul>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-head" href="#grow">Grow</a>
+              <ul>
+                <li><a href="#grow">SEO</a></li>
+                <li><a href="#grow">AEO &amp; GEO</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <!-- Blog stays hidden until 3 published posts (plan 02 §1). -->
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-header" href="#book">Book a free 20-min call</a>
+  </div>
+</header>
+
+<main>
+  <!-- S1 Hero: fixed H1 + subhead, three slides in order Develop → Automate → Grow -->
+  <div class="hero-pin">
+    <div class="hero-stage">
+      <div class="wrap hero-grid" id="hero-content">
+        <div class="hero-intro">
+          <p class="eyebrow">Founder-led · Dhaka, Bangladesh (UTC+6)</p>
+          <h1>I'm Mohammad. I build, automate and grow the digital side of your business.</h1>
+          <p class="subhead">Websites, mobile apps, SaaS, AI automation and search visibility, from one founder who builds the work directly.</p>
+          <div class="hero-ctas">
+            <a class="btn" href="#book">Book a free 20-min call</a>
+            <a class="btn btn-ghost" href="#services">See all services</a>
+          </div>
+          <div class="founder">
+            <svg viewBox="0 0 72 72" role="img" aria-label="Founder headshot placeholder, 320 by 320">
+              <rect width="72" height="72" fill="#F3F0EB"/>
+              <circle cx="36" cy="28" r="12" fill="#D6D3D1"/>
+              <path d="M12 66c4-14 14-20 24-20s20 6 24 20" fill="#D6D3D1"/>
+            </svg>
+            <div>
+              <strong>Mohammad [surname — O3]</strong><br>
+              <span class="muted">Founder · Dhaka, UTC+6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slides" aria-label="Services">
+          <article class="slide" id="develop">
+            <p class="eyebrow">01 / 03 · Develop</p>
+            <p class="num" aria-hidden="true">01</p>
+            <h2>Websites, apps and SaaS you can actually run.</h2>
+            <p class="muted">Marketing sites, web apps, mobile apps and SaaS products, built on a stack I can maintain after launch, with content your team can edit.</p>
+            <ul>
+              <li><a href="#develop">Web development</a></li>
+              <li><a href="#develop">Mobile apps</a></li>
+              <li><a href="#develop">SaaS products</a></li>
+            </ul>
+            <a class="link" href="#develop">See what I build →</a>
+          </article>
+
+          <article class="slide" id="automate">
+            <p class="eyebrow">02 / 03 · Automate</p>
+            <p class="num" aria-hidden="true">02</p>
+            <h2>Your repetitive work, running in the background.</h2>
+            <p class="muted">AI automation on n8n and Claude: instant replies to new inquiries, document follow-ups, and the handoffs between the tools you already use. Every step logged, every failure alerts a person.</p>
+            <ul>
+              <li><a href="#automate">AI intake &amp; speed-to-lead</a></li>
+              <li><a href="#automate">Document intake &amp; chase</a></li>
+              <li><a href="#automate">Audit &amp; sprint</a></li>
+            </ul>
+            <a class="link" href="#automate">See how automation works →</a>
+          </article>
+
+          <article class="slide" id="grow">
+            <p class="eyebrow">03 / 03 · Grow</p>
+            <p class="num" aria-hidden="true">03</p>
+            <h2>Be found by people, and by the AI tools they ask.</h2>
+            <p class="muted">Technical SEO, answer-engine (AEO) and generative-engine (GEO) work, so search engines and AI assistants can find, understand and cite your business. I measure it and say plainly what moved.</p>
+            <ul>
+              <li><a href="#grow">SEO</a></li>
+              <li><a href="#grow">AEO &amp; GEO</a></li>
+            </ul>
+            <a class="link" href="#grow">See the growth work →</a>
+          </article>
+
+          <div class="rail" aria-hidden="true">
+            <span>Develop</span><span>Automate</span><span>Grow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 Recent work: every item labelled, no invented results -->
+  <section class="block" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <p class="eyebrow">Work</p>
+      <h2 id="work-h">What's already built, labelled honestly.</h2>
+      <div class="cards" style="margin-top:32px">
+        <article class="card">
+          <span class="badge">Internal build</span>
+          <h3>LedgerLine</h3>
+          <p class="muted">My own document-intake automation, in its third version. Not a client project. The write-up shows what it does and what changed between versions.</p>
+          <a class="link" href="#work">Read the build log →</a>
+        </article>
+        <article class="card">
+          <span class="badge">Demo build</span>
+          <h3>[Demo title — placeholder]</h3>
+          <p class="muted">Recorded end-to-end with test data. Placeholder: replace with a real demo from the list.</p>
+          <a class="link" href="#work">View demo →</a>
+        </article>
+        <article class="card">
+          <span class="badge">Illustrative example</span>
+          <h3>[Example title — placeholder]</h3>
+          <p class="muted">A walkthrough of how a system would look. Not a client result.</p>
+          <a class="link" href="#work">View example →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4 How I work -->
+  <section class="block" aria-labelledby="how-h">
+    <div class="wrap">
+      <p class="eyebrow">How I work</p>
+      <h2 id="how-h">Four steps, one person, a fixed price.</h2>
+      <ol class="steps" style="margin-top:32px">
+        <li><h3>Talk</h3><p class="muted">A 20-minute call to see whether I'm the right fit.</p></li>
+        <li><h3>Scope</h3><p class="muted">A written scope and a fixed price, agreed before any work starts.</p></li>
+        <li><h3>Build</h3><p class="muted">I build in the open and show progress as I go.</p></li>
+        <li><h3>Hand over</h3><p class="muted">You own everything. Handover notes, then a 30-day fix guarantee.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- S5 Industries row: one line, one link. Law firms are a niche, not the hero. -->
+  <section class="block" id="niche" aria-label="Industries">
+    <div class="wrap">
+      <div class="niche-row">
+        <p style="margin:0">I also build intake and search systems for law firms.</p>
+        <a class="link" href="#niche">Law firms →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 Writing: hidden until 3 posts are published (plan 03 §7). -->
+
+  <!-- S7 FAQ -->
+  <section class="block" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <p class="eyebrow">Questions</p>
+      <h2 id="faq-h">Before you book.</h2>
+      <div style="margin-top:32px">
+        <details><summary>Who will I work with?</summary><p>Me. I'm the founder and I build the work directly. I don't hand projects to a team.</p></details>
+        <details><summary>Do I own the code and the workflows?</summary><p>Yes. Everything runs in your accounts with your credentials, and you get the source and the documentation at handover.</p></details>
+        <details><summary>How does pricing work?</summary><p>Fixed price, agreed in writing before work starts. Invoices in USD. Payment terms are on the pricing page.</p></details>
+        <details><summary>What if something breaks after launch?</summary><p>For 30 days after go-live I fix anything I built, at no extra cost, within the agreed scope.</p></details>
+        <details><summary>Do you guarantee rankings or AI citations?</summary><p>No. I don't guarantee rankings, leads or AI citations. I report what changes and what I measured.</p></details>
+        <details><summary>Do you work with agencies?</summary><p>Yes, on referral and partner arrangements. See the partners page, linked in the footer.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- S8 Final CTA -->
+  <section class="block final" id="book" aria-labelledby="final-h">
+    <div class="wrap">
+      <h2 id="final-h">Tell me what you're building.</h2>
+      <p class="muted" style="max-width:52ch;margin-top:12px">Twenty minutes, one honest answer. If you don't need me, I'll say so.</p>
+      <div class="ladder">
+        <a class="btn" href="#book">Book a free 20-min call</a>
+        <a class="btn btn-ghost" href="mailto:hello@growrixos.com">Email me</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap foot-grid">
+    <div>
+      <strong style="color:var(--color-ink)">Growrix OS</strong>
+      <p style="margin:8px 0 0">Websites, apps, AI automation and search visibility, by Mohammad. Founder-led from Dhaka (UTC+6).</p>
+      <p style="margin:8px 0 0">hello@growrixos.com</p>
+    </div>
+    <div>
+      <strong style="color:var(--color-ink)">Services</strong>
+      <a href="#develop">Develop</a><a href="#automate">Automate</a><a href="#grow">Grow</a>
+    </div>
+    <div>
+      <strong style="color:var(--color-ink)">Company</strong>
+      <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#security">Security</a>
+    </div>
+    <div>
+      <strong style="color:var(--color-ink)">Verify me</strong>
+      <a href="#upwork">Upwork</a><a href="#linkedin">LinkedIn</a><a href="#github">GitHub</a><a href="#partners">Partners</a>
+      <p class="source" style="margin:8px 0 0">Same person, same name, same photo everywhere.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="draft" aria-hidden="true">PROTOTYPE · draft copy</div>
+
+<script>
+  (function () {
+    var servicesToggle = document.getElementById('services-toggle');
+    var mega = document.getElementById('mega-services');
+    var menuToggle = document.getElementById('menu-toggle');
+    var siteNav = document.getElementById('site-nav');
+    var header = document.querySelector('.site-header');
+
+    function setMega(open) {
+      mega.hidden = !open;
+      servicesToggle.setAttribute('aria-expanded', String(open));
+    }
+    servicesToggle.addEventListener('click', function () { setMega(mega.hidden); });
+    menuToggle.addEventListener('click', function () {
+      var open = !siteNav.classList.contains('is-open');
+      siteNav.classList.toggle('is-open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !mega.hidden) { setMega(false); servicesToggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (!header.contains(e.target)) {
+        setMega(false);
+        siteNav.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
