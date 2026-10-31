@@ -1,11 +1,12 @@
 # pages/ai-automation — AI Automation main page creative plan
 
 - **Title:** AI Automation main page: search plan, section order, line route, and each section's layout, surface, type, copy, imagery and signature moment
-- **Status:** review (31 Oct 2026; Stage A)
-- **Version:** 1
+- **Status:** review (revision 2: tools section added, 31 Oct 2026; Stage A)
+- **Version:** 2
 - **Last-updated:** 2026-10-31
 - **Owner-agent:** page-type-planner
-- **Depends-on:** `00-brief-ai-automation.md` v2; `01-art-direction-ai-automation.md` v1; `02-tokens-ai-automation.md` v1; `02-tokens.md` v4; `01-voice-and-terms.md` v1; `pages/ai-automation.motion.md` v1; `prototype/home/index.html` at f99a144.
+- **Depends-on:** `00-brief-ai-automation.md` v3; `01-art-direction-ai-automation.md` v2; `02-tokens-ai-automation.md` v2; `02-tokens.md` v4; `01-voice-and-terms.md` v1; `pages/ai-automation.motion.md` v2; `prototype/home/index.html` at f99a144; `prototype/ai-automation/index.html` at d6a33df.
+- **Revision 2:** adds S2 Tools. Later sections move down by one, so The short answer is now S3 (C-D40). `prototype/ai-automation/CHANGES.md` Round 1 departures still apply.
 
 ## 0. How to read this file
 
@@ -22,6 +23,7 @@
 | Beat | Sections | What the visitor gets |
 | --- | --- | --- |
 | Start | Hero | The service named in plain words, and one run in a panel |
+| What it runs on | Tools | The real tools, with example runs moving through them |
 | The answer | The short answer | A straight answer in under 60 words |
 | Can it do my work? | What we automate | Four services and the law-firm line |
 | Show me | Demo automations | The page goes to night, with demos to open |
@@ -35,7 +37,7 @@
 | Item | Plan |
 | --- | --- |
 | Main search phrase | AI automation services |
-| Supporting phrases | AI automation for small business · n8n automation · lead response automation · document intake automation. These are planner judgement, not measured search data. `ASSUMED` |
+| Supporting phrases | AI automation for small business · n8n automation · Zapier automation · Make automation · GoHighLevel automation · lead response automation · document intake automation. These are planner judgement, not measured search data. `ASSUMED` |
 | Title (56 characters) | `AI Automation Services for Small Businesses \| Growrix OS` *(DRAFT)* |
 | Meta description (149 characters) | `AI automation built on n8n and Claude: instant replies to inquiries, document follow-ups and tool handoffs. Fixed scope and price. See working demos.` *(DRAFT)* |
 | Open Graph title | `AI automation services for your repetitive work` *(DRAFT)* |
@@ -49,6 +51,8 @@
 
 ```
 H1  AI automation services for your repetitive work
+  H2  n8n, Zapier, Make and GoHighLevel, wired together.
+    H3  n8n · Make · Zapier · GoHighLevel · Claude · Slack · Webhooks · Using something else?
   H2  What does AI automation do for a business?
   H2  What can we automate for you?
     H3  AI intake & speed-to-lead
@@ -71,13 +75,14 @@ H1  AI automation services for your repetitive work
 | # | Section | id | Surface | Pinned on desktop | Below 1024 px |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Hero | `hero` | Paper, plotted field | No | Stacked |
-| 2 | The short answer | `answer` | Sand | No | Stacked |
-| 3 | What we automate | `services` | Paper | Heading sticks | Stacked |
-| 4 | Demo automations | `demos` | Night | No | Cards pin sideways from four cards |
-| 5 | How a run works | `run` | Paper | Yes, the page's only pin | Stacked, with a rail |
-| 6 | How we work | `how-we-work` | Sand | No | Stacked |
-| 7 | FAQ | `faq` | Ivory | Heading sticks | Stacked |
-| 8 | Final CTA | `book` | Field | No | Stacked |
+| 2 | Tools | `tools` | Night, with an ivory board | No | Stacked. The graph becomes a vertical chain |
+| 3 | The short answer | `answer` | Sand | No | Stacked |
+| 4 | What we automate | `services` | Paper | Heading sticks | Stacked |
+| 5 | Demo automations | `demos` | Night | No | Cards pin sideways from four cards |
+| 6 | How a run works | `run` | Paper | Yes, the page's only pin | Stacked, with a rail |
+| 7 | How we work | `how-we-work` | Sand | No | Stacked |
+| 8 | FAQ | `faq` | Ivory | Heading sticks | Stacked |
+| 9 | Final CTA | `book` | Field | No | Stacked |
 
 Header and footer copy and links are as in `prototype/home/index.html`. The header takes the scope of the band under it, as on the homepage.
 
@@ -92,7 +97,8 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 | Section | Enters | Path | Leaves | Stops |
 | --- | --- | --- | --- | --- |
 | Hero | Starts at the bottom centre of the run panel | Straight down | X-P, bottom | 0 |
-| The short answer | X-P, top | Elbow left along the top padding to X-5, straight down | X-5, bottom | 4, level with each list row |
+| Tools | X-P, top | Elbow right along the top padding to X-R, elbow down the right gutter, past the heading and the board | X-R, bottom | 2, level with the middle of the graph and with the tool list |
+| The short answer | X-R, top | Elbow left along the top padding to X-5, straight down | X-5, bottom | 4, level with each list row |
 | What we automate | X-5, top | Straight down | X-5, bottom | 5, level with each service label |
 | Demo automations | X-5, top | Down to below the heading, elbow right, horizontal to X-R, elbow down the right gutter | X-R, bottom | 1 at the featured demo, then 1 per card row |
 | How a run works | X-R, stage top | Elbow left along the top of the stage to X-L, down the left gutter | X-L, stage bottom | 5, level with each station |
@@ -100,7 +106,9 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 | FAQ | X-R, top | Elbow left along the top padding to X-4, straight down | X-4, bottom | 6, level with each question |
 | Final CTA | X-4, top | As `pages/home.md`: left to X-L, down the gutter, right into the primary button | Ends | 1, the terminal stop |
 
-**Below 1024 px:** a straight rail at x = 10 px with the same stops, as on the homepage. It starts under the hero's buttons and ends at the final primary button. In `#run` the stops sit at each station.
+**Below 1024 px:** a straight rail at x = 10 px with the same stops, as on the homepage. It starts under the hero's buttons and ends at the final primary button. In `#run` the stops sit at each station. In `#tools` the rail runs beside the board and keeps its 2 stops.
+
+**Total stops:** 29, up from 27. The board's own connectors are separate from this line: they belong to the graph, and the line passes outside the board.
 
 ## 5. Sections
 
@@ -125,10 +133,96 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 - **Imagery:** plotted field only.
 - **Signature moment:** a packet runs the panel's nodes once, lighting each in turn. Then an ember stroke draws under `repetitive work`. The visitor sees what automation means before reading another word. The H1, subhead and buttons are all there from first paint. [AIA-01 to AIA-04]
 
-### S2. The short answer
+### S2. Tools
+
+- **Job:** show the real tools, show how a run moves through them, and show technical skill. The user asked for official icons, some text and an animated visual, as high on the page as possible.
+- **Surface:** night, `data-band="night"`, with one ivory board on it. The board uses `data-band="board"`, which stays light in both themes (`02-tokens-ai-automation.md` §4). Every mark sits on this one board, so each shows in its primary colours on a plain ground.
+- **Layout:**
+  - Heading row: 7fr/5fr, gap 64 px. H2 left, sub right, aligned to the H2's last line.
+  - Board: full container width, `--radius-panel`, padding 32 px, `--shadow-card` removed. In order: top row, graph, run sentence, hairline, tool list.
+  - Top row: badge `Illustrative example`, four run tabs, then the Pause control at the far right.
+  - Graph, from 1024 px: the canvas below, drawn at a 1200:400 ratio.
+  - Run sentence: 19 px DM Sans, `--measure-read`, 2 lines of space reserved so nothing moves.
+  - Tool list: four columns, two rows, cells split by hairlines.
+  - Under the board, on night: the ownership line.
+  - Below 1024 px: one column. Board padding 20 px. Tabs in a 2 × 2 grid. The graph becomes the vertical chain below. The tool list sits inside a native `details`, closed on phones and tablets, styled as an FAQ row (C-D41). Two columns inside it from 768 px.
+  - No pin at any width. Section padding `--section-pad`.
+- **Type:** H2 `--text-h2-col`. Sub DM Sans, muted. Tabs mono 13 px, on buttons at least 44 px tall. Column heads and captions mono 12 px. Tool names in H3, 19 px Bricolage 600. Tool lines 15 px DM Sans, muted. Ownership line 14 px DM Sans, muted.
+- **Copy:**
+  - H2: `n8n, Zapier, Make and GoHighLevel,` `wired together.` *(DRAFT; gradient on the second part. Tool use `CLIENT`)*
+  - Sub: `We pick the right tool for each job and connect it to the ones you already use. Here is how a run moves through them.` *(DRAFT)*
+  - Badge: `Illustrative example`. Every run on the board is an example, not a client run.
+  - Column heads: `Trigger` · `Workflow` · `AI` · `Action` *(DRAFT)*
+  - Pause control: icon, with `Pause` and `Play` as its label *(DRAFT)*
+  - Ownership line: `Product names and logos belong to their owners. They are shown to name the tools we build with, and do not mean a partnership or endorsement.` *(DRAFT)*
+  - Review note, prototype only, under the ownership line: `Shown for review. More tools join this list once you confirm them (D-A6). They are not claimed here.`
+
+**The canvas.** Positions in a 1200 × 400 box. `in` and `out` anchors sit 64 px left and right of a node's centre, which leaves clear space around each mark.
+
+| Node | Column, row | Centre | Shows |
+| --- | --- | --- | --- |
+| N1 | Trigger | 110, 80 | Webhook glyph |
+| N2 | Trigger | 110, 200 | Slack mark |
+| N3 | Trigger | 110, 320 | GoHighLevel mark |
+| N4 | Workflow | 410, 80 | n8n mark |
+| N5 | Workflow | 410, 200 | Make mark |
+| N6 | Workflow | 410, 320 | Zapier mark |
+| N7 | AI | 730, 80 | The word `Claude`, in Bricolage 600 at 24 px. No logo |
+| N8 | Action | 1050, 80 | GoHighLevel mark |
+| N9 | Action | 1050, 200 | Webhook glyph |
+| N10 | Action | 1050, 320 | Slack mark |
+
+| Connector | From, to | SVG path |
+| --- | --- | --- |
+| K1 | N1, N4 | `M174 80 H346` |
+| K2 | N4, N7 | `M474 80 H666` |
+| K3 | N7, N8 | `M794 80 H986` |
+| K4 | N8, N10 | `M1114 80 H1136 Q1160 80 1160 104 V296 Q1160 320 1136 320 H1114` |
+| K5 | N2, N5 | `M174 200 H346` |
+| K6 | N5, N7 | `M474 200 H596 Q620 200 620 176 V104 Q620 80 644 80 H666` |
+| K7 | N7, N9 | `M794 80 H806 Q830 80 830 104 V176 Q830 200 854 200 H986` |
+| K8 | N3, N6 | `M174 320 H346` |
+| K9 | N6, N10 | `M474 320 H986` |
+| K10 | N7, N10 | `M730 146 V296 Q730 320 754 320 H986` |
+
+- **Each node:** mark in a 96 × 48 box, name in mono under it at `cy + 34`, step caption in mono under that at `cy + 52`. A 10 px stop sits at the node's `in` anchor, or its `out` anchor in the Trigger column. Captions show from 1200 px. Between 1024 and 1199 px only names show.
+- **Connectors:** 2 px, in the signal colours. They turn only in 24 px elbows, as the signal line does. Each has a faint track, a lit layer and a packet (`pages/ai-automation.motion.md` §3).
+- **Column heads:** at y = 20, centred on each column.
+- **Grid:** the 32 px plotted grid, faint, behind the canvas. Each 96 × 48 mark box has a plain ivory fill, the same colour as the board, so no grid line runs behind a mark.
+
+**The runs.** All text *(DRAFT)*, tagged `TBD-from-client`. Tab labels first. Each step gives its node and its caption.
+
+| Tab | Path | Steps | Sentence |
+| --- | --- | --- | --- |
+| `New inquiry` | N1 K1 N4 K2 N7 K3 N8 K4 N10 | Webhook `Form posts the inquiry` · n8n `Workflow starts` · Claude `Reads it, finds the need` · GoHighLevel `Contact and booking created` · Slack `Team is told` | `A website form posts to a webhook, n8n starts the workflow, Claude reads the message, GoHighLevel gets the contact, and your team sees it in Slack.` |
+| `Deal moves stage` | N3 K8 N6 K9 N10 | GoHighLevel `Deal moves stage` · Zapier `Zap runs` · Slack `Owner is told` | `When one app only needs to tell another, a Zap is often enough. A deal moves in GoHighLevel, Zapier picks it up, and the owner gets a Slack message.` |
+| `Request in Slack` | N2 K5 N5 K6 N7 K7 N9 | Slack `Someone asks` · Make `Scenario runs` · Claude `Drafts the answer` · Webhook `Sends it to your system` | `A request in Slack starts a Make scenario. Claude drafts the answer, and a webhook sends it to the system that needs it.` |
+| `A step fails` | N1 K1 N4 K2 N7 K10 N10 | Webhook `Inquiry posted` · n8n `Workflow starts` · Claude `Step failed` · Slack `Person alerted` | `Every failure alerts a person. Here a step fails, the run stops, and Slack tells your team which step it was.` |
+
+**The vertical chain, below 1024 px.** One `ol` per run, showing the active run. Each row is a grid: rail with stop, mark box 72 × 32, then tool name in 15 px weight 600 and the step caption in 15 px. Rows are 64 px tall. The list reserves the height of five rows, so switching runs moves nothing. Sentences are hidden here, because the chain says the same thing. From 1024 px this is reversed: the `ol` is hidden, and script copies its step text into the node captions. Both stay in the HTML.
+
+**The tool list.** One `ul`, in this order. Tool use is `CLIENT`, except Claude, which is `PROJECT (prototype/home/index.html)` and `TBD-from-client`. Lines are *(DRAFT)*.
+
+| H3 | Line | Mark, 28 px tall |
+| --- | --- | --- |
+| `n8n` | `Custom workflows with branches, retries and error handling.` | n8n |
+| `Make` | `Visual scenarios for multi-step work across many apps.` | Make |
+| `Zapier` | `Quick app-to-app links for jobs with simple logic.` | Zapier |
+| `GoHighLevel` | `Contacts, pipelines and follow-ups for your sales team.` | GoHighLevel |
+| `Claude` | `Reads messages and documents against rules you set.` | None, the name is enough |
+| `Slack` | `Alerts, approvals and a place to see what ran.` | Slack |
+| `Webhooks` | `Direct connections to any tool that can send or receive one.` | Webhook glyph |
+| `Using something else?` | `Tell us on the call, and we'll say whether it fits.` Link `Book a free 20-min call` → `#book` | None |
+
+Summary label on phones and tablets: `What each tool does` *(DRAFT)*.
+
+- **Imagery and marks:** real brand marks, inline as one set of SVG `symbol`s, used with `use`, so each loads once. Sources and rules are in `01-art-direction-ai-automation.md` §13. Marks are never placed inside a shape, recoloured, outlined, rotated, skewed or given effects.
+- **Signature moment:** the graph assembles itself, then a run moves through the real tools. The packet leaves the Webhook, a stop lights at each tool, and each step's caption appears. In `A step fails`, the run stops at Claude and takes the failure route to Slack, which shows the care behind "every failure alerts a person". [TOOL-01 to TOOL-11]
+
+### S3. The short answer
 
 - **Job:** answer the question in the first scroll, in text that stands alone if quoted.
-- **Surface:** sand, `data-band="sand"`.
+- **Surface:** sand, `data-band="sand"`, rising over the night.
 - **Layout:** `.studio-grid`, 5fr/7fr, gap 64 px. Heading left, sticky at `top: 120px`. Right: answer, then list. Mobile: one column. Padding `--section-pad`.
 - **Type:** H2 `--text-h2-col`. Answer `--text-answer`, text colour. List as `.commits`: 19 px, weight 600, with ticks and row hairlines.
 - **Copy:**
@@ -138,7 +232,7 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 - **Imagery:** none.
 - **Signature moment:** the line ticks the list. As it reaches a row, the tick draws, so the answer reads as a checklist being signed off. [AIA-10 to AIA-13]
 
-### S3. What we automate
+### S4. What we automate
 
 - **Job:** let the visitor find their own problem, and move on to its service page.
 - **Surface:** paper.
@@ -157,7 +251,7 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 - **Imagery:** none.
 - **Signature moment:** the heading thickens from weight 300 to 700 while it stays in view, and each service lands beside its stop on the line. [AIA-20 to AIA-23]
 
-### S4. Demo automations
+### S5. Demo automations
 
 - **Job:** show that the work is real, and send people to each demo page.
 - **Surface:** night, `data-band="night"`.
@@ -178,7 +272,7 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 - **Chips:** show which kinds of media the demo page holds. Mono, 12 px, outlined. They are text, not links.
 - **Signature moment:** the page goes to night, the featured image wipes open, and the packet runs its nodes once. It uses the homepage's moment on a demo the visitor can open. [AIA-30 to AIA-35]
 
-### S5. How a run works
+### S6. How a run works
 
 - **Job:** show how it works and what keeps it safe. This is the workflow explanation for the page.
 - **Surface:** paper, wiping up over the night.
@@ -202,7 +296,7 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 - **Imagery:** none. The log is the image.
 - **Signature moment:** the run log fills in. Each stop on the line adds one row with a tick, until the whole run is on the record. It shows the promise "every step is logged" as it happens. [AIA-40 to AIA-46]
 
-### S6. How we work
+### S7. How we work
 
 - **Job:** reduce the risk of starting.
 - **Surface:** sand, `data-band="sand"`.
@@ -210,7 +304,7 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 - **Imagery:** none.
 - **Signature moment:** the line crosses left to right, and each numeral rises and thickens as the line reaches it. It is the homepage's moment, kept because it is the same promise. [AIA-50 to AIA-52]
 
-### S7. FAQ
+### S8. FAQ
 
 - **Job:** answer objections, in text search and AI assistants can read.
 - **Surface:** ivory.
@@ -227,7 +321,7 @@ Same layers, weight, elbows and stops as `pages/home.md` §3. Uses X-L, X-R, X-5
 - **Imagery:** none.
 - **Signature moment:** the answer opens on a filled row, as on the homepage. [AIA-60 to AIA-63]
 
-### S8. Final CTA
+### S9. Final CTA
 
 - **Job:** close on one decision.
 - **Surface:** deep teal field, `data-band="field"`.
@@ -247,20 +341,22 @@ As in `prototype/home/index.html`, with one change: the mega menu's `AI Automati
 
 | Check | Result |
 | --- | --- |
-| 1. Flat background | Pass. Five surfaces, and no two neighbours match |
+| 1. Flat background | Pass. Five surfaces, and no two neighbours match. The tools section adds an ivory board on night |
 | 2. Default dividers | Pass. Hairlines stay inside lists |
-| 3. No typographic motion | Pass. Headings mask-rise, and S3 shifts weight |
+| 3. No typographic motion | Pass. Headings mask-rise, and S4 shifts weight |
 
 ## 7. Mobile and search check on the plan
 
 | Check | Result at 375 px, by estimate |
 | --- | --- |
-| H1 | 3 lines at 38 px |
-| Longest H2 | 3 lines at 36 to 40 px |
-| Primary button | About 500 px down the page, inside the first screen at 667 px tall |
-| Answer-first text | Starts in the second section, about one screen down. The subhead answers the same question sooner |
+| H1 | 3 lines at 38 px. Measured in Round 1 |
+| Longest H2 | 4 lines at 36 px, the tools heading |
+| Primary button | Ends 518 px down the page, inside the first screen at 667 px tall. Measured in Round 1 |
+| Tools section height | About 1,180 px, with the tool list closed |
+| Answer-first text | Starts in the third section, about 2,080 px down. The subhead answers the same question at once, and the tools H2 and chain carry real text before it (D-A7) |
 | Running text in a sideways list | None. Only demo cards move sideways, with short text |
 | Pinned text | None |
+| Tap targets in the tools section | Tabs, Pause and the `details` row at least 44 px tall |
 | Visible at first paint | Breadcrumb, H1, subhead, buttons |
 
 The builder confirms these at 375 × 667 and 375 × 812.
@@ -273,6 +369,19 @@ The builder confirms these at 375 × 667 and 375 × 812.
 - **Links:** `Visit demo` on LedgerLine goes to `../automation-demo/index.html`. Other demo links stay `#demos`.
 - **Comment at the top of the file:** this page's route, and that the file is a prototype.
 
+### Round 2 handover: the tools section
+
+- **Edit in place:** `docs/agency-website-plan/prototype/ai-automation/index.html`. Add `#tools` after `#hero`. Add a Round 2 entry to `CHANGES.md`.
+- **Change outside the new section, only these:**
+  - The hero's line stays as it is. The answer's line now enters at X-R (`pages/ai-automation.md` §4).
+  - `#answer` changes from band expand to rise, over a night layer (AIA-10).
+  - Add `'tools'` to the section list, and its line to the stop count.
+  - Add `tools` to the header's band logic (AIA-92).
+- **Marks:** download each file from the source in `01-art-direction-ai-automation.md` §13. Never redraw a mark from memory, and never use a lookalike. If a file can't be fetched, show the tool's name in mono with `Logo file needed`, and say so in `CHANGES.md`.
+- **n8n:** use the 2026 symbol. Older icon libraries still hold the old mark.
+- **No new library.** No MotionPath plugin. The packet is a dash on the connector path (TOOL-06).
+- **Check at the end:** all four runs by tab, Pause and Play, the section scrolled off and back, reduced motion, and 375 × 667.
+
 ## 9. Open items
 
-Listed in `03-decisions.md`, "Stage A round, Run Record": D-A1 to D-A5, X-33 to X-40.
+Listed in `03-decisions.md`, "Stage A round, Run Record": D-A1 to D-A5, X-33 to X-40; and "Tools section round": D-A6 to D-A9, X-41 to X-45.

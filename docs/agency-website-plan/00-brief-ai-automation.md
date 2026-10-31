@@ -1,13 +1,31 @@
 # 00 — Brief: AI Automation main page and automation demo template
 
 - **Title:** Agency website plan, AI Automation main page and demo slug template
-- **Status:** review (Gate 1 answered, 31 Oct 2026; Stage A)
-- **Version:** 2
+- **Status:** review (revision 3: tools section added, 31 Oct 2026; Stage A)
+- **Version:** 3
 - **Last-updated:** 2026-10-31
 - **Owner-agent:** brief-intake
-- **Depends-on:** `00-brief.md` v4; `01-art-direction.md` v5; `01-voice-and-terms.md` v1; `02-tokens.md` v4; `03-decisions.md`; `prototype/home/index.html` at commit f99a144; `prototype/home/CHANGES.md` Rounds 15 to 19.
+- **Depends-on:** `00-brief.md` v4; `01-art-direction.md` v5; `01-voice-and-terms.md` v1; `02-tokens.md` v4; `03-decisions.md`; `prototype/home/index.html` at commit f99a144; `prototype/home/CHANGES.md` Rounds 15 to 19; `prototype/ai-automation/index.html` at d6a33df and its `CHANGES.md` Round 1.
 
 The homepage brief, `00-brief.md`, stays as written. It describes the homepage only, so these pages get their own brief.
+
+## Revision 3: tools section (M3 field set)
+
+| Field | Value | Tag |
+| --- | --- | --- |
+| Mode | M3 new section on the AI Automation main page, Stage A, one-shot | `CLIENT` |
+| Section purpose | Show the tools the studio works with, with official icons, motion and some text, and an animated visual of how the work moves through them, to show technical skill | `CLIENT` |
+| Conversion it serves | `Book a free 20-min call` → `/book`, the page's own | `PROJECT (pages/ai-automation.md)` |
+| Host page | `/services/ai-automation`. Placement left to the planner, with the preference "as top as possible" | `CLIENT` |
+| Token source | `02-tokens.md`, `02-tokens-ai-automation.md` | `PROJECT` |
+| Content readiness | Tools named by the user: n8n, Zapier, Make, GoHighLevel, Slack, webhooks. Claude comes from the approved copy. Other tools are proposals for the user to confirm | `CLIENT`; `PROJECT (prototype/home/index.html)` for Claude; `ASSUMED` for proposals |
+| Motion intensity | 3 | `CLIENT` (this page, Gate 1) |
+| Boldness | 3 | `CLIENT` (this page, Gate 1) |
+| Visual references | None supplied. n8n.io's node graph carries from the page's brief, as a principle only | `ASSUMED` · `UNVERIFIED` |
+| Locales and RTL | English, LTR | `PROJECT` |
+| Third-party tools named | The tools above, as content. The prototype uses their real marks (`01-art-direction-ai-automation.md` §13) | `CLIENT` |
+
+The user's words: "your job is to make it happen with your creativity", "Creative decision and plan is yours, even you can decide which section it should be". The creative direction from Gate 1 below still applies.
 
 ## Mode and scope
 
@@ -53,7 +71,7 @@ The homepage brief, `00-brief.md`, stays as written. It describes the homepage o
 | Locales and RTL | English, one LTR locale. No RTL. | `PROJECT (00-brief.md)` |
 | Third-party tools | Loom, for video. Share links come from the user's own account. None supplied yet. | `CLIENT` (request) |
 
-Baseline: SKILL §1.10. It binds from Stage B. Stage A freedom applies until then (SKILL §3a). Within that freedom, the user has asked for best practice now, so these plans already keep the H1 visible at first paint and leave out timed movement.
+Baseline: SKILL §1.10. It binds from Stage B. Stage A freedom applies until then (SKILL §3a). Within that freedom, the user has asked for best practice now, so these plans already keep the H1 visible at first paint. The only timed movement is the tools board, which has a Pause control.
 
 ## Defaults in force
 
@@ -101,11 +119,13 @@ Stage A limits nothing here (SKILL §3a). Facts come from the plan files. The ap
 | Keyword overlap | A demo page and its service page can compete for the same search. The demo answers "how does it work", and the service page answers "can you do this for me". | `ASSUMED` |
 | Heavy media | Live HTML previews and Loom players are the heaviest things on either page. Both load only when needed. | `ASSUMED` |
 | Word ban | The approved hero subhead uses "seamless", which `01-voice-and-terms.md` §6 forbids. It came from the user in Round 17. These pages do not reuse the word. Stage B asks about the hero. | `PROJECT (prototype/home/CHANGES.md, 01-voice-and-terms.md §6)` |
+| Third-party marks | The tools section shows other companies' logos. Each owner's terms differ, and showing them is not permission to publish. | `01-art-direction-ai-automation.md` §13 |
+| Implied partnership | A row of logos can read as a partnership. No partnership, certification or count is claimed, and an ownership line sits under the board. | `CLIENT` (voice rules) |
 | RTL | None. | `PROJECT (00-brief.md)` |
 
 ## Conflicts for Stage B
 
-Logged in `03-decisions.md` as X-33 to X-40. None limits Stage A.
+Logged in `03-decisions.md` as X-33 to X-45. None limits Stage A.
 
 ## Blockers
 
@@ -128,9 +148,11 @@ Used for facts and structure, not copy (DEC-02). Founder voice and the `automati
 5. Defaults 1 to 6 above.
 6. Thin demo pages, keyword overlap and heavy media risks.
 7. The publish rule in `pages/automation-demo.md` §2.
+8. The proposed tools list in `01-art-direction-ai-automation.md` §13, until the user confirms it.
 
 ## Tool register
 
 - Loom: named by the user. No link yet. Status: manual, the user supplies links.
 - WebFetch and WebSearch: used for two Google Search facts, checked 31 Oct 2026: video guidance and the end of FAQ rich results. Logged in `03-decisions.md`. Visual references were not fetched and stay `UNVERIFIED`.
+- WebFetch and WebSearch, revision 3: brand terms and mark files for the tools section, checked 31 Oct 2026. Slack's Brand Center and Make's PDF could not be read here and stay `UNVERIFIED`.
 - Browser capture belongs to `prototype-builder`. `prototype/reference-notes.md` does not exist; no reference URLs were supplied.

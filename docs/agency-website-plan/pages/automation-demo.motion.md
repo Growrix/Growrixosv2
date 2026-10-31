@@ -5,7 +5,7 @@
 - **Version:** 1
 - **Last-updated:** 2026-10-31
 - **Owner-agent:** motion-choreographer
-- **Depends-on:** `01-art-direction-ai-automation.md` v1; `02-tokens.md` v4 (§6, §6b); `pages/automation-demo.md` v1; `pages/home.motion.md` v5.
+- **Depends-on:** `01-art-direction-ai-automation.md` v2; `02-tokens.md` v4 (§6, §6b); `pages/automation-demo.md` v1; `pages/home.motion.md` v5.
 - **Intensity:** 2 at most, light. `CLIENT` ("just give light animations, no need something like homepage or main page").
 
 ## 1. Technique

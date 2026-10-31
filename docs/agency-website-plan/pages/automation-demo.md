@@ -5,7 +5,7 @@
 - **Version:** 1
 - **Last-updated:** 2026-10-31
 - **Owner-agent:** page-type-planner
-- **Depends-on:** `00-brief-ai-automation.md` v2; `01-art-direction-ai-automation.md` v1; `02-tokens-ai-automation.md` v1; `02-tokens.md` v4; `01-voice-and-terms.md` v1; `pages/ai-automation.md` v1; `pages/automation-demo.motion.md` v1; `prototype/home/index.html` at f99a144.
+- **Depends-on:** `00-brief-ai-automation.md` v3; `01-art-direction-ai-automation.md` v2; `02-tokens-ai-automation.md` v2; `02-tokens.md` v4; `01-voice-and-terms.md` v1; `pages/ai-automation.md` v2; `pages/automation-demo.motion.md` v1; `prototype/home/index.html` at f99a144.
 
 ## 0. How to read this file
 

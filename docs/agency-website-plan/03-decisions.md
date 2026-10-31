@@ -367,3 +367,61 @@ Superseded or settled by this round, for these pages only:
 - X-38. The hero subhead from Round 17 uses "seamless", which `01-voice-and-terms.md` §6 bans. These pages do not reuse it. The homepage question stays for Stage B.
 - X-39. The publish rule, including its 250-word guideline, is planner judgement, not a search-engine rule. Stage B decides whether the CMS enforces it.
 - X-40. The homepage's small buttons and 11 px node chips on phones fall under the touch-target and readability rules these pages now follow. The homepage is not changed in this round.
+
+## Tools section round (31 Oct 2026): AI Automation main page
+
+Scope: one new section, `#tools`, on `/services/ai-automation`. Files: `pages/ai-automation.md` v2, `pages/ai-automation.motion.md` v2, `01-art-direction-ai-automation.md` v2 (§12, §13), `02-tokens-ai-automation.md` v2, `00-brief-ai-automation.md` v3. All in review. The prototype at d6a33df is not changed by this round. The planner does not edit it; the next step does.
+
+| ID | Decision | Source |
+| --- | --- | --- |
+| DEC-52 | Add a tools section to the AI Automation main page, with official icons, motion, some text and an animated visual of how the studio works with the tools, to show technical skill. | `CLIENT` (request) |
+| DEC-53 | Tools the studio works with, as named by the user: n8n, Zapier, Make, GoHighLevel, Slack, webhooks. | `CLIENT` (request) |
+| DEC-54 | Creative decisions and placement are the planner's. The user's preference is "as top as possible". | `CLIENT` (request) |
+
+Concept round (`01-art-direction-ai-automation.md` §12):
+
+| ID | Item | Status |
+| --- | --- | --- |
+| C-D30 | **Wiring Board** chosen by rubric, 22 of 24. Rejected: Logo Ledger 18, Pinned Build-Along 17, Orbit 16. The Build-Along's self-assembling graph and the Ledger's rows are kept. | Planner, under DEC-54 |
+| C-D31 | Position 2, directly after the hero. | Planner, under DEC-54. Trade-off in D-A7 |
+| C-D32 | Night section with one ivory board, the same in both themes, new band scope `board`. Marks all sit on the board, in their primary colours. | Planner |
+| C-D33 | Marks are bare, with no tiles, and they do not animate beyond a plain entrance. Stops, connectors, rings and captions carry the motion. Reason: HighLevel's kit says "Do not edit, recolor, crop, rotate, skew, add effects, outline, or place inside shapes", and the other owners ask for unmodified marks. | Planner, to protect the owners' terms |
+| C-D34 | The board's runs play on a loop, with a visible Pause control. They stop off screen and on keyboard focus. **This supersedes C-D19 for this section only**, because the user asked for an animated visual. Scroll-only motion would leave it still while people read. | Planner, under DEC-52 |
+| C-D35 | No pin. C-D21 stands: How a run works stays the page's only pin. | Planner, under DEC-49 |
+| C-D36 | Claude stays as text, with no logo, because Anthropic's guidelines require approval first. | Planner, from the owner's terms |
+| C-D37 | n8n uses its new 2026 symbol from n8n's own guidelines site. Simple Icons' file differs and is not used. | Planner, checked 31 Oct 2026 |
+| C-D38 | `#answer` changes from band expand to rise, over a night layer, because it now follows night. Its line enters at X-R. Total stops 29. | Follows C-D31 |
+| C-D39 | The concept round is a block in `01-art-direction-ai-automation.md`, and the section is planned in `pages/ai-automation.md`. No `sections/tools.md` is written. This departs from SKILL §3a for M3, as the request directs, because the section belongs to one page already planned. | Directed by the request |
+| C-D40 | Sections after the hero move down by one. D-A3's "Final S3" now means S4 in `pages/ai-automation.md`, and the art direction's list of sections moves with it. | Follows C-D31 |
+| C-D41 | On phones and tablets the tool list sits in a closed `details`, which saves about 520 px. The chain above it already names each tool and its job, and the text stays in the page. | Planner, under DEC-49 |
+| C-D42 | No partnership, certification or client count appears. Every run is labelled `Illustrative example`. An ownership line sits under the board. | Planner, under `01-voice-and-terms.md` §6 |
+| C-D43 | The run steps and tool lines are drafts. They describe what each tool does in a build, and they are `TBD-from-client`. | Planner |
+
+Facts checked 31 Oct 2026, from the owners' pages unless marked:
+
+- n8n introduced a new logo on 14 Oct 2026, and its guidelines site serves `/brand/n8n-symbol.svg`.
+- HighLevel's brand kit has the rule quoted in C-D33 and lists Space Blue and White as the approved versions.
+- Anthropic: "You may only use our trademarks as specifically permitted by us and only in materials we approve beforehand."
+- Zapier's trademark notice allows use to show integration, unmodified, without confusion about the relationship. That partners may not use standalone logos comes from a search summary of its Solution Partner guide. `UNVERIFIED`
+- Slack's media kit allows use under its guidelines and can change that at any time. Its Brand Center was not reachable. `UNVERIFIED`
+- Make's brand PDF could not be read here. `UNVERIFIED`
+- Simple Icons has `zapier`, `make`, `slack`, `claude` and `n8n`, and has no `gohighlevel` or `webhook` file. Its disclaimer leaves permission to the user.
+
+### Open decisions
+
+| ID | Question | Recommendation | Consequence | Blocks |
+| --- | --- | --- | --- | --- |
+| D-A6 | **More tools.** Which of the tools proposed in `01-art-direction-ai-automation.md` §13 does the studio really work with? | Confirm only tools used in real builds. Add them to the tool list, and keep the graph at ten nodes. | Each confirmed tool needs a marks row. Until then only the six named tools and Claude show. | Final tool list |
+| D-A7 | **Answer position.** The tools section puts the short answer about 2,080 px down on a phone. Keep this, or move the tools to position 3? | Keep position 2, as the user asked. The hero subhead already answers the question, and the tools heading and chain are real text. | Position 3 lifts the answer by about 1,180 px on a phone and lowers the tools by the same. Review after the prototype. | Nothing now |
+| D-A8 | **The name.** The user wrote GoHighLevel. The owner's kit writes HighLevel. | Keep GoHighLevel in the copy, because the user uses it and it is the common search term. Confirm against the owner's rules. | Changes the H2, tool list and run steps. | Final copy |
+| D-A9 | **Partner status.** Is the studio an official partner of Zapier, Make, n8n, Slack or HighLevel? | Say nothing about partners unless there is one. If the studio is a Zapier Solution Partner, check the logo rule first. | A partner program's rules can be stricter than general fair use. Zapier's may require text instead of the logo. | Final marks |
+
+### Conflicts for Stage B (noted, not applied; none limits Stage A)
+
+- X-41. Third-party marks need a verdict per owner before publishing (`01-art-direction-ai-automation.md` §13). Showing them in a private prototype is not permission to publish them. Read Slack's Brand Center and Make's PDF first.
+- X-42. Rings and stops around a mark are outside the mark, but "add effects" and clear-space rules could still apply. Stage B checks the moving parts against each owner's clear space.
+- X-43. The looping board meets WCAG 2.2.2 only with its Pause control, so the control is required, not optional. The board also needs a keyboard path through its tabs and a client island, like X-27.
+- X-44. Marks need a home in the content model: file, name, alt text and approval status per tool. Same class as X-37.
+- X-45. This section adds to the first-load weight and JS on the route, and to X-36. Stage B measures it. The fallback is to keep the marks and the chain and to drop the looping graph.
+
+Re-check: `pages/automation-demo.md` and its motion spec are unaffected by this round. Their depends-on pins are updated.
