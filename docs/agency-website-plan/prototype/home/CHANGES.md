@@ -1,5 +1,11 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 8 — "Our services" heading
+
+**Asked:** show "Our services" on the section.
+
+**Changed:** a visible H2 "Our services" sits above the stage, before the pinned part starts. This replaces the no-heading default (D-25) for this prototype. The heading is the user's own wording, so it is treated as approved. It is not in `02-homepage-copy.md` yet, so that file needs updating if you keep it.
+
 ## Round 7 — services: pinned two-column stage
 
 **Asked:** the services section pinned while scrolling, in two columns, with each service type as its own slide. Think about the overall design.

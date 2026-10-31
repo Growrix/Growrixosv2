@@ -100,6 +100,7 @@
   /* Section 2: services. Desktop with motion: a pinned left stage and scrolling right slides.
      Everything else: one column, the pillar panel above its slides. */
   .services { padding: 64px 0 96px; border-top: 1px solid var(--c-border); }
+  .svc-heading { font-size: clamp(30px, 3.6vw, 44px); margin-bottom: 48px; }
   .svc-track { display: block; }
   .svc-panel { margin-bottom: 40px; padding: 32px; background: var(--c-inset); border-radius: 16px; position: relative; overflow: hidden; }
   .svc-panel .muted { margin: 16px 0 0; }
@@ -238,6 +239,9 @@
 
   <!-- Section 2: services. Panels and slides are in one track, in pillar order. -->
   <section class="services" id="services" aria-label="Services">
+    <div class="wrap">
+      <h2 class="svc-heading">Our services</h2>
+    </div>
     <div class="wrap svc-track">
 
       <div class="svc-panel is-active" data-pillar="develop" id="develop">
