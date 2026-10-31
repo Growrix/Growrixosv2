@@ -1,5 +1,19 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 4 — layout centred, brand colours and themes
+
+**Asked:** centre the hero on both axes; use the brand colours and themes the project already maintains.
+
+**Changed:**
+- Hero is centred horizontally and vertically in the first viewport (measured: content centre matches the hero centre at 1440×900). Text is centred, with the CTAs centred below.
+- Colours now come from the brand tokens in `docs/frontend-plans/homepage/02-tokens.md` (the same values as `app/globals.css`): teal primary `#0e6b63` on warm background `#f5f1e8`, ink `#171a1f`, muted `#5c6470`, hairlines `#d5ccbb`, and the decorative mark `#c56a3b` on the hero eyebrow rule. The orange accent from the research (decision D-12) is no longer used. This supersedes D-12.
+- Light and dark themes are both included, keyed to `data-theme` on `<html>`, as in the repo. The default is light. A "Dark theme" toggle sits in the header, and it stays visible on mobile.
+- Primary buttons use the primary fill with on-primary text. Secondary buttons are outlined.
+
+**Checked in the browser:** light and dark at 1440 px (hero centred, services rows and links use the token colours), and 375 px (no horizontal scroll, header fits).
+
+**Not changed:** the font is still the system fallback. The brand face is Manrope in the repo; D-13 chose DM Sans. This is still open (X-3). Animations are not included, as requested.
+
 ## Round 3 — sections 1 and 2 only
 
 **Asked:** simplify the hero to one column with the left-column content only, and make the services section the second section. Build only sections 1 and 2.

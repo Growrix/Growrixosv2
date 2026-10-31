@@ -1,117 +1,139 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f1e8">
 <title>Websites, Apps, AI Automation & Growth | Growrix OS</title>
 <meta name="description" content="Websites, mobile apps, SaaS, AI automation and search visibility from one studio. Fixed scope and price, 30-day fix guarantee.">
 <style>
-  /* Sections 1 and 2 only (revision 3). Font is the system fallback; the build self-hosts DM Sans. */
-  :root {
-    --color-bg: #FAF8F5;
-    --color-surface: #FFFFFF;
-    --color-surface-muted: #F3F0EB;
-    --color-line: #E7E2DA;
-    --color-ink: #1C1917;
-    --color-ink-muted: #57534E;
-    --color-accent: #C2410C;
-    --color-accent-hover: #9A3412;
-    --color-accent-soft: #FFEDD5;
-    --color-on-accent: #FFFFFF;
-    --radius-pill: 999px;
-    --max-content: 1200px;
-    --font-display: system-ui, -apple-system, "Segoe UI", sans-serif;
-    --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Sections 1 and 2 only. Brand tokens from docs/frontend-plans/homepage/02-tokens.md (teal primary, warm neutrals,
+     decorative mark). Light is the default; dark is keyed to [data-theme="dark"] on <html>, as in app/globals.css.
+     Font is the system fallback; the build loads the brand face (see X-3). */
+  :root, [data-theme="light"] {
+    --c-bg: #f5f1e8;
+    --c-surface: #fffdf8;
+    --c-inset: #ece5d8;
+    --c-border: #d5ccbb;
+    --c-border-strong: #b9ad94;
+    --c-border-control: #8a7f6c;
+    --c-text: #171a1f;
+    --c-text-muted: #5c6470;
+    --c-primary: #0e6b63;
+    --c-primary-hover: #0b5e58;
+    --c-on-primary: #fffdf8;
+    --c-focus: #0e6b63;
+    --c-mark: #c56a3b;
   }
+  [data-theme="dark"] {
+    --c-bg: #000000;
+    --c-surface: #0a0a0a;
+    --c-inset: #111111;
+    --c-border: #1a1a1a;
+    --c-border-strong: #2a2a2a;
+    --c-border-control: #706b62;
+    --c-text: #f1ece1;
+    --c-text-muted: #9aa3b0;
+    --c-primary: #2dd4bf;
+    --c-primary-hover: #5eead4;
+    --c-on-primary: #0a0a0a;
+    --c-focus: #2dd4bf;
+    --c-mark: #e8895a;
+  }
+
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--color-bg); color: var(--color-ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
-  a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; border-radius: 4px; }
-  .wrap { max-width: var(--max-content); margin: 0 auto; padding: 0 16px; }
-  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.1; margin: 0; }
+  body { margin: 0; background: var(--c-bg); color: var(--c-text); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.6; }
+  a { color: var(--c-primary); }
+  :focus-visible { outline: 2px solid var(--c-focus); outline-offset: 2px; border-radius: 4px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; margin: 0; color: var(--c-text); }
   h1 { font-size: clamp(36px, 5vw, 56px); }
-  h2 { font-size: clamp(26px, 3vw, 36px); }
-  h3 { font-size: 20px; font-weight: 600; }
-  .eyebrow { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-muted); margin: 0 0 12px; }
-  .muted { color: var(--color-ink-muted); }
-  .note { font-size: 13px; color: var(--color-ink-muted); }
-  .skip { position: absolute; left: 16px; top: -100px; background: var(--color-ink); color: var(--color-bg); padding: 8px 12px; border-radius: 6px; z-index: 50; }
+  h2 { font-size: clamp(26px, 3vw, 32px); }
+  h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-text-muted); margin: 0 0 14px; }
+  .muted { color: var(--c-text-muted); }
+  .skip { position: absolute; left: 16px; top: -100px; background: var(--c-text); color: var(--c-bg); padding: 8px 12px; border-radius: 6px; z-index: 50; }
   .skip:focus { top: 12px; }
 
-  .btn { display: inline-block; text-decoration: none; font-weight: 500; padding: 12px 20px; border-radius: var(--radius-pill); border: 1px solid var(--color-accent); background: var(--color-accent); color: var(--color-on-accent); }
-  .btn:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
-  .btn-ghost { background: transparent; color: var(--color-accent); }
-  .btn-ghost:hover { background: var(--color-accent-soft); }
-  .link { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+  /* Buttons: primary is the only filled control; ghost is outline. */
+  .btn { display: inline-block; text-decoration: none; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; padding: 14px 22px; border-radius: 999px; border: 1px solid var(--c-primary); background: var(--c-primary); color: var(--c-on-primary); box-shadow: 0 1px 2px rgb(20 22 26 / 0.06); }
+  .btn:hover { background: var(--c-primary-hover); border-color: var(--c-primary-hover); }
+  .btn-ghost { background: transparent; color: var(--c-text); border-color: var(--c-border-control); box-shadow: none; }
+  .btn-ghost:hover { background: var(--c-inset); border-color: var(--c-border-control); color: var(--c-text); }
+  .link { color: var(--c-primary); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
-  .draft { position: fixed; right: 12px; bottom: 12px; z-index: 60; font-size: 12px; background: var(--color-ink); color: var(--color-bg); padding: 6px 10px; border-radius: 6px; }
+  .draft { position: fixed; right: 12px; bottom: 12px; z-index: 60; font-size: 12px; background: var(--c-text); color: var(--c-bg); padding: 6px 10px; border-radius: 6px; }
 
-  /* Header and mega menu (approved structure; labels AI Automation and Growth) */
-  .site-header { position: sticky; top: 0; z-index: 20; background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+  /* Header and mega menu */
+  .site-header { position: sticky; top: 0; z-index: 20; background: var(--c-bg); border-bottom: 1px solid var(--c-border); }
   .bar { display: flex; align-items: center; gap: 24px; min-height: 64px; }
-  .brand { font-weight: 600; font-size: 18px; text-decoration: none; margin-right: auto; }
+  .brand { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; text-decoration: none; color: var(--c-text); margin-right: auto; }
   .site-nav { display: block; }
   .nav-list { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; align-items: center; }
   .nav-list > li { position: relative; }
-  .nav-list a, .nav-list button { font: inherit; color: var(--color-ink); background: none; border: 0; padding: 8px 0; text-decoration: none; cursor: pointer; }
-  .nav-list a:hover, .nav-list button:hover { text-decoration: underline; }
-  .menu-toggle { display: none; font: inherit; background: none; border: 1px solid var(--color-line); color: var(--color-ink); padding: 8px 14px; border-radius: var(--radius-pill); cursor: pointer; }
-  .mega { position: absolute; top: calc(100% + 8px); left: -16px; width: min(760px, 92vw); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 10px; padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; box-shadow: 0 8px 24px rgb(28 25 23 / 0.08); }
+  .nav-list a, .nav-list button { font: inherit; color: var(--c-text); background: none; border: 0; padding: 8px 0; text-decoration: none; cursor: pointer; }
+  .nav-list a:hover, .nav-list button:hover { color: var(--c-primary); text-decoration: underline; }
+  .theme-toggle { font: inherit; font-size: 14px; color: var(--c-text); background: transparent; border: 1px solid var(--c-border-control); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+  .theme-toggle:hover { background: var(--c-inset); }
+  .menu-toggle { display: none; font: inherit; background: none; border: 1px solid var(--c-border-control); color: var(--c-text); padding: 8px 14px; border-radius: 999px; cursor: pointer; }
+  .mega { position: absolute; top: calc(100% + 8px); left: -16px; width: min(760px, 92vw); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; box-shadow: 0 12px 32px rgb(20 22 26 / 0.10); }
   .mega[hidden] { display: none; }
-  .mega-head { display: block; font-weight: 600; text-decoration: none; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); }
+  .mega-head { display: block; font-weight: 700; text-decoration: none; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-primary); }
   .mega ul { list-style: none; margin: 0; padding: 0; }
-  .mega li a { display: block; padding: 6px 0; text-decoration: none; color: var(--color-ink); }
-  .mega li a:hover { text-decoration: underline; }
-  .sub-label { display: block; margin-top: 14px; font-size: 13px; color: var(--color-ink-muted); }
-  .mega ul ul { padding-left: 12px; border-left: 1px solid var(--color-line); margin-top: 4px; }
+  .mega li a { display: block; padding: 6px 0; text-decoration: none; color: var(--c-text); }
+  .mega li a:hover { color: var(--c-primary); text-decoration: underline; }
+  .sub-label { display: block; margin-top: 14px; font-size: 13px; color: var(--c-text-muted); }
+  .mega ul ul { padding-left: 12px; border-left: 1px solid var(--c-border); margin-top: 4px; }
 
-  /* Section 1: hero, one column, no pin, no motion */
-  .hero { padding: 96px 0 72px; border-bottom: 1px solid var(--color-line); }
-  .hero .subhead { font-size: 19px; margin: 20px 0 32px; max-width: 46ch; }
-  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .hero h1 { max-width: 20ch; }
+  /* Section 1: hero, one column, centred on both axes, no pin, no motion */
+  .hero { min-height: calc(100svh - 64px); display: flex; align-items: center; padding: 72px 0; border-bottom: 1px solid var(--c-border); }
+  .hero .wrap { max-width: 800px; text-align: center; }
+  .hero .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 2px; background: var(--c-mark); vertical-align: middle; margin-right: 10px; }
+  .hero h1 { max-width: 20ch; margin: 0 auto; }
+  .hero .subhead { font-size: 19px; line-height: 1.6; color: var(--c-text-muted); margin: 20px auto 36px; max-width: 46ch; }
+  .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 
   /* Section 2: services, three ledger rows */
   .services { padding: 72px 0; }
-  .block { display: grid; gap: 20px; padding: 32px 0; border-top: 1px solid var(--color-line); }
-  .block:last-child { border-bottom: 1px solid var(--color-line); }
+  .block { display: grid; gap: 20px; padding: 32px 0; border-top: 1px solid var(--c-border); }
+  .block:last-child { border-bottom: 1px solid var(--c-border); }
   .block ul { list-style: none; margin: 0; padding: 0; }
-  .block li { padding: 10px 0; border-top: 1px solid var(--color-line); }
+  .block li { padding: 10px 0; border-top: 1px solid var(--c-border); }
   .block li:first-child { border-top: 0; }
-  .block li a { text-decoration: none; }
-  .block li a:hover { text-decoration: underline; }
-  .block .cta { display: inline-block; margin-top: 8px; font-weight: 500; }
-  .block .eyebrow { margin-bottom: 8px; }
+  .block li a { text-decoration: none; color: var(--c-text); }
+  .block li a:hover { color: var(--c-primary); text-decoration: underline; }
+  .block .cta { display: inline-block; margin-top: 8px; }
+  .block .eyebrow { margin-bottom: 10px; }
 
-  footer.site-footer { border-top: 1px solid var(--color-line); padding: 40px 0 96px; font-size: 15px; color: var(--color-ink-muted); }
+  footer.site-footer { border-top: 1px solid var(--c-border); padding: 40px 0 96px; font-size: 15px; color: var(--c-text-muted); }
   .foot-grid { display: grid; gap: 24px; }
-  .foot-grid a { text-decoration: none; display: block; padding: 3px 0; }
-  .foot-grid a:hover { text-decoration: underline; }
+  .foot-grid strong { color: var(--c-text); }
+  .foot-grid a { text-decoration: none; color: var(--c-text-muted); display: block; padding: 3px 0; }
+  .foot-grid a:hover { color: var(--c-primary); text-decoration: underline; }
 
   @media (max-width: 767px) {
     .menu-toggle { display: inline-block; }
+    .bar { gap: 12px; }
     .bar .btn-header { display: none; }
-    .site-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--color-bg); border-bottom: 1px solid var(--color-line); padding: 8px 16px 24px; }
+    .site-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--c-bg); border-bottom: 1px solid var(--c-border); padding: 8px 16px 24px; }
     .site-nav.is-open { display: block; }
     .nav-list { flex-direction: column; align-items: stretch; gap: 0; }
-    .nav-list > li { border-top: 1px solid var(--color-line); }
+    .nav-list > li { border-top: 1px solid var(--c-border); }
     .nav-list > li > a, .nav-list > li > button { display: flex; width: 100%; justify-content: space-between; padding: 14px 0; font-size: 17px; }
     .mega { position: static; width: auto; margin: 0 0 12px; box-shadow: none; border: 0; background: transparent; padding: 0; grid-template-columns: 1fr; gap: 16px; }
     .site-header { position: relative; }
-    .hero { padding: 56px 0 48px; }
+    .hero { min-height: 0; padding: 64px 0 56px; }
     .block li a { display: block; padding: 6px 0; }
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (min-width: 1024px) {
     .block { grid-template-columns: 5fr 1fr 6fr; align-items: start; }
     .block .intro { grid-column: 1; }
     .block .body { grid-column: 3; }
     .foot-grid { grid-template-columns: 2fr 1fr 1fr; }
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .foot-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 767px) {
-    .foot-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -164,12 +186,13 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark theme</button>
     <a class="btn btn-header" href="#book">Book a free 20-min call</a>
   </div>
 </header>
 
 <main>
-  <!-- Section 1: hero, one column -->
+  <!-- Section 1: hero, one column, centred -->
   <section class="hero" id="hero" aria-label="Introduction">
     <div class="wrap">
       <p class="eyebrow">Digital studio for websites, apps and AI automation</p>
@@ -238,15 +261,15 @@
 <footer class="site-footer" id="contact">
   <div class="wrap foot-grid">
     <div>
-      <strong style="color:var(--color-ink)">Growrix OS</strong>
+      <strong>Growrix OS</strong>
       <p style="margin:8px 0 0">Websites, apps, AI automation and search visibility, from one studio.</p>
     </div>
     <div>
-      <strong style="color:var(--color-ink)">Services</strong>
+      <strong>Services</strong>
       <a href="#develop">Develop</a><a href="#ai-automation">AI Automation</a><a href="#growth">Growth</a>
     </div>
     <div>
-      <strong style="color:var(--color-ink)">Company</strong>
+      <strong>Company</strong>
       <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#partners">Partners</a>
     </div>
   </div>
@@ -256,11 +279,23 @@
 
 <script>
   (function () {
+    var html = document.documentElement;
+    var themeToggle = document.getElementById('theme-toggle');
     var servicesToggle = document.getElementById('services-toggle');
     var mega = document.getElementById('mega-services');
     var menuToggle = document.getElementById('menu-toggle');
     var siteNav = document.getElementById('site-nav');
     var header = document.querySelector('.site-header');
+
+    function setTheme(dark) {
+      html.setAttribute('data-theme', dark ? 'dark' : 'light');
+      themeToggle.setAttribute('aria-pressed', String(dark));
+      themeToggle.textContent = dark ? 'Light theme' : 'Dark theme';
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#000000' : '#f5f1e8');
+    }
+    themeToggle.addEventListener('click', function () {
+      setTheme(html.getAttribute('data-theme') !== 'dark');
+    });
 
     function setMega(open) {
       mega.hidden = !open;
