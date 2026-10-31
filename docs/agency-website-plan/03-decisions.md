@@ -259,3 +259,48 @@ Conflicts added:
 - X-19 (see above).
 
 Open items for the user at the gate (summary): headings (SHW-D1, AS-D4), cards per section (SHW-D5), segment length (SHW-D6), whether Work keeps its name (SHW-D7), `/work` index (SHW-D8), both sections pinned (SHW-D9), live threshold (SHW-D3, AS-D1), LedgerLine summary length (AS-D3), spacer approach (SHW-D2), hidden-card screen-reader behaviour (SHW-D4).
+
+## Stage A round, The Run (31 Oct 2026)
+
+Scope: the homepage only. Files: `00-brief.md` v4, `01-art-direction.md` v5, `02-tokens.md` v4, `pages/home.md` v4, `pages/home.motion.md` v5. All in review.
+
+| ID | Decision | Source |
+| --- | --- | --- |
+| DEC-39 | Mode is M2 page redesign (existing page), one-shot, Stage A. | `CLIENT` (request) |
+| DEC-40 | Motion intensity 3, expressive. Confirms DEC-37 and closes C-D2 and C-D3. | `CLIENT` ("Motion 3, boldness 3") |
+| DEC-41 | Boldness 3, striking. | `CLIENT` ("Motion 3, boldness 3") |
+| DEC-42 | `prototype/home/index.html` is approved. Its section order, copy and labels are locked and win over `02-homepage-copy.md`, `pages/home.wireframe.md` and `sections/*.md` where they differ. | `CLIENT` (31 Oct 2026 update) |
+| DEC-43 | The Round 14 entry in `CHANGES.md` is stale. `index.html` is byte-identical to dd9229c; rollback commit 8f97a9f is empty. `CHANGES.md` is not edited. | `CLIENT` (rollback note) |
+| DEC-44 | `docs/frontend-plans/homepage/` and the Claude research document are no longer sources. | `CLIENT` (31 Oct 2026 update) |
+| DEC-45 | Homepage only for now. | `CLIENT` (31 Oct 2026 update) |
+
+Concept round (`01-art-direction.md` §1):
+
+| ID | Item | Status |
+| --- | --- | --- |
+| C-D17 | **The Run** chosen by rubric, 17 of 18. Rejected: Big Index 13, After Hours 14, The Ledger 14. Replaces C-D1 (The Ledger). | Planner's choice, for review with the prototype |
+| C-D12 | Hero stays centred, one-line H1 from 768 px, two-line subhead (Rounds 4 to 6). Closes C-D4 and D-28. H1 now scales to about 60 px. | Follows the user's rounds |
+| C-D13 | C-D5 (remove the showcase timers) and C-D8 (static services) are withdrawn. `index.html` keeps the pinned services stage and the timers, which the user asked for in Rounds 7 and 12. The timer gains a pause on hover and focus. | Follows the user's rounds. Stage B: X-26 |
+| C-D14 | C-D6 stands: Demo automations on the night band in both themes. | Planner |
+| C-D15 | C-D7 stands: no cursor effect, no magnetic buttons, no smooth-scroll library. | Planner |
+| C-D16 | The prototype loads web fonts, reversing P-6 for the prototype only. | Planner |
+
+Settled by the approved `index.html` (DEC-42): D-23 (Who we are at 3), R3-P1 (one-column hero), R3-P3 (services at 2), SV-D1 (pinned stage replaces the three columns), D-25 (visible "Our services"), SHW-D1 and AS-D4 ("Demo websites", "Demo automations"), SHW-D5 (six items), SHW-D6 (50 svh), SHW-D9 (both pinned), D-27 (teal across the page). The Industries row is gone (Round 13), so the page has nine sections. Per `01-art-direction.md` §6, "Who we are" takes the largest type; "Writing" and the FAQ heading are sized to their 4fr column.
+
+Still open: D-1, D-2, D-24, SHW-D2 to SHW-D4, SHW-D7, SHW-D8, AS-D1 to AS-D3. All are Stage B or content decisions, and none blocks the prototype.
+
+### Conflicts for Stage B (noted, not applied; none limits Stage A)
+
+- X-22. GSAP, ScrollTrigger and SplitText meet the "no motion library" lock (CLAUDE.md). Reconciliation needs a verdict on each moment: ADAPT to CSS scroll-driven animation, or USER DECISION.
+- X-23. About 15 KB brotli of JS headroom remains. GSAP alone would likely exceed it.
+- X-24. Three font families against the limit of two (CLAUDE.md). ADAPT option: a system mono stack for labels, which loads no file.
+- X-25. RUN-02 starts the H1 masked, so it is not visible in the first paint, against the LCP baseline (SKILL §1.10).
+- X-26. Timed showcases against WCAG 2.2.2. They now pause on hover and focus but have no visible pause control.
+- X-27. The homepage's scripted moments (pins, timers, panel swaps) need client islands that the approved list does not include.
+- X-28. RUN-07 and later moments animate `clip-path`, `stroke-dashoffset`, `font-variation-settings` and height, which go beyond transform and opacity.
+- X-29. `02-homepage-copy.md`, `pages/home.wireframe.md` and `sections/*.md` are behind `index.html`. They were not changed in this round.
+- X-30. Copy in `index.html` has no CMS fields yet ("Our services", the demo headings, the commitment list, the DRAFT service text, the Writing intro). Same class as X-15 and X-19.
+- X-31. The ember signal appears more than once in view, against the one-mark cap in the earlier token rule (X-17). `01-art-direction.md` r5 replaces that cap in this plan.
+- X-32. Muted text on the sand band uses a darker value (`02-tokens.md` §6b) to clear 4.5:1. Hand-calculated.
+
+Housekeeping: `docs/frontend-plans/homepage-acceptance/` holds two stray files from an earlier stage of this run, and they are not part of this plan.

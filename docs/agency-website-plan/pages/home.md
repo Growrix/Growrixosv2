@@ -1,391 +1,275 @@
-# pages/home — Homepage creative plan (revision 3)
+# pages/home — Homepage creative plan (revision 4: The Run)
 
-- **Title:** Homepage: section layout, components, CMS fields, states and accessibility
-- **Status:** review (revision 3, 31 Oct 2026; needs the user's approval, see `03-decisions.md`)
-- **Version:** 3
+- **Title:** Homepage: scroll story, signal line route, and each section's layout, surface, type, copy, imagery and signature moment
+- **Status:** review (revision 4, 31 Oct 2026; Stage A)
+- **Version:** 4
 - **Last-updated:** 2026-10-31
-- **Owner-agent:** site-planner
-- **Depends-on:** `00-brief.md` v3; `01-art-direction.md` v3; `02-tokens.md` v2 (re-checked, no change); `02-homepage-copy.md` v2 (approved copy, referenced not restated); `pages/home.motion.md` v3.
+- **Owner-agent:** page-type-planner
+- **Depends-on:** `00-brief.md` v4; `01-art-direction.md` v5; `02-tokens.md` v4; `pages/home.motion.md` v5; `prototype/home/index.html` (approved content).
 
 ## 0. How to read this file
 
-- Copy is never restated here. Each section names its copy by section in `02-homepage-copy.md` (for example, "copy: 02 S1 slide 1").
-- Revision 3 changes three things: the hero is one column with no pin and no slides; the services section is section 2; "Who we are" moves to section 3 by default. Section keys (S1 to S8, and SV for services) keep their copy IDs. Position is set by §2 only.
-- Field names in "CMS fields" are proposed (`ASSUMED`). They are not aligned with the live Sanity schema (see `pages/home.md` §8.5, X-8 and X-15).
-- "Required" means the CMS validation blocks publish. "Optional" means the element renders nothing when empty.
+- **`index.html` is the content source.** Section order, copy and labels are locked. The copy below is quoted from it word for word. `DRAFT:` prefixes and "to supply" slots stay exactly as written.
+- This file is the creative layer. CMS fields, component states and accessibility from revision 3 return in Stage B; that text is in git at commit 8f97a9f. The conflict list stays in §8.5, because `03-decisions.md` cites it there.
 - Breakpoints: mobile below 768 px · tablet 768 to 1023 px · desktop from 1024 px.
+- `pages/home.motion.md` gives every moment's timing. The IDs in brackets (RUN-nn) point to it.
 
-## 1. Page rules
+## 1. Goal and scroll story
 
-- Every section is a server-rendered section element with an accessible name. Headings: one H1 (the hero), then H2 per section or block, H3 inside.
-- No client islands. No JavaScript in the homepage sections (the FAQ uses native disclosure).
-- No pinned element on the page. No scroll-linked effect on the hero. Revision 3 removes the pinned hero (see `03-decisions.md`, R3-P1).
-- A section renders only when its required fields are filled. A hidden section renders no heading, no wrapper and no border. No empty headings.
-- Reveal: one short scroll-linked fade per section block on SV and S2 to S8 (`pages/home.motion.md` SM-01). None on the hero.
-- Every link goes to a live page. A link to a page that is not live is hidden, not shown dead.
-- Touch targets are at least 44 px high on mobile (links, summaries, buttons).
+**Goal:** a visitor knows what the studio does on the first screen, and arrives at the end ready to book the free 20-minute call.
 
-## 2. Section order and visibility
+**Scroll story:** one run of a system, from start to handover.
 
-Proposed order, revision 3. Position 2 and 3 are the decision points (see `03-decisions.md`, R3-P3 and D-23).
-
-| Pos | Key | Section | Job | Visibility rule | Copy (02) |
-| --- | --- | --- | --- | --- | --- |
-| 1 | S1 | Hero, one column | Say what the studio does and offer the two actions | Never hidden | S1 hero rows (eyebrow, H1, subhead, CTAs) |
-| 2 | SV | Services | Show the three pillars and their services | Never hidden; exactly three blocks | S1 slides 1 to 3 |
-| 3 | S2 | Studio strip ("Who we are") | Say who the studio is, before the proof | Never hidden; optional lines per field | S2 |
-| 4 | S3 | Work | Show proof with honest labels | Hidden when fewer than two items are complete | S3 |
-| 5 | S4 | How we work | Show the four steps | Never hidden; exactly four steps | S4 |
-| 6 | S5 | Industries row | One line for law firms | Hidden unless the industry is live | S5 |
-| 7 | S6 | Writing | Show writing once there is enough | Hidden until three published posts | S6 |
-| 8 | S7 | FAQ | Answer objections before booking | Never hidden; five or six items (D-18) | S7 |
-| 9 | S8 | Final CTA | Close with one call and one email | Never hidden; secondary optional | S8 |
-
-## 3. Sections
-
-### S1 — Hero (one column)
-
-- **Purpose:** say what the studio does, in one column, and offer the two actions. The hero carries no motion and no pinned stage.
-- **Layout**
-  - Desktop (≥1024): one column, columns 1 to 8, left aligned. Eyebrow, H1, subhead, then the CTA row. Top padding 56 px, bottom 48 px. No right column.
-  - Tablet (768 to 1023): same single column. Subhead measure 46 characters. CTAs in one row.
-  - Mobile (below 768): same order. H1 wraps to three or four lines. CTAs stacked, full width, 48 px high, primary first. Top padding 40 px.
-- **Components:** `HomeHero` (server). Reads eyebrow, headline, subhead, primary CTA, secondary CTA.
-- **CMS fields (proposed):**
-  - `homePage.hero.eyebrow` — required, copy 02 S1 eyebrow.
-  - `homePage.hero.headline` — required, copy 02 S1 H1 (rendered as the only H1 on the page).
-  - `homePage.hero.subhead` — required, copy 02 S1 subhead.
-  - `homePage.hero.primaryCta` — required: label "Book a free 20-min call", target `/book`.
-  - `homePage.hero.secondaryCta` — optional: label "See all services", target `/services`. Renders nothing when empty.
-- **Visual:** typographic. No card, no background art, no grid texture, no image. Eyebrow in the muted text colour, small size. H1 at the display size. Subhead at the lead size, measure 46 characters. Primary CTA: accent fill, on-accent text, pill. Secondary CTA: accent outline, accent text, pill. A hairline closes the hero from the services section.
-- **States**
-  - Default: all four elements, plus the secondary CTA.
-  - Secondary CTA empty: primary CTA alone.
-  - Any required field empty: publish blocked. No fallback text.
-  - Never hidden.
-- **Motion:** none on the hero. No pin, no scroll effect, no background motion, no entrance animation on the H1. Only CTA colour and press feedback (SM-02, SM-03), which is interaction feedback, not hero motion.
-- **Accessibility:** one H1. Reading order: eyebrow (a paragraph, not a heading), H1, subhead, primary CTA, secondary CTA. Both CTAs are links. Focus visible. Contrast per `02-tokens.md` §3.
-- **Performance:** the H1 is the LCP element. It is server-rendered text, present in the first paint, with no opacity start and no image. No preload needed for the hero.
-- **Changes from the approved hero (revision 3):** the right column, the three slides, the progress rail and the pinned stage are removed. The pin, the stacked fallback and the hero motion (approved P2 to P5) are superseded, pending approval (R3-P1). Hero copy is unchanged.
-
-### SV — Services
-
-- **Purpose:** show the three pillars in the approved order, Develop, AI Automation, Growth, each with its services and one call to action. Plain, non-pinned, no motion beyond a short fade.
-- **Layout**
-  - Desktop (≥1024): three ledger rows, one per pillar, in order. Each row is a 12-column grid: eyebrow and H2 in columns 1 to 5; body, link list and CTA in columns 7 to 12. Hairline above each row. Row padding 32 px top and bottom.
-  - Tablet (768 to 1023): each row stacked. Eyebrow and H2 full width. Body full width, measure 60 characters. Link list full width. CTA below. Hairline above each row.
-  - Mobile (below 768): same as tablet, single column. Each link is a row 44 px high with a hairline between rows. CTA as a full-width row, 44 px high.
-- **Components:** `ServicesSection` (server). Renders three `ServiceBlock` (server) items in pillar order.
-- **CMS fields (proposed):**
-  - `homePage.services.blocks` — required, exactly three, ordered by the fixed pillar order: `develop`, `ai-automation`, `growth`.
-  - Each block:
-    - `pillar` — required, enum (`develop`, `ai-automation`, `growth`), unique across the three.
-    - `eyebrow` — required, copy 02 S1 slide eyebrow (for example "01 / 03 · Develop").
-    - `heading` — required, H2, copy 02 S1 slide H2.
-    - `body` — required, copy 02 S1 slide body.
-    - `links` — required, two or three items, each with `label` (required) and `target` (required). Copy 02 S1 slide links.
-    - `cta` — required: label and target. Copy 02 S1 slide CTA. Targets: `/services/develop`, `/services/ai-automation`, `/services/growth`.
-  - No section heading field. The approved copy has none (D-25).
-- **Visual:** ledger rows with hairlines. No cards. Block H2 at the block heading size (`--text-h2`, D-14). Eyebrow in the muted text colour. Body in the body size. Link list with arrows, accent (interactive). CTA as an accent text link with an arrow. Numbers in the eyebrow are not accent.
-- **States**
-  - Default: three blocks, all required fields filled.
-  - Fewer or more than three blocks: publish blocked.
-  - A block with a required field empty: publish blocked.
-  - A link whose target is not live: that link is hidden. The rest of the list stays. If every link is hidden, the list is not rendered.
-  - A CTA whose target is not live (a pillar hub not yet built): the CTA is hidden. The heading and body still render (default, D-24).
-  - The section is never hidden.
-- **Motion:** SM-01 on the section block (one short fade). Link and CTA arrow nudge on hover, fine pointers only (SM-04). No stagger between blocks.
-- **Accessibility:** the section is labelled `aria-label="Services"` (no visible heading, D-25). Each block is an `article` with an H2. Link lists are `ul` with `li`. Link text is unique within the section; the CTA names the action ("See development services"). Touch targets at least 44 px on mobile. Focus visible. The accent link on the page background and the surface passes 4.5:1 (`02-tokens.md` §3).
-- **Copy source:** 02 S1 slide 1 (Develop), slide 2 (AI Automation), slide 3 (Growth). Used exactly as approved, not rewritten.
-
-### S2 — Studio strip ("Who we are")
-
-- **Position:** 3 by default (revision 3; decision D-23). Keys and copy unchanged from the approved plan.
-- **Purpose:** say who the studio is, in one paragraph, before the proof.
-- **Layout**
-  - Desktop (≥1024): heading in columns 1 to 5. Body in columns 7 to 12, measure 60 characters. Optional lines as a two-item definition list under the body, columns 7 to 12. About link under the heading, columns 1 to 5.
-  - Tablet (768 to 1023): heading full width. Body full width, measure 60 characters. Optional lines stacked, label above value. About link below.
-  - Mobile (below 768): single column, same order. About link as a full-width row, 44 px high.
-- **Components:** `StudioStrip` (server). Reads heading, body, team line, location line, about link.
-- **CMS fields (proposed):**
-  - `siteSettings.homepage.studio.heading` — required, copy 02 S2 "Who we are".
-  - `siteSettings.homepage.studio.body` — required, copy 02 S2 body (≤50 words).
-  - `siteSettings.homepage.studio.teamLine` — optional. Hidden until D-1 is confirmed. Renders nothing when empty.
-  - `siteSettings.homepage.studio.locationLine` — optional. Hidden until D-2 is confirmed. Renders nothing when empty.
-  - `siteSettings.homepage.studio.aboutLink` — required: label and target `/about`.
-- **Visual:** typographic. No card. Hairline above the section. Optional lines use the eyebrow size and the muted text colour. The About link uses the accent (interactive).
-- **States**
-  - Default: heading, body and About link.
-  - Optional lines empty: nothing rendered; no label, no separator, no gap.
-  - One optional line filled: that line only; layout unchanged.
-  - Required field empty: publish blocked. No fallback text.
-- **Motion:** SM-01 reveal on the section block.
-- **Accessibility:** section labelled by its H2. Definition list uses `dl`, `dt`, `dd`. About link text is the copy label. Muted lines meet 4.5:1 on the page background and surface.
-
-### S3 — Work
-
-- **Position:** 4 by default.
-- **Purpose:** show what exists, labelled by how it was made. Claim nothing beyond the label.
-- **Layout**
-  - Desktop (≥1024): heading and sub stacked in columns 1 to 7. Cards in a three-column grid, each four columns. With two cards: two columns, each six. Card is a flex column: badge, optional media, title, summary, link pinned to the bottom.
-  - Tablet (768 to 1023): two-column grid. A third card spans both columns as a horizontal row (media five columns, text seven). Without media, text only, full width.
-  - Mobile (below 768): one column, 16 px gap. Media at 16:9 maximum. Link 44 px high.
-- **Components:** `WorkSection` (server; counts complete items). `WorkCard` (server), up to three.
-- **CMS fields (proposed):**
-  - `siteSettings.homepage.work.heading` and `.sub` — required, copy 02 S3.
-  - `siteSettings.homepage.work.link` — required, label copy 02 S3 "See all work" and target `/work`. Hidden until `/work` is live.
-  - `caseStudy` (featured items): `featured` (boolean), `order` (integer), `label` (enum: client-project, internal-build, demo-build, illustrative-example) — required, `title` — required, `summary` — required, ≤30 words, `slug` — required, `media` — optional image with required `alt` when present, `linkLabel` and `linkTarget` — optional pair (both or neither).
-  - LedgerLine: label internal-build, decided DEC-17. Title and summary copy 02 S3 card 1.
-- **Visual:** cards use the surface token, a one-pixel border, `radius-md`, padding 24 px (20 px mobile), shadow-1. Badge: pill chip on the muted surface with muted text, label text only (no colour code). Title H3. Media only when real.
-- **States**
-  - Three complete: full grid.
-  - Two complete: two columns on desktop and tablet, stacked on mobile. No empty slot.
-  - Fewer than two complete: section not rendered (no heading, no border).
-  - Card without media: text-only card, same flex behaviour.
-  - Card without link fields: no link rendered (no dead text).
-  - Card with a missing required field: not rendered and blocks publish of that item.
-- **Motion:** SM-01 on the section block only. No stagger between cards.
-- **Accessibility:** section labelled by its H2. Each card is an `article` with an H3. Badge text carries the meaning. Media has `alt`. Each link text is unique within the section.
-
-### S4 — How we work
-
-- **Position:** 5 by default.
-- **Purpose:** reduce the perceived risk of starting: four steps, in order, with a fixed price.
-- **Layout**
-  - Desktop (≥1024): heading in columns 1 to 5. Four steps in a row, each three columns, hairline above each step.
-  - Tablet (768 to 1023): two-by-two grid, hairline above each step.
-  - Mobile (below 768): single column ledger. Number in a fixed 40 px column on the left, title and text on the right, hairline between rows.
-- **Components:** `ProcessSteps` (server). Reads heading and four steps.
-- **CMS fields (proposed):**
-  - `siteSettings.homepage.process.heading` — required, copy 02 S4 H2.
-  - `siteSettings.homepage.process.steps` — required, exactly four items: `title` (required, ≤2 words), `text` (required, ≤20 words), `order` (integer).
-- **Visual:** ledger rows. Numbers in the display face, in the muted text colour. Not the accent (accent is interactive only; the prototype uses accent, see §6, P-2).
-- **States:** exactly four required. Fewer or more: publish blocked. A step with an empty field: publish blocked. Never hidden.
-- **Motion:** SM-01 on the section block.
-- **Accessibility:** steps are an `ol` with `li`. Each title is an H3. Number spans are `aria-hidden` (order is conveyed by the list). Text meets 4.5:1.
-
-### S5 — Industries row
-
-- **Position:** 6 by default.
-- **Purpose:** one line and one link. Law firms stay a niche, not the hero.
-- **Layout**
-  - Desktop (≥1024): full-width band on the inset surface, padding 24 px. Line on the left (up to 60 characters); link on the right, baseline aligned.
-  - Tablet (768 to 1023): same band. The link wraps below the line, left aligned.
-  - Mobile (below 768): stacked. Link is a full-width row, 44 px high.
-- **Components:** `IndustryRow` (server). Reads the line and the link.
-- **CMS fields (proposed):**
-  - `industry.homepageLine` — required, copy 02 S5 line.
-  - `industry.homepageLink` — required, label copy 02 S5 and target `/services/ai-automation/industries/law-firms`.
-  - `industry.status` — required, enum `draft` or `live`. The row renders only when `live` and the target page is live.
-- **Visual:** band on the inset surface (research value, `02-tokens.md`). Line in the text colour. Link in the accent with a two-pixel underline offset of three pixels (interactive).
-- **States**
-  - Industry not live: section not rendered (no band, no border).
-  - Live: band renders.
-  - Line filled but link missing: publish blocked.
-- **Motion:** SM-01 on the section block.
-- **Accessibility:** section has `aria-label="Industries"` (copy has no heading; a visually hidden label is a non-visible addition, `ASSUMED`). Link text is "Law firms"; the arrow glyph is decorative and `aria-hidden`. Accent link on the research inset passes 4.5:1 (`02-tokens.md` §3); the app's inset value does not and must not be used.
-
-### S6 — Writing
-
-- **Position:** 7 by default.
-- **Purpose:** show a writing habit once there is a real body of posts.
-- **Layout**
-  - Desktop (≥1024): heading in columns 1 to 8. Three post cards in a three-column grid, each four columns. Text only.
-  - Tablet (768 to 1023): single column of rows. Date in columns 1 to 2, title and summary in columns 3 to 8.
-  - Mobile (below 768): same rows, single column.
-- **Components:** `PostList` (server), `PostItem` (server), up to three.
-- **CMS fields (proposed):**
-  - `siteSettings.homepage.writing.heading` — required, copy 02 S6 "Writing".
-  - `post` (published only): `publishedAt` (date, required), `title` (required, ≤12 words), `summary` (required, ≤25 words), `slug` (required).
-  - The list shows the latest three posts by `publishedAt`.
-- **Visual:** text only. No thumbnails (protects layout stability). Date in the small size and muted colour, as a `time` element.
-- **States**
-  - Fewer than three published posts: section not rendered.
-  - Exactly three: three items.
-  - More than three: latest three only.
-  - No "see all" link: none is approved in copy 02 S6 (gap G3, §6).
-- **Motion:** SM-01 on the section block.
-- **Accessibility:** list of articles. Each title is an H3 and its link text is the title. Dates use `time` with a machine-readable `datetime`.
-
-### S7 — FAQ
-
-- **Position:** 8 by default.
-- **Purpose:** answer the objections before booking. The text sits in the initial HTML, so it is readable without script.
-- **Layout**
-  - Desktop (≥1024): heading in columns 1 to 4. Questions in columns 5 to 12, measure 68 characters.
-  - Tablet (768 to 1023): heading full width. Questions full width.
-  - Mobile (below 768): same, single column. Summary is a full-width row, 44 px high.
-- **Components:** `FaqList` (server) with native `details`. `FaqItem` (server).
-- **CMS fields (proposed):**
-  - `siteSettings.homepage.faq.heading` — required in the build. Approved as "Questions before you book." (DEC-27).
-  - `siteSettings.faq` (homepage): `question` (required, ≤10 words), `answer` (required, ≤45 words; paragraphs and at most one inline link), `order`, and `visible` (boolean, default true).
-  - Count: five to six visible items (D-18). Q1 is hidden until D-1 is confirmed.
-- **Visual:** ledger rows with hairlines between items. Question text in the body size, weight 500. Marker is the chevron from the app (`motion-chevron`), decorative. Answer text in the muted colour.
-- **States**
-  - All closed by default. Each item opens on activation.
-  - Hidden item (Q1 until D-1): not rendered; the count rule applies.
-  - Fewer than five visible items: publish blocked.
-  - Find-in-page opens closed items natively. Nothing is added to force it.
-- **Motion:** SM-01 on the section block. SM-05 chevron rotation (instant under reduced motion). No height animation (it would move content under the reader).
-- **Accessibility:** native `details` and `summary` (keyboard and screen-reader support built in). Summary is focusable with the two-pixel focus ring. Chevron `aria-hidden`. Verify the summary announces as a disclosure button in each browser at build.
-
-### S8 — Final CTA
-
-- **Position:** 9 by default.
-- **Purpose:** close with one decision: a call, or an email.
-- **Layout**
-  - Desktop (≥1024): heading in columns 1 to 9, at the display size. Body below, measure 52 characters. Buttons in a row below, primary first.
-  - Tablet (768 to 1023): same. Buttons in a row.
-  - Mobile (below 768): heading wraps. Buttons stacked, full width, 48 px high, primary first.
-- **Components:** `FinalCta` (server). Reads heading, body, primary action, optional secondary action.
-- **CMS fields (proposed):**
-  - `siteSettings.homepage.finalCta.heading` and `.body` — required, copy 02 S8.
-  - `siteSettings.homepage.finalCta.primary` — required: label copy 02 S8 "Book a free 20-min call", target `/book`.
-  - `siteSettings.homepage.finalCta.secondary` — optional: label copy 02 S8 "Email us", target `mailto:` address. Renders nothing when empty.
-- **Visual:** on the page background, no card. Primary: accent fill, on-accent text, pill, press feedback. Secondary: accent outline, accent text, pill. Hover uses the accent hover value on hover-capable pointers only.
-- **States**
-  - Secondary empty: primary alone.
-  - Primary empty: publish blocked. The page's main conversion must not be empty.
-- **Motion:** SM-01 on the section block. SM-03 press feedback on buttons. SM-02 hover colour.
-- **Accessibility:** section labelled by its H2. Buttons are links (they navigate). Button text describes the action. Press and hover never carry meaning alone. Mailto link text is "Email us"; the address is in the target. Showing the address as visible text is not chosen (D-22).
-
-## 4. Hide and empty rules, checked against 02 and 03
-
-| Section | Rule in this plan | In 02 | In 03 §7 | Result |
-| --- | --- | --- | --- | --- |
-| S1 | Never hidden; secondary CTA optional | Yes (hero CTAs) | Never hidden | Consistent |
-| SV | Never hidden; exactly three blocks; hidden links and CTAs when target not live | Yes (three slides, links, CTAs) | Not in 03 §7 (new section, revision 3) | New; needs approval (R3-P3) |
-| S2 | Never hidden; optional lines hidden when empty | Yes (D-1, D-2 hidden slots) | Never hidden | Consistent. Position moved (D-23) |
-| S3 | Hidden below two complete items; two-item layout | Yes (two complete items) | Hidden below two | Consistent |
-| S4 | Never hidden; exactly four steps | Yes (four steps) | Never hidden | Consistent |
-| S5 | Hidden unless the industry is live | Yes (shown only when the law page is live) | Hidden with no live industry | Consistent |
-| S6 | Hidden until three published posts | Yes | Hidden below three | Consistent |
-| S7 | Never hidden; five or six items | Six Q and A (heading approved DEC-27) | Six questions, never hidden | Changed: five minimum to allow the D-1 hidden item (D-18) |
-| S8 | Never hidden; secondary optional | Two buttons | Never hidden | Secondary optional is new (`ASSUMED`) |
-
-## 5. Accessibility, page level
-
-- One H1 (the hero). H2 per section and per services block. Heading order follows the page (no skipped levels).
-- Landmarks: header and footer from the layout; the main landmark holds the page; each section labelled.
-- Skip link to the main landmark (from the layout).
-- Reading and tab order follow the DOM order, which matches the visual order.
-- No content depends on hover. Hover feedback is colour only.
-- Focus: two-pixel outline in the focus colour, two-pixel offset, never removed.
-- Contrast: per `02-tokens.md` §3.
-- Reduced motion: the section reveal and chevron rotation are removed. Content remains visible.
-- No JavaScript in the homepage sections. No pinned element.
-
-## 6. Gaps and departures
-
-### Gaps in the approved copy (need an approval, not written here)
-
-- **G1.** S7 heading: approved as "Questions before you book." (DEC-27). Recorded here; `02-homepage-copy.md` is not edited.
-- **G2.** S3 cards 2 and 3 have no links in the approved copy. None is added until a live page exists (D-19).
-- **G3.** S6 has no "see all writing" link in the approved copy. None is added (`ASSUMED`).
-- **G4.** Eyebrows not in the approved copy were removed (D-17). The services eyebrows ("01 / 03 · Develop" and the others) are approved copy and stay.
-- **G5.** The services section has no approved section heading. None is added (D-25).
-
-### Departures in the current prototype (`docs/agency-website-plan/prototype/home/index.html`)
-
-The prototype is reference only. These are for the `/prototype` step to fold in.
-
-| ID | Prototype | Plan | Action |
-| --- | --- | --- | --- |
-| P-1 | S2 heading "One studio, written scope, fixed price." | Heading is "Who we are" (02 S2) | Change to approved heading |
-| P-2 | S4 step numbers in the accent colour | Numbers are muted text, accent is interactive only | Change colour |
-| P-3 | S3 shows dashed "Slot:" cards with visible text | Placeholder text must not render | Keep only as a review aid, clearly marked; not in the build |
-| P-4 | S3 has no "See all work" link | 02 S3 approves "See all work" → `/work` | Add the approved link (hidden until `/work` is live) |
-| P-5 | S7 Q1 answer names a lead as fact | Q1 hidden until D-1 | Hide Q1 until confirmed |
-| P-6 | Google Fonts CSS link; DM Sans 600 not loaded | next/font, variable DM Sans | Fix in the build (font rule) |
-| P-7 | Eyebrows "Work", "How we work", "Questions" | Not in approved copy (G4) | Remove (D-17) |
-| P-8 | S7 heading "Before you book." | Approved heading "Questions before you book." (DEC-27) | Replace |
-| P-9 | Footer "Profiles" column with LinkedIn | DEC-13 keeps Upwork in footer and About | Remove LinkedIn (D-21) |
-| P-10 | Hero step numbers in the accent colour | Superseded: the hero has no slides or numbers in revision 3 | Closed by P-14 |
-| P-11 | `.draft` badge bottom right | Review aid only | Keep for review; not in the build |
-| P-12 | S3 and S5 shown although their rules hide them | Live rules hide them | Keep visible in review only, marked as such |
-| P-13 | Mega menu and header labels renamed | Approved structure, renamed labels | No change |
-| P-14 | Hero has the right column, three slides, progress rail and pinned stage | Hero is one column, no pin, no slides, no rail | Remove the right column, slides, rail and pinned CSS (needs R3-P1 approval) |
-| P-15 | No services section; the three services live inside the hero slides | Services is section 2 with three blocks, copy from 02 S1 slides | Add the SV section at position 2 |
-| P-16 | "Who we are" is second | Default position 3 (D-23) | Move after services, once D-23 is answered |
-
-## 7. Open decisions for this page (also logged in `03-decisions.md`)
-
-- D-12 to D-22: decided at their defaults (DEC-28 to DEC-36). D-20 is superseded by revision 3 (no hero numbers).
-- D-23 "Who we are" position (default 3). Needs the user's answer.
-- D-24 Pillar hub CTAs hidden until the hub page is live (default). Needs approval.
-- D-25 Services section heading: none (default). Needs approval.
-- R3-P1 Supersede the pinned three-slide hero. Needs approval.
-- R3-P3 Services as section 2. Needs approval.
-
-## 8. Prototype handover (revision 3, 31 Oct 2026)
-
-Status: review. Stage A was approved on 31 Oct 2026. Revision 3 changes the hero and the section order. It needs the user's approval before `/prototype` runs (`03-decisions.md`, R3-P1 and R3-P3).
-
-The prototype output path is `docs/agency-website-plan/prototype/home/`. The main session builds it from this file and `02-homepage-copy.md` v2. The prototype-builder is not run. Nothing is written to `docs/frontend-plans/` or `docs/revised-website-plan/`.
-
-### 8.1 Section order (revision 3, proposed)
-
-| Pos | Section | Visibility |
+| Beat | Sections | What the visitor feels |
 | --- | --- | --- |
-| Header | Layout chrome (existing; see X-11) | Per layout |
-| 1 | Hero, one column (eyebrow, H1, subhead, two CTAs). No pin, no slides | Always |
-| 2 | Services: Develop, AI Automation, Growth (three blocks) | Always; exactly three blocks |
-| 3 | Studio strip ("Who we are") | Always; team and location lines hidden (D-1, D-2 TBD). Default position 3 (D-23) |
-| 4 | Work | Only when two or more items are complete |
-| 5 | How we work | Always; exactly four steps |
-| 6 | Industries row | Only when the industry is live |
-| 7 | Writing | Only when three or more posts are published |
-| 8 | FAQ | Always; five minimum (Q1 hidden until D-1); heading "Questions before you book." |
-| 9 | Final CTA | Always; secondary optional |
-| Footer | Layout chrome (existing; see D-21) | Per layout |
+| Start | Hero | One sentence starts the line |
+| Three stations | Services | The line passes eight services under three pillars |
+| Who runs it | Who we are | The line ticks off four commitments |
+| Shown running | Demo websites, Demo automations | The page goes to night, and the demos run themselves |
+| How you join in | How we work | The line crosses four steps, left to right |
+| Reading and doubts | Writing, FAQ | The line slows and stops at each question |
+| Handover | Final CTA | The line ends in the button |
 
-### 8.2 Hide and empty rules
+## 2. Section order (locked, from `index.html`)
 
-- Hero: never hidden. Secondary CTA renders only when filled. Required field empty blocks publish.
-- Services: never hidden. Exactly three blocks. A link whose target is not live is hidden. A CTA whose target is not live is hidden (D-24). Heading and body still render.
-- S2: optional lines render nothing when empty. Required fields block publish.
-- S3: section (including its heading) hidden below two complete items. Two items lay out as two columns. A card missing a required field is not rendered.
-- S4: exactly four steps. Fewer or more blocks publish.
-- S5: hidden unless the industry status is live and the target page is live.
-- S6: hidden below three published posts. Shows the latest three.
-- S7: five or six visible items. Fewer than five blocks publish. Q1 is not rendered until D-1 is confirmed.
-- S8: primary required. Secondary renders only when filled.
-- Any section: a required field empty means publish is blocked. No empty heading, no "TBD" text reaches a visitor.
+| # | Section | id | Surface | Pinned on desktop | Live rule in `index.html` |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Hero | `hero` | Paper, plotted field | No | Always |
+| 2 | Services | `services` | Paper, panel by pillar | Panel sticks | Always |
+| 3 | Who we are | `who-we-are` | Sand | No | Always |
+| 4 | Demo websites | `websites` | Ivory | Yes | Always in the prototype |
+| 5 | Demo automations | `automations` | Night | Yes | Always in the prototype |
+| 6 | How we work | `how-we-work` | Paper | No | Always |
+| 7 | Writing | `writing` | Sand | No | Review note stays |
+| 8 | FAQ | `faq` | Ivory | No | Five questions |
+| 9 | Final CTA | `book` | Field | No | Always |
 
-### 8.3 Decisions applied to the prototype
+Header and footer keep their copy and links. The footer takes the night surface. The header takes the scope of the band under it (RUN-92).
 
-- D-12 to D-22 at their defaults (DEC-28 to DEC-36, see `03-decisions.md`), with the conflicts in §8.5.
-- D-16: S7 heading "Questions before you book." (DEC-27).
-- D-17: eyebrows "Work", "How we work", "Questions" removed. The services eyebrows are approved copy and stay.
-- D-20: superseded by revision 3 (no hero numbers).
-- D-23: "Who we are" default position 3, pending.
-- D-24: pillar hub CTAs hidden until live, pending.
-- D-25: no services section heading, pending.
+## 3. Signal line route (desktop)
 
-### 8.4 Prototype departures to fix
+Each section holds its own line layer, above the surface and below the text. In pinned sections the layer sits inside the sticky stage. Each line starts at the x where the last one ended.
 
-| ID | Fix |
+**Named positions**, inside `--container-wide`, where W is the container's inner width and the column gap is 64 px:
+
+| Name | Position |
 | --- | --- |
-| P-1 | S2 heading becomes "Who we are" (approved copy). Remove the invented heading. |
-| P-2 | S4 step numbers use the muted text colour, not the accent. |
-| P-3 | Dashed "Slot:" cards are a review aid only, clearly marked. Not in the build. |
-| P-4 | Add "See all work" → `/work` under S3, hidden until `/work` is live (approved copy, 02 S3). |
-| P-5 | S7 Q1 not rendered until D-1 is confirmed. |
-| P-6 | Remove the Google Fonts CSS link. Load DM Sans as a variable font in the build (see X-3). Load DM Sans 600 for H3 in the prototype too. |
-| P-7 | Remove eyebrows "Work", "How we work", "Questions". |
-| P-8 | S7 heading "Questions before you book." (DEC-27). |
-| P-9 | Remove LinkedIn from the homepage footer (D-21). |
-| P-10 | Closed by P-14. |
-| P-11 | Keep the draft badge for review only. |
-| P-12 | S3 and S5 may show for review, marked as not live. |
-| P-13 | No change to the menu. Labels stay renamed. |
-| P-14 | Remove the hero right column, the three slides, the progress rail and the pinned CSS. Hero is one column with the approved eyebrow, H1, subhead and two CTAs. No motion on the hero. Needs R3-P1 approval first. |
-| P-15 | Add the services section at position 2: three ledger blocks (Develop, AI Automation, Growth), copy from 02 S1 slides 1 to 3, in that order. Keep the anchor ids `develop`, `ai-automation`, `growth`, which the menu uses in the prototype. |
-| P-16 | Move "Who we are" to position 3, after services (D-23). |
+| X-L | Container left edge minus 20 px (in the gutter) |
+| X-R | Container right edge plus 20 px (in the gutter) |
+| X-C | Page centre |
+| X-5 | Middle of the 5fr/7fr gap: `(W − 64) × 5/12 + 32 px` from the left edge |
+| X-4 | Middle of the 4fr/8fr gap: `(W − 64) × 4/12 + 32 px` from the left edge |
+
+**Route:**
+
+| Section | Enters | Path | Leaves | Stops |
+| --- | --- | --- | --- | --- |
+| Hero | Starts in the H1 | See S1. Both outer strokes meet at X-C below the buttons, then one line runs down | X-C, section bottom | 0 |
+| Services | X-C, top | Down past "Our services", elbow left to X-5, straight down the track | X-5, bottom | 8, level with each `svc-idx` label |
+| Who we are | X-5, top | Straight down | X-5, bottom | 4, level with each commitment row |
+| Demo websites | X-5, top | Down to below the heading, elbow right, horizontal above the cards to X-R, elbow down | X-R, stage bottom | 6, evenly spaced on the horizontal run |
+| Demo automations | X-R, top | Down to below the heading, elbow left, horizontal to X-5, down the gap between panel and rows, elbow left along the stage bottom to X-L, elbow down | X-L, stage bottom | 6, level with each row |
+| How we work | X-L, top | Down the gutter past the heading, elbow right, horizontal across the four steps to X-R, elbow down | X-R, bottom | 4, one above each step |
+| Writing | X-R, top | Down the top padding, elbow left to X-4, straight down | X-4, bottom | 3: feature post, row 1, row 2 |
+| FAQ | X-4, top | Straight down | X-4, bottom | 5, level with each question |
+| Final CTA | X-4, top | Elbow left along the top padding to X-L, down the gutter to the button row, elbow right, horizontal into the left edge of the primary button | Ends | 1, the terminal stop at the button |
+
+**Below 1024 px:** a straight rail at x = 10 px in every section, with the same stops. No elbows, no horizontal runs. The hero has no strokes. The rail starts under the hero's buttons and ends at the top left corner of the final primary button.
+
+**Check at 1440 × 900:** every section's line meets the next within 1 px.
+
+## 4. Sections
+
+### S1. Hero
+
+- **Job:** say what the studio does and offer the two actions.
+- **Surface:** paper, with the plotted field (`01-art-direction.md` §7) fading to the edges.
+- **Layout:** one column, centred on both axes, `min-height: calc(100svh − 64px)`. The H1 stays on one line from 768 px (Round 5). The subhead is 780 px wide, two lines from 768 px (Round 6). Mobile: H1 wraps; buttons wrap and stay centred; padding 64 px top, 56 px bottom.
+- **Type:** eyebrow in mono `--text-label`, uppercase, with a 24 × 2 px ember rule before it. H1 `--text-hero`, Bricolage 600. Subhead 19 px DM Sans, muted.
+- **Copy:**
+  - Eyebrow: `Digital studio for websites, apps and AI automation`
+  - H1: `We build it, automate it, and help people find it.`
+  - Subhead: `Websites, mobile apps, SaaS, AI automation and search visibility, from one studio that agrees scope and price in writing before work starts.`
+  - Buttons: `Book a free 20-min call` · `See all services`
+- **Imagery:** plotted field only.
+- **Signature moment:** three strokes. The clauses rise in turn, then an ember stroke draws under each: `We build it,` · `automate it,` · `and help people find it.` The first runs right to left and off the H1's left end. The third runs left to right and off the right end. Each turns down, passes outside the text, and turns inward below the buttons, where they meet at X-C. The middle stroke stays under `automate it,`. It serves the section by showing the three-part offer before a word of explanation. [RUN-01 to RUN-07]
+
+### S2. Services
+
+- **Job:** show the three pillars and the eight services, in order.
+- **Surface:** paper. The sticky panel takes a surface per pillar: Develop sand, AI Automation night, Growth field.
+- **Layout:**
+  - Heading above the track, flush left.
+  - Desktop track: 5fr/7fr, gap 64 px. Left: panels stacked in one cell, `position: sticky; top: 96px; height: calc(100svh − 128px)`, padding 56 px, `--radius-panel`. Right: slides, each `min-height: 74svh`, centred vertically.
+  - Below 1024 px: one column. Each panel sits above its slides on its own surface, radius 16 px, padding 24 px, not sticky.
+- **Type:** heading `--text-h2-xl`. Panel eyebrow mono. Panel H2 `--text-panel`. Panel numeral `--text-mega`, top right, outlined in the panel's text colour at 50%, filling to solid by scroll. Slide index mono. Slide H3 `--text-slide`. Slide body DM Sans, muted. Link rows 17 px with hairlines between them.
+- **Copy:**
+  - Heading: `Our services`
+  - Panel 1: `01 / 03 · Develop` · `Websites, apps and SaaS built to run after launch.` · `Marketing sites, web applications, mobile apps and SaaS products. We build on a stack we can maintain, with content your team can edit.`
+  - Slide `01.1 · Develop`, `Web development`: `DRAFT: Marketing sites and web applications, built so your team can change the content without a developer.` Rows: `Marketing sites` · `Web applications`. Link: `Web development details →`
+  - Slide `01.2 · Develop`, `Mobile apps`: `DRAFT: iOS and Android apps for a clear, specific job. We say early whether an app is the right answer.` Rows: `iOS and Android` · `Scoped before the first line of code`. Link: `Mobile apps details →`
+  - Slide `01.3 · Develop`, `SaaS products`: `DRAFT: The product, sign-in, billing and admin tools, built as one codebase you own.` Rows: `Product and admin` · `Sign-in and billing`. Link: `SaaS products details →`
+  - Panel 2: `02 / 03 · AI Automation` · `Your repetitive work, running in the background.` · `AI automation built on n8n and Claude: instant replies to new inquiries, document follow-ups, and handoffs between the tools you already use. Every step is logged, and every failure alerts a person.`
+  - Slide `02.1 · AI Automation`, `AI intake & speed-to-lead`: `DRAFT: Instant replies to new inquiries, qualified against your rules and logged in the tools your team already uses.` Rows: `Instant reply` · `Qualification and booking`. Link: `AI intake details →`
+  - Slide `02.2 · AI Automation`, `Document intake & chase`: `DRAFT: Requests and polite reminders for client documents, until everything arrives.` Rows: `Request lists` · `Reminders and filing`. Link: `Document intake details →`
+  - Slide `02.3 · AI Automation`, `Audit & sprint`: `DRAFT: A short, fixed-scope review of one workflow, with a written plan before any build.` Rows: `Workflow audit` · `Fixed-scope sprint`. Link: `Audit and sprint details →`
+  - Panel 3: `03 / 03 · Growth` · `Be found by people, and by the AI tools they ask.` · `Technical SEO, answer engine (AEO) and generative engine (GEO) work, so search engines and AI assistants can find, understand and cite your business. We report what we change and what we measure. We don't guarantee rankings or citations.`
+  - Slide `03.1 · Growth`, `SEO`: `DRAFT: Technical SEO and content planning, reported against what actually changes.` Rows: `Technical SEO` · `Content planning`. Link: `SEO details →`
+  - Slide `03.2 · Growth`, `AEO & GEO`: `DRAFT: Pages and structured data that answer engines can read and cite, measured honestly.` Rows: `Answer-first pages` · `Structured data`. Link: `AEO and GEO details →`
+- **Imagery:** none.
+- **Signature moment:** the panel changes register. When the line passes the last Develop stop, the night surface wipes up over the sand, and the numeral rolls from 01 to 02. The same happens for Growth. The panel's colour tells the visitor they have moved to a new pillar before they read a word. [RUN-10 to RUN-15]
+
+### S3. Who we are
+
+- **Job:** say who the studio is and what it commits to.
+- **Surface:** sand, `data-band="sand"`.
+- **Layout:** desktop 5fr/7fr, gap 64 px, heading left, sticky at `top: 120px`. Right: lead, commitments, link. Mobile: one column.
+- **Type:** heading `--text-mega`, weight moving by scroll. Lead `--text-lead-lg`. Commitments 19 px, weight 600, with a tick at the left of each row. Hairlines between rows are list structure.
+- **Copy:**
+  - Heading: `Who we are`
+  - Lead: `Growrix OS is a studio for websites, apps, AI automation and search visibility. Every project gets a written scope and a fixed price before work starts, is built in accounts you own, and comes with handover notes.`
+  - List: `Written scope before work starts` · `Fixed price, agreed in writing` · `Built in accounts you own` · `Handover notes at the end`
+  - Link: `About the studio →`
+- **Imagery:** none. Team and location lines stay hidden (D-1, D-2).
+- **Signature moment:** each commitment is ticked by the line. As the line reaches a row, its tick draws and its text goes from 45% to full opacity, so the list reads as a checklist being signed off. "Who we are" thickens from weight 300 to 700 at the same time. [RUN-20 to RUN-23]
+
+### S4. Demo websites
+
+- **Job:** show website demos with honest labels.
+- **Surface:** ivory, `--color-surface`.
+- **Layout:**
+  - Desktop, motion allowed: sticky stage, `top: 64px; height: calc(100svh − 64px)`, content centred vertically. Heading left; sub beside it at the right, aligned to the heading's baseline. Line track and stops below. Then the carousel: three cards in view, gap 20 px, track shifts one card per step. Six cards, three steps, 50 svh spacer per step.
+  - Tablet: two columns. Mobile: one column. No pin, no timer.
+- **Type:** heading `--text-h2-xl`. Sub DM Sans, muted. Badge mono `--text-label`. Card title 19 px Bricolage 600. Summary 15 px, muted.
+- **Copy:**
+  - Heading: `Demo websites`
+  - Sub: `Built as demos with test data. Each card carries its label.`
+  - Six cards, each: badge `Demo build`, title `Website demo 1` to `Website demo 6`, summary `Summary to supply.`, button `Visit demo`, media label `Screenshot slot`
+- **Imagery:** 16:10 screenshot slot on `--c-inset` with the plotted grid at 50%, `Screenshot slot` centred in mono.
+- **Card:** `--color-bg` fill on ivory, `--radius-card`, `--shadow-card`, no border in light.
+- **Signature moment:** the demos run themselves. Once pinned, the track advances on the 1.8 s timer: the next card arrives from the right, its slot wiping open as it comes, and a stop lights on the line above. Scrolling moves it too. It shows the portfolio moving without anyone having to work for it. The timer pauses while the pointer is over the stage or focus is inside it. [RUN-30 to RUN-35]
+
+### S5. Demo automations
+
+- **Job:** show automations running, led by the studio's own build.
+- **Surface:** night, `data-band="night"`. The change of register for the page.
+- **Layout:**
+  - Desktop, motion allowed: sticky stage, heading and sub as S4, then 5fr/7fr: flow panel left, row list right. Six rows, five steps, 50 svh spacer per step.
+  - Below 1024 px: panel above the list, all rows showing, no pin, no timer.
+- **Panel:** `--color-night-raised`, `--radius-panel`, padding 36 px. Nodes are chips on `--color-night` with a 1 px border, joined by the `→` from `index.html`.
+- **Type:** heading `--text-h2-xl`. Panel title `--text-panel`. Row number and nodes mono. Row title 19 px Bricolage 600, active row in primary.
+- **Copy:**
+  - Heading: `Demo automations`
+  - Sub: `Built as demos with test data, plus our own internal build. Each row carries its label.`
+  - Panel start: badge `Internal build`, title `LedgerLine`, text `Our document-intake automation, now in its third version. Not a client project.`, nodes `Document received` → `Classified and filed` → `Status board updated`, button `Read the build log`
+  - Row `01`: `LedgerLine`, button `Build log`
+  - Rows `02` to `06`: `Automation demo 2` to `Automation demo 6`, button `Visit demo`; panel for each: badge `Demo build`, text `Summary to supply.`, nodes `Trigger` → `Action` → `Output`, button `Visit demo`
+- **Imagery:** none. The flow chain is the image.
+- **Signature moment:** the page goes to night and a packet runs. Night rises over the ivory as the section enters. Each new row slides in from the right, a stop lights, and a small ember packet travels once along the panel's nodes, lighting each in turn. It shows what "running in the background" means, using the words already on the page. [RUN-40 to RUN-45]
+
+### S6. How we work
+
+- **Job:** reduce the risk of starting.
+- **Surface:** paper. It comes back as a wipe over the night.
+- **Layout:** heading flush left. Four equal columns, gap 24 px, with the line and four stops above them. Mobile and tablet below 1024 px: one column, numeral on the left in a 96 px column.
+- **Type:** heading `--text-h2-xl`. Numerals `--text-numeral`, Bricolage 300. Step title 22 px Bricolage 700. Text muted.
+- **Copy:**
+  - Heading: `Four steps, one studio, a fixed price.`
+  - `01` `Talk`: `A 20-minute call to see whether we are the right fit.`
+  - `02` `Scope`: `A written scope and fixed price, agreed before work starts.`
+  - `03` `Build`: `We build in the open and show progress as we go.`
+  - `04` `Hand over`: `You own the work. Handover notes, then a 30-day fix guarantee.`
+- **Imagery:** none.
+- **Signature moment:** the line crosses left to right, the only long horizontal run on the page. As it reaches each stop, that numeral rises and thickens from 300 to 700, and its step fades in. Reading order becomes a process. [RUN-50 to RUN-52]
+
+### S7. Writing
+
+- **Job:** show that the studio writes, once it does.
+- **Surface:** sand, `data-band="sand"`.
+- **Layout:** desktop 4fr/8fr, gap 64 px. Intro left, sticky at `top: 120px`. Right: feature post (1.1fr/1fr image and text from 768 px), then the reading list. Mobile: one column.
+- **Type:** heading `--text-h2-xl`, weight moving by scroll. Intro DM Sans, muted. Post dates, badge and meta mono. Feature title clamp from `index.html`. Row title 19 px Bricolage 600, muted while a slot.
+- **Copy:**
+  - Heading: `Writing`
+  - Intro: `Notes on building, automating and being found, from the work itself.`
+  - Link: `All writing →`
+  - Feature: media `Cover image slot`, badge `Featured`, title `Featured post title to supply`, text `Summary to supply.`, meta `Date · Reading time`
+  - Rows (2): `Date` · `Post title to supply` · `→`
+  - Note: `Shown for review. Hidden on the live site until three posts are published.`
+- **Imagery:** cover image slot, 16:9, as S4.
+- **Signature moment:** the cover opens. The slot wipes open from left to right with its fill settling from 108% scale, then the rows land one at a time beside their stops, while "Writing" stays pinned in view. The page slows to reading pace here. [RUN-60 to RUN-64]
+
+### S8. FAQ
+
+- **Job:** answer objections before the call.
+- **Surface:** ivory.
+- **Layout:** desktop 4fr/8fr, gap 64 px. Heading left, sticky at `top: 120px`. Questions right. Native `details`. Mobile: one column.
+- **Type:** heading `--text-h2-col`, in the left column, wrapping to two or three lines. Question 19 px Bricolage 600. Answer DM Sans, muted, 64 characters wide.
+- **Copy:**
+  - Heading: `Questions before you book.`
+  - `Do we own the code and the workflows?`: `Yes. The work runs in your accounts with your credentials, and you receive the source, documentation and a handover walkthrough.`
+  - `How does pricing work?`: `Fixed price, agreed in writing before work starts. Price ranges and payment terms are on the pricing page.`
+  - `What happens if something breaks after launch?`: `For 30 days after go-live we fix anything we built, within the agreed scope, at no extra cost.`
+  - `Do you guarantee rankings or AI citations?`: `No. We don't guarantee rankings, leads or AI citations. We report what we change and what we measure.`
+  - `Do you work with other agencies?`: `Yes, through a partner arrangement. Details are on the partners page, linked in the footer.`
+- **Imagery:** none.
+- **Signature moment:** the answer opens on a filled row. On open, the `+` turns to `−`, a sand fill wipes across the row from the left, and the answer rises in, with its stop on the line filled in. The open question stands out from the list, and the visitor sees where they are. [RUN-70 to RUN-73]
+
+### S9. Final CTA
+
+- **Job:** close on one decision.
+- **Surface:** deep teal field, `data-band="field"`, the strongest surface on the page.
+- **Layout:** centred, matching the hero. Padding `clamp(112px, 14vw, 200px)`. H2 22 characters wide on desktop.
+- **Type:** H2 `--text-h2-xl`. Body DM Sans, muted. Primary button fills with paper on the field; secondary stays a ghost button.
+- **Copy:**
+  - H2: `Tell us what you're building.`
+  - Body: `Twenty minutes, one honest answer. If we're not the right fit, we'll say so.`
+  - Buttons: `Book a free 20-min call` · `Email us`
+- **Imagery:** none.
+- **Signature moment:** the line lands. It runs down the gutter and in from the left to the primary button. On arrival the terminal stop rings once and the button's fill wipes across from the left. The whole page has been leading to this button, and now the visitor can see that. [RUN-80 to RUN-83]
+
+### Header and footer
+
+- **Header:** copy and links as in `index.html`. Sticky, 64 px. Nav in DM Sans.
+- **Footer:** copy and links as in `index.html`, on night, `data-band="night"`.
+- **Draft tag:** `PROTOTYPE · pinned showcases · draft copy` stays.
+
+## 5. Not-plain check on the plan
+
+| Check | Result |
+| --- | --- |
+| 1. Flat background | Pass. Five surfaces. Hero and Services share paper, and the Services panel brings in sand, night and field. From there on, no two neighbours match |
+| 2. Default dividers | Pass. Section `border-top` rules are removed. Hairlines stay only inside lists |
+| 3. No typographic motion | Pass. Headings mask-rise and shift weight; numerals thicken |
+
+## 6. Changes to `index.html` for the prototype step
+
+**Stays:** all copy, labels, ids, order, links, the mega menu, theme toggle, mobile menu, `aria-live` on the flow panel, the pin mechanics, spacers at 50 svh, the 1.8 s timer, and the carousel and flow scripts.
+
+**Changes:**
+
+| Item | From | To |
+| --- | --- | --- |
+| Fonts | System fallback | Three families (`02-tokens.md` §6b) |
+| Section dividers | `border-top` on sections | Surfaces (`01-art-direction.md` §4) |
+| Containers | 1200 px, 16 px padding | `--container-wide`, gutters per tokens |
+| Section padding | 96 px | Per tokens |
+| Heading sizes | `h2` up to 32 px | Per S1 to S9 |
+| Services numeral | Teal outline, 120 px | Text-colour outline, `--text-mega`, filling by scroll |
+| Services bar | 1.2 s linear | Scrubbed by pillar progress |
+| FAQ layout | One column | 4fr/8fr |
+| Who we are heading | H2 at 32 px | `--text-mega`, sticky |
+| Showcase head | Stacked | Heading and sub side by side |
+| Motion library | None | GSAP (`pages/home.motion.md` §1) |
+
+## 7. Open decisions
+
+Listed in `03-decisions.md`, "Stage A round, The Run". D-1 and D-2 stay open, and their slots stay hidden.
+
+## 8. Retained record
 
 ### 8.5 Conflicts from R1 to R3 (reported, not applied)
 
-These conflicts were found when the locked spec and the app were read. The plan has not been changed to match them. Each needs a decision or a `/plan-ui` revision.
+Kept word for word from revision 3 because `03-decisions.md` cites them here. Several cite the retired sources and stay as a record for Stage B.
 
 - X-1. First-load JS budget. CLAUDE.md says 130 KB brotli (D-032). `90-performance.md` §2 still says 130 KB gzip. This plan uses the stricter gzip reading, so no value changes. The locked file needs revision.
 - X-2. LCP element. `90-performance.md` §3 expects the founder photo at 1440 px as LCP. The founder card is gone. LCP is now the H1 text, which is consistent with the one-column hero. The LCP image row no longer applies. The locked file needs revision.

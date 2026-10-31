@@ -1,11 +1,12 @@
 # 02 — Tokens (homepage)
 
-- **Title:** Design tokens for the homepage, S2 to S8
-- **Status:** review (revision 4: creative layer, 31 Oct 2026; needs the user's approval)
-- **Version:** 3
+- **Title:** Design tokens for the homepage
+- **Status:** review (revision 5: The Run, 31 Oct 2026; Stage A)
+- **Version:** 4
 - **Last-updated:** 2026-10-31
-- **Owner-agent:** site-planner
-- **Depends-on:** `01-art-direction.md` v1; `PROJECT (app/globals.css)` for names and mechanism; `PROJECT (docs/Claude research/02 New website build plan.md §2.6)` for the requested values.
+- **Owner-agent:** style-director
+- **Depends-on:** `01-art-direction.md` v5; `PROJECT (app/globals.css)` for names and mechanism.
+- **Which sections apply:** §6a and §6b are the live colour and type set for the homepage. §2 to §4 are kept as the record of the earlier research palette and are superseded on the homepage (DEC-38, `03-decisions.md`). Where they disagree, §6a and §6b win.
 
 ## 1. Rule for this file
 
@@ -169,6 +170,91 @@ Night band (both themes, applied by a `data-band="night"` scope on the Automatio
 
 Contrast (locked table, `PROJECT`): text on bg 15.5:1 light, 17.8:1 dark; muted on bg 5.30:1 light, 8.32:1 dark; primary on bg 5.64:1 light, 11.3:1 dark; text on night 15.1:1; muted on night 6.99:1; primary on night 9.56:1; on-primary on night button 10.6:1. Mark on bg 3.39:1 (graphic only, passes 3:1).
 
+## 6b. The Run: added tokens (revision 5)
+
+New names extend §6a. Values live in the token file only; in the prototype they live in the `<style>` block.
+
+### Surfaces and signal
+
+| Token | Light | Dark | Use |
+| --- | --- | --- | --- |
+| `--color-sand` | `#e6dcc8` | `#16130e` | Who we are, Writing, Develop panel |
+| `--color-night` | `#0c1a1b` | `#0c1a1b` | Demo automations, AI Automation panel, footer (from §6a) |
+| `--color-night-raised` | `#132628` | `#132628` | Flow panel and chips on night |
+| `--color-field` | `#0b3f3b` | `#0b3f3b` | Final CTA, Growth panel |
+| `--color-signal` | `#c56a3b` | `#e8895a` | Signal line and stops. Decorative only. Same values as `--color-mark` |
+| `--color-signal-faint` | `rgba(197,106,59,0.28)` | `rgba(232,137,90,0.30)` | Undrawn line track |
+
+The prototype's `--c-inset` remains the fill for badges, screenshot slots and cover slots.
+
+### Band scopes
+
+Applied with `data-band` on the section or panel. Each scope remaps the semantic names inside it.
+
+| Token inside the scope | `sand` (light / dark) | `night` (both themes) | `field` (both themes) |
+| --- | --- | --- | --- |
+| Text | `#171a1f` / `#f1ece1` | `#f1ece1` | `#f1ece1` |
+| Muted text | `#4f5763` / `#9aa3b0` | `#9aa3b0` | `#b7c6c2` |
+| Primary | `#0e6b63` / `#2dd4bf` | `#2dd4bf` | `#f1ece1` |
+| Primary hover | `#0b5e58` / `#5eead4` | `#5eead4` | `#ffffff` |
+| On primary | `#fffdf8` / `#0a0a0a` | `#0a0a0a` | `#0b3f3b` |
+| Border | `#c9bda6` / `#2a251c` | `#1f3335` | `#2d6660` |
+| Ghost button border | `#8a7f6c` / `#706b62` | `#4d6668` | `#6f9a94` |
+| Focus | `#0e6b63` / `#2dd4bf` | `#2dd4bf` | `#f1ece1` |
+| Signal | `#c56a3b` / `#e8895a` | `#e8895a` | `#e8895a` |
+
+Hand-calculated contrast, `ASSUMED` until Stage B: muted on sand 5.4:1 (light); primary on sand 4.7:1 (light); text on field 9.9:1; muted on field 6.6:1; signal on field 4.5:1 (graphic). Other pairs carry over from §6a.
+
+### Type
+
+Families (`CLIENT` DEC-29 for DM Sans; JetBrains Mono is new, X-24):
+
+| Token | Family | Axes or weights |
+| --- | --- | --- |
+| `--font-display` | Bricolage Grotesque, variable | `wght` 200 to 800, `opsz` 12 to 96, `wdth` 75 to 100 |
+| `--font-sans` | DM Sans, variable | 400, 500, 600, 700 |
+| `--font-mono` | JetBrains Mono | 500 |
+
+The prototype loads all three from the Google Fonts CSS link. This reverses P-6 for the prototype only, because the concept cannot be judged in a system font.
+
+| Token | Mobile (375 px) | Desktop | Clamp | Use |
+| --- | --- | --- | --- | --- |
+| `--text-hero` | 39 px, wraps | 52 px at 1440 px, one line | below 768 px `clamp(36px, 10.5vw, 44px)`; from 768 px `clamp(28px, 3.6vw, 60px)` | H1 |
+| `--text-mega` | 62 px | 158 px at 1440 px | `clamp(56px, 11vw, 176px)` | "Who we are", Services numerals |
+| `--text-h2-xl` | 40 px | 92 px at 1440 px | `clamp(40px, 6.4vw, 96px)` | "Our services", "Demo websites", "Demo automations", "Four steps…", "Writing", "Tell us what you're building." |
+| `--text-h2-col` | 36 px | 63 px at 1440 px | `clamp(36px, 4.4vw, 64px)` | "Questions before you book.", in the 4fr column |
+| `--text-panel` | 30 px | 40 px at 1440 px | `clamp(30px, 2.8vw, 42px)` | Panel H2s |
+| `--text-slide` | 30 px | 49 px at 1440 px | `clamp(30px, 3.4vw, 52px)` | Service slide H3s |
+| `--text-numeral` | 64 px | 115 px at 1440 px | `clamp(64px, 8vw, 128px)` | How we work step numbers |
+| `--text-lead-lg` | 24 px | 28 px | `clamp(24px, 2vw, 28px)` | "Who we are" lead |
+| `--text-label` | 12 px | 13 px | `clamp(12px, 0.9vw, 13px)` | Mono labels |
+
+Line heights: `--text-mega` 0.95; `--text-h2-xl` 1.0; `--text-slide` 1.05. Tracking: `--text-mega` and `--text-h2-xl` −0.035em; labels +0.06em, uppercase for eyebrows.
+
+### Layout
+
+- `--container-wide` 1360 px. Every section uses it, so the signal line's positions match from section to section.
+- Gutter 20 px mobile, 40 px from 1024 px.
+- Section padding `clamp(96px, 12vw, 176px)`, replacing the prototype's 96 px.
+- Radius: `--radius-card` 16 px; `--radius-panel` 24 px; band entry radius 24 px.
+- `--shadow-card`: `0 1px 2px rgba(23,26,31,0.06), 0 12px 32px rgba(23,26,31,0.08)` light; none on dark, where a 1 px `--c-border-strong` outline replaces it.
+
+### Motion additions
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--ease-glide` | `cubic-bezier(0.22, 1, 0.36, 1)` | Same curve as `--ease-signal`. Entrances, masks |
+| `--ease-dolly` | `cubic-bezier(0.65, 0, 0.35, 1)` | Strokes, stage changes |
+| `--ease-slab` | `cubic-bezier(0.76, 0, 0.24, 1)` | Panel wipes |
+| `--ease-snap` | `cubic-bezier(0.16, 1, 0.3, 1)` | Stops, ticks. Same curve as `--ease-settle` |
+| `--ease-track` | `cubic-bezier(0.2, 0.7, 0.2, 1)` | Carousel and rows, as in `index.html` |
+| `--dur-mask` | 900 ms | Heading mask-rise |
+| `--dur-stage` | 700 ms | Panel wipe, row arrival |
+| `--dur-track` | 900 ms | Carousel step, as in `index.html` |
+| `--dur-step` | 1800 ms | Showcase timer, as in `index.html` |
+| `--stagger-line` | 100 ms | Between masked lines or words |
+| `--stagger-item` | 60 ms | Between items |
+
 ## 7. Focus
 
 - Two-pixel outline, two-pixel offset, in `--color-focus`. Never removed without a replacement. `PROJECT (app/globals.css, :focus-visible)`.
@@ -182,3 +268,4 @@ Layout: `--container-content`, `--container-prose`, `--space-section`, `--gutter
 Radius and elevation: `--radius-sm`, `--radius-md`, `--radius-pill`, `--shadow-1`.
 Motion (revision 4): `--ease-signal`, `--ease-settle`, `--ease-exit`, `--ease-linear`, `--dur-micro`, `--dur-fast`, `--dur-base`, `--dur-hero`, `--dur-rule`, `--stagger`, `--rise-s`, `--rise-l`, `--lift`, `--parallax`.
 Brand (revision 4): `--color-night`, `--color-mark`, `--color-grid-line`. The brand colour set in §6a replaces the research palette in §2 for the homepage (DEC-38).
+The Run (revision 5): `--color-sand`, `--color-night-raised`, `--color-field`, `--color-signal`, `--color-signal-faint`, `--font-mono`, `--text-hero`, `--text-mega`, `--text-h2-xl`, `--text-h2-col`, `--text-panel`, `--text-slide`, `--text-numeral`, `--text-lead-lg`, `--text-label`, `--container-wide`, `--radius-card`, `--radius-panel`, `--shadow-card`, `--ease-glide`, `--ease-dolly`, `--ease-slab`, `--ease-snap`, `--ease-track`, `--dur-mask`, `--dur-stage`, `--dur-track`, `--dur-step`, `--stagger-line`, `--stagger-item`.

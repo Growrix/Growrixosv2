@@ -1,100 +1,119 @@
-# 01 — Art direction and creative concept (homepage, revision 4)
+# 01 — Art direction and creative concept (homepage, revision 5)
 
-- **Title:** Creative concept, art direction and visual language for the homepage
-- **Status:** review (revision 4, 31 Oct 2026; needs the user's decisions at the gate)
-- **Version:** 4
+- **Title:** Concept round, chosen direction and visual language for the homepage
+- **Status:** review (revision 5, 31 Oct 2026; Stage A)
+- **Version:** 5
 - **Last-updated:** 2026-10-31
-- **Owner-agent:** site-planner
-- **Depends-on:** `00-brief.md` v3; `02-tokens.md` v3 (brand colour set §6a, motion §6); `pages/home.wireframe.md` v1; `pages/home.motion.md` v4; `02-homepage-copy.md` v2 (copy fixed, not changed); `03-decisions.md`.
-- **Hard limits:** no copy change. Navigation and section order unchanged. Brand tokens and both themes kept.
+- **Owner-agent:** style-director
+- **Depends-on:** `00-brief.md` v4; `prototype/home/index.html` (approved content); `02-tokens.md` v4; `pages/home.md` v4; `pages/home.motion.md` v5; `03-decisions.md`.
+- **Hard limits:** section order, copy and labels stay as in `index.html`. Boldness 3, motion intensity 3 (`CLIENT`).
 
-## 1. What this file decides
+## 1. Concepts
 
-- The overall visual idea that ties the homepage together.
-- Three concepts, and the recommended one.
-- The visual language rules that every section follows.
-- What makes the page distinct from a generic studio homepage.
+| # | Concept | Style term | The idea | Palette and type direction | Hero idea | Signature motion | Not-plain result | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | **The Run** | Agentic-systems + Editorial | The whole page is one run of a system. A single signal line starts in the H1, travels through every section, and ends in the call button. | Warm paper, sand, ivory, night teal, deep teal field, ember signal. Bricolage Grotesque variable + DM Sans + JetBrains Mono labels. | Each of the H1's three clauses gets a stroke. The outer two run out around the text, join below the buttons and drop into Services as one line. | A scroll-drawn signal line with a stop at every item, ending in the primary button. | **Pass.** 1: five surfaces. 2: surfaces and the line separate sections, not rules. 3: headings mask-rise and shift weight. | **Chosen** |
+| 2 | **Big Index** | Swiss / International + Kinetic typography | The page is a numbered index set huge. Numerals and headings are the imagery. | Paper, black ink, one full-bleed teal field. Bricolage variable only. | The three clauses swing in weight as the visitor scrolls. | Numerals scrub weight 300 to 800 while wipes run along the grid. | **Pass.** 1: colour fields. 2: none. 3: scrubbed weight. | Rejected. A type-only page leaves "Summary to supply." and the screenshot slots with nothing to stand behind, and huge numerals beside empty slots start to read like statistics. Swiss also rejects centred text, and the user asked for a centred hero (Round 4). |
+| 3 | **After Hours** | Cinematic + Editorial | The page moves from day to night and back, because the work runs while you are away. | Dawn paper, night teal, amber highlights. Fraunces + DM Sans. | Paper hero, light falling as the visitor scrolls. | The whole page background scrubs through a day. | **Pass.** 1: moving surface. 2: none. 3: line mask. | Rejected. The story speaks to automation and not to Develop or Growth. Cinematic depends on real footage or stills and the plan has no photography. A serif would also replace Bricolage, the one face every source agrees on. |
+| 4 | **The Ledger** (previous recommendation) | Formal + Editorial | The page is a document being written. Hairlines draw across as sections arrive. | Warm paper, one night band. Bricolage + DM Sans. | Fine grid behind the hero, rule draws under it. | Section rules draw left to right. | **Pass, narrowly.** Formal names 1 px rules as a trait; one night band is the only surface change. | Rejected. It stays at boldness 2 because rules carry the page. It was built in Round 14 and rolled back (`PROJECT`, commits cf8a3fd and 8f97a9f). |
 
-Motion rules are in `pages/home.motion.md`. Layout per section is in `pages/home.wireframe.md`. Copy is not touched: `02-homepage-copy.md` is the copy source and stays as approved.
+Earlier concepts: "Build log" (a progress rail) is absorbed into The Run, whose line gives the same sense of progress with no fixed layer. "Two registers" is absorbed by the surface map in §4.
 
-## 2. Concepts
+### Rubric
 
-### Concept A — The ledger (recommended)
+Each criterion scores 1 to 3. The highest total wins.
 
-- **Idea:** the studio keeps a ledger. The page reads as a document being written. Structure comes from hairline rules that draw across the page as you reach each section. Index numerals and proof entries behave like ledger lines.
-- **Signature moves:**
-  1. Every section starts with a hairline that draws from left to right as it enters. The rule is the section's first mark.
-  2. Pillar eyebrows ("01 / 03 · Develop") and step numbers are the only indexes. One index numeral at a time is shown in the mark colour (`#c56a3b` light, `#e8895a` dark), so the decorative colour never repeats in view.
-  3. The fine grid texture (`--color-grid-line`) sits behind the hero only, fading to the edges, so the page starts on paper.
-  4. Automations is the one band. It is the night band (`#0c1a1b`), a deliberate change of register, the place where the proof of automation is shown.
-  5. Showcase cards are entries: a label badge, a title, a summary, a link. They reveal one by one as the ledger fills.
-- **Why it is distinct:** the device is structural, not decorative. The motion is the drawing of rules and the filling of entries, which is what a ledger does. It is not a gradient, a blob, a stock illustration or a particle field.
-- **Fit with the copy:** the copy already uses ledger-language ("labelled by how it was made", "status", "one line"). The concept makes that visible without new words.
-- **Risk:** quiet. It needs the typography and the rules to carry the page. Mitigated by the night band and the pinned showcases, which are the two strongest moments.
+| Criterion | The Run | Big Index | After Hours | The Ledger |
+| --- | --- | --- | --- | --- |
+| Serves the locked order, copy and labels | 3 | 3 | 2 | 3 |
+| Looks intended with empty slots | 3 | 1 | 2 | 2 |
+| Reaches boldness 3 | 3 | 3 | 3 | 1 |
+| Reaches motion 3 | 3 | 2 | 3 | 2 |
+| One idea reaches all nine sections | 3 | 2 | 2 | 3 |
+| Fits the calm, accountable voice (`01-voice-and-terms.md` §1) | 2 | 2 | 2 | 3 |
+| **Total** | **17** | **13** | **14** | **14** |
 
-### Concept B — Build log
+## 2. Chosen direction: The Run
 
-- **Idea:** the page is a build log. A fixed progress rail on the right edge fills as the visitor scrolls. Each section is a build step, and each band change is a handoff between steps.
-- **Signature moves:** a fixed progress rail (decorative, `aria-hidden`); a band change at each handoff; the showcases read as build steps.
-- **Why it is distinct:** strong sense of progress and a clear arc down the page.
-- **Cost:** a fixed rail adds a persistent layer on every breakpoint and competes with the header. The rail's `aria-current` would need a script, which is a new island (rejected in §6). The concept's brand tie is weaker.
+**Mood:** a precise system, running. Calm, exact, visibly working. Every step is logged, which is what the approved copy promises, and the page behaves that way.
 
-### Concept C — Two registers
+**Hero idea:** "We build it, automate it, and help people find it." is three clauses, and they map to the three pillars (DEC-15). Each clause gets its own ember stroke. The first and third strokes run outward, wrap around the text block without crossing it, and meet below the buttons as one line. The middle stroke stays under its clause.
 
-- **Idea:** the studio work reads in the light register (Develop, Growth, the approved copy), and the automation proof reads in the night register, with each theme giving its own version of the same page.
-- **Signature moves:** full-bleed night bands in both themes; a dramatic contrast between sections.
-- **Why it is distinct:** the most theatrical option.
-- **Cost:** it doubles the contrast management in both themes, and a full night page is at odds with the calm, precise mood from the research and the approved copy.
+**Signature motion:** the signal line. It is drawn by scroll, stops at every item the page lists, and ends at the primary button in the final section. The line is the page's only ornament, so it carries all the expression; nothing else competes.
 
-### Recommendation
+**Why it suits a thin portfolio:** the line stops at empty slots the same way it stops at real ones. A slot reads as a stage in a process, not a missing case study.
 
-Concept A, with the night band from Concept B used once, for the Automations showcase (decision C-D6). Concept C is rejected. Concept B's rail is rejected for its script cost and its persistent layer.
+**Scope note:** the line belongs to the whole studio, not only to AI Automation. Build, automate and be found are three stations on one run.
 
-## 3. Visual language (applies to every section)
+## 3. The signal line
+
+- Colour: `--color-signal`. Ember, decorative only. It never marks something interactive and carries no meaning.
+- Weight: 2 px. Stops: 10 px circles, hollow until reached, filled once reached.
+- One line per section, in that section's own layer, drawn by scroll. Each section's line starts where the previous one ended, so the eye reads one line.
+- It passes through empty slots without comment.
+- It turns only in rounded 24 px elbows, never at an angle.
+- Below 1024 px it is a straight rail at the left, with the same stops.
+
+Route: `pages/home.md` §3.
+
+## 4. Surface map
+
+Surfaces separate the sections. Section `border-top` rules from `index.html` are removed.
+
+| # | Section | Surface | Light | Dark |
+| --- | --- | --- | --- | --- |
+| 1 | Hero | Paper, plotted field | `#f5f1e8` | `#000000` |
+| 2 | Services | Paper; the panel changes per pillar: sand, night, field | `#f5f1e8` | `#000000` |
+| 3 | Who we are | Sand | `#e6dcc8` | `#16130e` |
+| 4 | Demo websites | Ivory | `#fffdf8` | `#0a0a0a` |
+| 5 | Demo automations | Night | `#0c1a1b` | `#0c1a1b` |
+| 6 | How we work | Paper | `#f5f1e8` | `#000000` |
+| 7 | Writing | Sand | `#e6dcc8` | `#16130e` |
+| 8 | FAQ | Ivory | `#fffdf8` | `#0a0a0a` |
+| 9 | Final CTA | Deep teal field | `#0b3f3b` | `#0b3f3b` |
+| — | Footer | Night | `#0c1a1b` | `#0c1a1b` |
+
+Night and field stay the same in both themes, so the page keeps its shape in dark mode.
+
+## 5. Visual language
 
 | Rule | What it means on the page |
 | --- | --- |
-| Rules before boxes | Sections, steps and rows are separated by hairlines that draw in. Cards are used only for showcase entries and only where the copy has a label. |
-| One index at a time | The mark colour (`--color-mark`) appears on one numeral or the leading rule of one element in view. The locked cap (one mark element in view) holds. |
-| Accent is interactive | Primary teal is used for links, buttons and focus. It is never used for numbers, rules or badges. |
-| Badges are text | Demo build, Internal build, Illustrative example: the label is text on a neutral chip. No colour codes a label. |
-| No decorative imagery | No stock photos, icons used as decoration, gradients, blobs, particles or 3D. |
-| Grid texture in one place | The grid texture is behind the hero only. It is static apart from the parallax on the hero layer (lite: off). |
-| Type carries the page | Display face for H1 and H2. DM Sans for body and labels. Two families. |
-| Motion has a reason | Every motion is one of: a rule drawing in (structure), content rising in (arrival), a card or step revealing (sequence), or feedback on an action (interaction). Nothing else moves. |
+| One ornament | The signal line is the only decoration besides the hero's plotted field. |
+| Surfaces, not rules | Sections change surface. Hairlines appear only inside lists, where they are row structure. |
+| Accent is interactive | Teal is for links, buttons and focus. Ember is for the line. Neither crosses over. The filled numeral in Services uses the text colour; the prototype's teal outline changes to match. |
+| Three voices of type | Bricolage speaks, DM Sans explains, JetBrains Mono logs (indexes, badges, dates, flow nodes, slot labels). |
+| Big where it fits | "Who we are" goes huge. Other headings go large, sized to their column. Body stays calm. |
+| Asymmetry | Two-column sections keep the 5fr/7fr and 4fr/8fr splits. Only the hero and the final CTA are centred. |
+| Slots stay honest | Slot text stays visible in the mono voice, never dressed up as content. Badges are text. |
 
-## 4. Brand and both themes
+## 6. Type
 
-- Light and dark themes are keyed to `data-theme` on `<html>`, as in the locked spec. Every colour token has a light and a dark value (`02-tokens.md` §6a).
-- The page background is warm off-white in light and black in dark. Surfaces step up slightly in both.
-- The night band is the same in both themes (`#0c1a1b`), so the Automations band keeps its character in light and dark. Its text and focus colours are the night-band set.
-- Contrast: every text and control pair passes, as recorded in `02-tokens.md` §6a. The build re-checks with axe.
+| Role | Face | Treatment |
+| --- | --- | --- |
+| H1 | Bricolage Grotesque, variable, 600 | Centred. One line from 768 px, per the user's Round 5 ask. That rule caps the H1 at about 60 px, so the large type lands on section headings. |
+| "Who we are", Services numerals | Bricolage, variable | `--text-mega`, up to 176 px. "Who we are" moves from weight 300 to 700 by scroll. |
+| Full-width headings and "Writing" | Bricolage, 600 | `--text-h2-xl`, up to 96 px, flush left, line mask. "Writing" also moves in weight. |
+| FAQ heading | Bricolage, 600 | `--text-h2-col`, up to 64 px, to fit the 4fr column. |
+| Body and lead | DM Sans 400 | Unchanged sizes for body; lead 24 to 28 px in "Who we are". |
+| Labels | JetBrains Mono 500 | 12 to 13 px, uppercase eyebrows, indexes, badges, dates, node labels. |
 
-## 5. Distinctiveness checklist
+## 7. Imagery
 
-- No gradient text, no blurred blobs, no glass panels other than the existing header.
-- No custom cursor, no magnetic buttons, no particles, no 3D, no looping motion.
-- The page's rhythm comes from the rules and the pinned showcases, not from effects.
-- Each section can be understood without motion (see `pages/home.motion.md` §7).
+- No photography. No stock. "Screenshot slot" and "Cover image slot" stay as labelled slots on a plotted-grid fill.
+- The hero's plotted field is a CSS pattern: 32 px grid with a small cross at every fourth intersection, fading to the edges.
+- No icons besides the arrow glyph, tick and plus/minus, all decorative.
 
-## 6. Boldness and intensity
+## 8. Both themes
 
-- Boldness: 3 of 4 (expressive but disciplined). The night band and the pinned showcases are the bold moves; everything else stays quiet.
-- Motion intensity: 3 of 4 (expressive) on full tier, with the lite and none tiers below it (`pages/home.motion.md` §2). Supersedes the earlier intensity 2 (DEC-37).
+Light is the default. Every surface and token has a dark value (`02-tokens.md` §6b). The line stays ember in both themes, at a lighter value on dark surfaces.
 
-## 7. Risks
+## 9. Risks
 
-- **Quiet first screen.** With the hero one column and centred, the first screen relies on the grid texture and the H1. Mitigated by the hero rule draw and the H1 rise.
-- **Two pinned showcases back to back.** Long scroll (about 4,400 px of pinned travel at default settings). Mitigated by segment length choice (SHW-D6).
-- **Night band contrast in light theme.** The band is dark on a light page. It must not look like an error; it is a deliberate change of register and sits between two light sections.
-- **Motion on low-power devices.** Covered by the lite tier and the budget in `pages/home.motion.md` §8.
+- **Long page.** Three pinned passes. The timed advance helps visitors who stop scrolling; pin length stays at 50 svh per step, as in `index.html`.
+- **Line continuity.** Each section's line must meet the next at the same x. `pages/home.md` §3 fixes those positions, and the builder verifies them at 1440 px.
+- **Motion on a calm brand.** The line moves only with scroll, except in the hero and at the final button.
 
-## 8. Imagery and iconography
+## 10. Locales
 
-- No photography. No stock imagery. Showcase thumbnails are real screenshots only, as before.
-- No icons except the arrow glyph and the FAQ chevron, both decorative.
-- The grid texture is a CSS pattern, not an image.
-
-## 9. Locales
-
-- One locale, English, left-to-right. RTL is not in scope; the arrow nudge mirrors if RTL is added later (`pages/home.motion.md`).
+One locale, English, left-to-right.

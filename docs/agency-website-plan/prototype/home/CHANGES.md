@@ -1,5 +1,41 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 15 — concept "The Run" (2026-10-31)
+
+**Asked:** build the approved concept The Run on this file, homepage only, with content locked.
+
+**Built:** `pages/home.md` v4 and `pages/home.motion.md` v5.
+- One signal line through all nine sections, with 37 stops, ending in the final primary button.
+- Five surfaces replace the section rules. Night is used for Demo automations, the AI Automation panel and the footer.
+- Three typefaces: Bricolage Grotesque, DM Sans and JetBrains Mono, loaded from Google Fonts.
+- Mask-rise headings, weight changes on "Who we are", "Writing" and the step numbers, the panel wipe with a numeral roll, the packet on the flow nodes, the FAQ fill, the circular theme switch and the header taking each band's colours.
+- GSAP 3.13.0 with ScrollTrigger and SplitText, inlined in `index.html`, because CDN requests failed repeatedly during testing. The file grew from 50 KB to 212 KB. Fonts still come from Google Fonts.
+
+**Content:** a script compared the visible text with the approved file and found it identical. Decorative numerals are excluded.
+
+**Departures from the plan:**
+- Demo websites: the line steps around the heading, because X-5 ran through the word "websites". It then runs above the cards as planned.
+- Demo automations: heading and sub fire at `top 35%`, not `top 60%`, because the text is light until the night has risen.
+- How we work: the heading fires at `top 60%`, not `top 80%`, for the same reason.
+- Most stops fire at the line's own position. Scroll ranges are `top 60%` to `bottom 60%` in most sections, so the line stays continuous.
+- Final CTA: if the line has not finished, the landing plays at `top 50%` of the button row, not `top 90%`, so it is not seen too early.
+- GSAP easings stand in for the named curves: `expo.out` for glide and snap, `power2.inOut` for dolly. CSS transitions use the exact curves.
+- The Writing review note wraps inside the left column, so the line does not cross it.
+
+**Fixed along the way:** `grid-template-rows` on the services track, which had ended the sticky panel after the first pillar.
+
+**Visual QA (round-15 screenshots, 1440 and 375 px, opened and checked):**
+1. Not plain: yes. Surfaces change across the checkpoints (`1440-light-025.png` to `075.png`), rules are not the separators, and headings mask-rise and change weight.
+2. Signature moments: visible for hero, services panel, who-we-are ticks, demo websites stops, automations line, how-we-work crossing, writing and final CTA (`*-s01` to `*-s09`). Stills cannot show the packet run, the wipes or the ring.
+3. Type personality: yes. Bricolage carries the page (`1440-light-s03-who-we-are.png`).
+4. Contrast: readable on every surface in both themes by eye. Not measured.
+5. Mobile: no overflow at 375 px (`scrollWidth` 375). The rail, stops and hierarchy hold.
+6. Built as planned: yes, with the departures above.
+
+**Functional check:** a wheel scroll through the whole page at 1440 and 375 px lit all 37 stops and landed the button. The FAQ opened and closed, the theme toggled, and there were no console errors. With GSAP missing, the page stayed readable with no line or motion.
+
+**Review answer:** awaiting.
+
 ## Round 14 — concept A "The ledger" (creative layer)
 
 **Built, concept A only:**
