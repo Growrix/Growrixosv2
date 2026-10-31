@@ -1,5 +1,21 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 12 — showcases: right-side carousel and a different automations layout
+
+**Asked:** cards come in from the right, each has a button to the demo page, the section auto-advances without scrolling and stays on the section, and the second section has a different layout.
+
+**Websites (carousel):** three cards show. Each step shifts the track left one card, so the next card arrives from the right. Each card has a "Visit demo" button. The section pins on desktop, and the steps run on a timer (1.8 s) while the section is pinned in view. Scrolling also advances the steps, and the timer does not run after the last card.
+
+**Automations (flow):** a flow panel on the left shows the active demo, with its title, badge, a Trigger → Action → Output chain and a button. On the right, the rows slide in from the right, one per step, and the active row updates the panel. LedgerLine is the first row and carries its approved text. Other rows are demo slots.
+
+**Mobile, tablet and reduced motion:** no pin. The carousel becomes a plain grid, and every row shows.
+
+**Checked in the browser:** at 1440×900, the websites section moves from card 1 to card 4 over about 5 s with the section still pinned (no scrolling). The automations rows reveal one at a time, and the panel follows. At 375 px there is no horizontal scroll, and all cards and rows show.
+
+**Not done:** "stay on the section" is met by the pin and the timer. The section can still be scrolled past before the timer finishes. A hard scroll lock is a separate decision, because it changes how the page scrolls. Demo links point to placeholder anchors until the demo pages exist.
+
+**Still open from the planner's report:** heading copy, live thresholds, and the scroll-length decision (the prototype uses 50 vh per step).
+
 ## Round 11 — Work replaced by two showcase sections
 
 **Asked:** the portfolio is thin, so show demos instead. Two separate sections, one for websites and one for automations. Three cards show, and more reveal while the section stays pinned until they are all shown. Re-plan and redesign.

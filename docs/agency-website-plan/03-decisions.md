@@ -194,3 +194,38 @@ Conflicts added:
 
 - X-17. The locked brand token file (`docs/frontend-plans/homepage/02-tokens.md`) caps the decorative mark colour at one mark element in view (`01` §4). Three eyebrow rules in the mark colour would break the cap. SV-D5 avoids this.
 - X-18. The locked tokens have no block-heading size between H2 and H3. `--text-block` (SV-D3) is a new token. It needs adding to the token file in the next locked-spec revision.
+- X-19. The `workEntry` schema has no `showcase`, `featured` or `order` field (`PROJECT sanity/schemaTypes/documents/content.ts`). The showcase needs them. This is a content-model change, the same class as X-8 and X-15.
+
+## Showcase round (31 Oct 2026): Work replaced by two showcase sections
+
+Scope: `sections/showcase-websites.md` v1 and `sections/showcase-automations.md` v1 (both review). Other sections are not changed.
+
+| ID | Item | Status |
+| --- | --- | --- |
+| SHW-R1 | **Work replaced.** The Work section (02 S3) is replaced by two showcase sections, Websites and Automations, placed where Work sat (position 4, with Automations at 5). The Work heading, sub and "See all work" link are superseded. | `CLIENT` (31 Oct 2026). Positions follow Work's position; the user's position decision (D-23) still applies to the sections above |
+| SHW-R2 | **Pinned reveal on desktop.** The first three cards show; further cards reveal in order, one per scroll segment; the section unpins after the last card. Static below 1024 px, under 700 px height, with reduced motion, or without scroll-linked support. | `CLIENT` (31 Oct 2026). **Supersedes DEC-22 ("no new pinned sections") for these two sections only.** Flagged: confirm at the gate |
+| SHW-R3 | **Labels reused:** "Demo build", "Internal build", "Illustrative example". Badge text, not colour. | `CLIENT` (honest labels) |
+| SHW-R4 | **LedgerLine card copy and link reused** from 02 S3 card 1 (approved). | `CLIENT`. Copy not rewritten |
+| SHW-P1 | Websites heading "Websites, shown as demos." and sub (PROPOSED). | **PENDING** (SHW-D1) |
+| SHW-P2 | Automations heading "Automations, shown as they run." and sub (PROPOSED). | **PENDING** (AS-D4) |
+| SHW-P3 | Six cards per section by default (three rows of three do not fit a 900 px viewport). | **PENDING** (SHW-D5) |
+| SHW-P4 | Segment length 50 svh per card. Total pinned scroll for six cards: about 2,190 px at 900 px tall (2 sections, about 4,400 px). | **PENDING** (SHW-D6) |
+| SHW-P5 | Fit check at 900 px: stage content 764 px against 836 px available (72 px spare). Cards are 296 px with a summary of four lines (140 characters). | Calculated. Build verifies |
+| SHW-P6 | No DOM spacers; the wrapper height carries the scroll. | **PENDING** (SHW-D2) |
+| SHW-P7 | Hidden cards stay in the accessibility tree at opacity 0; forced to opacity 1 on keyboard focus. | **PENDING** (SHW-D4) |
+| SHW-P8 | Live threshold: at least three complete cards to show a section; pin only with four or more. | **PENDING** (SHW-D3, AS-D1) |
+| SHW-P9 | "Work" name: retire as a heading; `/work` index optional. | **PENDING** (SHW-D7, SHW-D8) |
+| SHW-P10 | Both sections pinned, or only Websites. | **PENDING** (SHW-D9) |
+
+Superseded by this round:
+
+- DEC-22 for the two showcase sections only, pending SHW-R2 confirmation.
+- The approved Work copy in `02-homepage-copy.md` S3 (heading, sub and "See all work" link). That file is not edited; the copy is recorded as superseded here.
+- D-19 is kept: no demo link before its page is live.
+
+Conflicts added:
+
+- X-9 (reopened). The LedgerLine approved card text (about 150 characters) is over the `cardSummary` limit of 140 characters. It fits the pinned card budget at four lines, so the CMS limit is the binding constraint (AS-D3).
+- X-19 (see above).
+
+Open items for the user at the gate (summary): headings (SHW-D1, AS-D4), cards per section (SHW-D5), segment length (SHW-D6), whether Work keeps its name (SHW-D7), `/work` index (SHW-D8), both sections pinned (SHW-D9), live threshold (SHW-D3, AS-D1), LedgerLine summary length (AS-D3), spacer approach (SHW-D2), hidden-card screen-reader behaviour (SHW-D4).

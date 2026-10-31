@@ -7,8 +7,8 @@
 <title>Websites, Apps, AI Automation & Growth | Growrix OS</title>
 <meta name="description" content="Websites, mobile apps, SaaS, AI automation and search visibility from one studio. Fixed scope and price, 30-day fix guarantee.">
 <style>
-  /* Sections 1 and 2 only. Brand tokens from docs/frontend-plans/homepage/02-tokens.md (teal primary, warm neutrals,
-     decorative mark). Light is the default; dark is keyed to [data-theme="dark"] on <html>.
+  /* Sections 1 to 9 of the homepage prototype. Brand tokens from docs/frontend-plans/homepage/02-tokens.md
+     (teal primary, warm neutrals, decorative mark). Light is the default; dark is keyed to [data-theme="dark"].
      Font is the system fallback; the build loads the brand face (see X-3). */
   :root, [data-theme="light"] {
     --c-bg: #f5f1e8;
@@ -60,9 +60,12 @@
   .btn:hover { background: var(--c-primary-hover); border-color: var(--c-primary-hover); }
   .btn-ghost { background: transparent; color: var(--c-text); border-color: var(--c-border-control); box-shadow: none; }
   .btn-ghost:hover { background: var(--c-inset); color: var(--c-text); }
+  .btn-sm { padding: 9px 16px; font-size: 14px; }
   .link { color: var(--c-primary); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
   .draft { position: fixed; right: 12px; bottom: 12px; z-index: 60; font-size: 12px; background: var(--c-text); color: var(--c-bg); padding: 6px 10px; border-radius: 6px; }
+  .badge { display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--c-inset); color: var(--c-text-muted); margin-bottom: 12px; }
+  .badge.is-internal { background: transparent; color: var(--c-primary); border: 1px solid var(--c-primary); }
 
   /* Header and mega menu */
   .site-header { position: sticky; top: 0; z-index: 20; background: var(--c-bg); border-bottom: 1px solid var(--c-border); }
@@ -97,8 +100,13 @@
     .hero .subhead { max-width: 780px; }
   }
 
-  /* Section 2: services. Desktop with motion: a pinned left stage and scrolling right slides.
-     Everything else: one column, the pillar panel above its slides. */
+  /* Shared section rhythm and heads */
+  .block-section { padding: 96px 0; border-top: 1px solid var(--c-border); }
+  .section-head { max-width: 680px; margin-bottom: 40px; }
+  .section-head p { margin: 14px 0 0; color: var(--c-text-muted); }
+  .review-note { display: block; font-size: 13px; color: var(--c-text-muted); margin-top: 16px; }
+
+  /* Section 2: services. Desktop with motion: a pinned left stage and scrolling right slides. Otherwise one column. */
   .services { padding: 64px 0 96px; border-top: 1px solid var(--c-border); }
   .svc-heading { font-size: clamp(30px, 3.6vw, 44px); margin-bottom: 48px; }
   .svc-track { display: block; }
@@ -118,7 +126,6 @@
   .svc-slide li a { color: var(--c-text); text-decoration: none; }
   .svc-slide li a:hover { color: var(--c-primary); text-decoration: underline; }
   .svc-slide .link { display: inline-block; margin-top: 16px; }
-
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
     .svc-track { display: grid; grid-template-columns: 5fr 7fr; column-gap: 64px; align-items: start; }
     .svc-panel {
@@ -139,7 +146,7 @@
     }
   }
 
-  /* Section 3: who we are. Heading left, approved body and a short ledger of commitments right. */
+  /* Section 3: who we are */
   .studio { padding: 96px 0; border-top: 1px solid var(--c-border); }
   .studio-grid { display: grid; gap: 40px; }
   .studio .lead { font-size: 21px; line-height: 1.55; color: var(--c-text); margin: 0 0 32px; }
@@ -150,40 +157,78 @@
     .studio-grid { grid-template-columns: 5fr 7fr; column-gap: 64px; align-items: start; }
   }
 
-  /* Shared section rhythm and heads */
-  .block-section { padding: 96px 0; border-top: 1px solid var(--c-border); }
-  .section-head { max-width: 680px; margin-bottom: 48px; }
-  .section-head p { margin: 14px 0 0; color: var(--c-text-muted); }
-  .review-note { display: block; font-size: 13px; color: var(--c-text-muted); margin-top: 16px; }
+  /* Section 4: demo websites. A right-side carousel that auto-advances while the section is pinned. */
+  .showcase { border-top: 1px solid var(--c-border); }
+  .showcase-track-outer { position: relative; }
+  .showcase-stage { padding-top: 96px; padding-bottom: 96px; }
+  .showcase-window { overflow: visible; }
+  .showcase-track { display: flex; flex-wrap: wrap; gap: 20px; }
+  .showcase-card {
+    flex: 0 0 calc((100% - 40px) / 3); min-width: 0;
+    background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .showcase-media {
+    aspect-ratio: 16 / 10; background: var(--c-inset); border-bottom: 1px solid var(--c-border);
+    display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--c-text-muted);
+  }
+  .showcase-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .showcase-body h3 { font-size: 19px; margin: 0 0 6px; }
+  .showcase-body p { margin: 0; color: var(--c-text-muted); font-size: 15px; }
+  .showcase-body .btn { margin-top: auto; align-self: flex-start; }
+  @media (max-width: 1023px) { .showcase-card { flex-basis: calc((100% - 20px) / 2); } }
+  @media (max-width: 767px) { .showcase-card { flex-basis: 100%; } }
 
-  /* Section 4: work. Proof cards only; every item carries its honest label. */
-  .work-grid { display: grid; gap: 20px; }
-  .work-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; }
-  .work-card p { color: var(--c-text-muted); margin: 12px 0 20px; }
-  .work-card .link { margin-top: auto; align-self: flex-start; }
-  .work-card.is-slot { background: transparent; border-style: dashed; border-color: var(--c-border-control); }
-  .badge { display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--c-inset); color: var(--c-text-muted); margin-bottom: 16px; }
-  .badge.is-internal { background: transparent; color: var(--c-primary); border: 1px solid var(--c-primary); }
-  .work-more { margin-top: 28px; }
-  @media (min-width: 768px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
+  /* Section 5: demo automations. A different composition: a flow panel on the left, rows sliding in from the right. */
+  .flow-grid { display: grid; gap: 32px; }
+  .flow-panel { background: var(--c-inset); border-radius: 16px; padding: 36px; display: flex; flex-direction: column; }
+  .flow-panel .badge { margin-bottom: 16px; }
+  .flow-panel h3 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.12; }
+  .flow-panel p { margin: 12px 0 0; color: var(--c-text-muted); }
+  .flow-nodes { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 28px 0 0; padding: 0; list-style: none; }
+  .flow-nodes li { font-size: 14px; font-weight: 600; padding: 10px 14px; border: 1px solid var(--c-border-control); border-radius: 10px; background: var(--c-surface); }
+  .flow-nodes li + li::before { content: "→"; color: var(--c-primary); margin-right: 10px; }
+  .flow-panel .btn { margin-top: 28px; align-self: flex-start; }
+  .flow-list { list-style: none; margin: 0; padding: 0; }
+  .flow-row {
+    display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 16px; padding: 18px 0;
+    border-top: 1px solid var(--c-border); cursor: default;
+  }
+  .flow-row:last-child { border-bottom: 1px solid var(--c-border); }
+  .flow-row-n { font-size: 13px; font-weight: 700; color: var(--c-text-muted); }
+  .flow-row-title { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; color: var(--c-text); }
+  .flow-row.is-active .flow-row-title { color: var(--c-primary); }
+  .flow-row .btn { padding: 8px 14px; font-size: 13px; }
+  @media (min-width: 1024px) {
+    .flow-grid { grid-template-columns: 5fr 7fr; column-gap: 64px; align-items: start; }
+  }
 
-  /* Section 5: how we work. Four numbered steps on hairlines. */
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
-  .steps li { padding: 28px 24px 28px 0; border-top: 1px solid var(--c-border); }
-  .step-n { display: block; font-size: 13px; font-weight: 700; color: var(--c-text-muted); margin-bottom: 18px; letter-spacing: 0.04em; }
-  .steps h3 { font-size: 22px; margin-bottom: 8px; }
-  .steps p { margin: 0; color: var(--c-text-muted); }
-  @media (min-width: 768px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+  /* Pinned behaviour for both showcases: desktop with motion only. */
+  .showcase.is-pinned .showcase-stage {
+    position: sticky; top: 64px; height: calc(100svh - 64px); padding-top: 0; padding-bottom: 0;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .showcase.is-pinned .showcase-window { overflow: hidden; }
+  .showcase.is-pinned .showcase-spacer { display: block; height: 50svh; }
+  .showcase-spacer { display: none; }
+  .showcase[data-showcase="carousel"].is-pinned .showcase-track {
+    flex-wrap: nowrap; transform: translateX(calc(var(--k, 0) * -1 * (100% / 3 + 6.6667px)));
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .showcase[data-showcase="flow"].is-pinned .flow-row { transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s ease; }
+  .showcase[data-showcase="flow"].is-pinned .flow-row:not(.is-revealed) { opacity: 0; transform: translateX(64px); }
+  .showcase[data-showcase="flow"].is-pinned .flow-row.is-revealed { opacity: 1; transform: none; }
 
   /* Section 6: industries row. One line, one link. */
   .niche-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 28px 32px; background: var(--c-inset); border-radius: 16px; }
   .niche-row p { margin: 0; font-size: 19px; font-weight: 600; }
 
-  /* Section 7: writing. Three latest posts; slots shown for review. */
+  /* Section 7: writing. Post slots for review. */
+  .post-grid { display: grid; gap: 20px; }
   .post-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; }
   .post-card p { margin: 12px 0 0; color: var(--c-text-muted); }
   .post-card.is-slot { background: transparent; border-style: dashed; border-color: var(--c-border-control); }
-  @media (min-width: 768px) { .work-grid.posts { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 768px) { .post-grid { grid-template-columns: repeat(3, 1fr); } }
 
   /* Section 8: FAQ. Native disclosure, answers in the HTML. */
   .faq details { border-top: 1px solid var(--c-border); padding: 22px 0; }
@@ -198,35 +243,6 @@
   .final { padding: 112px 0; border-top: 1px solid var(--c-border); text-align: center; }
   .final h2 { font-size: clamp(30px, 4vw, 44px); max-width: 22ch; margin: 0 auto; }
   .final p { color: var(--c-text-muted); max-width: 52ch; margin: 16px auto 36px; }
-
-  /* Showcases (websites, automations). Three cards show; the rest reveal while the section is pinned (desktop, motion on).
-     Otherwise every card shows in a plain grid. */
-  .showcase { border-top: 1px solid var(--c-border); }
-  .showcase-track { position: relative; }
-  .showcase-stage { padding-top: 96px; padding-bottom: 96px; }
-  .showcase-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
-  .showcase-card {
-    background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden;
-    display: flex; flex-direction: column; transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .showcase-media {
-    aspect-ratio: 2 / 1; background: var(--c-inset); border-bottom: 1px solid var(--c-border);
-    display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--c-text-muted);
-  }
-  .showcase-body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
-  .showcase-body .badge { align-self: flex-start; margin-bottom: 12px; }
-  .showcase-body h3 { font-size: 19px; margin: 0 0 6px; }
-  .showcase-body p { margin: 0; color: var(--c-text-muted); font-size: 15px; }
-  .showcase-body .link { margin-top: auto; padding-top: 14px; align-self: flex-start; }
-  .showcase-spacer { display: none; }
-  @media (min-width: 768px) { .showcase-grid { grid-template-columns: repeat(3, 1fr); } }
-  .showcase.is-pinned .showcase-stage {
-    position: sticky; top: 64px; height: calc(100svh - 64px); padding-top: 0; padding-bottom: 0;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .showcase.is-pinned .showcase-spacer { display: block; height: 60svh; }
-  .showcase.is-pinned .showcase-card.is-pending { opacity: 0; transform: translateY(24px); }
-  .showcase .section-head { margin-bottom: 32px; }
 
   footer.site-footer { border-top: 1px solid var(--c-border); padding: 40px 0 96px; font-size: 15px; color: var(--c-text-muted); }
   .foot-grid { display: grid; gap: 24px; }
@@ -248,6 +264,9 @@
     .hero { min-height: 0; padding: 64px 0 56px; }
     .svc-panel { padding: 24px; }
     .svc-slide li a { display: block; padding: 6px 0; }
+    .flow-panel { padding: 24px; }
+    .flow-row { grid-template-columns: 32px 1fr; }
+    .flow-row .btn { grid-column: 2; justify-self: start; }
     .foot-grid { grid-template-columns: 1fr; }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -256,6 +275,16 @@
   @media (min-width: 1024px) {
     .foot-grid { grid-template-columns: 2fr 1fr 1fr; }
   }
+  @media (min-width: 768px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .steps li { padding: 28px 24px 28px 0; border-top: 1px solid var(--c-border); }
+  .step-n { display: block; font-size: 13px; font-weight: 700; color: var(--c-text-muted); margin-bottom: 18px; letter-spacing: 0.04em; }
+  .steps h3 { font-size: 22px; margin-bottom: 8px; }
+  .steps p { margin: 0; color: var(--c-text-muted); }
+  @media (min-width: 768px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -273,18 +302,18 @@
             <div>
               <a class="mega-head" href="#develop">Develop</a>
               <ul>
-                <li><a href="#web-development">Web development</a></li>
-                <li><a href="#mobile-apps">Mobile apps</a></li>
-                <li><a href="#saas-products">SaaS products</a></li>
+                <li><a href="#develop">Web development</a></li>
+                <li><a href="#develop">Mobile apps</a></li>
+                <li><a href="#develop">SaaS products</a></li>
               </ul>
             </div>
             <div>
               <a class="mega-head" href="#ai-automation">AI Automation</a>
               <ul>
-                <li><a href="#ai-intake">AI intake &amp; speed-to-lead</a></li>
-                <li><a href="#document-intake">Document intake &amp; chase</a></li>
-                <li><a href="#audit">Audit &amp; sprint</a></li>
-                <li><a href="#care-plans">Care plans</a></li>
+                <li><a href="#ai-automation">AI intake &amp; speed-to-lead</a></li>
+                <li><a href="#ai-automation">Document intake &amp; chase</a></li>
+                <li><a href="#ai-automation">Audit &amp; sprint</a></li>
+                <li><a href="#ai-automation">Care plans</a></li>
                 <li>
                   <span class="sub-label">Industries</span>
                   <ul><li><a href="#ai-automation">Law firms</a></li></ul>
@@ -294,13 +323,13 @@
             <div>
               <a class="mega-head" href="#growth">Growth</a>
               <ul>
-                <li><a href="#seo">SEO</a></li>
-                <li><a href="#aeo-geo">AEO &amp; GEO</a></li>
+                <li><a href="#growth">SEO</a></li>
+                <li><a href="#growth">AEO &amp; GEO</a></li>
               </ul>
             </div>
           </div>
         </li>
-        <li><a href="#work">Work</a></li>
+        <li><a href="#websites">Work</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <!-- Blog stays hidden until three published posts (D-11). -->
         <li><a href="#about">About</a></li>
@@ -313,7 +342,7 @@
 </header>
 
 <main>
-  <!-- Section 1: hero, one column, centred -->
+  <!-- Section 1: hero -->
   <section class="hero" id="hero" aria-label="Introduction">
     <div class="wrap">
       <p class="eyebrow">Digital studio for websites, apps and AI automation</p>
@@ -441,100 +470,88 @@
     </div>
   </section>
 
-  <!-- Section 4a: demo websites. Pinned reveal on desktop; the first three cards show, the rest reveal while pinned. -->
-  <section class="showcase" id="websites" data-showcase aria-labelledby="websites-h">
-    <div class="showcase-track">
+  <!-- Section 4: demo websites. Cards slide in from the right; the section pins and auto-advances. -->
+  <section class="showcase" id="websites" data-showcase="carousel" aria-labelledby="websites-h">
+    <div class="showcase-track-outer">
       <div class="showcase-stage wrap">
         <div class="section-head">
           <h2 id="websites-h">Demo websites</h2>
           <p>Built as demos with test data. Each card carries its label.</p>
         </div>
-        <div class="showcase-grid">
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 1</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 2</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 3</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 4</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 5</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 6</h3><p>Summary to supply.</p></div>
-          </article>
+        <div class="showcase-window">
+          <div class="showcase-track">
+            <article class="showcase-card">
+              <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+              <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 1</h3><p>Summary to supply.</p><a class="btn btn-ghost btn-sm" href="#websites" aria-label="Visit website demo 1">Visit demo</a></div>
+            </article>
+            <article class="showcase-card">
+              <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+              <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 2</h3><p>Summary to supply.</p><a class="btn btn-ghost btn-sm" href="#websites" aria-label="Visit website demo 2">Visit demo</a></div>
+            </article>
+            <article class="showcase-card">
+              <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+              <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 3</h3><p>Summary to supply.</p><a class="btn btn-ghost btn-sm" href="#websites" aria-label="Visit website demo 3">Visit demo</a></div>
+            </article>
+            <article class="showcase-card">
+              <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+              <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 4</h3><p>Summary to supply.</p><a class="btn btn-ghost btn-sm" href="#websites" aria-label="Visit website demo 4">Visit demo</a></div>
+            </article>
+            <article class="showcase-card">
+              <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+              <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 5</h3><p>Summary to supply.</p><a class="btn btn-ghost btn-sm" href="#websites" aria-label="Visit website demo 5">Visit demo</a></div>
+            </article>
+            <article class="showcase-card">
+              <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
+              <div class="showcase-body"><span class="badge">Demo build</span><h3>Website demo 6</h3><p>Summary to supply.</p><a class="btn btn-ghost btn-sm" href="#websites" aria-label="Visit website demo 6">Visit demo</a></div>
+            </article>
+          </div>
         </div>
       </div>
-      <div class="showcase-spacer" aria-hidden="true"></div>
-      <div class="showcase-spacer" aria-hidden="true"></div>
-      <div class="showcase-spacer" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- Section 4b: demo automations. LedgerLine is the one internal build. -->
-  <section class="showcase" id="automations" data-showcase aria-labelledby="automations-h">
-    <div class="showcase-track">
+  <!-- Section 5: demo automations. A flow panel on the left; the rows slide in from the right, one at a time. -->
+  <section class="showcase" id="automations" data-showcase="flow" aria-labelledby="automations-h">
+    <div class="showcase-track-outer">
       <div class="showcase-stage wrap">
         <div class="section-head">
           <h2 id="automations-h">Demo automations</h2>
-          <p>Built as demos with test data, plus our own internal build. Each card carries its label.</p>
+          <p>Built as demos with test data, plus our own internal build. Each row carries its label.</p>
         </div>
-        <div class="showcase-grid">
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge is-internal">Internal build</span><h3>LedgerLine</h3><p>Our document-intake automation, now in its third version. Not a client project.</p><a class="link" href="#automations">Read the build log →</a></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 2</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 3</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 4</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 5</h3><p>Summary to supply.</p></div>
-          </article>
-          <article class="showcase-card">
-            <div class="showcase-media" aria-hidden="true">Screenshot slot</div>
-            <div class="showcase-body"><span class="badge">Demo build</span><h3>Automation demo 6</h3><p>Summary to supply.</p></div>
-          </article>
+        <div class="flow-grid">
+          <div class="flow-panel" aria-live="polite">
+            <span class="badge is-internal" id="flow-badge">Internal build</span>
+            <h3 id="flow-title">LedgerLine</h3>
+            <p id="flow-desc">Our document-intake automation, now in its third version. Not a client project.</p>
+            <ul class="flow-nodes" id="flow-nodes">
+              <li>Document received</li>
+              <li>Classified and filed</li>
+              <li>Status board updated</li>
+            </ul>
+            <a class="btn btn-ghost btn-sm" href="#automations" id="flow-link">Read the build log</a>
+          </div>
+          <ol class="flow-list" id="flow-list">
+            <li class="flow-row" data-badge="Internal build" data-title="LedgerLine" data-desc="Our document-intake automation, now in its third version. Not a client project." data-flow="Document received|Classified and filed|Status board updated" data-link="Read the build log" data-href="#automations">
+              <span class="flow-row-n">01</span><span class="flow-row-title">LedgerLine</span><a class="btn btn-ghost btn-sm" href="#automations" aria-label="Read the LedgerLine build log">Build log</a>
+            </li>
+            <li class="flow-row" data-badge="Demo build" data-title="Automation demo 2" data-desc="Summary to supply." data-flow="Trigger|Action|Output" data-link="Visit demo" data-href="#automations">
+              <span class="flow-row-n">02</span><span class="flow-row-title">Automation demo 2</span><a class="btn btn-ghost btn-sm" href="#automations" aria-label="Visit automation demo 2">Visit demo</a>
+            </li>
+            <li class="flow-row" data-badge="Demo build" data-title="Automation demo 3" data-desc="Summary to supply." data-flow="Trigger|Action|Output" data-link="Visit demo" data-href="#automations">
+              <span class="flow-row-n">03</span><span class="flow-row-title">Automation demo 3</span><a class="btn btn-ghost btn-sm" href="#automations" aria-label="Visit automation demo 3">Visit demo</a>
+            </li>
+            <li class="flow-row" data-badge="Demo build" data-title="Automation demo 4" data-desc="Summary to supply." data-flow="Trigger|Action|Output" data-link="Visit demo" data-href="#automations">
+              <span class="flow-row-n">04</span><span class="flow-row-title">Automation demo 4</span><a class="btn btn-ghost btn-sm" href="#automations" aria-label="Visit automation demo 4">Visit demo</a>
+            </li>
+            <li class="flow-row" data-badge="Demo build" data-title="Automation demo 5" data-desc="Summary to supply." data-flow="Trigger|Action|Output" data-link="Visit demo" data-href="#automations">
+              <span class="flow-row-n">05</span><span class="flow-row-title">Automation demo 5</span><a class="btn btn-ghost btn-sm" href="#automations" aria-label="Visit automation demo 5">Visit demo</a>
+            </li>
+            <li class="flow-row" data-badge="Demo build" data-title="Automation demo 6" data-desc="Summary to supply." data-flow="Trigger|Action|Output" data-link="Visit demo" data-href="#automations">
+              <span class="flow-row-n">06</span><span class="flow-row-title">Automation demo 6</span><a class="btn btn-ghost btn-sm" href="#automations" aria-label="Visit automation demo 6">Visit demo</a>
+            </li>
+          </ol>
         </div>
       </div>
-      <div class="showcase-spacer" aria-hidden="true"></div>
-      <div class="showcase-spacer" aria-hidden="true"></div>
-      <div class="showcase-spacer" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- Section 5: how we work. Exactly four steps. -->
-  <section class="block-section" id="how-we-work" aria-labelledby="how-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="how-h">Four steps, one studio, a fixed price.</h2>
-      </div>
-      <ol class="steps">
-        <li><span class="step-n">01</span><h3>Talk</h3><p>A 20-minute call to see whether we are the right fit.</p></li>
-        <li><span class="step-n">02</span><h3>Scope</h3><p>A written scope and fixed price, agreed before work starts.</p></li>
-        <li><span class="step-n">03</span><h3>Build</h3><p>We build in the open and show progress as we go.</p></li>
-        <li><span class="step-n">04</span><h3>Hand over</h3><p>You own the work. Handover notes, then a 30-day fix guarantee.</p></li>
-      </ol>
     </div>
   </section>
 
@@ -549,13 +566,28 @@
     </div>
   </section>
 
-  <!-- Section 7: writing. Live rule: shown only with three published posts. -->
+  <!-- Section 7: how we work. Exactly four steps. -->
+  <section class="block-section" id="how-we-work" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="how-h">Four steps, one studio, a fixed price.</h2>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">01</span><h3>Talk</h3><p>A 20-minute call to see whether we are the right fit.</p></li>
+        <li><span class="step-n">02</span><h3>Scope</h3><p>A written scope and fixed price, agreed before work starts.</p></li>
+        <li><span class="step-n">03</span><h3>Build</h3><p>We build in the open and show progress as we go.</p></li>
+        <li><span class="step-n">04</span><h3>Hand over</h3><p>You own the work. Handover notes, then a 30-day fix guarantee.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Section 8: writing. Live rule: shown only with three published posts. -->
   <section class="block-section" id="writing" aria-labelledby="writing-h">
     <div class="wrap">
       <div class="section-head">
         <h2 id="writing-h">Writing</h2>
       </div>
-      <div class="work-grid posts">
+      <div class="post-grid">
         <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
         <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
         <article class="post-card is-slot"><span class="badge">Post slot</span><h3>Review slot: latest post</h3><p>Fills from the CMS when a post is published.</p></article>
@@ -564,7 +596,7 @@
     </div>
   </section>
 
-  <!-- Section 8: FAQ. Five questions while the first is hidden (D-1, D-18). -->
+  <!-- Section 9: FAQ. Five questions while the first is hidden (D-1, D-18). -->
   <section class="block-section faq" id="faq" aria-labelledby="faq-h">
     <div class="wrap">
       <div class="section-head">
@@ -593,7 +625,7 @@
     </div>
   </section>
 
-  <!-- Section 9: final CTA -->
+  <!-- Section 10: final CTA -->
   <section class="final" id="book" aria-labelledby="final-h">
     <div class="wrap">
       <h2 id="final-h">Tell us what you're building.</h2>
@@ -618,12 +650,12 @@
     </div>
     <div>
       <strong>Company</strong>
-      <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#partners">Partners</a>
+      <a href="#websites">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#partners">Partners</a>
     </div>
   </div>
 </footer>
 
-<div class="draft" aria-hidden="true">PROTOTYPE · sections 1 and 2 · pinned services</div>
+<div class="draft" aria-hidden="true">PROTOTYPE · pinned showcases · draft copy</div>
 
 <script>
   (function () {
@@ -666,60 +698,116 @@
       }
     });
 
-    // Pinned services: the panel for the pillar that is in the middle of the screen is active.
-    // Only used where the layout is pinned; the CSS and the stacked layout do not depend on it.
+    // Services: the panel for the pillar in the middle of the screen is active (pinned layout only).
     var panels = {};
     document.querySelectorAll('.svc-panel').forEach(function (p) { panels[p.getAttribute('data-pillar')] = p; });
-    function activate(pillar) {
-      Object.keys(panels).forEach(function (key) {
-        panels[key].classList.toggle('is-active', key === pillar);
-      });
+    function activatePillar(pillar) {
+      Object.keys(panels).forEach(function (key) { panels[key].classList.toggle('is-active', key === pillar); });
     }
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) activate(entry.target.getAttribute('data-pillar'));
+          if (entry.isIntersecting) activatePillar(entry.target.getAttribute('data-pillar'));
         });
       }, { rootMargin: '-45% 0px -45% 0px' });
       document.querySelectorAll('.svc-group').forEach(function (g) { io.observe(g); });
     }
-  })();
-</script>
-<script>
-  // Showcases: on desktop with motion, the first three cards show and each further card reveals
-  // as the section scrolls through its spacers. The section stays pinned until the last card is shown.
-  (function () {
+
+    // Showcases. On desktop with motion, each section pins. Its steps advance on a timer while it is in view,
+    // and also with scroll. Carousel: the track shifts left one card per step, so the next card arrives from the right.
+    // Flow: the next row slides in from the right and the left panel shows that row.
     var pinQuery = window.matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)');
-    var showcases = [];
+    var STEP_MS = 1800;
+    var shows = [];
+    var flowRows = document.querySelectorAll('#flow-list .flow-row');
+
     document.querySelectorAll('[data-showcase]').forEach(function (sec) {
-      var cards = sec.querySelectorAll('.showcase-card');
-      var track = sec.querySelector('.showcase-track');
-      var stage = sec.querySelector('.showcase-stage');
-      showcases.push({ sec: sec, cards: cards, track: track, stage: stage, hidden: Math.max(0, cards.length - 3) });
+      var kind = sec.getAttribute('data-showcase');
+      var items = kind === 'carousel'
+        ? Array.prototype.slice.call(sec.querySelectorAll('.showcase-card'))
+        : Array.prototype.slice.call(sec.querySelectorAll('.flow-row'));
+      var visible = kind === 'carousel' ? 3 : 1;
+      var steps = Math.max(0, items.length - visible);
+      var outer = sec.querySelector('.showcase-track-outer');
+      for (var i = 0; i < steps; i++) {
+        var spacer = document.createElement('div');
+        spacer.className = 'showcase-spacer';
+        spacer.setAttribute('aria-hidden', 'true');
+        outer.appendChild(spacer);
+      }
+      shows.push({ sec: sec, kind: kind, items: items, steps: steps, outer: outer,
+        stage: sec.querySelector('.showcase-stage'), k: 0, timer: null, started: false });
     });
 
-    function layout() {
-      var pinned = pinQuery.matches;
-      showcases.forEach(function (s) {
-        s.sec.classList.toggle('is-pinned', pinned);
-        Array.prototype.forEach.call(s.cards, function (card, i) {
-          card.classList.toggle('is-pending', pinned && i >= 3);
-        });
+    function setFlowPanel(row) {
+      document.getElementById('flow-badge').textContent = row.getAttribute('data-badge');
+      document.getElementById('flow-title').textContent = row.getAttribute('data-title');
+      document.getElementById('flow-desc').textContent = row.getAttribute('data-desc');
+      document.getElementById('flow-link').textContent = row.getAttribute('data-link');
+      document.getElementById('flow-link').setAttribute('href', row.getAttribute('data-href'));
+      var nodes = document.getElementById('flow-nodes');
+      nodes.innerHTML = '';
+      row.getAttribute('data-flow').split('|').forEach(function (label) {
+        var li = document.createElement('li');
+        li.textContent = label;
+        nodes.appendChild(li);
       });
-      update();
+    }
+
+    function render(s) {
+      if (s.kind === 'carousel') {
+        var track = s.sec.querySelector('.showcase-track');
+        track.style.setProperty('--k', s.k);
+      } else {
+        s.items.forEach(function (el, i) {
+          el.classList.toggle('is-revealed', i <= s.k);
+          el.classList.toggle('is-active', i === s.k);
+        });
+        setFlowPanel(s.items[s.k]);
+      }
+    }
+
+    function pinnedNow(s) {
+      var top = s.outer.getBoundingClientRect().top - 64;
+      var range = s.outer.offsetHeight - s.stage.offsetHeight;
+      return { top: top, range: range, inPin: top <= 0 && top >= -range, p: Math.min(1, Math.max(0, -top / range)) };
     }
 
     function update() {
-      showcases.forEach(function (s) {
+      shows.forEach(function (s) {
         if (!s.sec.classList.contains('is-pinned')) return;
-        var range = s.track.offsetHeight - s.stage.offsetHeight;
-        var top = s.track.getBoundingClientRect().top - 64;
-        var p = Math.min(1, Math.max(0, -top / range));
-        var revealed = Math.min(s.hidden, Math.floor(p * s.hidden + 0.0001));
-        Array.prototype.forEach.call(s.cards, function (card, i) {
-          if (i >= 3) card.classList.toggle('is-pending', i - 3 >= revealed);
-        });
+        var st = pinnedNow(s);
+        var fromScroll = Math.floor(st.p * s.steps + 0.0001);
+        if (fromScroll > s.k) { s.k = fromScroll; render(s); }
+        if (st.inPin && !s.started && s.k < s.steps) {
+          s.started = true;
+          s.timer = setInterval(function () { tick(s); }, STEP_MS);
+        }
       });
+    }
+
+    // The timer advances a section only while it is pinned in view, and stops at its last step.
+    function tick(s) {
+      if (!s.sec.classList.contains('is-pinned') || !pinnedNow(s).inPin) return;
+      if (s.k < s.steps) { s.k += 1; render(s); }
+      if (s.k >= s.steps) { clearInterval(s.timer); }
+    }
+
+    function layout() {
+      var pinned = pinQuery.matches;
+      shows.forEach(function (s) {
+        s.sec.classList.toggle('is-pinned', pinned);
+        if (s.timer) clearInterval(s.timer);
+        s.started = false;
+        if (!pinned) {
+          s.k = s.steps;
+        } else if (!s.wasPinned) {
+          s.k = 0;
+        }
+        s.wasPinned = pinned;
+        render(s);
+      });
+      update();
     }
 
     var ticking = false;
