@@ -139,6 +139,17 @@
     }
   }
 
+  /* Section 3: who we are. Heading left, approved body and a short ledger of commitments right. */
+  .studio { padding: 96px 0; border-top: 1px solid var(--c-border); }
+  .studio-grid { display: grid; gap: 40px; }
+  .studio .lead { font-size: 21px; line-height: 1.55; color: var(--c-text); margin: 0 0 32px; }
+  .studio .commits { list-style: none; margin: 0 0 32px; padding: 0; border-bottom: 1px solid var(--c-border); }
+  .studio .commits li { padding: 14px 0; border-top: 1px solid var(--c-border); font-weight: 600; }
+  .studio .link { display: inline-block; }
+  @media (min-width: 1024px) {
+    .studio-grid { grid-template-columns: 5fr 7fr; column-gap: 64px; align-items: start; }
+  }
+
   footer.site-footer { border-top: 1px solid var(--c-border); padding: 40px 0 96px; font-size: 15px; color: var(--c-text-muted); }
   .foot-grid { display: grid; gap: 24px; }
   .foot-grid strong { color: var(--c-text); }
@@ -330,6 +341,25 @@
         </article>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Section 3: who we are. Team and location lines are hidden until confirmed (D-1, D-2). -->
+  <section class="studio" id="who-we-are" aria-labelledby="studio-h">
+    <div class="wrap studio-grid">
+      <div>
+        <h2 id="studio-h">Who we are</h2>
+      </div>
+      <div>
+        <p class="lead">Growrix OS is a studio for websites, apps, AI automation and search visibility. Every project gets a written scope and a fixed price before work starts, is built in accounts you own, and comes with handover notes.</p>
+        <ul class="commits">
+          <li>Written scope before work starts</li>
+          <li>Fixed price, agreed in writing</li>
+          <li>Built in accounts you own</li>
+          <li>Handover notes at the end</li>
+        </ul>
+        <a class="link" href="#about">About the studio →</a>
+      </div>
     </div>
   </section>
 </main>

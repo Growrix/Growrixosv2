@@ -1,5 +1,15 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 9 — section 3, Who we are
+
+**Built:** the "Who we are" section after services, following the planner's section order (services at 2, "Who we are" at 3, D-23 default). Heading and approved body from `02-homepage-copy.md` (S2). Team and location lines are not shown (D-1, D-2 TBD).
+
+**Added (DRAFT):** four short commitment lines (written scope, fixed price, accounts you own, handover notes). They are drawn from the approved body text, but the list itself is draft and needs your review.
+
+**Not built:** the Work, How we work, Industries, Writing, FAQ and final CTA sections. These come next, one at a time.
+
+**Checked in the browser:** 1440 px (two columns, heading left, body and list right) and 375 px (one column, no horizontal scroll).
+
 ## Round 8 — "Our services" heading
 
 **Asked:** show "Our services" on the section.
