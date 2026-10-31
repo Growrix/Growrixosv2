@@ -304,3 +304,66 @@ Still open: D-1, D-2, D-24, SHW-D2 to SHW-D4, SHW-D7, SHW-D8, AS-D1 to AS-D3. Al
 - X-32. Muted text on the sand band uses a darker value (`02-tokens.md` §6b) to clear 4.5:1. Hand-calculated.
 
 Housekeeping: `docs/frontend-plans/homepage-acceptance/` holds two stray files from an earlier stage of this run, and they are not part of this plan.
+
+## Stage A round, Run Record (31 Oct 2026): AI Automation main page and demo template
+
+Scope: the AI Automation main page and the automation demo slug template. Files: `00-brief-ai-automation.md` v2, `01-art-direction-ai-automation.md` v1, `02-tokens-ai-automation.md` v1, `pages/ai-automation.md` v1, `pages/ai-automation.motion.md` v1, `pages/automation-demo.md` v1, `pages/automation-demo.motion.md` v1. All in review. No homepage plan file is changed. All other pages follow in later runs.
+
+| ID | Decision | Source |
+| --- | --- | --- |
+| DEC-46 | Mode is M2 new, applied to two pages, one-shot, Stage A. | `CLIENT` (request) |
+| DEC-47 | Main page: motion 3, boldness 3. | `CLIENT` (Gate 1: "do as per your recommendations", "take your recommended decision") |
+| DEC-48 | Demo template: motion 2 at most and light, boldness 3. | `CLIENT` (Gate 1: "just give light animations") |
+| DEC-49 | Other pages must not get new design types or motion that make the site heavy. Best practice, mobile readability and SEO come first. The planner may decide anything harmless and best practice. | `CLIENT` (Gate 1) |
+| DEC-50 | The demo pages are the main search targets. | `CLIENT` (Gate 1) |
+| DEC-51 | Read permission for what the plan needs, read only. Used for `docs/revised-website-plan/01-positioning.md`, `02-sitemap-and-menu.md`, `04-page-templates.md` and a search of `07-decisions.md`. Nothing there was edited. | `CLIENT` (Gate 1: "read whatever you think is required") |
+
+Concept round (`01-art-direction-ai-automation.md` §1):
+
+| ID | Item | Status |
+| --- | --- | --- |
+| C-D18 | **Run Record** chosen by rubric, 23 of 24. Rejected: Demo Shelf 15, Control Room 16, Field Guide 19. Field Guide's reading order is kept for the demo template. | Planner's choice, for review with the prototype |
+| C-D19 | No timed movement on these pages. Everything moves only with scroll or a click. The homepage keeps its timers (C-D13). | Planner, best practice under DEC-49 |
+| C-D20 | No H1 entrance on these pages, so the homepage's typing title is not reused. The H1 is visible at first paint, for search and speed. | Planner, best practice under DEC-49 |
+| C-D21 | One pin on the main page, in How a run works. Demo automations does not pin on desktop. | Planner, under DEC-49 |
+| C-D22 | Below 1024 px only demo cards move sideways, pinned from four cards. Services stack, because they hold running text. This departs from the homepage's Round 19 pattern on purpose. | Planner, under DEC-49 |
+| C-D23 | On phones the HTML preview card shows a still image, not the live file. A 1280 px file scaled to a phone can't be read. This narrows default 4. | Planner, under DEC-49. Confirm at the prototype review |
+| C-D24 | The main page uses GSAP and ScrollTrigger only, with no SplitText. The demo template uses no motion library. | Planner, under DEC-49 |
+| C-D25 | Concepts share the fonts and palette, and differ by style term, layout and surface mix. This narrows the distinctness test in SKILL §3a, because the user wants one site. | `CLIENT` (default 8, Gate 1) |
+| C-D26 | Both page heroes are flush left, 7fr/5fr, not centred like the homepage's. A long H1 and a text answer read better flush left, and it gives the run panel a place. | Planner, under DEC-49 |
+| C-D27 | The main page's section shape follows `docs/revised-website-plan/04-page-templates.md` §2, without its founder strip (DEC-05). The AI supervision answer lands in the main page FAQ, closing the move in DEC-19. | Planner |
+| C-D28 | The main page's run panel and run log are labelled `Illustrative example`, because they show an example, not a real run. | Planner, under `01-voice-and-terms.md` §4 |
+| C-D29 | The `Read the build log` promise is met by `#build-log` on the demo page. `/work/[slug]` is no longer needed for LedgerLine. | Follows default 3 |
+
+Search facts checked 31 Oct 2026:
+
+- Google's FAQ rich result stopped appearing on 7 May 2026, and its documentation was removed on 15 June 2026 (Google Search Central, FAQPage documentation change log). The visible FAQs stay; FAQ markup is not relied on.
+- Google advises not to rely on user actions to load a video, and defines a watch page as one whose main purpose is a single video (Google Search Central, video best practices). See X-33.
+- HowTo rich results are reported gone since 2023. This comes from secondary sources, `UNVERIFIED` against Google's own page. Not planned, so nothing depends on it.
+
+Superseded or settled by this round, for these pages only:
+
+- D-24 still stands: links to pages not yet live are hidden on the live site. The prototype shows them for review.
+- AS-D2: settled by default 3 and C-D29, once the user confirms at the prototype review.
+- AS-D1 and SHW-D3: the three-card threshold covers the homepage section only. The main page shows from one demo.
+
+### Open decisions
+
+| ID | Question | Recommendation | Consequence | Blocks |
+| --- | --- | --- | --- | --- |
+| D-A1 | **LedgerLine slug.** Keep `ledgerline`, or use `document-intake-automation`, which holds the search words. | Keep `ledgerline`. The title and H1 carry the search words, and the service page already covers the broader phrase. Later demos use task-first slugs. | Slugs don't change after publishing, so decide before launch. | Publishing |
+| D-A2 | **First demo media.** LedgerLine needs at least one of: screenshots, a Loom link, an HTML file. | Supply the HTML file and two screenshots first. | Until then its demo page cannot publish (`pages/automation-demo.md` §2). | Publishing |
+| D-A3 | **Care plans.** The plan has a label and no content. The main page text and rows are planner drafts. | Confirm or replace them. | The block stays a draft. | Final S3 |
+| D-A4 | **Price line.** The older plan's answer-first summary includes price, and the research priced the automation offers. | No price on either page for now, under DEC-10 and default 7. Add one when the pricing page is planned. | The answer omits price, as that template allows. | Nothing now |
+| D-A5 | **Audience in the title.** "Small Businesses" is assumed. | Keep it until the user names the audience. | Changes the title and the answer. | Final meta |
+
+### Conflicts for Stage B (noted, not applied; none limits Stage A)
+
+- X-33. A Loom that loads on click won't be seen as a video by Google, which says not to rely on user actions. These pages are not watch pages, so this costs little, and the transcript carries the text. Stage B confirms this, or switches to loading the player when it nears the viewport, at the cost of weight.
+- X-34. A Loom player is a third party in an iframe, with its own scripts and cookies, on the click. Needs a content security rule and a mention in the privacy page.
+- X-35. Live HTML previews need a home: where the files are stored, how they are isolated from the site, how they send `noindex`, and how they stay out of the sitemap. A sandboxed frame is the starting point.
+- X-36. The main page repeats X-22, X-23, X-27 and X-28 on a new route: GSAP, its weight, the islands it needs, and the properties it animates. C-D24 and C-D21 reduce the cost but do not remove it. The locked budgets and the static rule are written for the homepage; Stage B confirms how far they reach.
+- X-37. No content type exists for a demo. It needs fields for label, answer, nodes, steps, tools, data, media of three kinds, transcript, build log and FAQs. Same class as X-15, X-19 and X-30.
+- X-38. The hero subhead from Round 17 uses "seamless", which `01-voice-and-terms.md` §6 bans. These pages do not reuse it. The homepage question stays for Stage B.
+- X-39. The publish rule, including its 250-word guideline, is planner judgement, not a search-engine rule. Stage B decides whether the CMS enforces it.
+- X-40. The homepage's small buttons and 11 px node chips on phones fall under the touch-target and readability rules these pages now follow. The homepage is not changed in this round.
