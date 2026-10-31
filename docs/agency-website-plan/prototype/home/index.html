@@ -100,10 +100,10 @@
   .skip:focus { top: 12px; }
 
   /* Buttons */
-  .btn { display: inline-block; text-decoration: none; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; padding: 14px 22px; border-radius: 999px; border: 1px solid var(--c-primary); background: var(--c-primary); color: var(--c-on-primary); box-shadow: 0 1px 2px rgb(20 22 26 / 0.06); transition: background 160ms var(--ease-glide), border-color 160ms var(--ease-glide), color 160ms var(--ease-glide), transform 120ms var(--ease-glide); }
+  .btn { display: inline-block; text-decoration: none; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; padding: 12px 18px; border-radius: 6px; border: 1px solid var(--c-primary); background: var(--c-primary); color: var(--c-on-primary); box-shadow: 0 1px 2px rgb(20 22 26 / 0.06); transition: background 160ms var(--ease-glide), border-color 160ms var(--ease-glide), color 160ms var(--ease-glide), transform 120ms var(--ease-glide); }
   .btn:active { transform: scale(0.98); }
   .btn-ghost { background: transparent; color: var(--c-text); border-color: var(--c-border-control); box-shadow: none; }
-  .btn-sm { padding: 9px 16px; font-size: 14px; }
+  .btn-sm { padding: 8px 13px; font-size: 14px; }
   .link { color: var(--c-primary); font-weight: 700; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
   @media (hover: hover) {
     .btn:hover { background: var(--c-primary-hover); border-color: var(--c-primary-hover); }
@@ -138,9 +138,15 @@
   .nav-list > li > a:hover, .nav-list > li > button:hover { color: var(--c-primary); text-decoration: underline; }
   #services-toggle::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(45deg); transition: transform 200ms var(--ease-glide); }
   #services-toggle[aria-expanded="true"]::after { transform: translateY(0) rotate(225deg); }
-  .theme-toggle { font: inherit; font-size: 14px; color: var(--c-text); background: transparent; border: 1px solid var(--c-border-control); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
-  .theme-toggle:hover { background: var(--c-inset); }
-  .menu-toggle { display: none; font: inherit; background: none; border: 1px solid var(--c-border-control); color: var(--c-text); padding: 8px 14px; border-radius: 999px; cursor: pointer; }
+  .icon-btn { display: inline-grid; place-items: center; width: 40px; height: 40px; padding: 0; color: var(--c-text); background: transparent; border: 1px solid var(--c-border-control); border-radius: 6px; cursor: pointer; transition: background 160ms var(--ease-glide), transform 120ms var(--ease-glide); }
+  .icon-btn:hover { background: var(--c-inset); }
+  .icon-btn:active { transform: scale(0.96); }
+  .icon-btn svg { grid-area: 1 / 1; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: opacity 200ms var(--ease-glide), transform 200ms var(--ease-glide); }
+  .theme-toggle .i-sun, [data-theme="dark"] .theme-toggle .i-moon { opacity: 0; transform: rotate(-45deg) scale(0.7); }
+  [data-theme="dark"] .theme-toggle .i-sun { opacity: 1; transform: none; }
+  .menu-toggle { display: none; }
+  .menu-toggle .i-close, .menu-toggle[aria-expanded="true"] .i-menu { opacity: 0; transform: rotate(45deg) scale(0.7); }
+  .menu-toggle[aria-expanded="true"] .i-close { opacity: 1; transform: none; }
   .mega { position: absolute; top: calc(100% + 10px); left: var(--gutter); right: var(--gutter); background: var(--c-surface); border-radius: 24px; padding: 12px; display: grid; grid-template-columns: repeat(3, 1fr) minmax(280px, 1.1fr); gap: 12px; box-shadow: 0 24px 64px rgb(12 26 27 / 0.22), 0 0 0 1px var(--c-border); overflow: hidden; transform-origin: top center; animation: megaIn 420ms var(--ease-glide); }
   .mega[hidden] { display: none; }
   .mega::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--grad); transform-origin: left; animation: megaDraw 700ms var(--ease-glide); }
@@ -183,7 +189,12 @@
   .hero .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 2px; background: var(--c-signal); vertical-align: middle; margin-right: 10px; transform-origin: left; }
   .cl { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 0.04em 0.14em; margin-bottom: -0.14em; }
   .cl > span { display: inline-block; }
-  .js .cl > span { transform: translateY(110%); }
+  .js .hero h1 { visibility: hidden; }
+  .hero h1 { position: relative; }
+  .ch.off { visibility: hidden; }
+  .caret { position: absolute; left: 0; top: 0; width: 3px; background: var(--c-signal); border-radius: 1px; pointer-events: none; }
+  .caret.blink { animation: caret 900ms steps(2, jump-none) infinite; }
+  @keyframes caret { from { opacity: 1; } to { opacity: 0; } }
   .js .hero .eyebrow, .js .hero .subhead, .js .hero-ctas > * { opacity: 0; }
   .js .hero .run { visibility: hidden; }
   .hero h1 { margin: 0 auto; }
@@ -397,10 +408,13 @@
   .foot-col strong { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-text-muted); }
   .foot-col a { position: relative; display: block; width: fit-content; padding: 4px 0; text-decoration: none; color: var(--c-text); transition: color 160ms var(--ease-glide), transform 160ms var(--ease-glide); }
   .foot-col a:hover { color: var(--c-primary); transform: translateX(4px); }
+  .foot-ext::after { content: " ↗"; color: var(--c-primary); }
+  .foot-bottom { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding: 20px 0 22px; border-top: 1px solid var(--c-border); font-family: var(--font-mono); font-size: 12px; color: var(--c-text-muted); }
+  .foot-bottom p { margin: 0; }
   .foot-mark { display: block; margin: 0 auto; padding-bottom: 0.08em; font-family: var(--font-display); font-size: 18.6vw; font-weight: 700; line-height: 1; letter-spacing: -0.045em; text-align: center; white-space: nowrap; user-select: none; }
 
   @media (max-width: 767px) {
-    .menu-toggle { display: inline-block; }
+    .menu-toggle { display: inline-grid; }
     .bar { gap: 12px; }
     .bar .btn-header { display: none; }
     .site-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--band-bg); padding: 8px 16px 24px; }
@@ -422,8 +436,49 @@
     .foot-grid { grid-template-columns: repeat(5, 1fr); }
   }
 
+  /* Below 1024 px long lists become sideways swipes, so the page stays short. */
+  .swipe-nav, .flow-extra { display: none; }
+  @media (max-width: 1023px) {
+    .svc-group, .showcase-track, .flow-list {
+      display: flex; flex-wrap: nowrap; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+      margin: 0 calc(-1 * var(--gutter)); padding: 8px var(--gutter) 20px; scroll-padding: 0 var(--gutter); scrollbar-width: none;
+    }
+    .svc-group::-webkit-scrollbar, .showcase-track::-webkit-scrollbar, .flow-list::-webkit-scrollbar { display: none; }
+    .svc-group > *, .showcase-track > *, .flow-list > * { scroll-snap-align: start; }
+    .svc-panel { margin-bottom: 12px; }
+    .svc-slide { flex: 0 0 84%; padding: 24px; background: var(--c-surface); border-radius: 16px; box-shadow: var(--shadow-card); outline: 1px solid var(--card-outline); outline-offset: -1px; }
+    .svc-slide h3 { font-size: 28px; }
+    .showcase-card { flex: 0 0 84%; }
+    .showcase-stage { padding-top: 88px; padding-bottom: 72px; }
+    .services { padding-bottom: 72px; }
+    .flow-panel { display: none; }
+    .flow-grid { display: block; }
+    .flow-row, .flow-row:last-child { flex: 0 0 84%; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px; border: 0; border-radius: 16px; background: var(--night-raised); }
+    .flow-row.is-active .flow-row-title { color: var(--c-text); }
+    .flow-row-title { font-size: 26px; line-height: 1.1; }
+    .flow-extra { display: block; order: 2; width: 100%; }
+    .flow-extra .badge { margin: 4px 0 0; }
+    .flow-extra p { margin: 10px 0 0; color: var(--c-text-muted); font-size: 15px; }
+    .flow-extra .flow-nodes { margin-top: 16px; gap: 8px; }
+    .flow-extra .flow-nodes li { font-size: 11px; padding: 7px 9px; }
+    .flow-extra .flow-nodes li + li::before { margin-right: 6px; }
+    .flow-row .btn { order: 3; margin-top: 16px; }
+    .swipe-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 4px; }
+    .swipe-dots { position: relative; display: flex; align-items: center; gap: 14px; }
+    .swipe-dots::before { content: ""; position: absolute; left: 4px; right: 4px; top: 50%; height: 2px; margin-top: -1px; background: var(--c-signal-faint); }
+    .swipe-dots button { position: relative; width: 10px; height: 10px; padding: 0; border: 2px solid var(--c-signal-faint); border-radius: 50%; background: var(--band-bg); cursor: pointer; transition: background 200ms var(--ease-snap), border-color 200ms var(--ease-snap); }
+    .swipe-dots button.on { background: var(--c-signal); border-color: var(--c-signal); }
+    .swipe-count { font-family: var(--font-mono); font-size: 12px; color: var(--c-text-muted); }
+    .svc-group { margin-bottom: 0; }
+    .svc-group + .swipe-nav { margin-bottom: 40px; }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .svc-slide, .showcase-card, .flow-row, .flow-row:last-child { flex-basis: 46%; }
+  }
+
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  @media (max-width: 767px) { .foot-bottom { padding-bottom: 60px; } }
 </style>
 </head>
 <body>
@@ -432,7 +487,7 @@
 <header class="site-header">
   <div class="wrap bar">
     <a class="brand" href="#top" id="top">Growrix OS</a>
-    <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <button type="button" class="icon-btn menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-menu"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" class="i-close"><path d="M6 18 18 6M6 6l12 12"/></svg></button>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <ul class="nav-list">
         <li>
@@ -481,7 +536,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark theme</button>
+    <button type="button" class="icon-btn theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Switch to dark theme"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-moon"><path d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" class="i-sun"><path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg></button>
     <a class="btn btn-header" href="#book">Book a free 20-min call</a>
   </div>
 </header>
@@ -826,11 +881,16 @@
       </div>
       <div class="foot-col">
         <strong>Contact</strong>
-        <a href="mailto:hello@growrixos.com">hello@growrixos.com</a><a href="#book">Book a free 20-min call</a>
+        <a href="mailto:hello@growrixos.com">hello@growrixos.com</a><a href="#book">Book a free 20-min call</a><a class="foot-ext" href="#upwork" data-slot="upwork-profile-url">Hire us on Upwork</a>
       </div>
     </div>
   </div>
   <div class="foot-mark hl" aria-hidden="true">Growrix OS</div>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <p>© 2026 Growrix OS. All rights reserved.</p>
+    </div>
+  </div>
 </footer>
 
 
@@ -888,7 +948,7 @@
     function setTheme(dark) {
       html.setAttribute('data-theme', dark ? 'dark' : 'light');
       themeToggle.setAttribute('aria-pressed', String(dark));
-      themeToggle.textContent = dark ? 'Light theme' : 'Dark theme';
+      themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
       document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#000000' : '#f5f1e8');
     }
     // RUN-91: a circle grows from the toggle.
@@ -1063,6 +1123,58 @@
   })();
 </script>
 <script>
+  // Sideways swipes below 1024 px: cards for the automations, and a stop rail with a counter for every list.
+  (function () {
+    var $$ = function (q, r) { return Array.prototype.slice.call((r || document).querySelectorAll(q)); };
+    $$('.flow-row').forEach(function (row) {
+      var extra = document.createElement('div'), badge = document.createElement('span');
+      var desc = document.createElement('p'), nodes = document.createElement('ul');
+      var label = row.getAttribute('data-badge');
+      extra.className = 'flow-extra';
+      badge.className = 'badge' + (label === 'Internal build' ? ' is-internal' : '');
+      badge.textContent = label;
+      desc.textContent = row.getAttribute('data-desc');
+      nodes.className = 'flow-nodes';
+      row.getAttribute('data-flow').split('|').forEach(function (text) {
+        var li = document.createElement('li');
+        li.textContent = text;
+        nodes.appendChild(li);
+      });
+      extra.appendChild(badge); extra.appendChild(desc); extra.appendChild(nodes);
+      row.appendChild(extra);
+    });
+    $$('.svc-group, .showcase-track, .flow-list').forEach(function (scroller) {
+      var items = Array.prototype.slice.call(scroller.children), nav = document.createElement('div');
+      var dots = document.createElement('div'), count = document.createElement('span');
+      nav.className = 'swipe-nav'; dots.className = 'swipe-dots'; count.className = 'swipe-count';
+      var buttons = items.map(function (item, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Go to item ' + (i + 1) + ' of ' + items.length);
+        b.addEventListener('click', function () {
+          scroller.scrollTo({ left: item.offsetLeft - scroller.firstElementChild.offsetLeft, behavior: 'smooth' });
+        });
+        dots.appendChild(b);
+        return b;
+      });
+      function sync() {
+        var at = 0, best = Infinity;
+        items.forEach(function (item, i) {
+          var d = Math.abs(item.offsetLeft - scroller.firstElementChild.offsetLeft - scroller.scrollLeft);
+          if (d < best) { best = d; at = i; }
+        });
+        if (scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 2) at = items.length - 1;
+        buttons.forEach(function (b, i) { b.classList.toggle('on', i <= at); });
+        count.textContent = (at + 1) + ' / ' + items.length;
+      }
+      scroller.setAttribute('tabindex', '0');
+      scroller.addEventListener('scroll', sync, { passive: true });
+      nav.appendChild(dots); nav.appendChild(count);
+      scroller.parentNode.insertBefore(nav, scroller.nextSibling);
+      sync();
+    });
+  })();
+
   // The Run: signal line, band moments and type motion. Moment ids (RUN-nn) come from pages/home.motion.md.
   (function () {
     var html = document.documentElement;
@@ -1218,12 +1330,12 @@
 
       // Services
       b = sec.services;
-      stops = $$('.svc-idx', b).map(function (s) { return box(b, s).m; });
       h = b.getBoundingClientRect().height;
       if (desktop) {
+        stops = $$('.svc-idx', b).map(function (s) { return box(b, s).m; });
         var ty = box(b, $('.svc-track', b)).t - 32;
         line.services.route([[g.XC, 0], [g.XC, ty], [g.X5, ty], [g.X5, h]], stops.map(function (s) { return [g.X5, s]; }));
-      } else rail(b, stops, line.services);
+      } else rail(b, $$('.svc-group', b).map(function (g) { return box(b, g).t + 32; }), line.services);
 
       // Who we are
       b = sec['who-we-are'];
@@ -1243,7 +1355,7 @@
         line.web.route(wx > w0 ? [[w0, 0], [w0, wtopY], [wx, wtopY], [wx, wy], [wr, wy], [wr, h]] : [[w0, 0], [w0, wy], [wr, wy], [wr, h]], stopX);
       } else {
         b = sec.websites;
-        rail(b, $$('.showcase-card', b).map(function (c) { return box(b, c).t + 24; }), railWeb);
+        rail(b, [], railWeb);
       }
 
       // Demo automations
@@ -1256,7 +1368,7 @@
           $$('.flow-row', b).map(function (r) { return [ax, box(b, r).m]; }));
       } else {
         b = sec.automations;
-        rail(b, $$('.flow-row', b).map(function (r) { return box(b, r).m; }), railAuto);
+        rail(b, [], railAuto);
       }
 
       // How we work
@@ -1365,26 +1477,70 @@
         scrollTrigger: { trigger: s, start: startAt, end: endAt, scrub: 0.5 } });
     }
 
+    // The hero title types itself. Characters are hidden, never removed, so the layout does not move.
+    function typeTitle(h1, onDone) {
+      var original = h1.innerHTML, label = h1.textContent, chars = [];
+      var walk = function (n) {
+        Array.prototype.slice.call(n.childNodes).forEach(function (c) {
+          if (c.nodeType !== 3) { walk(c); return; }
+          var frag = document.createDocumentFragment();
+          Array.prototype.forEach.call(c.textContent, function (ch) {
+            var s = document.createElement('span');
+            s.className = 'ch off'; s.textContent = ch;
+            frag.appendChild(s); chars.push(s);
+          });
+          c.parentNode.replaceChild(frag, c);
+        });
+      };
+      h1.setAttribute('aria-label', label);
+      walk(h1);
+      h1.style.visibility = 'visible';
+      var caret = document.createElement('i');
+      caret.className = 'caret'; caret.setAttribute('aria-hidden', 'true');
+      h1.appendChild(caret);
+      var place = function (c, end) {
+        var h = h1.getBoundingClientRect(), r = c.getBoundingClientRect();
+        caret.style.height = r.height * 0.86 + 'px';
+        caret.style.transform = 'translate(' + ((end ? r.right : r.left) - h.left + 2) + 'px,' + (r.top - h.top + r.height * 0.07) + 'px)';
+      };
+      place(chars[0], false);
+      var tl = gsap.timeline({ delay: 0.35 }), t = 0;
+      chars.forEach(function (c) {
+        tl.call(function () { c.classList.remove('off'); place(c, true); }, null, t);
+        var ch = c.textContent;
+        t += ch === '|' ? 0.26 : ch === ',' || ch === '&' ? 0.11 : 0.032 + Math.random() * 0.018;
+      });
+      tl.call(function () { caret.classList.add('blink'); }, null, t + 0.05);
+      tl.call(function () {
+        h1.innerHTML = original;
+        h1.removeAttribute('aria-label');
+        onDone();
+      }, null, t + 1.1);
+      return t;
+    }
+
     function heroIn() {
       var hero = sec.hero, tl = gsap.timeline();
-      html.classList.remove('js');
-      heroSvg.style.visibility = 'visible';
-      gsap.set($$('.cl > span', hero), { yPercent: 110, y: 0 });
+      var h1 = $('h1', hero);
       gsap.set($('.field', hero), { opacity: 0 });
       gsap.set([$('.hero .eyebrow'), $('.subhead', hero)], { opacity: 0 });
       gsap.set($$('.hero-ctas > *', hero), { opacity: 0 });
+      html.classList.remove('js');
+      heroSvg.style.visibility = 'visible';
+      if (pinned.matches) strokes.forEach(function (s) { s.draw.style.strokeDashoffset = 1; });
+      gsap.set(h1, { visibility: 'hidden' });
       tl.to($('.field', hero), { opacity: 1, duration: 0.8, ease: GLIDE }, 0)
         .fromTo($('.hero .eyebrow'), { opacity: 0 }, { opacity: 1, duration: 0.4, ease: GLIDE }, 0)
-        .to($$('.cl > span', hero), { yPercent: 0, duration: 0.9, ease: GLIDE, stagger: 0.14 }, 0.1)
-        .fromTo($('.subhead', hero), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: GLIDE }, 0.6)
-        .fromTo($$('.hero-ctas > *', hero), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: GLIDE, stagger: 0.08 }, 0.75);
-      if (pinned.matches) {
+        .fromTo($('.subhead', hero), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: GLIDE }, 0.5)
+        .fromTo($$('.hero-ctas > *', hero), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: GLIDE, stagger: 0.08 }, 0.65);
+      typeTitle(h1, function () {
+        if (!pinned.matches) return;
+        var st = gsap.timeline();
         strokes.forEach(function (s, i) {
-          s.draw.style.strokeDashoffset = 1;
-          tl.to(s.draw, { strokeDashoffset: 1 - s.under, duration: 0.5, ease: DOLLY }, 1 + i * 0.12);
-          if (i !== 1) tl.to(s.draw, { strokeDashoffset: 0, duration: 0.9, ease: DOLLY }, 1.5);
+          st.to(s.draw, { strokeDashoffset: 1 - s.under, duration: 0.5, ease: DOLLY }, i * 0.12);
+          if (i !== 1) st.to(s.draw, { strokeDashoffset: 0, duration: 0.9, ease: DOLLY }, 0.5);
         });
-      }
+      });
     }
 
     function setup() {
@@ -1402,7 +1558,8 @@
       maskIn($('.svc-heading'), 'words', 0.1);
       line.services.scrub({ trigger: sec.services, start: 'top 60%', end: 'bottom 60%' });
       var slides = $$('.svc-slide');
-      line.services.onStop = function (i, on) { slides[i].classList.toggle('on', on); };
+      if (pinned.matches) line.services.onStop = function (i, on) { slides[i].classList.toggle('on', on); };
+      else slides.forEach(function (s) { s.classList.add('on'); });
       slides.forEach(function (s) {
         maskIn($('h3', s), 'lines', 0.1, 'top 75%');
         riseIn($$('p, ul, .link', s), s, 'top 75%', 0.2);
@@ -1449,10 +1606,7 @@
       if (pinned.matches) {
         line.auto.scrub({ trigger: auto, start: 'top 60%', end: 'top 64px', to: line.auto.fr[0] });
         ScrollTrigger.create({ trigger: auto, start: 'top 64px', once: true, onEnter: runPacket });
-      } else {
-        railAuto.scrub({ trigger: auto, start: 'top 60%', end: 'bottom 60%' });
-        ScrollTrigger.create({ trigger: $('.flow-panel', auto), start: 'top 75%', once: true, onEnter: runPacket });
-      }
+      } else railAuto.scrub({ trigger: auto, start: 'top 60%', end: 'bottom 60%' });
 
       // How we work: RUN-50 to RUN-52
       var how = sec['how-we-work'];

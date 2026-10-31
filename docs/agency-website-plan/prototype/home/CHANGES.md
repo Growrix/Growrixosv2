@@ -1,5 +1,26 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 18 — mobile swipes, icons, square buttons, typing title (2026-10-31)
+
+**Asked:** sideways swipes on mobile; one icon for the theme switch; an icon for the menu; an Upwork hire link in the footer; a copyright line at the very bottom; squarer buttons (shape only, from the reference); an animation on the hero title.
+
+**Changed:**
+- Below 1024 px, the service slides, demo websites and demo automations are sideways swipes with snap, a stop rail and a counter. Automation cards carry their own badge, text and flow chain. The 375 px page drops from about 15,100 px to about 10,500 px.
+- Theme switch: one moon or sun icon. Menu: one icon that turns into a close icon. Both keep a text label for screen readers.
+- Buttons: 6 px radius and tighter padding across the page. Badges stay round.
+- Hero title types itself with an ember caret and short pauses at `,`, `&` and `|`. The characters hold their place, so nothing shifts, and the gradient stays whole. The subhead and buttons arrive first, so the call to action does not wait. The strokes draw after typing ends.
+- Footer: `Hire us on Upwork` under Contact, and `© 2026 Growrix OS. All rights reserved.` under the wordmark.
+
+**Open:**
+- The Upwork link is a placeholder (`#upwork`). No profile URL exists in the repo.
+- Below 1024 px the rail has 20 stops, not 37: one per service group, with the swipe rails standing in for the per-card stops.
+
+**Departures from the plan:** RUN-02 (clause mask-rise) is replaced by typing. RUN-44 (the packet) runs on desktop only, because the panel is hidden on the swipe layout. Copy for the new footer lines is `CLIENT` by request; the wording is the builder's.
+
+**Visual QA (round-18):** opened 1440 px hero mid-typing and finished, and 375 px services, websites, automations and footer. Swiping updates the counter. Fonts failed to load in one mobile capture and fell back to a system face, so judge type from the pane.
+
+**Review answer:** awaiting.
+
 ## Round 17 — new hero title and subtitle (2026-10-31)
 
 **Asked:** replace the hero copy. Gradient on "Websites, Apps & AI Automation".
