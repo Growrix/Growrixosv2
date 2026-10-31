@@ -8,29 +8,31 @@ The audit step (`system-builder` Step 1) reads this file first. If the file disa
 
 ---
 
-## Baseline snapshot — 2026-10-21 (after Wave 2)
+## Baseline snapshot — 2026-10-31
 
-Anything before this date is captured by git history; anything after is logged below.
+Anything before this date is captured by git history and the Changes section; anything after is logged below. Counts come from the live tree.
 
-### Agents (46 total — after 2026-10-21 Wave 2)
+### Agents (49 total)
 
-- **Orchestration (1):** `project-director`
+- **Orchestration (2):** `project-director`, `senior-dev`
 - **Phase coordinators (6):** `phase0-coordinator`, `phase1-coordinator`, `phase2-coordinator`, `phase3-coordinator`, `phase4-coordinator`, `phase5-coordinator`
 - **Phase 0 Intake — greenfield (3):** `product-strategist`, `market-researcher`, `risk-assessor`
 - **Phase 0 Intake — existing project (1):** `project-auditor`
 - **Phase 1 Design (5):** `system-architect`, `db-schema-designer`, `api-designer`, `ux-designer`, `threat-modeler`
-- **Phase 2 Build — capability-devs (12):** `frontend-dev`, `ui-dev`, `api-dev`, `database-dev`, `auth-dev`, `email-dev`, `payments-dev`, `storage-dev`, `monitoring-dev`, `compliance-dev`, `feature-flag-dev` _(new, Wave 2)_, `i18n-dev` _(new, Wave 2)_
-- **Phase 3 Quality — core (6):** `test-writer`, `code-reviewer`, `security-auditor`, `accessibility-checker`, `bug-fixer`, `load-tester` _(new, Wave 2)_
+- **Frontend planning (2):** `site-planner`, `prototype-builder`
+- **Phase 2 Build — capability-devs (12):** `frontend-dev`, `ui-dev`, `api-dev`, `database-dev`, `auth-dev`, `email-dev`, `payments-dev`, `storage-dev`, `monitoring-dev`, `compliance-dev`, `feature-flag-dev`, `i18n-dev`
+- **Phase 3 Quality — core (6):** `test-writer`, `code-reviewer`, `security-auditor`, `accessibility-checker`, `bug-fixer`, `load-tester`
 - **Phase 3 Quality — audit specialists (4):** `performance-auditor`, `dependency-auditor`, `consistency-auditor`, `docs-auditor`
-- **Phase 4 DevOps (4):** `ci-cd-engineer`, `hosting-dev`, `migration-runner`, `infra-dev` _(new, Wave 2)_
+- **Phase 4 DevOps (4):** `ci-cd-engineer`, `hosting-dev`, `migration-runner`, `infra-dev`
 - **Phase 5 Growth (4):** `seo-optimizer`, `content-writer`, `analytics-reporter`, `support-triager`
 
-### Skills (11 total — after Wave 2)
+### Skills (15 folders, plus `adapters/`)
 
-- **Cross-cutting:** `commit-convention`, `pr-template`, `migration-safety-checklist`, `preview-deploy-smoke-test`, `rate-limit-pattern`, `error-boundary-pattern`, `error-handling-policy` _(new, Wave 2)_
+- **Cross-cutting:** `commit-convention`, `conventional-commit`, `pr-template`, `document-project`, `migration-safety-checklist`, `preview-deploy-smoke-test`, `rate-limit-pattern`, `error-boundary-pattern`, `error-handling-policy`, `frontend-quality-standard`
 - **Strategy:** `observability-strategy`, `backup-dr-plan`
-- **Meta:** `system-builder` (this skill)
-- **Adapter library** at `.claude/skills/adapters/` — empty on day one, grows via `/retrospective` after each shipped product (no vendor-named skills baselined)
+- **Planning:** `site-planning-playbook`
+- **Meta:** `system-builder` (this skill), `system-export`
+- **Adapter library** at `.claude/skills/adapters/` — README only; grows via `/retrospective` after each shipped product (no vendor-named skills baselined)
 
 ### Manifest schema (`.claude/templates/product.config.template.json`)
 
@@ -45,10 +47,13 @@ Wave 2 added three slots: `feature_flags.provider`, `i18n.provider` (+ `default_
 - `commit-reminder` on `Stop` — warns on uncommitted changes
 - `session-boot` on `SessionStart` — reads `docs/.state.json`, prints status banner
 
-### Commands (6 total — after 2026-10-21)
+### Commands (9 total)
 
 - `/new-product <idea>` — kicks off Phase 0 for a new SaaS idea (greenfield)
-- `/audit-project [url]` — full senior-dev audit for an existing project (new)
+- `/audit-project [url]` — full senior-dev audit for an existing project
+- `/senior-dev <task>` — ongoing work on an existing project
+- `/plan-ui <request>` — frontend planning through `site-planner`
+- `/prototype <slug>` — single-file HTML prototype, and `study` for reference sites
 - `/status` — current project phase + branch + PR + CI
 - `/fix-until-green` — code-review → fix → re-review loop (max 5 iterations)
 - `/retrospective` — mines capability-dev reports into vendor-adapter skills post-ship
@@ -63,12 +68,29 @@ Vendor-specific MCPs (Neon, Supabase, Clerk, Stripe, etc.) are **per-product** �
 
 ### Products built with the system
 
-- `products/focus-log/` — tiny focus-session timer; demonstrated the port/adapter boundary end-to-end
-- `products/taskflow/` — 5-feature SaaS (Tasks, Projects+Kanban, Calendar, Analytics, Collaboration); Phases 2+3+4 complete, Neon+Clerk swap applied; own git repo with 2 commits
+None in this repository. It holds the Growrix OS v2 marketing site.
 
 ---
 
 ## Changes (newest first)
+
+### 2026-10-31 — Creative planning upgrade
+
+#### Rebaseline — 2026-10-31
+
+- `chore(skills)` **changelog baseline** — Supersedes the 2026-10-21 baseline, which said 46 agents, 11 skills and 6 commands. Live tree: 49 agents, 15 skill folders plus `adapters/`, 9 commands, 6 hooks. `products/` is no longer in this repository. _[this commit]_
+
+#### Changes
+
+- `feat(skills)` **site-planning-playbook** — Contract change, confirmed by the user: creative runs always ask boldness and motion intensity, and "use defaults" no longer answers them. The rejected concept A took a silent 2. _[this commit]_
+- `feat(skills)` **site-planning-playbook** — Stage A needs at least 3 named concepts with rejected reasons, one signature moment per section, and a Not-plain check; refusal list extended. Critic prompt now covers screenshots. Deviations 16–23 added; Motion Choreographer in Stage A is deviation 16, because `references/` stay unedited. _[this commit]_
+- `feat(skills)` **site-planning-playbook** — Contract change, confirmed by the user: no production rule binds Stage A or the prototype, Stage A writes draft copy and prototype-ready detail, and Stage B is the hard gate that opens with prototype reconciliation (`KEEP` / `ADAPT` / `USER DECISION`) and full Gates 1–2. _[this commit]_
+- `feat(agents-ext)` **prototype-builder** — Builds the plan exactly with any CDN library. Adds reference-study mode (principles only), fixed scroll-state screenshots, a visual QA checklist and the fixed review question. The silent "motion intensity (default 2)" in quick briefs is gone. _[this commit]_
+- `feat(skills)` **scroll-capture.mjs** — Saves checkpoints to disk with the project's Playwright, because browser-pane screenshots never reach a file the Critic can read. Installs nothing. _[this commit]_
+- `feat(agents-ext)` **site-planner** — `effort: high` (Opus 5.5 defaults to `medium`), Stage A rules, a report that lists concepts, and no-browser rule. _[this commit]_
+- `feat(commands)` **/prototype**, **/plan-ui** — `study` mode; "use defaults" text matches the new rule. _[this commit]_
+- `docs(skills)` **system-builder** — The frontmatter invariant now allows `effort` on agents, which is documented at code.claude.com/docs/en/sub-agents. _[this commit]_
+- `chore(docs)` **cross-refs** — Root `CLAUDE.md` has no counts, no README inventory exists, and no Blueprint artifact URL is on record, so none changed. _[this commit]_
 
 ### 2026-10-30 — Frontend flow: creative → prototype → production
 

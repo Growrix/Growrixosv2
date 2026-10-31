@@ -9,7 +9,7 @@ The request is: **$ARGUMENTS**
 
 If `$ARGUMENTS` is empty, ask the user what to plan (a full site, a page, a section, or a redesign) and stop.
 
-Invoke the `site-planner` subagent now with that request, and tell it it is running in **delegated mode**. It runs its pre-flight, resolves the mode, and stops only where its stop rule says to. If the user's request or reply says "use defaults" (or "defaults"), pass those words through verbatim — the planner then answers its own brief questions with their defaults and stops only on a true blocker.
+Invoke the `site-planner` subagent now with that request, and tell it it is running in **delegated mode**. It runs its pre-flight, resolves the mode, and stops only where its stop rule says to. If the user's request or reply says "use defaults" (or "defaults"), pass those words through verbatim — the planner then answers its own brief questions with their defaults and stops only on a true blocker or, in a creative run, to ask boldness and motion intensity.
 
 Relay loop — repeat until the planner returns its final report:
 

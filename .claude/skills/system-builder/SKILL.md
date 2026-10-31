@@ -141,7 +141,7 @@ These checks block the write. Each must pass or you report the fail and stop.
 - **Vendor neutrality** — proposed agent names must be role-based (`email-dev`, `database-dev`, `auth-dev`). If the user asks for a vendor-named agent (`resend-dev`, `stripe-dev`, `clerk-auth-dev`), **reject** and propose adding it as an adapter skill at `.claude/skills/adapters/<capability>/<vendor>.md` instead.
 - **Port rule** — if the proposed piece suggests business code imports from a vendor SDK directly, reject and propose the port shape (`lib/<capability>/index.ts` as the port, `lib/<capability>/<provider>.ts` as the only vendor-SDK importer).
 - **Lane rule** — if a proposed agent description crosses capabilities ("writes DB migrations AND wires auth"), reject and propose splitting into two agents.
-- **Frontmatter shape** — exactly two keys for skills: `name` and `description`. Agents also allow optional `tools:`. Hooks have no frontmatter. Commands allow `description:` and `argument-hint:`. Nothing else.
+- **Frontmatter shape** — exactly two keys for skills: `name` and `description`. Agents also allow optional `tools:` and `effort:`, each checked against the official docs before use. Hooks have no frontmatter. Commands allow `description:` and `argument-hint:`. Nothing else.
 - **Human gates preserved** — if the change touches a phase coordinator, confirm the between-phase approval gate (`[GATE: user types 'approved']`) is intact.
 - **No `main`-pushing** — the final commit never pushes to `main`; always a feature branch.
 

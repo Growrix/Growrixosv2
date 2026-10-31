@@ -1,6 +1,6 @@
 ---
-description: Build or refine a single-file HTML prototype of a page so you can see the design before production. Runs the prototype-builder procedure in this session, opens the result in the browser pane, and screenshots it.
-argument-hint: <plan-slug or one-line idea> [feedback]
+description: Build or refine a single-file HTML prototype of a page so you can see the design before production, or study reference sites with `study <slug> <urls>`. Runs the prototype-builder procedure in this session, opens the result in the browser pane, and screenshots it.
+argument-hint: <plan-slug or one-line idea> [feedback] | study <plan-slug> <url> [url] [url]
 ---
 
 The request is: **$ARGUMENTS**
@@ -9,6 +9,7 @@ If `$ARGUMENTS` is empty, ask which plan slug (or idea) to prototype and stop.
 
 Run this in the main session — do not spawn a subagent (the browser pane tools are needed for the screenshot loop). Read `.claude/agents/prototype-builder.md` and follow it exactly, acting as that agent:
 
+- If the first word is `study`, the next word is the slug and the rest are up to 3 URLs: run the agent's reference-study mode and build nothing. The slug folder may not exist yet; create `prototype/` inside it.
 - If the first word matches a folder in `docs/frontend-plans/`, that is the slug; any remaining text is feedback for a refinement round.
 - Otherwise treat the whole request as a one-line idea: choose a kebab-case slug and write the quick brief first.
 
