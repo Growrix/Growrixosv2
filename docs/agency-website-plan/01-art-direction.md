@@ -1,62 +1,100 @@
-# 01 — Art direction (homepage)
+# 01 — Art direction and creative concept (homepage, revision 4)
 
-- **Title:** Art direction for the homepage, S2 to S8 (S1 approved)
-- **Status:** review (revision 3, 31 Oct 2026; needs the user's approval)
-- **Version:** 3
+- **Title:** Creative concept, art direction and visual language for the homepage
+- **Status:** review (revision 4, 31 Oct 2026; needs the user's decisions at the gate)
+- **Version:** 4
 - **Last-updated:** 2026-10-31
 - **Owner-agent:** site-planner
-- **Depends-on:** `00-brief.md` v2; `02-tokens.md` v1; `docs/Claude research/02 New website build plan.md` §2.5 (read-only).
+- **Depends-on:** `00-brief.md` v3; `02-tokens.md` v3 (brand colour set §6a, motion §6); `pages/home.wireframe.md` v1; `pages/home.motion.md` v4; `02-homepage-copy.md` v2 (copy fixed, not changed); `03-decisions.md`.
+- **Hard limits:** no copy change. Navigation and section order unchanged. Brand tokens and both themes kept.
 
-## 1. Direction in one paragraph
+## 1. What this file decides
 
-Calm, precise, accountable. The page reads like a careful studio's ledger, not a launch page. Structure comes from hairline rules, rows and plain type. Cards appear only where they carry proof, because each proof item is a discrete object with a label. The hero is one column with no motion. The page is quiet throughout, with a short fade as the only motion. `CLIENT` (mood, 31 Oct 2026 request) `PROJECT (research §2.5)`.
+- The overall visual idea that ties the homepage together.
+- Three concepts, and the recommended one.
+- The visual language rules that every section follows.
+- What makes the page distinct from a generic studio homepage.
 
-## 2. Visual language
+Motion rules are in `pages/home.motion.md`. Layout per section is in `pages/home.wireframe.md`. Copy is not touched: `02-homepage-copy.md` is the copy source and stays as approved.
 
-| Rule | What it means on this page | Source |
-| --- | --- | --- |
-| Ledger over cards | Steps (S4), posts (S6) and questions (S7) are hairline rows. Cards are used only for proof (S3) | `PROJECT (research §2.5)`, `ASSUMED` (section-level choice) |
-| Accent is interactive only | Accent colour appears on links, buttons and focus rings. Never on numbers, rules, badges or decorative marks | `PROJECT (research §2.5, §2.6)` |
-| Neutral proof badges | Badges show their label as text on a neutral chip. No colour coding by label | `PROJECT (research §2.5 status language)`, `ASSUMED` |
-| No decorative imagery | No stock photos, illustrations, gradients, icons used as decoration, or shadows beyond the card hairline | `PROJECT (research §2.5 refusal list)` |
-| Media only when real | Work media is a real screenshot with test data, sensitive fields blurred. Absent media means a text-only card | `PROJECT (research §2.5)` |
-| One display face, one body face | Bricolage Grotesque for headings, DM Sans for text. Two families only | `PROJECT (research §2.6)`, `PROJECT (CLAUDE.md, ≤2 families)` |
-| Generous space | Section padding uses the app's section token. No content above the hero fold except the hero | `PROJECT (app/globals.css, --space-section)` |
+## 2. Concepts
 
-## 3. Layout system
+### Concept A — The ledger (recommended)
 
-- Container: 1200 px maximum content width. Side gutter 20 px mobile, 32 px from 640 px, 40 px from 1024 px. `PROJECT (app/globals.css)`.
-- Grid: 12 columns desktop, 8 tablet, 4 mobile. Column gap 16 px below 1024 px, 24 px from 1024 px. `PROJECT (app/globals.css, --grid-gap)`, `ASSUMED` for the column counts.
-- Prose measure: 68 characters maximum. `PROJECT (app/globals.css, --container-prose)`.
+- **Idea:** the studio keeps a ledger. The page reads as a document being written. Structure comes from hairline rules that draw across the page as you reach each section. Index numerals and proof entries behave like ledger lines.
+- **Signature moves:**
+  1. Every section starts with a hairline that draws from left to right as it enters. The rule is the section's first mark.
+  2. Pillar eyebrows ("01 / 03 · Develop") and step numbers are the only indexes. One index numeral at a time is shown in the mark colour (`#c56a3b` light, `#e8895a` dark), so the decorative colour never repeats in view.
+  3. The fine grid texture (`--color-grid-line`) sits behind the hero only, fading to the edges, so the page starts on paper.
+  4. Automations is the one band. It is the night band (`#0c1a1b`), a deliberate change of register, the place where the proof of automation is shown.
+  5. Showcase cards are entries: a label badge, a title, a summary, a link. They reveal one by one as the ledger fills.
+- **Why it is distinct:** the device is structural, not decorative. The motion is the drawing of rules and the filling of entries, which is what a ledger does. It is not a gradient, a blob, a stock illustration or a particle field.
+- **Fit with the copy:** the copy already uses ledger-language ("labelled by how it was made", "status", "one line"). The concept makes that visible without new words.
+- **Risk:** quiet. It needs the typography and the rules to carry the page. Mitigated by the night band and the pinned showcases, which are the two strongest moments.
 
-## 4. Section rhythm
+### Concept B — Build log
 
-- Each section starts with a hairline top border in the border token. Section padding uses the section token. The hero is the only section without a top border. `ASSUMED`.
-- No full-bleed colour bands other than S5 (industries row). S5 is the one band, to mark a secondary offer. `ASSUMED`.
-- Section order (revision 3, proposed): hero, services, studio, work, process, industries, writing, FAQ, close. Services moves to position 2, pending approval (R3-P3). The rest is the approved order from `docs/revised-website-plan/03-homepage-hero.md` §7.
+- **Idea:** the page is a build log. A fixed progress rail on the right edge fills as the visitor scrolls. Each section is a build step, and each band change is a handoff between steps.
+- **Signature moves:** a fixed progress rail (decorative, `aria-hidden`); a band change at each handoff; the showcases read as build steps.
+- **Why it is distinct:** strong sense of progress and a clear arc down the page.
+- **Cost:** a fixed rail adds a persistent layer on every breakpoint and competes with the header. The rail's `aria-current` would need a script, which is a new island (rejected in §6). The concept's brand tie is weaker.
 
-## 5. Risks to flag
+### Concept C — Two registers
 
-- **Stock-SaaS order.** The order (hero, studio, proof, process, FAQ, close) is conventional. The refusal list calls out stock order. With the pinned hero removed in revision 3, differentiation has to come from the ledger treatment and the typography. This is the main risk of the revision. It is a risk, not a refusal, because the order is approved. `ASSUMED` (risk call).
-- **Proof is thin.** Only one internal build is confirmed (LedgerLine, D-8 decided). S3 may show two cards with placeholders until more proof is supplied. Partial states are designed in `pages/home.md` §3.
-- **Low-end devices.** No pinned element remains in revision 3. Test the page on a mid-range Android phone for layout and the reveal fade.
-- **Regulated sector.** The homepage names law firms in one line (S5). No legal claims, no outcomes, no ethics copy on the homepage. `PROJECT (05-law-niche-and-content.md §4)`.
+- **Idea:** the studio work reads in the light register (Develop, Growth, the approved copy), and the automation proof reads in the night register, with each theme giving its own version of the same page.
+- **Signature moves:** full-bleed night bands in both themes; a dramatic contrast between sections.
+- **Why it is distinct:** the most theatrical option.
+- **Cost:** it doubles the contrast management in both themes, and a full night page is at odds with the calm, precise mood from the research and the approved copy.
 
-## 6. Imagery and iconography
+### Recommendation
 
-- None on S2 to S8 at launch. Optional S3 media only (see §2).
-- Icons: directional arrows on links (decorative) and the FAQ chevron (decorative). The chat launcher icon comes from the existing layout (out of scope). `PROJECT (app/layout.tsx)`.
+Concept A, with the night band from Concept B used once, for the Automations showcase (decision C-D6). Concept C is rejected. Concept B's rail is rejected for its script cost and its persistent layer.
 
-## 7. Boldness and intensity
+## 3. Visual language (applies to every section)
 
-- Boldness: 2 of 4, quiet. `ASSUMED` (the prototype brief uses 2).
-- Motion intensity: hero 0 (no motion, revision 3). Services and S2 to S8: 2 (restrained: short fade on reveal, hover and focus feedback). `ASSUMED`.
+| Rule | What it means on the page |
+| --- | --- |
+| Rules before boxes | Sections, steps and rows are separated by hairlines that draw in. Cards are used only for showcase entries and only where the copy has a label. |
+| One index at a time | The mark colour (`--color-mark`) appears on one numeral or the leading rule of one element in view. The locked cap (one mark element in view) holds. |
+| Accent is interactive | Primary teal is used for links, buttons and focus. It is never used for numbers, rules or badges. |
+| Badges are text | Demo build, Internal build, Illustrative example: the label is text on a neutral chip. No colour codes a label. |
+| No decorative imagery | No stock photos, icons used as decoration, gradients, blobs, particles or 3D. |
+| Grid texture in one place | The grid texture is behind the hero only. It is static apart from the parallax on the hero layer (lite: off). |
+| Type carries the page | Display face for H1 and H2. DM Sans for body and labels. Two families. |
+| Motion has a reason | Every motion is one of: a rule drawing in (structure), content rising in (arrival), a card or step revealing (sequence), or feedback on an action (interaction). Nothing else moves. |
 
-## 8. Visual references
+## 4. Brand and both themes
 
-- None supplied. Proposed patterns, not sites to copy: ledger rows with hairline rules (research §2.5). `UNVERIFIED` (no URLs checked).
+- Light and dark themes are keyed to `data-theme` on `<html>`, as in the locked spec. Every colour token has a light and a dark value (`02-tokens.md` §6a).
+- The page background is warm off-white in light and black in dark. Surfaces step up slightly in both.
+- The night band is the same in both themes (`#0c1a1b`), so the Automations band keeps its character in light and dark. Its text and focus colours are the night-band set.
+- Contrast: every text and control pair passes, as recorded in `02-tokens.md` §6a. The build re-checks with axe.
 
-## 9. Locales and direction
+## 5. Distinctiveness checklist
 
-- One locale, English, left-to-right. `PROJECT (app/layout.tsx, lang="en")`. `ASSUMED` that no RTL locale is planned. Adding RTL later is rework.
-- Dark theme is supported by the app. The homepage plan carries dark values (see `02-tokens.md`).
+- No gradient text, no blurred blobs, no glass panels other than the existing header.
+- No custom cursor, no magnetic buttons, no particles, no 3D, no looping motion.
+- The page's rhythm comes from the rules and the pinned showcases, not from effects.
+- Each section can be understood without motion (see `pages/home.motion.md` §7).
+
+## 6. Boldness and intensity
+
+- Boldness: 3 of 4 (expressive but disciplined). The night band and the pinned showcases are the bold moves; everything else stays quiet.
+- Motion intensity: 3 of 4 (expressive) on full tier, with the lite and none tiers below it (`pages/home.motion.md` §2). Supersedes the earlier intensity 2 (DEC-37).
+
+## 7. Risks
+
+- **Quiet first screen.** With the hero one column and centred, the first screen relies on the grid texture and the H1. Mitigated by the hero rule draw and the H1 rise.
+- **Two pinned showcases back to back.** Long scroll (about 4,400 px of pinned travel at default settings). Mitigated by segment length choice (SHW-D6).
+- **Night band contrast in light theme.** The band is dark on a light page. It must not look like an error; it is a deliberate change of register and sits between two light sections.
+- **Motion on low-power devices.** Covered by the lite tier and the budget in `pages/home.motion.md` §8.
+
+## 8. Imagery and iconography
+
+- No photography. No stock imagery. Showcase thumbnails are real screenshots only, as before.
+- No icons except the arrow glyph and the FAQ chevron, both decorative.
+- The grid texture is a CSS pattern, not an image.
+
+## 9. Locales
+
+- One locale, English, left-to-right. RTL is not in scope; the arrow nudge mirrors if RTL is added later (`pages/home.motion.md`).

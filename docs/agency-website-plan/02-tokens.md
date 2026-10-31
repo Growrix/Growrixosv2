@@ -1,8 +1,8 @@
 # 02 — Tokens (homepage)
 
 - **Title:** Design tokens for the homepage, S2 to S8
-- **Status:** approved (Stage A, 31 Oct 2026)
-- **Version:** 2
+- **Status:** review (revision 4: creative layer, 31 Oct 2026; needs the user's approval)
+- **Version:** 3
 - **Last-updated:** 2026-10-31
 - **Owner-agent:** site-planner
 - **Depends-on:** `01-art-direction.md` v1; `PROJECT (app/globals.css)` for names and mechanism; `PROJECT (docs/Claude research/02 New website build plan.md §2.6)` for the requested values.
@@ -101,11 +101,73 @@ Font loading (build constraint, `PROJECT CLAUDE.md`):
 - Elevation: `--shadow-1` only, on S3 cards (research §2.6). No other shadows on S2 to S8.
 - Breakpoints: `md` 768 px, `lg` 1024 px (app defaults).
 
-## 6. Motion tokens (existing, reused)
+## 6. Motion tokens (revision 4: creative layer)
 
-- `--dur-s` 100 ms, `--dur-m` 160 ms, `--dur-l` 200 ms, `--ease-signal` (app). `PROJECT (app/globals.css)`.
-- The S2 to S8 reveal has no duration token: it is scroll-linked (see `pages/home.motion.md`).
-- Motion classes reused from the app: `motion-press` (button press), `motion-arrow` (link arrow nudge), `motion-chevron` (FAQ chevron). `PROJECT (app/globals.css, M-01, M-10, M-12)`.
+Revision 4 supersedes the earlier "short fade only" motion decisions for the homepage (DEC-37). The values below are the creative layer's motion set. Full detail and rules are in `pages/home.motion.md`.
+
+Easing:
+
+| Token | Value | Use | Source |
+| --- | --- | --- | --- |
+| `--ease-signal` | `cubic-bezier(0.22, 1, 0.36, 1)` | Hover and colour feedback, arrow, chevron | `PROJECT (app/globals.css)` |
+| `--ease-settle` | `cubic-bezier(0.16, 1, 0.3, 1)` | Entrances (hero, section content, cards) | New |
+| `--ease-exit` | `cubic-bezier(0.64, 0, 0.78, 0)` | Exits (none on the homepage in revision 4; reserved) | New |
+| `--ease-linear` | `linear` | Scroll-linked progress only | New |
+
+Durations (full tier / lite tier):
+
+| Token | Full | Lite | Use |
+| --- | --- | --- | --- |
+| `--dur-micro` | 120 ms | 80 ms | Press scale, focus-related colour |
+| `--dur-fast` | 160 ms | 120 ms | Hover colour, arrow nudge, chevron |
+| `--dur-base` | 240 ms | 160 ms | Card lift, link underline draw, eyebrow entrance |
+| `--dur-hero` | 800 ms | 480 ms | Hero entrance (time-based, plays once) |
+| `--dur-rule` | 720 ms | 400 ms | Hero rule draw (time-based, plays once) |
+| `--stagger` | 80 ms | 60 ms | Sibling delay; a chain stops at 600 ms |
+
+Distances: `--rise-s` 12 px (full) and 8 px (lite) for cards and blocks; `--rise-l` 24 px full and 12 px lite for the hero H1; `--lift` 2 px for card hover (fine pointer only). Press scale 0.98.
+
+Parallax: `--parallax` 4% (full) and 0 (lite). Applies only to the decorative grid texture layer. Never to text, images or cards.
+
+Scroll ranges (not durations; scroll-linked, so there is no time value):
+
+| Range | Position | Use |
+| --- | --- | --- |
+| Section content reveal | entry 0% to entry 35% | Heading and body rise and fade in |
+| Section rule draw | entry 0% to entry 60% | Section top hairline draws left to right |
+| Pinned card reveal | first 60% of each segment | One card per segment |
+| Night band overlay | entry 0% to entry 25% | Automations band opacity |
+| Connector draw | first 60% of each segment | Flow connector between revealed cards |
+
+Motion classes reused from the app: `motion-press` (button press), `motion-arrow` (link arrow nudge), `motion-chevron` (FAQ chevron). `PROJECT (app/globals.css, M-01, M-10, M-12)`.
+
+Properties animated: `transform` and `opacity` only. Colour changes only for user-initiated hover and focus, at 160 ms or less (`PROJECT locked 90-performance.md` §4).
+
+## 6a. Brand colour set for the homepage (revision 4)
+
+The user has asked for the brand tokens from the locked spec, not the research orange. This supersedes D-12 for the homepage (DEC-38). The locked values are `PROJECT (docs/frontend-plans/homepage/02-tokens.md §1.2, §1.3, §2)`.
+
+| Token | Light | Dark | Use |
+| --- | --- | --- | --- |
+| `--color-bg` | `#f5f1e8` | `#000000` | Page |
+| `--color-surface` | `#fffdf8` | `#0a0a0a` | Raised surfaces, showcase cards |
+| `--color-inset` | `#ece5d8` | `#111111` | Badges, hover fill |
+| `--color-border` | `#d5ccbb` | `#1a1a1a` | Rules and dividers (decorative) |
+| `--color-border-strong` | `#b9ad94` | `#2a2a2a` | Emphasised rules |
+| `--color-border-control` | `#8a7f6c` | `#706b62` | Control boundaries (≥3:1) |
+| `--color-text` | `#171a1f` | `#f1ece1` | Headings, body |
+| `--color-text-muted` | `#5c6470` | `#9aa3b0` | Eyebrows, dates, captions |
+| `--color-primary` | `#0e6b63` | `#2dd4bf` | Links, buttons, focus (interactive only) |
+| `--color-primary-hover` | `#0b5e58` | `#5eead4` | Hover of primary |
+| `--color-on-primary` | `#fffdf8` | `#0a0a0a` | Text on primary |
+| `--color-focus` | = primary | = primary | Focus ring |
+| `--color-mark` | `#c56a3b` | `#e8895a` | Decorative only. One mark element in view at a time |
+| `--color-grid-line` | `rgba(23,26,31,0.07)` | `rgba(241,236,225,0.07)` | Fine grid texture (decorative) |
+| `--color-night` | `#0c1a1b` (both themes) | `#0c1a1b` | Automations band fill |
+
+Night band (both themes, applied by a `data-band="night"` scope on the Automations showcase): text `#f1ece1`, muted `#9aa3b0`, border `#1f3335`, primary `#2dd4bf`, primary-hover `#5eead4`, on-primary `#0a0a0a`, focus `#2dd4bf`, mark `#e8895a`, grid line `rgba(241,236,225,0.06)`.
+
+Contrast (locked table, `PROJECT`): text on bg 15.5:1 light, 17.8:1 dark; muted on bg 5.30:1 light, 8.32:1 dark; primary on bg 5.64:1 light, 11.3:1 dark; text on night 15.1:1; muted on night 6.99:1; primary on night 9.56:1; on-primary on night button 10.6:1. Mark on bg 3.39:1 (graphic only, passes 3:1).
 
 ## 7. Focus
 
@@ -118,4 +180,5 @@ Colour: `--color-bg`, `--color-surface`, `--color-inset`, `--color-border`, `--c
 Type: `--text-display`, `--text-h2`, `--text-h3`, `--text-lead`, `--text-body`, `--text-small`, `--text-eyebrow`, `--text-badge`, `--font-display`, `--font-sans`.
 Layout: `--container-content`, `--container-prose`, `--space-section`, `--gutter`, `--grid-gap`.
 Radius and elevation: `--radius-sm`, `--radius-md`, `--radius-pill`, `--shadow-1`.
-Motion: `--dur-s`, `--dur-m`, `--dur-l`, `--ease-signal`.
+Motion (revision 4): `--ease-signal`, `--ease-settle`, `--ease-exit`, `--ease-linear`, `--dur-micro`, `--dur-fast`, `--dur-base`, `--dur-hero`, `--dur-rule`, `--stagger`, `--rise-s`, `--rise-l`, `--lift`, `--parallax`.
+Brand (revision 4): `--color-night`, `--color-mark`, `--color-grid-line`. The brand colour set in §6a replaces the research palette in §2 for the homepage (DEC-38).

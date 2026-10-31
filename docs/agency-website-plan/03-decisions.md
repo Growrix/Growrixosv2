@@ -168,6 +168,36 @@ Conflicts added:
 
 `02-tokens.md` (v2) was re-checked against revision 3. No token change is needed, so it keeps its version.
 
+## Creative layer round (31 Oct 2026): homepage design, motion and wireframes
+
+Scope: the homepage creative layer. Copy, navigation and section order are unchanged. Files: `01-art-direction.md` v4, `02-tokens.md` v3, `pages/home.wireframe.md` v1 (new), `pages/home.motion.md` v4. All in review.
+
+| ID | Item | Status |
+| --- | --- | --- |
+| DEC-37 | **Supersedes the earlier motion decisions for the homepage:** "short fade only", motion intensity 2, "no new pinned sections" (DEC-22) beyond the showcases, and the hero's approved P2 to P5 motion. The homepage now runs the full creative layer at intensity 3, with lite and none tiers. | `CLIENT` (31 Oct 2026 request). **Flagged: confirm at the gate** |
+| DEC-38 | **Supersedes D-12 for the homepage:** the brand colour set from the locked `02-tokens.md` (teal primary, warm neutrals, decorative mark colour, night band for Automations, both themes) replaces the research orange on the whole page. | `CLIENT` (31 Oct 2026 request: keep the brand tokens). **Flagged** |
+| C-D1 | Concept: A, "The ledger" (rules draw in, one mark index at a time, a grid texture behind the hero, the Automations night band). | **PENDING** (recommended) |
+| C-D2 | Motion tier: intensity 3 on full, with lite and none. | **PENDING** (recommended) |
+| C-D3 | Confirm DEC-37 and DEC-22 supersession for the homepage. | **PENDING** |
+| C-D4 | Hero centred, with a fluid H1 that stays on one line from 768 px. This conflicts with the locked display scale (X-5) and with D-28. | **PENDING** |
+| C-D5 | Showcase autoplay timers removed. Reveals are scroll-driven only (WCAG 2.2.2). | **PENDING** (recommended; the prototype's timer is not kept) |
+| C-D6 | Automations uses the night band in both themes. | **PENDING** (recommended) |
+| C-D7 | No cursor effect, no magnetic buttons, no smooth-scroll library. | **PENDING** (recommended) |
+| C-D8 | Services static with an entrance, not pinned. Depends on SV-D1 (Direction 1). The prototype's pinned services stage is replaced. | **PENDING** (recommended) |
+| C-D9 | Zero new islands. Approve removing `InViewOnce` (C-53) from the locked list; its job moves to CSS. | **PENDING** |
+| C-D10 | Low-power tier via `@media (update: slow)` and the existing bootstrap's `saveData` check. | **PENDING** (recommended) |
+| C-D11 | Integration: `pages/home.md` §2 still lists Work at position 4. The two showcases replace it in the page list. This round does not edit `pages/home.md`. | Note. Integrate at the next revision |
+
+New decisions and flags:
+
+- SHW-D2 (no DOM spacers), SHW-D4 (hidden cards in the tree), SHW-D6 (segment length 50 svh) and SHW-D9 (both showcases pinned) apply to the motion system unchanged.
+- The lite tier's CSS-only detection `@media (update: slow)` is not supported in every browser. Where unsupported, the page stays on full, which is safe.
+
+Conflicts added:
+
+- X-20. The locked spec's motion rule (intensity 1 to 2, "no motion library", transform and opacity only) is kept. The creative layer runs at intensity 3 within those rules. Confirm that the locked spec's motion rule is superseded for the homepage (C-D2), or it is a deviation.
+- X-21. The locked `91-stack.md` §3 lists C-53 `InViewOnce` for the S4 highlight. C-D9 removes the need.
+
 ## Services redesign round (31 Oct 2026): needs the user's decisions
 
 Scope: the services section (SV) only. The file is `sections/services.md` v1 (review). Nothing else is planned in this round. No animation.
