@@ -1,5 +1,40 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 17 — new hero title and subtitle (2026-10-31)
+
+**Asked:** replace the hero copy. Gradient on "Websites, Apps & AI Automation".
+
+**Changed:**
+- H1: `Build, Automate & Scale | Websites, Apps & AI Automation`, with the gradient on the part after the bar.
+- Subhead: `Smart development, seamless automation, and targeted reach with upfront pricing`
+- The ember strokes now sit under `Build,`, `Automate` and the rest of the line.
+- H1 size drops from 3.6vw to 3.4vw, so the longer line stays inside the container. It stays on one line from 768 px and wraps at 375 px.
+
+**Departure from the plan:** this is new `CLIENT` copy, so `pages/home.md` S1 and `02-homepage-copy.md` no longer match. Stage B folds it back. The page `<title>` and meta description still use the old wording, because the request named only the hero.
+
+**Visual QA (round-17):** hero opened at 1440 px in light and dark and at 375 px. All other sections unchanged. All 37 stops lit at 1440 and 375 px, with no console errors.
+
+**Review answer:** awaiting.
+
+## Round 16 — gradient headings, mega menu, footer (2026-10-31)
+
+**Asked:** gradient highlights on all titles and main headings, in the style of the supplied reference; a better mega menu; a redesigned footer. Mobile motion stays open for discussion.
+
+**Changed:**
+- Headings: the H1, every section heading, the three service panels and the eight service titles carry a gradient phrase. The gradient has a value per surface: teal to ember on light, teal to sand on dark and night, light teal to sand on the field. The words are unchanged.
+- Mega menu: full width with a gradient top rule, three numbered pillars with their approved one-line descriptions, row hover with an arrow, and a field card with the booking button. It opens on hover and on click. Escape, outside click and the mobile menu still work.
+- Footer: a large closing line, the two actions, five link columns and a full-width gradient wordmark that rises and thickens on scroll.
+
+**New text:** none. The mega menu and footer reuse lines and links already on the page, including `hello@growrixos.com`.
+
+**Not changed:** page copy in `<main>` (script check: identical), section order, the signal line and mobile motion.
+
+**Visual QA (round-16):** light and dark mega menu, footer and headings opened and checked at 1440 px; hero checked at 375 px. All 37 stops lit at 1440 and 375 px, FAQ and theme worked, and there were no console errors. Gradient contrast is by eye, not measured.
+
+**Rollback:** commit `4f8f8cd` is Round 15. This round is not committed.
+
+**Review answer:** awaiting.
+
 ## Round 15 — concept "The Run" (2026-10-31)
 
 **Asked:** build the approved concept The Run on this file, homepage only, with content locked.

@@ -24,6 +24,7 @@
     --shadow-card: 0 1px 2px rgba(23,26,31,0.06), 0 12px 32px rgba(23,26,31,0.08);
     --card-outline: transparent;
     --c-cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cpath d='M124 0h8M0 124v8M128 124v8M-4 0h8M0 -4v8' stroke='%238a7f6c' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    --grad: linear-gradient(90deg, #0e6b63 0%, #6f7f4f 52%, #c56a3b 100%);
   }
   [data-theme="dark"] {
     --c-bg: #000000; --c-surface: #0a0a0a; --c-inset: #111111; --c-sand: #16130e;
@@ -35,6 +36,7 @@
     --shadow-card: none;
     --card-outline: #2a2a2a;
     --c-cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cpath d='M124 0h8M0 124v8M128 124v8M-4 0h8M0 -4v8' stroke='%23706b62' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    --grad: linear-gradient(90deg, #2dd4bf 0%, #8fb59a 50%, #d9a877 100%);
   }
   :root {
     --night: #0c1a1b; --night-raised: #132628; --field: #0b3f3b;
@@ -64,13 +66,15 @@
   [data-band="sand"] { --band-bg: var(--c-sand); --c-text-muted: #4f5763; --c-border: #c9bda6; }
   [data-theme="dark"] [data-band="sand"] { --c-text-muted: #9aa3b0; --c-border: #2a251c; }
   [data-band="night"], [data-theme="dark"] [data-band="night"] {
-    --band-bg: var(--night); --c-bg: #0c1a1b; --c-inset: var(--night-raised);
+    --band-bg: var(--night); --c-bg: #0c1a1b; --c-inset: var(--night-raised); --c-surface: var(--night-raised);
+    --grad: linear-gradient(90deg, #2dd4bf 0%, #8fb59a 50%, #d9a877 100%);
     --c-text: #f1ece1; --c-text-muted: #9aa3b0; --c-border: #1f3335; --c-border-control: #4d6668;
     --c-primary: #2dd4bf; --c-primary-hover: #5eead4; --c-on-primary: #0a0a0a; --c-focus: #2dd4bf;
     --c-signal: #e8895a; --c-signal-faint: rgba(232,137,90,0.30); --c-grid: rgba(241,236,225,0.06);
   }
   [data-band="field"], [data-theme="dark"] [data-band="field"] {
-    --band-bg: var(--field); --c-bg: #0b3f3b; --c-inset: #0f4d48;
+    --band-bg: var(--field); --c-bg: #0b3f3b; --c-inset: #0f4d48; --c-surface: #0f4d48;
+    --grad: linear-gradient(90deg, #5eead4 0%, #b9d3b0 50%, #e8c9a0 100%);
     --c-text: #f1ece1; --c-text-muted: #b7c6c2; --c-border: #2d6660; --c-border-control: #6f9a94;
     --c-primary: #f1ece1; --c-primary-hover: #ffffff; --c-on-primary: #0b3f3b; --c-focus: #f1ece1;
     --c-signal: #e8895a; --c-signal-faint: rgba(232,137,90,0.30);
@@ -87,6 +91,9 @@
   h1 { font-size: clamp(36px, 10.5vw, 44px); line-height: 1.08; letter-spacing: -0.03em; }
   h2 { font-size: var(--text-h2-xl); line-height: 1; letter-spacing: -0.035em; }
   h3 { font-size: 20px; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; }
+  .hl { background-image: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+  .mk { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 0.04em 0.16em; margin: 0 -0.04em -0.16em; max-width: 100%; }
+  .mi { display: inline-block; max-width: 100%; }
   .eyebrow { font-family: var(--font-mono); font-size: var(--text-label); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-text-muted); margin: 0 0 14px; }
   .muted { color: var(--c-text-muted); }
   .skip { position: absolute; left: 16px; top: -100px; background: var(--c-text); color: var(--c-bg); padding: 8px 12px; border-radius: 6px; z-index: 50; }
@@ -126,20 +133,42 @@
   .brand { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.01em; text-decoration: none; color: var(--c-text); margin-right: auto; }
   .site-nav { display: block; }
   .nav-list { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; align-items: center; }
-  .nav-list > li { position: relative; }
-  .nav-list a, .nav-list button { font: inherit; color: var(--c-text); background: none; border: 0; padding: 8px 0; text-decoration: none; cursor: pointer; }
-  .nav-list a:hover, .nav-list button:hover { color: var(--c-primary); text-decoration: underline; }
+  .bar { position: relative; }
+  .nav-list > li > a, .nav-list > li > button { font: inherit; color: var(--c-text); background: none; border: 0; padding: 8px 0; text-decoration: none; cursor: pointer; }
+  .nav-list > li > a:hover, .nav-list > li > button:hover { color: var(--c-primary); text-decoration: underline; }
+  #services-toggle::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(45deg); transition: transform 200ms var(--ease-glide); }
+  #services-toggle[aria-expanded="true"]::after { transform: translateY(0) rotate(225deg); }
   .theme-toggle { font: inherit; font-size: 14px; color: var(--c-text); background: transparent; border: 1px solid var(--c-border-control); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
   .theme-toggle:hover { background: var(--c-inset); }
   .menu-toggle { display: none; font: inherit; background: none; border: 1px solid var(--c-border-control); color: var(--c-text); padding: 8px 14px; border-radius: 999px; cursor: pointer; }
-  .mega { position: absolute; top: calc(100% + 8px); left: -16px; width: min(760px, 92vw); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; box-shadow: 0 12px 32px rgb(20 22 26 / 0.10); }
+  .mega { position: absolute; top: calc(100% + 10px); left: var(--gutter); right: var(--gutter); background: var(--c-surface); border-radius: 24px; padding: 12px; display: grid; grid-template-columns: repeat(3, 1fr) minmax(280px, 1.1fr); gap: 12px; box-shadow: 0 24px 64px rgb(12 26 27 / 0.22), 0 0 0 1px var(--c-border); overflow: hidden; transform-origin: top center; animation: megaIn 420ms var(--ease-glide); }
   .mega[hidden] { display: none; }
-  .mega-head { display: block; font-family: var(--font-mono); font-weight: 500; text-decoration: none; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-primary); }
+  .mega::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--grad); transform-origin: left; animation: megaDraw 700ms var(--ease-glide); }
+  .mega-col { padding: 24px 22px 22px; border-radius: 16px; display: flex; flex-direction: column; animation: megaItem 480ms var(--ease-glide) backwards; transition: background 200ms var(--ease-glide); }
+  .mega-col:nth-child(2) { animation-delay: 60ms; }
+  .mega-col:nth-child(3) { animation-delay: 120ms; }
+  .mega-cta { animation-delay: 180ms; }
+  .mega-col:hover { background: var(--c-inset); }
+  .nav-list .mega-head { display: flex; align-items: baseline; gap: 10px; padding: 0; text-decoration: none; }
+  .mega-n { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--c-text-muted); }
+  .mega-t { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+  .mega-sub { margin: 8px 0 18px; font-size: 14px; line-height: 1.45; color: var(--c-text-muted); }
   .mega ul { list-style: none; margin: 0; padding: 0; }
-  .mega li a { display: block; padding: 6px 0; text-decoration: none; color: var(--c-text); }
-  .mega li a:hover { color: var(--c-primary); text-decoration: underline; }
-  .sub-label { display: block; margin-top: 14px; font-size: 13px; color: var(--c-text-muted); }
-  .mega ul ul { padding-left: 12px; border-left: 1px solid var(--c-border); margin-top: 4px; }
+  .nav-list .mega ul a { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; text-decoration: none; color: var(--c-text); font-size: 15px; border-top: 1px solid var(--c-border); transition: color 160ms var(--ease-glide), padding 160ms var(--ease-glide); }
+  .nav-list .mega ul a::after { content: "→"; color: var(--c-primary); opacity: 0; transform: translateX(-6px); transition: opacity 160ms var(--ease-glide), transform 160ms var(--ease-glide); }
+  .nav-list .mega ul a:hover, .nav-list .mega ul a:focus-visible { color: var(--c-primary); padding-left: 6px; text-decoration: none; }
+  .nav-list .mega ul a:hover::after, .nav-list .mega ul a:focus-visible::after { opacity: 1; transform: none; }
+  .sub-label { display: block; margin: 12px 0 2px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--c-text-muted); }
+  .mega-cta { position: relative; overflow: hidden; padding: 26px 24px 24px; border-radius: 16px; background: var(--band-bg); color: var(--c-text); display: flex; flex-direction: column; justify-content: flex-end; min-height: 280px; animation-name: megaItem; animation-duration: 480ms; animation-timing-function: var(--ease-glide); animation-fill-mode: backwards; }
+  .mega-cta::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(241,236,225,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(241,236,225,0.07) 1px, transparent 1px); background-size: 24px 24px; -webkit-mask-image: linear-gradient(200deg, #000, transparent 70%); mask-image: linear-gradient(200deg, #000, transparent 70%); }
+  .mega-cta > * { position: relative; }
+  .mega-cta h3 { font-size: 28px; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; }
+  .mega-cta p { margin: 10px 0 18px; font-size: 14px; line-height: 1.5; color: var(--c-text-muted); }
+  .nav-list .mega-cta .btn { display: inline-block; align-self: flex-start; padding: 11px 18px; font-size: 14px; color: var(--c-on-primary); text-decoration: none; }
+  @keyframes megaIn { from { opacity: 0; transform: translateY(-8px) scale(0.985); } to { opacity: 1; transform: none; } }
+  @keyframes megaDraw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes megaItem { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 1023px) { .mega { grid-template-columns: repeat(3, 1fr); } .mega-cta { grid-column: 1 / -1; min-height: 0; } }
 
   /* S1: hero */
   .hero { min-height: calc(100svh - 64px); display: flex; align-items: center; padding: 72px 0 112px; overflow: clip; }
@@ -161,7 +190,7 @@
   .hero .subhead { font-size: 19px; line-height: 1.6; color: var(--c-text-muted); margin: 24px auto 36px; max-width: 46ch; }
   .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
   @media (min-width: 768px) {
-    .hero h1 { white-space: nowrap; font-size: clamp(28px, 3.6vw, 60px); }
+    .hero h1 { white-space: nowrap; font-size: clamp(26px, 3.4vw, 60px); }
     .hero .subhead { max-width: 780px; }
   }
 
@@ -359,11 +388,16 @@
   .final.awaiting .btn:not(.btn-ghost)::before { transform: scaleX(0); }
   .ring { fill: none; stroke: var(--c-signal); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
 
-  footer.site-footer { position: relative; background: var(--band-bg); padding: 56px 0 96px; font-size: 15px; color: var(--c-text-muted); }
-  .foot-grid { display: grid; gap: 24px; }
-  .foot-grid strong { color: var(--c-text); font-family: var(--font-display); }
-  .foot-grid a { text-decoration: none; color: var(--c-text-muted); display: block; padding: 3px 0; }
-  .foot-grid a:hover { color: var(--c-primary); text-decoration: underline; }
+  footer.site-footer { position: relative; overflow: hidden; isolation: isolate; background: var(--band-bg); padding: clamp(72px, 9vw, 128px) 0 0; font-size: 15px; color: var(--c-text-muted); }
+  footer.site-footer::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--c-grid) 1px, transparent 1px), linear-gradient(90deg, var(--c-grid) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 100%, #000, transparent 75%); mask-image: radial-gradient(ellipse 80% 70% at 50% 100%, #000, transparent 75%); }
+  .foot-top { display: grid; gap: 32px; padding-bottom: clamp(48px, 6vw, 80px); border-bottom: 1px solid var(--c-border); }
+  .foot-lead { margin: 0; font-family: var(--font-display); font-size: clamp(32px, 4.2vw, 60px); font-weight: 600; line-height: 1.04; letter-spacing: -0.03em; color: var(--c-text); max-width: 19ch; }
+  .foot-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .foot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 24px; padding: clamp(40px, 5vw, 64px) 0; }
+  .foot-col strong { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-text-muted); }
+  .foot-col a { position: relative; display: block; width: fit-content; padding: 4px 0; text-decoration: none; color: var(--c-text); transition: color 160ms var(--ease-glide), transform 160ms var(--ease-glide); }
+  .foot-col a:hover { color: var(--c-primary); transform: translateX(4px); }
+  .foot-mark { display: block; margin: 0 auto; padding-bottom: 0.08em; font-family: var(--font-display); font-size: 18.6vw; font-weight: 700; line-height: 1; letter-spacing: -0.045em; text-align: center; white-space: nowrap; user-select: none; }
 
   @media (max-width: 767px) {
     .menu-toggle { display: inline-block; }
@@ -374,18 +408,22 @@
     .nav-list { flex-direction: column; align-items: stretch; gap: 0; }
     .nav-list > li { border-top: 1px solid var(--c-border); }
     .nav-list > li > a, .nav-list > li > button { display: flex; width: 100%; justify-content: space-between; padding: 14px 0; font-size: 17px; }
-    .mega { position: static; width: auto; margin: 0 0 12px; box-shadow: none; border: 0; background: transparent; padding: 0; grid-template-columns: 1fr; gap: 16px; }
+    .mega { position: static; width: auto; margin: 0 0 12px; box-shadow: none; background: transparent; padding: 0; grid-template-columns: 1fr; gap: 4px; animation: none; }
+    .mega::before { display: none; }
+    .mega-col { padding: 12px 0; }
+    .mega-cta { display: none; }
     .hero { min-height: 0; padding: 64px 0 56px; }
     .flow-panel { padding: 24px; }
     .flow-row { grid-template-columns: 32px 1fr; }
     .flow-row .btn { grid-column: 2; justify-self: start; }
-    .foot-grid { grid-template-columns: 1fr; }
   }
-  @media (min-width: 768px) and (max-width: 1023px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .foot-grid { grid-template-columns: 2fr 1fr 1fr; } }
+  @media (min-width: 1024px) {
+    .foot-top { grid-template-columns: 1fr auto; align-items: end; }
+    .foot-grid { grid-template-columns: repeat(5, 1fr); }
+  }
 
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
@@ -400,34 +438,40 @@
         <li>
           <button type="button" id="services-toggle" aria-expanded="false" aria-controls="mega-services">Services</button>
           <div class="mega" id="mega-services" hidden>
-            <div>
-              <a class="mega-head" href="#develop">Develop</a>
+            <div class="mega-col">
+              <a class="mega-head" href="#develop"><span class="mega-n">01</span><span class="mega-t">Develop</span></a>
+              <p class="mega-sub">Websites, apps and SaaS built to run after launch.</p>
               <ul>
                 <li><a href="#develop">Web development</a></li>
                 <li><a href="#develop">Mobile apps</a></li>
                 <li><a href="#develop">SaaS products</a></li>
               </ul>
             </div>
-            <div>
-              <a class="mega-head" href="#ai-automation">AI Automation</a>
+            <div class="mega-col">
+              <a class="mega-head" href="#ai-automation"><span class="mega-n">02</span><span class="mega-t">AI Automation</span></a>
+              <p class="mega-sub">Your repetitive work, running in the background.</p>
               <ul>
                 <li><a href="#ai-automation">AI intake &amp; speed-to-lead</a></li>
                 <li><a href="#ai-automation">Document intake &amp; chase</a></li>
                 <li><a href="#ai-automation">Audit &amp; sprint</a></li>
                 <li><a href="#ai-automation">Care plans</a></li>
-                <li>
-                  <span class="sub-label">Industries</span>
-                  <ul><li><a href="#ai-automation">Law firms</a></li></ul>
-                </li>
               </ul>
+              <span class="sub-label">Industries</span>
+              <ul><li><a href="#ai-automation">Law firms</a></li></ul>
             </div>
-            <div>
-              <a class="mega-head" href="#growth">Growth</a>
+            <div class="mega-col">
+              <a class="mega-head" href="#growth"><span class="mega-n">03</span><span class="mega-t">Growth</span></a>
+              <p class="mega-sub">Be found by people, and by the AI tools they ask.</p>
               <ul>
                 <li><a href="#growth">SEO</a></li>
                 <li><a href="#growth">AEO &amp; GEO</a></li>
               </ul>
             </div>
+            <aside class="mega-cta" data-band="field">
+              <h3>Tell us what <span class="hl">you're building.</span></h3>
+              <p>Twenty minutes, one honest answer.</p>
+              <a class="btn" href="#book">Book a free 20-min call</a>
+            </aside>
           </div>
         </li>
         <li><a href="#websites">Work</a></li>
@@ -448,8 +492,8 @@
     <div class="field" aria-hidden="true"></div>
     <div class="wrap">
       <p class="eyebrow">Digital studio for websites, apps and AI automation</p>
-      <h1><span class="cl"><span>We build it,</span></span> <span class="cl"><span>automate it,</span></span> <span class="cl"><span>and help people find it.</span></span></h1>
-      <p class="subhead">Websites, mobile apps, SaaS, AI automation and search visibility, from one studio that agrees scope and price in writing before work starts.</p>
+      <h1><span class="cl"><span>Build,</span></span> <span class="cl"><span>Automate</span></span> <span class="cl"><span>&amp; Scale | <span class="hl">Websites, Apps &amp; AI Automation</span></span></span></h1>
+      <p class="subhead">Smart development, seamless automation, and targeted reach with upfront pricing</p>
       <div class="hero-ctas">
         <a class="btn" href="#book">Book a free 20-min call</a>
         <a class="btn btn-ghost" href="#services">See all services</a>
@@ -460,13 +504,13 @@
   <!-- Section 2: services. Panels and slides are in one track, in pillar order. -->
   <section class="services sec" id="services" data-section="services" aria-label="Services">
     <div class="wrap">
-      <h2 class="svc-heading">Our services</h2>
+      <h2 class="svc-heading">Our <span class="hl">services</span></h2>
     </div>
     <div class="wrap svc-track">
 
       <div class="svc-panel is-active" data-pillar="develop" id="develop" data-band="sand">
         <p class="eyebrow">01 / 03 · Develop</p>
-        <h2>Websites, apps and SaaS built to run after launch.</h2>
+        <h2>Websites, apps and SaaS <span class="hl">built to run after launch.</span></h2>
         <p class="muted">Marketing sites, web applications, mobile apps and SaaS products. We build on a stack we can maintain, with content your team can edit.</p>
         <span class="svc-bar" aria-hidden="true"><i></i></span>
         <span class="svc-num-mask" aria-hidden="true"><span class="svc-num">01<b>01</b></span></span>
@@ -474,21 +518,21 @@
       <div class="svc-group" data-pillar="develop">
         <article class="svc-slide" id="web-development">
           <span class="svc-idx">01.1 · Develop</span>
-          <h3>Web development</h3>
+          <h3>Web <span class="hl">development</span></h3>
           <p>DRAFT: Marketing sites and web applications, built so your team can change the content without a developer.</p>
           <ul><li><a href="#web-development">Marketing sites</a></li><li><a href="#web-development">Web applications</a></li></ul>
           <a class="link" href="#web-development">Web development details →</a>
         </article>
         <article class="svc-slide" id="mobile-apps">
           <span class="svc-idx">01.2 · Develop</span>
-          <h3>Mobile apps</h3>
+          <h3>Mobile <span class="hl">apps</span></h3>
           <p>DRAFT: iOS and Android apps for a clear, specific job. We say early whether an app is the right answer.</p>
           <ul><li><a href="#mobile-apps">iOS and Android</a></li><li><a href="#mobile-apps">Scoped before the first line of code</a></li></ul>
           <a class="link" href="#mobile-apps">Mobile apps details →</a>
         </article>
         <article class="svc-slide" id="saas-products">
           <span class="svc-idx">01.3 · Develop</span>
-          <h3>SaaS products</h3>
+          <h3>SaaS <span class="hl">products</span></h3>
           <p>DRAFT: The product, sign-in, billing and admin tools, built as one codebase you own.</p>
           <ul><li><a href="#saas-products">Product and admin</a></li><li><a href="#saas-products">Sign-in and billing</a></li></ul>
           <a class="link" href="#saas-products">SaaS products details →</a>
@@ -497,7 +541,7 @@
 
       <div class="svc-panel" data-pillar="ai-automation" id="ai-automation" data-band="night">
         <p class="eyebrow">02 / 03 · AI Automation</p>
-        <h2>Your repetitive work, running in the background.</h2>
+        <h2>Your repetitive work, <span class="hl">running in the background.</span></h2>
         <p class="muted">AI automation built on n8n and Claude: instant replies to new inquiries, document follow-ups, and handoffs between the tools you already use. Every step is logged, and every failure alerts a person.</p>
         <span class="svc-bar" aria-hidden="true"><i></i></span>
         <span class="svc-num-mask" aria-hidden="true"><span class="svc-num">02<b>02</b></span></span>
@@ -505,21 +549,21 @@
       <div class="svc-group" data-pillar="ai-automation">
         <article class="svc-slide" id="ai-intake">
           <span class="svc-idx">02.1 · AI Automation</span>
-          <h3>AI intake &amp; speed-to-lead</h3>
+          <h3>AI intake &amp; <span class="hl">speed-to-lead</span></h3>
           <p>DRAFT: Instant replies to new inquiries, qualified against your rules and logged in the tools your team already uses.</p>
           <ul><li><a href="#ai-intake">Instant reply</a></li><li><a href="#ai-intake">Qualification and booking</a></li></ul>
           <a class="link" href="#ai-intake">AI intake details →</a>
         </article>
         <article class="svc-slide" id="document-intake">
           <span class="svc-idx">02.2 · AI Automation</span>
-          <h3>Document intake &amp; chase</h3>
+          <h3>Document intake &amp; <span class="hl">chase</span></h3>
           <p>DRAFT: Requests and polite reminders for client documents, until everything arrives.</p>
           <ul><li><a href="#document-intake">Request lists</a></li><li><a href="#document-intake">Reminders and filing</a></li></ul>
           <a class="link" href="#document-intake">Document intake details →</a>
         </article>
         <article class="svc-slide" id="audit">
           <span class="svc-idx">02.3 · AI Automation</span>
-          <h3>Audit &amp; sprint</h3>
+          <h3>Audit &amp; <span class="hl">sprint</span></h3>
           <p>DRAFT: A short, fixed-scope review of one workflow, with a written plan before any build.</p>
           <ul><li><a href="#audit">Workflow audit</a></li><li><a href="#audit">Fixed-scope sprint</a></li></ul>
           <a class="link" href="#audit">Audit and sprint details →</a>
@@ -528,7 +572,7 @@
 
       <div class="svc-panel" data-pillar="growth" id="growth" data-band="field">
         <p class="eyebrow">03 / 03 · Growth</p>
-        <h2>Be found by people, and by the AI tools they ask.</h2>
+        <h2>Be found by people, <span class="hl">and by the AI tools they ask.</span></h2>
         <p class="muted">Technical SEO, answer engine (AEO) and generative engine (GEO) work, so search engines and AI assistants can find, understand and cite your business. We report what we change and what we measure. We don't guarantee rankings or citations.</p>
         <span class="svc-bar" aria-hidden="true"><i></i></span>
         <span class="svc-num-mask" aria-hidden="true"><span class="svc-num">03<b>03</b></span></span>
@@ -536,14 +580,14 @@
       <div class="svc-group" data-pillar="growth">
         <article class="svc-slide" id="seo">
           <span class="svc-idx">03.1 · Growth</span>
-          <h3>SEO</h3>
+          <h3><span class="hl">SEO</span></h3>
           <p>DRAFT: Technical SEO and content planning, reported against what actually changes.</p>
           <ul><li><a href="#seo">Technical SEO</a></li><li><a href="#seo">Content planning</a></li></ul>
           <a class="link" href="#seo">SEO details →</a>
         </article>
         <article class="svc-slide" id="aeo-geo">
           <span class="svc-idx">03.2 · Growth</span>
-          <h3>AEO &amp; GEO</h3>
+          <h3>AEO &amp; <span class="hl">GEO</span></h3>
           <p>DRAFT: Pages and structured data that answer engines can read and cite, measured honestly.</p>
           <ul><li><a href="#aeo-geo">Answer-first pages</a></li><li><a href="#aeo-geo">Structured data</a></li></ul>
           <a class="link" href="#aeo-geo">AEO and GEO details →</a>
@@ -558,7 +602,7 @@
     <div class="band" aria-hidden="true"></div>
     <div class="wrap studio-grid">
       <div>
-        <h2 id="studio-h">Who we are</h2>
+        <h2 id="studio-h">Who <span class="hl">we are</span></h2>
       </div>
       <div>
         <p class="lead">Growrix OS is a studio for websites, apps, AI automation and search visibility. Every project gets a written scope and a fixed price before work starts, is built in accounts you own, and comes with handover notes.</p>
@@ -579,7 +623,7 @@
     <div class="showcase-track-outer">
       <div class="showcase-stage wrap">
         <div class="section-head">
-          <h2 id="websites-h">Demo websites</h2>
+          <h2 id="websites-h">Demo <span class="hl">websites</span></h2>
           <p>Built as demos with test data. Each card carries its label.</p>
         </div>
         <div class="showcase-window">
@@ -620,7 +664,7 @@
     <div class="showcase-track-outer">
       <div class="showcase-stage wrap">
         <div class="section-head">
-          <h2 id="automations-h">Demo automations</h2>
+          <h2 id="automations-h">Demo <span class="hl">automations</span></h2>
           <p>Built as demos with test data, plus our own internal build. Each row carries its label.</p>
         </div>
         <div class="flow-grid">
@@ -666,7 +710,7 @@
     <div class="band" aria-hidden="true"></div>
     <div class="wrap">
       <div class="section-head">
-        <h2 id="how-h">Four steps, one studio, a fixed price.</h2>
+        <h2 id="how-h">Four steps, one studio, <span class="hl">a fixed price.</span></h2>
       </div>
       <ol class="steps">
         <li><span class="step-n">01</span><h3>Talk</h3><p>A 20-minute call to see whether we are the right fit.</p></li>
@@ -683,7 +727,7 @@
     <div class="band" aria-hidden="true"></div>
     <div class="wrap writing-grid">
       <div class="writing-intro">
-        <h2 id="writing-h">Writing</h2>
+        <h2 id="writing-h"><span class="hl">Writing</span></h2>
         <p>Notes on building, automating and being found, from the work itself.</p>
         <a class="link" href="#writing">All writing →</a>
       </div>
@@ -712,7 +756,7 @@
     <div class="wrap">
       <div class="faq-grid">
       <div class="section-head">
-        <h2 id="faq-h">Questions before you book.</h2>
+        <h2 id="faq-h">Questions <span class="hl">before you book.</span></h2>
       </div>
       <div class="faq-list">
       <details>
@@ -744,7 +788,7 @@
   <section class="final sec" id="book" data-section="book" data-band="field" aria-labelledby="final-h">
     <div class="band" aria-hidden="true"></div>
     <div class="wrap">
-      <h2 id="final-h">Tell us what you're building.</h2>
+      <h2 id="final-h">Tell us what <span class="hl">you're building.</span></h2>
       <p>Twenty minutes, one honest answer. If we're not the right fit, we'll say so.</p>
       <div class="hero-ctas">
         <a class="btn" href="#book">Book a free 20-min call</a>
@@ -755,21 +799,40 @@
 </main>
 
 <footer class="site-footer" id="contact" data-band="night">
-  <div class="wrap foot-grid">
-    <div>
-      <strong>Growrix OS</strong>
-      <p style="margin:8px 0 0">Websites, apps, AI automation and search visibility, from one studio.</p>
+  <div class="wrap">
+    <div class="foot-top">
+      <p class="foot-lead">Websites, apps, AI automation and search visibility, <span class="hl">from one studio.</span></p>
+      <div class="foot-actions">
+        <a class="btn" href="#book">Book a free 20-min call</a>
+        <a class="btn btn-ghost" href="mailto:hello@growrixos.com">Email us</a>
+      </div>
     </div>
-    <div>
-      <strong>Services</strong>
-      <a href="#develop">Develop</a><a href="#ai-automation">AI Automation</a><a href="#growth">Growth</a>
-    </div>
-    <div>
-      <strong>Company</strong>
-      <a href="#websites">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#partners">Partners</a>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <strong>Develop</strong>
+        <a href="#develop">Web development</a><a href="#develop">Mobile apps</a><a href="#develop">SaaS products</a>
+      </div>
+      <div class="foot-col">
+        <strong>AI Automation</strong>
+        <a href="#ai-automation">AI intake &amp; speed-to-lead</a><a href="#ai-automation">Document intake &amp; chase</a><a href="#ai-automation">Audit &amp; sprint</a>
+      </div>
+      <div class="foot-col">
+        <strong>Growth</strong>
+        <a href="#growth">SEO</a><a href="#growth">AEO &amp; GEO</a>
+      </div>
+      <div class="foot-col">
+        <strong>Company</strong>
+        <a href="#websites">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#partners">Partners</a>
+      </div>
+      <div class="foot-col">
+        <strong>Contact</strong>
+        <a href="mailto:hello@growrixos.com">hello@growrixos.com</a><a href="#book">Book a free 20-min call</a>
+      </div>
     </div>
   </div>
+  <div class="foot-mark hl" aria-hidden="true">Growrix OS</div>
 </footer>
+
 
 <div class="draft" aria-hidden="true">PROTOTYPE · pinned showcases · draft copy</div>
 
@@ -845,6 +908,13 @@
       servicesToggle.setAttribute('aria-expanded', String(open));
     }
     servicesToggle.addEventListener('click', function () { setMega(mega.hidden); });
+    // Pointer users can also open it by hovering, with a short grace period on the way out.
+    var megaItem = servicesToggle.parentNode, megaTimer;
+    if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
+      megaItem.addEventListener('mouseenter', function () { clearTimeout(megaTimer); setMega(true); });
+      megaItem.addEventListener('mouseleave', function () { megaTimer = setTimeout(function () { setMega(false); }, 180); });
+    }
+    mega.addEventListener('click', function (e) { if (e.target.closest('a')) setMega(false); });
     menuToggle.addEventListener('click', function () {
       var open = !siteNav.classList.contains('is-open');
       siteNav.classList.toggle('is-open', open);
@@ -1248,7 +1318,33 @@
     $('.final').classList.add('awaiting');
     sec['who-we-are'].classList.add('gated');
 
+    // Headings with a gradient phrase: the phrase moves as one unit, so its gradient stays whole.
+    function maskUnits(el, stagger, start) {
+      var original = el.innerHTML, units = [];
+      el.style.height = el.getBoundingClientRect().height + 'px';
+      var wrap = function (n) {
+        var mk = document.createElement('span'), mi = document.createElement('span');
+        mk.className = 'mk'; mi.className = 'mi';
+        mi.appendChild(n); mk.appendChild(mi); units.push(mi);
+        return mk;
+      };
+      var frag = document.createDocumentFragment();
+      Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          n.textContent.split(/(\s+)/).forEach(function (w) {
+            if (!w) return;
+            frag.appendChild(/^\s+$/.test(w) ? document.createTextNode(w) : wrap(document.createTextNode(w)));
+          });
+        } else frag.appendChild(wrap(n));
+      });
+      el.textContent = '';
+      el.appendChild(frag);
+      gsap.from(units, { yPercent: 115, duration: 0.9, ease: GLIDE, stagger: stagger || 0.1,
+        scrollTrigger: { trigger: el, start: start || 'top 80%', once: true },
+        onComplete: function () { el.innerHTML = original; el.style.height = ''; } });
+    }
     function maskIn(el, type, stagger, start, weight) {
+      if ($('.hl', el)) { maskUnits(el, stagger, start); return; }
       el.style.height = el.getBoundingClientRect().height + 'px';  // Masks must not change the layout.
       var split = SplitText.create(el, { type: type, mask: type });
       gsap.from(split[type], { yPercent: 110, duration: 0.9, ease: GLIDE, stagger: stagger,
@@ -1424,6 +1520,14 @@
       line.book.onStop = function (i, on) { if (on) land(); };
       line.book.scrub({ trigger: book, start: 'top 70%', end: 'center 60%' });
       ScrollTrigger.create({ trigger: $('.hero-ctas', book), start: 'top 50%', once: true, onEnter: land });
+
+      // Footer
+      var foot = $('.site-footer');
+      maskIn($('.foot-lead', foot), 'words', 0.08, 'top 85%');
+      riseIn($$('.foot-actions > *', foot), foot, 'top 75%', 0.2);
+      riseIn($$('.foot-col', foot), $('.foot-grid', foot), 'top 90%');
+      gsap.fromTo($('.foot-mark', foot), { yPercent: 40, fontWeight: 300 }, { yPercent: 0, fontWeight: 700, ease: 'none',
+        scrollTrigger: { trigger: $('.foot-grid', foot), start: 'top 80%', end: 'bottom bottom', scrub: 0.5 } });
 
       // RUN-92: the header takes the scope of the band under it.
       var header = $('.site-header'), bands = $$('main > [data-band], .site-footer');
