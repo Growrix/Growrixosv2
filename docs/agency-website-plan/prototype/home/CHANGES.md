@@ -1,5 +1,34 @@
 # CHANGES — home prototype (agency plan)
 
+## Round 20 — type scale and compact spacing (2026-11-01)
+
+**Asked:** headings are too large, the page feels too wide on a laptop, some sections overlap, and mobile text sizes need the same review. Apply the proposed type scale from the AI Automation review, check the fit, and roll back if it does not fit.
+
+**Changed:** all sizes now come from tokens in `:root`.
+- Section heading (`--text-h2-xl`): 87 px at 1366 px, now 41 px. Phone 40 px, now 28 px. Capped at 44 px.
+- "Who we are" heading: it used the 150 px mega token. It now uses the section heading token, 41 px at 1366 px.
+- Panel and slide headings (`--text-panel`, `--text-slide`): 46 px at 1366 px, now 27 px. Phone 28 px, now 24 px.
+- Column heading (`--text-h2-col`): 36–64 px, now 26–36 px.
+- Card titles (`--text-card`, 20 px): demo cards, automation rows, steps, posts, FAQ questions.
+- Lead (`--text-lead`, 18–20 px): hero subhead and the "Who we are" lead.
+- Body: 17 px → 16 px. Demo and automation descriptions are 16 px.
+- Hero title (`--text-display`): 46 px at 1366 px and 35 px at 1024 px (unchanged). Capped at 48 px on one line at 1920 px, was 60 px. Phone 32 px, was 39 px.
+- Section padding (`--section-pad`): 164 px → 109 px at 1366 px. Final band and footer top padding follow the same step.
+- Numerals (`--text-numeral`, `--text-mega`): 64 px and 96 px caps, no longer 128 and 176 px.
+- Small text: automation-flow chips 11 px → 12 px. Labels stay at 12 px or more.
+
+**Kept as they were:** the header and mega-menu sizes (14–28 px), the button labels (14–15 px), and the decorative wordmark in the footer (sized to the viewport on purpose).
+
+**Departures from the proposed scale:** the hero title keeps the 3.4 vw step on one line at 1024 px and above, because 4 vw would overflow the line at 1024–1366 px. It wraps below 1024 px.
+
+**Fit check (script):** at 320, 375, 768, 1024, 1366 and 1920 px there is no horizontal overflow. The page is `innerWidth` minus the 15 px scrollbar. The hero title fits its box at every width. Heading sizes match the table above.
+
+**Visual check (screenshots, 1366 × 768 and 375 × 667):** the hero, "Who we are", services, demo websites, demo automations and the phone hero and services read as one hierarchy. No text overlaps a card in the static layout. Pinned overlap during scroll was not reproduced at 1366 × 768. Hand swiping on a real phone was not tested.
+
+**Open:** during testing, one automation swipe list was left at a scroll offset after a script scroll. A real swipe snaps correctly, but this was not verified on a device.
+
+**Review answer:** awaiting.
+
 ## Round 19 — pinned scrolling on mobile (2026-10-31)
 
 **Asked:** the mobile layout is fine, but the service, website and automation cards should slide and show every card with pinned scrolling, as on desktop.
