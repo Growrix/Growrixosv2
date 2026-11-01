@@ -134,6 +134,25 @@ Use these tools in order:
 
 Quote the one load-bearing rule or pattern the book recommends in your Step 5 report. If the book is silent on the topic, say so explicitly ("book has no section on this; relying on official docs only").
 
+## Step 5B — Expert scan (any role, every new or modified agent or skill)
+
+Run this for any role: SEO expert, marketing manager, content planner, frontend planner, or anything else. The user does not need to know the domain in advance.
+
+1. **Name the role** and its end-to-end job in one sentence. Ask the user only if the role is unclear.
+2. **Research**, at the depth the request needs:
+   - **Light:** 3 searches. Use for wording edits to existing files.
+   - **Standard (default for any new agent):** 5–8 searches, with 2 primary sources per topic.
+   - **Deep:** for a high-stakes new role (planner, QA, security, compliance). Use `anthropic-skills:deep-research`, or an extended WebSearch, when the Agent tool is available.
+   - **Source order:** official standards bodies and regulators first, then official product or framework docs, then reputable practitioner guides. A single blog never proves a rule.
+   - Record the URL and the access date for every source.
+3. **Answer three questions:**
+   - What does a top practitioner in this role do, end to end?
+   - Which standards, policies or laws apply?
+   - Which failures does this role prevent?
+4. **Must-cover checklist:** at most 12 items. Each item is one line: topic · why it matters · the rule · source URL · how the agent will prove coverage.
+5. **Open questions:** anything the research cannot settle goes here, as a numbered list of one-line questions for the user. Never guess an answer.
+6. **Research note:** one page, placed in the Step 8 proposal.
+
 ## Step 6 — Validate against system invariants (hard gate)
 
 These checks block the write. Each must pass or you report the fail and stop.
@@ -144,6 +163,7 @@ These checks block the write. Each must pass or you report the fail and stop.
 - **Frontmatter shape** — exactly two keys for skills: `name` and `description`. Agents also allow optional `tools:` and `effort:`, each checked against the official docs before use. Hooks have no frontmatter. Commands allow `description:` and `argument-hint:`. Nothing else.
 - **Human gates preserved** — if the change touches a phase coordinator, confirm the between-phase approval gate (`[GATE: user types 'approved']`) is intact.
 - **No `main`-pushing** — the final commit never pushes to `main`; always a feature branch.
+- **Coverage invariant** — every checklist item from Step 5B maps to a named section of the agent, or to a skill the agent preloads. If one item has no home, STOP and report it.
 
 For each invariant, report pass/fail. If any fail, STOP and surface the specific failure.
 
@@ -155,6 +175,8 @@ Produce the full proposed file content(s). Match the existing convention of comp
 - **Skill** — frontmatter (`name`, `description`), then body with clear step-by-step guidance. See `.claude/skills/pr-template/SKILL.md` as the canonical example.
 - **Hook** — PowerShell script, reads JSON from stdin, exit 0 to allow / exit 2 to block. See `.claude/hooks/pre-bash-guard.ps1` as the canonical example.
 - **Command** — frontmatter (`description`, optional `argument-hint`), then prose instructing the model what to do when the command fires. See `.claude/commands/fix-until-green.md` as the canonical example.
+
+- **Coverage section** — the agent body includes a "Coverage" table: checklist item → the section that covers it. If open questions exist, add an "Open questions" section too.
 
 Draft the file(s) in your working context. **Do not write them yet.**
 
@@ -172,6 +194,7 @@ Print:
    - Which block in the SaaS Factory Blueprint HTML artifact gets edited (specific `AGENTS`/`SKILLS`/`HOOKS`/`COMMANDS` array entry)
 4. **A one-sentence summary** of what the whole change does.
 5. **The commit message you'll use** (Conventional Commits format per the `commit-convention` skill).
+6. **Research note and checklist** — the one-page research note, the must-cover checklist, and the open questions from Step 5B.
 
 Then wait. **Nothing writes until the user types "approved" or an edit.** If the user edits the proposal, apply their changes to the draft and re-show Step 8. Loop until approved.
 
@@ -220,6 +243,7 @@ If multiple files touched for one logical change (new agent + CLAUDE.md + README
 - Re-read the touched lines in `CLAUDE.md` and `README.md` to confirm the new entry is in the right place with the right phrasing.
 - Re-read the changelog entry you added — confirm it names the right file, right scope, and the commit SHA (or `[this commit]` sentinel) is populated.
 - If the HTML artifact was updated, confirm the `Artifact publish` returned success and the version id advanced.
+- **Coverage check** — grep the new file for each checklist topic. List any topic with no match.
 
 ## Step 12 — Report back in ≤ 10 lines
 
@@ -248,6 +272,8 @@ If multiple files touched for one logical change (new agent + CLAUDE.md + README
 13. **Always append a changelog entry** in Step 10 as part of the same commit as the change. No change is complete without its log line.
 14. **If the changelog disagrees with the live tree**, the live tree wins. Rebaseline the changelog rather than editing files to match a stale log.
 15. **Never state an unverified fact** about the Claude Code system. Follow the "Validation rule" section: cite the source, or label the gap.
+16. **No new or modified agent or skill reaches Step 8 without an expert-scan research note.** The Light tier is allowed only for wording edits to existing files.
+17. **Every domain fact in a file needs a source URL and an access date.** Without them, the fact is labelled `UNVERIFIED`.
 
 ---
 

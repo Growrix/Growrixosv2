@@ -80,7 +80,8 @@ None in this repository. It holds the Growrix OS v2 marketing site.
 - `feat(agents)` **responsive-architect** — plans per-tier layout, app-like patterns, pin thresholds and fallbacks in `docs/frontend-plans/<slug>/responsive.md`. Plans only. _[this commit]_
 - `feat(agents)` **responsive-auditor** — measures gates G1–G8 and G10 at each matrix tier; reports PASS or FAIL with evidence; never edits. _[commit `2073749`]_
 - `feat(agents)` **site-planner, prototype-builder, ui-dev, frontend-dev, senior-dev, /prototype** — wired the responsive standard in: planner spawns responsive-architect (rule changed from one Agent use to two); builders preload the standard; senior-dev verify runs responsive-auditor; /prototype runs the auditor after each round. _[commit `aba35ef`]_
-- `docs(skills)` **frontend-quality-standard, site-planning-playbook** — viewport list points at the responsive matrix; touch-target rule corrected to the WCAG 2.2 AA 24 px floor with the 44 px house rule stated. _[this commit]_
+- `docs(skills)` **frontend-quality-standard, site-planning-playbook** — viewport list points at the responsive matrix; touch-target rule corrected to the WCAG 2.2 AA 24 px floor with the 44 px house rule stated. _[commit `d2fbf9f`]_
+- `feat(skills)` **system-builder** — added Step 5B expert scan (any role), a coverage invariant and coverage section, and hard rules 16–17. _[this commit]_
 
 ### 2026-10-31 — Creative planning upgrade
 
