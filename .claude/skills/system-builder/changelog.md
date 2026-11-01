@@ -74,6 +74,10 @@ None in this repository. It holds the Growrix OS v2 marketing site.
 
 ## Changes (newest first)
 
+### 2026-11-01 — Responsive design system
+
+- `feat(skills)` **responsive-design-standard** — one standard for every device tier and height: matrix from phone-320 to desktop-1920 with landscape phones and short laptops, app-like phone patterns P1–P9, pin and fallback rules, measured gates G1–G11, and `scripts/responsive-audit.mjs`. _[this commit]_
+
 ### 2026-10-31 — Creative planning upgrade
 
 #### Rebaseline — 2026-10-31
