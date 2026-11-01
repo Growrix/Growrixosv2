@@ -79,7 +79,8 @@ None in this repository. It holds the Growrix OS v2 marketing site.
 - `feat(skills)` **responsive-design-standard** — one standard for every device tier and height: matrix from phone-320 to desktop-1920 with landscape phones and short laptops, app-like phone patterns P1–P9, pin and fallback rules, measured gates G1–G11, and `scripts/responsive-audit.mjs`. _[commit `e5e27b5`]_
 - `feat(agents)` **responsive-architect** — plans per-tier layout, app-like patterns, pin thresholds and fallbacks in `docs/frontend-plans/<slug>/responsive.md`. Plans only. _[this commit]_
 - `feat(agents)` **responsive-auditor** — measures gates G1–G8 and G10 at each matrix tier; reports PASS or FAIL with evidence; never edits. _[commit `2073749`]_
-- `feat(agents)` **site-planner, prototype-builder, ui-dev, frontend-dev, senior-dev, /prototype** — wired the responsive standard in: planner spawns responsive-architect (rule changed from one Agent use to two); builders preload the standard; senior-dev verify runs responsive-auditor; /prototype runs the auditor after each round. _[this commit]_
+- `feat(agents)` **site-planner, prototype-builder, ui-dev, frontend-dev, senior-dev, /prototype** — wired the responsive standard in: planner spawns responsive-architect (rule changed from one Agent use to two); builders preload the standard; senior-dev verify runs responsive-auditor; /prototype runs the auditor after each round. _[commit `aba35ef`]_
+- `docs(skills)` **frontend-quality-standard, site-planning-playbook** — viewport list points at the responsive matrix; touch-target rule corrected to the WCAG 2.2 AA 24 px floor with the 44 px house rule stated. _[this commit]_
 
 ### 2026-10-31 — Creative planning upgrade
 

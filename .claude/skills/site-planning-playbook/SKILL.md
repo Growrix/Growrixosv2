@@ -61,7 +61,7 @@ Use Grep on a reference's headings to jump to a section instead of reading from 
     - WCAG 2.2 AA; semantic landmarks, one H1, logical heading order.
     - Full keyboard path; visible focus that does not rely on colour alone; no keyboard traps.
     - Contrast ≥ 4.5:1 for text, ≥ 3:1 for UI components and focus indicators, in every theme the project supports.
-    - Touch targets ≥ 44 px; hover effects only under `(hover: hover)`.
+    - Touch targets: at least 24 × 24 CSS px (WCAG 2.2 AA, 2.5.8). House rule: 44 × 44 px for every touch control (AAA level, 2.5.5). Hover effects only under `(hover: hover)`. Full rules: `responsive-design-standard`.
     - Reduced motion honoured; no meaning carried by motion or colour alone; nothing flashes more than 3 times per second.
     - LCP element server-rendered and present in the first paint; explicit media dimensions (no layout shift); Core Web Vitals "good" at p75 (LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1).
     - Progressive enhancement: the page is fully usable if motion or scripts fail.

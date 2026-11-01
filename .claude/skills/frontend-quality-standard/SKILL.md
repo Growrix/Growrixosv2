@@ -208,7 +208,7 @@ At build time run `npm view next version` and pin the result. Never copy version
 **10.3 Performance traces** at Slow 4G + 4x CPU on each key route: LCP sub-parts within §5.2; 0 flagged layout shifts; 0 tasks > 150 ms before load; during a 5 s scripted scroll, 0 tasks > 50 ms and ≥ 45 fps; scripted interactions (open nav, accordion, form submit) show INP ≤ 200 ms.
 
 **10.4 Playwright** (`@playwright/test` in CI; Playwright MCP for interactive inspection).
-- Viewports 375 × 812, 768 × 1024, 1440 × 900, plus 320 × 640 for reflow. Browsers: Chromium, WebKit, Firefox.
+- Viewports: the full matrix in `responsive-design-standard` §1, which includes phone-320, landscape phones, short laptop heights and 1920. Browsers: Chromium, WebKit, Firefox. The responsive gates are `responsive-design-standard` §7.
 - Per route and viewport: 0 console errors; 0 failed requests; `scrollWidth <= innerWidth`; exactly 1 `h1`; axe clean.
 - Keyboard walk: every Tab stop is inside the viewport and has a computed focus indicator. Reduced-motion run per §4.6.
 
