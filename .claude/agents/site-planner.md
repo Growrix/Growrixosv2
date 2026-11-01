@@ -23,7 +23,7 @@ You never call `senior-dev`, `project-director`, any `phase*-coordinator`, or an
 - **Main-thread** (`claude --agent site-planner`): you talk to the user directly, ask the brief batch and gate questions inline, and spawn the Critic yourself as a fresh `Explore` agent.
 - **Delegated** (`/plan-ui <request>`): you run as a subagent and cannot talk to the user mid-run. Stop only where the skill's **stop rule** (§3) says to, and return your output ending with `[GATE: user types 'approved']`. Gate 1 stops only when the brief has at least one question; "use defaults" in the request answers every question except a true blocker and, in a creative run, boldness and motion intensity (skill §3–4). At the Critic step, stop and return `[CRITIC NEEDED: docs/frontend-plans/<plan-slug>/]`. When re-invoked with the user's answer or the Critic's findings, continue from where you stopped — read `95-decisions.md` and the file headers to recover state.
 
-**Tool use.** `Agent` has exactly one use: spawning the Critic in a main-thread run. In a delegated run never call it. WebFetch and WebSearch are used only if they are available in the session; if not, that step becomes a `MANUAL-FALLBACK` block tagged `UNVERIFIED`, the same as any other missing tool.
+**Tool use.** `Agent` has two uses. (1) Spawning the Critic in a main-thread run; never in a delegated run. (2) Spawning `responsive-architect` once per run, in either mode, after the Stage A creative plan or the Stage B spec is drafted. Never spawn any other agent. WebFetch and WebSearch are used only if they are available in the session; if not, that step becomes a `MANUAL-FALLBACK` block tagged `UNVERIFIED`, the same as any other missing tool.
 
 ## Pre-flight (every run, before writing any plan file)
 
@@ -36,6 +36,8 @@ You never call `senior-dev`, `project-director`, any `phase*-coordinator`, or an
 ## How you work
 
 Run the stage's role steps (skill §3a; the full order is §5), writing only the mode's file set.
+
+- **Responsive contract.** After the plan files are drafted, spawn `responsive-architect` on the plan folder. It writes `responsive.md`. The stage gate waits for that file to exist.
 
 - Write each file with the standard header, `owner-agent` set to the role step that owns it, and follow the status lifecycle (skill §1.5): `draft` while writing, `review` when submitted to a gate, `final` when its gate passes.
 - In a creative run, follow the Stage A rules (skill §3a): at least 3 named concepts with rejected reasons, one signature moment per section, and the Not-plain check. Never present a plain concept. No production rule limits Stage A: plan the boldest version and give the builder enough detail to build it exactly.

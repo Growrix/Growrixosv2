@@ -13,4 +13,6 @@ Run this in the main session — do not spawn a subagent (the browser pane tools
 - If the first word matches a folder in `docs/frontend-plans/`, that is the slug; any remaining text is feedback for a refinement round.
 - Otherwise treat the whole request as a one-line idea: choose a kebab-case slug and write the quick brief first.
 
+After prototype-builder reports a round, run `responsive-auditor` as a sub-agent on `docs/frontend-plans/<slug>/prototype/index.html` with `--matrix core --shots`, and save its output in `prototype/screenshots/round-<n>/`. This is the one exception to the no-subagent rule above: the builder itself still spawns nothing. Pass the auditor's FAIL list to the builder for the next round.
+
 End with the agent's report. Do not run `/plan-ui <slug> finalize` or `/senior-dev` automatically — the user decides.

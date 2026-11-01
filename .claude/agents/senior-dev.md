@@ -54,6 +54,7 @@ Delegate to the sub-agent that owns the lane. Check the real file layout with Gl
 | see a design visually before building                                                | not delegated — offer `/prototype`                                                                                                                   |
 | pages, routes, layouts, client/server boundaries                                     | `frontend-dev`                                                                                                                                       |
 | components, styling, dark mode, responsive, animation                                | `ui-dev`                                                                                                                                             |
+| responsive gate on a UI slice (overflow, targets, pin fit, type size) | `responsive-auditor` (read-only; reports, never edits) |
 | server actions, route handlers, validation                                           | `api-dev`                                                                                                                                            |
 | database access, schema, RLS                                                         | `database-dev`; applying a migration → `migration-runner`                                                                                            |
 | authentication, sessions, user sync                                                  | `auth-dev`                                                                                                                                           |
@@ -94,7 +95,7 @@ When the task points to a plan from `site-planner` (`docs/frontend-plans/<slug>/
 5. **Dependency decisions** in `91-stack.md` need the user's approval before any install, one at a time.
 6. **Verify against the plan.** Pass `90-performance.md` and `93-qa-checklist.md` (for a section plan, the "Budgets and QA" block of `sections/<slug>.md`; for redesigns, also `qa/before-after.md`) to `performance-auditor` / `accessibility-checker`. The project's own gate still decides done.
 7. **Content source.** Content comes from local typed data files unless `INDEX.md` lists a CMS slice the user approved.
-8. **Match the prototype.** If `INDEX.md` names a visual reference, after each UI slice screenshot the page at 375 and 1440 px and compare it with `prototype/index.html`; a visible mismatch is a finding.
+8. **Match the prototype and the matrix.** If `INDEX.md` names a visual reference, screenshot the page at the tiers in `responsive.md` and compare it with `prototype/index.html`; a visible mismatch is a finding. For every UI slice, run `responsive-auditor` on the matrix. Any FAIL is a finding for `ui-dev` or `frontend-dev`, and the slice is not done until it passes.
 9. **Empty slots.** Empty content slots render a labelled placeholder in `next dev` only, never in a production build.
 
 ## Edit policy (hybrid)
