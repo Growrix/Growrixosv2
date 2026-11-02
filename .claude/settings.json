@@ -50,7 +50,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/pre-bash-guard.ps1"
+            "command": "bash .claude/hooks/pre-bash-guard.sh"
           }
         ]
       },
@@ -59,7 +59,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/secret-file-guard.ps1"
+            "command": "bash .claude/hooks/secret-file-guard.sh"
           }
         ]
       }
@@ -70,7 +70,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/post-edit-format.ps1"
+            "command": "bash .claude/hooks/post-edit-format.sh"
           }
         ]
       }
@@ -80,7 +80,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/state-injector.ps1"
+            "command": "bash .claude/hooks/state-injector.sh"
           }
         ]
       }
@@ -90,7 +90,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/commit-reminder.ps1"
+            "command": "bash .claude/hooks/commit-reminder.sh"
           }
         ]
       }
@@ -100,7 +100,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/session-boot.ps1"
+            "command": "bash .claude/hooks/session-boot.sh"
           }
         ]
       }

@@ -74,6 +74,12 @@ None in this repository. It holds the Growrix OS v2 marketing site.
 
 ## Changes (newest first)
 
+### 2026-11-02 — Replit environment (branch `replit/agentic-env`)
+
+- `feat(hooks)` **bash ports of the six hooks** — `.claude/hooks/*.sh` mirror the `.ps1` files for Linux (Replit). Same rules; `pre-bash-guard` fails closed without `jq`. The `.ps1` files stay for Windows. _[this commit]_
+- `feat(config)` **settings.json hook wiring (replit branch only)** — hook commands call `bash .claude/hooks/<name>.sh`; the Windows branch keeps the PowerShell commands. Permissions and deny list unchanged. _[this commit]_
+- `docs(replit)` **replit.md + .gitattributes** — root instructions for Replit's Agent; LF line endings forced for `*.sh`. _[this commit]_
+
 ### 2026-11-01 — Responsive design system
 
 - `feat(skills)` **responsive-design-standard** — one standard for every device tier and height: matrix from phone-320 to desktop-1920 with landscape phones and short laptops, app-like phone patterns P1–P9, pin and fallback rules, measured gates G1–G11, and `scripts/responsive-audit.mjs`. _[commit `e5e27b5`]_
