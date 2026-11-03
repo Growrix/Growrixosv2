@@ -11,6 +11,8 @@ Claude Code is the default environment and the single source of truth. Every oth
 
 - `registry.json` (this folder) — one entry per environment: status, branch, worktree, profile, docs check date, last synced source commit.
 - `.claude/skills/adapters/environment/<env-id>.md` — one profile per environment: verified capabilities, the mapping from the source, gaps, and sources with access dates.
+- `scripts/sync-agent-skills.mjs` — generates `.agents/skills/` (skills copied, agents as `agent-<name>` role skills) and the environment's instruction file. Dry run by default; `--apply` writes; `--verify` checks for drift. Refuses to run on the source branch or an unregistered branch.
+- `templates/<env-id>.md` — the instruction file template for an environment whose registry entry has `instruction_file`. Placeholders: `{{CLAUDE_MD}}`, `{{COMMANDS}}`.
 
 Status values: `source` (Claude Code), `active` (built and current), `stale` (built, source has moved on), `planned` (profile only), `retired`.
 
@@ -81,6 +83,7 @@ Wait for "approved".
 ## Step 5 — Build
 
 - New environment: `git worktree add -b env/<env-id> <path> <source-commit>`. Existing one: merge the source commit into the environment branch first and resolve conflicts in favour of the source, except the files this skill generates.
+- Run `node .claude/skills/environment-builder/scripts/sync-agent-skills.mjs --root <worktree> --source <source-commit>` (dry run) and check that its counts match the approved plan; then run it again with `--apply`.
 - Write only the files in the approved plan.
 - Shell scripts get LF line endings through `.gitattributes` on the environment branch; confirm with a CR count of 0.
 - Commit on the environment branch. Do not push.
@@ -88,6 +91,7 @@ Wait for "approved".
 ## Step 6 — Verify
 
 - Source hashes from Step 1 are unchanged and the source checkout's `git status` is identical.
+- `sync-agent-skills.mjs --root <worktree> --verify` exits 0.
 - Every copied or generated skill passes the spec check from Step 3.
 - Every converted hook runs against sample payloads: each block case exits 2, each allow case exits 0. Keep test cases in a scratchpad file, never as inline command text that the source guards would block.
 - Every JSON and YAML file parses.
