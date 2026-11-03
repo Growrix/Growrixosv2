@@ -1,0 +1,60 @@
+{
+  "_comment": "Environment registry owned by the environment-builder skill. Claude Code is the source; every other entry is a generated copy on its own branch. Status: source | active | stale | planned | retired. Worktree paths are for this machine.",
+  "schema_version": 1,
+  "environments": [
+    {
+      "id": "claude-code",
+      "status": "source",
+      "branch": "feat/homepage-design",
+      "worktree": "F:/New Github/Growrixosv2",
+      "profile": ".claude/skills/adapters/environment/claude-code.md",
+      "docs_verified": "2026-11-03"
+    },
+    {
+      "id": "replit",
+      "status": "stale",
+      "branch": "replit/agentic-env",
+      "worktree": "F:/New Github/Growrixosv2-replit",
+      "remote": "origin",
+      "profile": ".claude/skills/adapters/environment/replit.md",
+      "instruction_file": "replit.md",
+      "docs_verified": "2026-11-03",
+      "last_synced_commit": "77454c2",
+      "last_synced_at": "2026-11-02",
+      "notes": "Built before environment-builder existed (commit 49af770). Lacks .agents/skills and has an inaccurate replit.md; the first sync fixes both."
+    },
+    {
+      "id": "cursor",
+      "status": "planned",
+      "branch": null,
+      "worktree": null,
+      "profile": ".claude/skills/adapters/environment/cursor.md",
+      "docs_verified": "2026-11-03"
+    },
+    {
+      "id": "vscode-copilot",
+      "status": "planned",
+      "branch": null,
+      "worktree": null,
+      "profile": ".claude/skills/adapters/environment/vscode-copilot.md",
+      "docs_verified": "2026-11-03"
+    },
+    {
+      "id": "hermes",
+      "status": "planned",
+      "branch": null,
+      "worktree": null,
+      "profile": ".claude/skills/adapters/environment/hermes.md",
+      "docs_verified": "2026-11-03"
+    },
+    {
+      "id": "openclaw",
+      "status": "planned",
+      "branch": null,
+      "worktree": null,
+      "profile": ".claude/skills/adapters/environment/openclaw.md",
+      "docs_verified": "2026-11-03",
+      "notes": "The workspace lives outside the repo (~/.openclaw/workspace by default) and holds memory files. Needs the user's named request before anything is installed there."
+    }
+  ]
+}
