@@ -5,7 +5,7 @@ description: Profile of Replit as a target environment for this agentic system �
 
 # Replit — environment profile
 
-Docs checked: 2026-11-03. Registry status: stale. Branch `replit/agentic-env`.
+Docs checked: 2026-11-03. Registry status: active. Branch `replit/agentic-env`.
 
 Replit has two ways to work with this repo. They load different things.
 
@@ -44,3 +44,4 @@ Replit has two ways to work with this repo. They load different things.
 
 - 2026-11-02 — first build, commit `49af770`, made without system-builder Step 1, 3 and 8. `replit.md` there says Agent reads only `replit.md`; that is wrong.
 - 2026-11-03 — corrected: Replit Agent also loads `/.agents/skills`.
+- 2026-11-03 — synced with environment-builder (env commit `ee35d09`): .agents/skills (17 skills + 52 role skills) and a generated replit.md.

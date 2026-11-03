@@ -81,7 +81,8 @@ None in this repository. It holds the Growrix OS v2 marketing site.
 - `feat(skills)` **adapters/environment/** — profiles for claude-code, replit, cursor, vscode-copilot, hermes, openclaw (docs checked 2026-11-03). _[commit `ea79ee7`]_
 - `docs(skills)` **replit (2026-11-02)** — the `replit/agentic-env` build (commit `49af770`) skipped Step 1, 3 and 8; retro-reviewed here. Its `replit.md` wrongly says Replit Agent reads only `replit.md`; fixed in the first sync. _[commit `ea79ee7`]_
 - `feat(skills)` **system-builder** — Step 1 reads the environment registry, Step 8 lists environment impact, Step 10 marks active environments stale; rules 18–19. _[commit `5c461d8`]_
-- `feat(env)` **environment-builder** — sync script (skills copy, agents as role skills, instruction file from a template) and the Replit template. _[this commit]_
+- `feat(env)` **environment-builder** — sync script (skills copy, agents as role skills, instruction file from a template) and the Replit template. _[commit `3a32d6b`]_
+- `chore(env)` **replit** — first sync: .agents/skills and generated replit.md. _[env commit `ee35d09`]_
 
 ### 2026-11-01 — Responsive design system
 

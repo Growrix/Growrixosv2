@@ -12,16 +12,15 @@
     },
     {
       "id": "replit",
-      "status": "stale",
+      "status": "active",
       "branch": "replit/agentic-env",
       "worktree": "F:/New Github/Growrixosv2-replit",
       "remote": "origin",
       "profile": ".claude/skills/adapters/environment/replit.md",
       "instruction_file": "replit.md",
       "docs_verified": "2026-11-03",
-      "last_synced_commit": "77454c2",
-      "last_synced_at": "2026-11-02",
-      "notes": "Built before environment-builder existed (commit 49af770). Lacks .agents/skills and has an inaccurate replit.md; the first sync fixes both."
+      "last_synced_commit": "3a32d6b",
+      "last_synced_at": "2026-11-03"
     },
     {
       "id": "cursor",
