@@ -76,10 +76,11 @@ None in this repository. It holds the Growrix OS v2 marketing site.
 
 ### 2026-11-03 — Multi-environment support
 
-- `feat(skills)` **environment-builder** — builds, syncs and verifies copies of the system for other agent tools from official docs, one branch per environment; owns `registry.json`. _[this commit]_
-- `feat(agents)` **environment-researcher** — read-only agent that reads a tool's official docs and returns a sourced capability table. _[this commit]_
-- `feat(skills)` **adapters/environment/** — profiles for claude-code, replit, cursor, vscode-copilot, hermes, openclaw (docs checked 2026-11-03). _[this commit]_
-- `docs(skills)` **replit (2026-11-02)** — the `replit/agentic-env` build (commit `49af770`) skipped Step 1, 3 and 8; retro-reviewed here. Its `replit.md` wrongly says Replit Agent reads only `replit.md`; fixed in the first sync. _[this commit]_
+- `feat(skills)` **environment-builder** — builds, syncs and verifies copies of the system for other agent tools from official docs, one branch per environment; owns `registry.json`. _[commit `ea79ee7`]_
+- `feat(agents)` **environment-researcher** — read-only agent that reads a tool's official docs and returns a sourced capability table. _[commit `ea79ee7`]_
+- `feat(skills)` **adapters/environment/** — profiles for claude-code, replit, cursor, vscode-copilot, hermes, openclaw (docs checked 2026-11-03). _[commit `ea79ee7`]_
+- `docs(skills)` **replit (2026-11-02)** — the `replit/agentic-env` build (commit `49af770`) skipped Step 1, 3 and 8; retro-reviewed here. Its `replit.md` wrongly says Replit Agent reads only `replit.md`; fixed in the first sync. _[commit `ea79ee7`]_
+- `feat(skills)` **system-builder** — Step 1 reads the environment registry, Step 8 lists environment impact, Step 10 marks active environments stale; rules 18–19. _[this commit]_
 
 ### 2026-11-01 — Responsive design system
 

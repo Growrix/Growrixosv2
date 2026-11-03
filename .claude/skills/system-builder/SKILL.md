@@ -27,6 +27,7 @@ This rule applies to every answer and every change this skill makes.
 - Keep verified facts apart from inference. Label any inference "assumption" and do not act on it.
 - If an earlier answer turns out wrong or unverified, say so and correct it before going on.
 - Do not write a file that depends on an unverified fact. Stop at Step 8 and report the gap.
+- For a fact about another agent tool, check that tool's official docs, then a live web search. book-mcp covers Claude Code only.
 
 ## Scope — what this skill is for
 
@@ -36,6 +37,7 @@ This rule applies to every answer and every change this skill makes.
 - Adding a new slash command (`.claude/commands/<name>.md`)
 - Modifying any of the above
 - Cross-cutting changes to the orchestration contract (manifest schema, port rule, phase sequence)
+- Keeping `.claude/skills/environment-builder/registry.json` accurate when the source changes (building the copies belongs to `environment-builder`)
 
 ## Scope — what this skill is NOT for
 
@@ -44,6 +46,7 @@ This rule applies to every answer and every change this skill makes.
 - Deleting/retiring an existing agent → requires the user's explicit, named ask.
 - Editing the port rule or vendor-neutrality axioms → those are architectural axioms; propose + diff + wait for human review, do not auto-apply.
 - Touching `~/.claude/` (user-level global settings) → never, unless the user explicitly asks.
+- Building or syncing a copy of the system for another tool (Replit, Cursor, VS Code, Hermes, OpenClaw) → use `environment-builder`.
 
 ---
 
@@ -61,6 +64,7 @@ Before you propose anything, understand what already exists. **Read in this orde
    ```
    If live-tree counts disagree with the changelog's baseline + changes, **the live tree wins**. Reconcile by rebaselining the changelog (see the "Rebaselining" section in that file).
 3. **Root `CLAUDE.md`** "Agentic system" section and **`README.md`** inventory block — the human-facing view, for cross-reference sanity.
+4. **`.claude/skills/environment-builder/registry.json`** — which other environments exist and their status.
 
 Report back in ≤ 10 lines:
 
@@ -70,6 +74,7 @@ Report back in ≤ 10 lines:
 - Command count
 - Anything in the changelog that already touches what the user asked for
 - Whether the changelog and live tree agree (yes/no + diff if no)
+- Registered environments and their status
 
 ## Step 2 — Classify the request into one of six buckets
 
@@ -195,6 +200,7 @@ Print:
 4. **A one-sentence summary** of what the whole change does.
 5. **The commit message you'll use** (Conventional Commits format per the `commit-convention` skill).
 6. **Research note and checklist** — the one-page research note, the must-cover checklist, and the open questions from Step 5B.
+7. **Environment impact** — every registered `active` environment this change will make `stale`.
 
 Then wait. **Nothing writes until the user types "approved" or an edit.** If the user edits the proposal, apply their changes to the draft and re-show Step 8. Loop until approved.
 
@@ -221,6 +227,7 @@ Per the user's scope decision for this skill: **update all cross-references**.
   - `<type>(<scope>)` **<name>** — <one-line reason>. _[commit `<short-sha>`]_
   ```
 - Leave the commit-SHA placeholder for now; fill it after the commit lands by amending the entry OR by using `[this commit]` as a sentinel the next entry resolves.
+- If the change touches `.claude/` or root `CLAUDE.md`, set every `active` environment in `.claude/skills/environment-builder/registry.json` to `stale` in the same commit, and tell the user to run `/environment-builder sync all` when they want the copies updated.
 
 Then load the `commit-convention` skill and produce one logical commit per change, Conventional Commits format:
 
@@ -274,6 +281,8 @@ If multiple files touched for one logical change (new agent + CLAUDE.md + README
 15. **Never state an unverified fact** about the Claude Code system. Follow the "Validation rule" section: cite the source, or label the gap.
 16. **No new or modified agent or skill reaches Step 8 without an expert-scan research note.** The Light tier is allowed only for wording edits to existing files.
 17. **Every domain fact in a file needs a source URL and an access date.** Without them, the fact is labelled `UNVERIFIED`.
+18. **Never build another environment from this skill, and never change the source to suit another environment.** Environment copies go through `environment-builder`, each on its own branch.
+19. **A broad go-ahead never skips Step 8.** "Make it work" or "do it" is the request, not approval of the files. Show the proposal and wait for "approved".
 
 ---
 
